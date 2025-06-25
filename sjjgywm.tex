@@ -1,0 +1,180 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{amsmath, amssymb}
+\usepackage{enumitem}
+\usepackage{geometry}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+% 自定义样式
+\lstset{
+	basicstyle=\ttfamily,
+	keywordstyle=\color{blue},
+	stringstyle=\color{magenta},
+	commentstyle=\color{gray},
+	showstringspaces=false,
+	frame=single,
+	breaklines=true,
+	numbers=none,
+	numberstyle=\tiny\color{gray},
+	stepnumber=1,
+	tabsize=4,
+	captionpos=b,
+	escapeinside={(*@}{@*)},
+}
+
+% 设置页眉
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\textbf{ADT 描述}}
+\lhead{\textbf{线性表、数组、栈、队列}}
+
+
+\begin{document}
+	
+	\textbf{Algorithm 2.1: InitList(L)}
+	\begin{algorithmic}
+		\STATE $L.elem \gets \text{new array of size } listsize$
+		\STATE $L.length \gets 0$
+	\end{algorithmic}
+	\textbf{Algorithm 2.2: MergeLists(La, Lb, Lc)}
+	\begin{algorithmic}
+		\STATE $i \gets 1$, $j \gets 1$, $k \gets 1$
+		\WHILE{$i \leq La.length \text{ AND } j \leq Lb.length$}
+		\IF{$La[i] \leq Lb[j]$}
+		\STATE $Lc[k] \gets La[i]$
+		\STATE $i \gets i + 1$
+		\ELSE
+		\STATE $Lc[k] \gets Lb[j]$
+		\STATE $j \gets j + 1$
+		\ENDIF
+		\STATE $k \gets k + 1$
+		\ENDWHILE
+		\IF{$i > La.length$}
+		\WHILE{$j \leq Lb.length$}
+		\STATE $Lc[k] \gets Lb[j]$
+		\STATE $j \gets j + 1$
+		\STATE $k \gets k + 1$
+		\ENDWHILE
+		\ELSE
+		\WHILE{$i \leq La.length$}
+		\STATE $Lc[k] \gets La[i]$
+		\STATE $i \gets i + 1$
+		\STATE $k \gets k + 1$
+		\ENDWHILE
+		\ENDIF
+		\STATE $Lc.length \gets k - 1$
+	\end{algorithmic}
+	\textbf{Algorithm 2.3: ListInsert(S, i, e)}
+	\begin{algorithmic}
+		\IF{$i < 1 \text{ OR } i > S.length + 1$}
+		\STATE \textbf{return} "Position error"
+		\ENDIF
+		\IF{$S.length == listsize$}
+		\STATE \textbf{return} "Overflow"
+		\ENDIF
+		\FOR{$j \gets S.length; j \geq i; j--$}
+		\STATE $S[j+1] \gets S[j]$
+		\ENDFOR
+		\STATE $S[i] \gets e$
+		\STATE $S.length \gets S.length + 1$
+	\end{algorithmic}
+	\textbf{Algorithm 2.4: ListDelete(S, i)}
+	\begin{algorithmic}
+		\IF{$i < 1 \text{ OR } i > S.length$}
+		\STATE \textbf{return} "Position error"
+		\ENDIF
+		\FOR{$j \gets i; j < S.length; j++$}
+		\STATE $S[j] \gets S[j+1]$
+		\ENDFOR
+		\STATE $S.length \gets S.length - 1$
+	\end{algorithmic}
+	\textbf{Algorithm 2.5: LocateElem(L, e)}
+	\begin{algorithmic}
+		\FOR{$i \gets 1; i \leq L.length; i++$}
+		\IF{$L[i] == e$}
+		\STATE \textbf{return} $i$
+		\ENDIF
+		\ENDFOR
+		\STATE \textbf{return} 0
+	\end{algorithmic}
+	\textbf{Algorithm 2.6: InitList(L)}
+	\begin{algorithmic}
+		\STATE $L.head \gets \text{NULL}$
+		\STATE $L.length \gets 0$
+	\end{algorithmic}
+	\textbf{Algorithm 2.7: ListInsert(L, i, e)}
+	\begin{algorithmic}
+		\IF{$i < 1 \text{ OR } i > L.length + 1$}
+		\STATE \textbf{return} "Position error"
+		\ENDIF
+		\STATE $p \gets L.head$
+		\STATE $j \gets 1$
+		\WHILE{$j < i - 1$}
+		\STATE $p \gets p.next$
+		\STATE $j \gets j + 1$
+		\ENDWHILE
+		\STATE $s \gets \text{new Node}$ \COMMENT{创建新结点}
+		\STATE $s.data \gets e$
+		\IF{$i == 1$}
+		\STATE $s.next \gets L.head$
+		\STATE $L.head \gets s$
+		\ELSE
+		\STATE $s.next \gets p.next$
+		\STATE $p.next \gets s$
+		\ENDIF
+		\STATE $L.length \gets L.length + 1$
+	\end{algorithmic}
+	\textbf{Algorithm 2.8: ListDelete(L, i)}
+	\begin{algorithmic}
+		\IF{$i < 1 \text{ OR } i > L.length$}
+		\STATE \textbf{return} "Position error"
+		\ENDIF
+		\STATE $p \gets L.head$
+		\STATE $j \gets 1$
+		\WHILE{$j < i - 1$}
+		\STATE $p \gets p.next$
+		\STATE $j \gets j + 1$
+		\ENDWHILE
+		\IF{$i == 1$}
+		\STATE $q \gets L.head$
+		\STATE $L.head \gets q.next$
+		\ELSE
+		\STATE $q \gets p.next$
+		\STATE $p.next \gets q.next$
+		\ENDIF
+		\STATE \textbf{free}(q)
+		\STATE $L.length \gets L.length - 1$
+	\end{algorithmic}
+	\textbf{Algorithm 2.9: BuildListReverse(L)}
+	\begin{algorithmic}
+		\STATE $L.head \gets \text{NULL}$
+		\STATE $L.length \gets 0$
+		\WHILE{\text{有输入元素}}
+		\STATE $s \gets \text{new Node}$ \COMMENT{创建新结点}
+		\STATE $s.data \gets \text{输入元素}$
+		\STATE $s.next \gets L.head$
+		\STATE $L.head \gets s$
+		\STATE $L.length \gets L.length + 1$
+		\ENDWHILE
+	\end{algorithmic}
+	\textbf{Algorithm 2.10: LocateElem(L, e)}
+	\begin{algorithmic}
+		\STATE $p \gets L.head$
+		\STATE $i \gets 1$
+		\WHILE{$p \neq \text{NULL}$}
+		\IF{$p.data == e$}
+		\STATE \textbf{return} $i$
+		\ENDIF
+		\STATE $p \gets p.next$
+		\STATE $i \gets i + 1$
+		\ENDWHILE
+		\STATE \textbf{return} 0
+	\end{algorithmic}
+\end{document}

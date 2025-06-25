@@ -1,0 +1,264 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{amsmath}
+\usepackage{geometry}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{shapes, arrows.meta, positioning, chains, decorations.pathreplacing, calligraphy}
+\usepackage[dvipsnames, svgnames, x11names]{xcolor}
+\usepackage{tcolorbox}
+\usepackage[normalem]{ulem}
+% 设置页面边距
+\geometry{a4paper, margin=2cm}
+\title{主存储器相关内容}
+\author{}
+\date{}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	\newpage
+	\section{主存储器}
+	\subsection{SRAM芯片和DRAM芯片}
+	半导体存储器分为随机存储器（RAM）和只读存储器（ROM）。RAM又分为静态随机存储器（SRAM）和动态随机存储器（DRAM），主存储器主要由DRAM实现，靠近处理器的那一层（Cache）则由SRAM实现，它们都是\underline{易失性存储器}。ROM是非易失性存储器。
+	
+	\subsubsection{SRAM的工作原理}
+	通常把存放一个二进制位的物理器件称为存储元，它是存储器的最基本的构件。地址码相同的多个存储元构成一个存储单元。若干存储单元的集合构成存储体。
+	
+	静态随机存储器（SRAM）的存储元是用双稳态触发器（六晶体管MOS）来记忆信息的，静态是指即使信息被读出后，它仍保持其原状态而不需要再生（非破坏性读出）。
+	
+	SRAM的存取速度快，但集成度低，功耗较大，价格昂贵，一般用于高速缓冲存储器。
+	
+	\subsubsection{DRAM的工作原理}
+	与SRAM的存储原理不同，动态随机存储器（DRAM）是利用存储元电路中栅极电容上的电荷来存储信息的，DRAM的基本存储元通常只使用一个晶体管，所以它比SRAM的密度要高很多。相对于SRAM来说，DRAM具有集成度高、位价低和功耗小等优点，但DRAM的存取速度比SRAM慢，且必须定时刷新和读后再生，一般用于大容量的主存系统。
+	
+	\begin{tcolorbox}[colframe=black, colback=white]
+	\kaishu	\textbf{命题追踪} \quad 需要刷新的存储芯片：SDRAM（2015）
+	\end{tcolorbox}
+	
+	DRAM电容上的电荷一般只能维持1～2ms，因此即使电源不断电，信息也会自动消失。此外，读操作会使其状态发生改变（破坏性读出），需读后再生，这也是称其为动态存储器的原因。刷新可以采用读出的方法进行，根据读出内容对相应单元进行重写，即读后再生。对同一行进行相邻两次刷新的时间间隔称为刷新周期，通常取2ms。常用的刷新方式有以下3种：
+	
+	1）集中刷新：在一个刷新周期内，利用一段固定的时间，依次对存储器的所有行进行逐一再生，在此期间停止对存储器的读/写操作，称为死时间，也称访存死区。优点是读/写操作期间不受刷新操作的影响；缺点是在集中刷新期间（死区）不能访问存储器。
+	
+	2）分散刷新：将一个存储器系统的工作周期分为两部分：前半部分用于正常的读/写操作；后半部分用于刷新。这种刷新方式增加了系统的存取周期，如存储芯片的存取周期为0.5$\mu$s，则系统的存取周期为1$\mu$s。优点是没有死区；缺点是加长了系统的存取周期。
+	
+	3）异步刷新：结合了前两种方法，使得在一个刷新周期内每一行仅刷新一次。具体做法是将刷新周期除以行数，得到相邻两行之间刷新的时间间隔$t$，每隔时间$t$产生一次刷新请求。这样就使“死时间”的分布更加分散，避免让CPU连续等待过长的时间。
+	
+	DRAM的刷新需要注意以下问题：①刷新对CPU是透明的，即刷新不依赖于外部的访问；②DRAM的刷新单位是行，由芯片内部自行生成行地址；③刷新操作类似于读操作，但又有所不同。另外，刷新时不需要选片，即整个存储器中的所有芯片同时被刷新。
+	
+	\begin{tcolorbox}[colframe=black, colback=white]
+	\kaishu	\textbf{注 意} \quad 虽然DRAM的刷新和再生都是恢复数据，但刷新与再生的过程并不完全相同。刷新是以行为单位，逐行恢复数据的，而再生仅需恢复被读出的那些单元的数据。
+	\end{tcolorbox}
+	
+	\begin{tcolorbox}[colframe=black, colback=white]
+	\kaishu	\textbf{命题追踪} \quad DRAM芯片的地址引脚复用技术（2014）
+	\end{tcolorbox}
+	
+	DRAM芯片容量较大，地址位数较多，为了减少芯片的地址引脚数，通常采用\underline{地址引脚复用技术}，行地址和列地址通过相同的引脚分先后两次输入，这样地址引脚数可减少一半。
+	
+	\begin{tcolorbox}[colframe=black, colback=white]
+	\kaishu	\textbf{命题追踪} \quad DRAM芯片行、列数的优化原则（2018）
+	\end{tcolorbox}
+	
+	假定有一个$2^n \times b$位DRAM芯片的存储阵列，其行数为$r$，列数为$c$，则$2^n = r \times c$。存储阵列的地址位数为$n$，其中行地址位数为$\log_2 r$，列地址位数为$\log_2 c$，则$n = \log_2 r + \log_2 c$。由于DRAM芯片采用地址引脚复用技术，为减少地址引脚数，应尽量使行、列位数相同，即满足$|r - c|$最小。又由于DRAM按行刷新，为减少刷新开销，应使行数较少，因此还需满足$r \leq c$。
+	
+	\begin{tcolorbox}[colframe=black, colback=white]
+	\kaishu	\textbf{命题追踪} \quad DRAM芯片行缓冲器容量的计算（2022）
+	\end{tcolorbox}
+	
+	DRAM芯片的内部结构示意图如图3.4所示。芯片容量为$16 \times 8$位，存储阵列 为$4$行$\times 4$列，地址引脚采用复用技术，因此仅需$2$根地址线，分时传送$2$位行地址和$2$位列地址。每个存储元有$8$位，需要$8$根数据线，芯片内部有一个行缓冲器，用来缓存指定行中每列的数据，其大小为列数$\times$存储元的位数，常用SRAM实现。选中某行后，该行的所有数据都被送到行缓冲器，以后每个时钟都可以连续地从DRAM中输出一个数据，因此可支持突发传输（突发传输方式是指在寻址阶段给出数据的首地址，在传输阶段可传送多个连续存储单元的数据）。
+	
+	\begin{figure}[h]
+		\centering
+		\caption{DRAM芯片的内部结构}
+		\label{fig:DRAM_structure}
+		% 这里由于没有实际图片，用占位符表示
+		\includegraphics[width=0.25\textwidth]{placeholder.png} 
+	\end{figure}
+	
+	目前更常用的是SDRAM（同步DRAM）芯片，与传统的异步DRAM不同，SDRAM与CPU的数据交换同步于系统的时钟信号，并且以CPU - 主存总线的最高速度运行，而不需要插入等待状态。在传统DRAM中，CPU将地址和控制信号送至存储器后，需经过一段延迟时间，数据才读出或写入。在此期间，CPU不断采样DRAM的完成信号，在读写完成之前，CPU不能做其他工作，降低了CPU的执行速度。而SDRAM在系统时钟的控制下进行数据的读出和写入，它将CPU发出的地址和控制信号锁存起来，经过指定的时钟周期数后再响应，此时CPU可执行其他操作。
+	
+	\subsubsection{SRAM和DRAM的比较}
+	表\ref{tab:SRAM_DRAM_comparison}详细列出了SRAM和DRAM各自的特点。
+	
+	\begin{table}[h]
+		\centering
+		\caption{SRAM和DRAM各自的特点}
+		\label{tab:SRAM_DRAM_comparison}
+		\begin{tabular}{lcc}
+			\toprule
+			\textbf{特 点} & \textbf{SRAM} & \textbf{DRAM} \\
+			\midrule
+			存储信息 & 触发器 & 电容 \\
+			破坏性读出 & 非 & 是 \\
+			需要刷新 & 不要 & 需要 \\
+			送行列地址 & 同时送 & 分两次送（复用） \\
+			运行速度 & 快 & 慢 \\
+			集成度 & 低 & 高 \\
+			存储成本 & 高 & 低 \\
+			主要用途 & 高速缓存 & 主机内存 \\
+			\bottomrule
+		\end{tabular}
+	\end{table}
+	
+	\subsubsection{存储器芯片的内部结构}
+	如图\ref{fig:memory_chip_structure}所示，存储器芯片由存储体、I/O写电路、地址译码器和控制电路等部分组成。
+	1) 存储体（存储矩阵）。存储体是存储单元的集合，它由行选择线（X）和列选择线（Y）来选择所访问单元，存储体的相同行、列上的多位（位平面数）同时被读出或写入。
+	
+	2) 地址译码器。用来将地址转换为译码输出线上的高电平，以便驱动相应的读/写电路。地址译码有单译码法（一维译码）和双译码法（二维译码）两种方式。
+	\begin{itemize}
+		\item 单译码法。只有一个行译码器，同一行中所有存储单元的字线连在一起，同一行中的各单元构成一个字，被同时读出或写入。缺点是地址译码器的输出线数过多。
+		\item 双译码法。如图\ref{fig:memory_chip_structure}所示，地址译码器分为X和Y两个译码器，在选中的行和列交叉点上能确定一个存储单元，这是DRAM芯片目前普遍采用的译码结构。
+	\end{itemize}
+	3) I/O电路。用以控制被选中的单元的读出或写入，具有放大信号的作用。
+	
+	4) 片选控制线。单个芯片容量太小，往往满足不了计算机对存储器容量的要求，因此需用一定数量的芯片进行存储器的扩展。在访问某个字时，必须“选中”该存储字所在的芯片，而其他芯片不被“选中”，因此需要有片选控制信号（经片选控制线传输）。
+	
+	5) 读/写控制线。根据CPU给出的读命令或写命令，经读/写控制线控制被选中单元进行读或写。
+	
+	\begin{figure}[h]
+		\centering
+		\caption{存储器芯片内部结构}
+		\label{fig:memory_chip_structure}
+		% 这里由于没有实际图片，用占位符表示
+		\includegraphics[width=0.4\textwidth]{placeholder2.png} 
+	\end{figure}
+	
+	\subsection{只读存储器}
+	\subsubsection{只读存储器（ROM）的特点}
+	\begin{tcolorbox}[colframe=black, colback=white]
+		\kaishu \textbf{命题追踪} \quad RAM和ROM的区别（2010）
+	\end{tcolorbox}
+	ROM和RAM都是支持随机访问的存储器，其中SRAM和DRAM均为易失性半导体存储器。而ROM中一旦有了信息，就不能轻易改变，即使掉电也不会丢失。ROM具有两个显著的优点：①结构简单，所以位密度比可读/写存储器的高。②具有非易失性，所以可靠性高。
+	
+	\subsubsection{ROM的类型}
+	根据制造工艺的不同，ROM可分为掩模式只读存储器（MROM）、一次可编程只读存储器（PROM）、可擦除可编程只读存储器（EPROM）、Flash存储器和固态硬盘（SSD）。
+	
+	(1) 掩模式只读存储器
+		
+	MROM的内容由半导体制造厂商按用户提出的要求在芯片的生产过程中直接写入，写入以后任何人都无法改变其内容。优点是可靠性高、集成度高、价格便宜；缺点是灵活性差。
+	
+	(2) 一次可编程只读存储器
+	
+	PROM是可以实现一次性编程的只读存储器，允许用户利用专门的设备（编程器）写入自己的程序，一旦写入，内容就无法改变。
+	
+	(3) 可擦除可编程只读存储器
+	
+	EPROM不仅可以由用户利用编程器写入信息，而且可以对其内容进行多次改写。EPROM虽然既可读又可写，但它不能取代RAM，因为EPROM的编程次数有限，且写入时间过长。
+	
+	(4) Flash存储器
+	
+	\begin{tcolorbox}[colframe=black, colback=white]
+		\kaishu \textbf{命题追踪} \quad Flash存储器的特点（2012）
+	\end{tcolorbox}
+	Flash存储器是在EPROM的基础上发展起来的，它兼有ROM和RAM的优点，可在不加电的情况下长期保存信息，又能在线进行快速擦除与重写。Flash存储器既有EPROM价格便宜、集成度高的优点，又有$E^2$PROM电可擦除重写的特点，且擦除重写的速度快。
+	
+	(5) 固态硬盘（Solid State Drive，SSD）
+	
+	基于闪存的固态硬盘是用固态电子存储芯片阵列制成的硬盘，由控制单元和存储单元（Flash芯片）组成。保留了Flash存储器长期保存信息、快速擦除与重写的特性。对比传统硬盘也具有读/写速度快、低功耗的特性，缺点是价格较高。
+	
+	\subsection{主存储器的基本组成}
+	如图\ref{fig:main_memory_diagram}是主存储器（Main Memory, MM）的基本框图，其中由一个个存储0或1的记忆单元（也称存储元件、存储单元）构成的存储矩阵（也称存储体、存储阵列）是存储器的核心部件。存储元件是具有两种稳态的能表示二进制0和1的物理器件。为了存取存储体中的信息，必须对存储单元编号（也称编址）。编址单位是指具有相同地址的那些存储元件构成的一个单位，可以按字节编址，也可以按字编址。现代计算机通常采用字节编址方式，此时存储体内的一个地址中有1字节。
+	
+	\begin{figure}[h]
+		\centering
+		\caption{主存储器基本框图}
+		\label{fig:main_memory_diagram}
+		% 这里由于没有实际图片，用占位符表示
+		\includegraphics[width=0.6\textwidth]{placeholder3.png} 
+	\end{figure}
+	
+	\begin{tcolorbox}[colframe=black, colback=white]
+		\kaishu \textbf{命题追踪} \quad MAR和MDR位数与地址线/数据线数的关系、寻址范围的计算（2021）
+	\end{tcolorbox}
+	
+	指令执行过程中需要访问主存时，CPU首先把被访问单元的地址送到MAR中，然后通过地址线将主存地址送到主存中的地址寄存器，以便地址译码器进行译码，选中相应单元，同时CPU将读/写控制信号通过控制线送到主存的读/写控制电路。若是写操作，则CPU同时将要写的信息送到MDR中，在读/写控制电路的控制下，经数据线将信号写入选中的单元；若是读操作，则主存读出选中单元的内容送至数据线，然后被送到MDR中。MDR的位数与数据线的位数相同，MAR的位数与地址线的位数相同。图3.6采用64位数据线，所以在按字节编址方式下，每次最多可以存取8个单元的内容。地址线的位数决定了主存地址空间的最大可寻址范围。例如，36位地址的最大寻址范围为$0 \sim 2^{36}-1$，即地址从0开始编号。
+	
+	\begin{tcolorbox}[colframe=black, colback=white]
+		\kaishu \textbf{注 意} \quad 数据线的位数通常等于存储字长，因此MDR的位数通常等于存储字长；若数据线的位数不等于存储字长，则MDR的位数由数据线的位数决定。
+	\end{tcolorbox}
+	
+	\subsection{多模块存储器}
+	多模块存储器是一种\underline{空间并行技术}，利用多个结构完全相同的存储模块的并行工作来提高存储器的吞吐率。常用的有单体多字存储器和多体低位交叉存储器。
+	
+	\begin{tcolorbox}[colframe=black, colback=white]
+		\kaishu \textbf{注 意} \quad CPU的速度比存储器快得多，若同时从存储器中取出$n$条指令，就可以充分利用CPU资源，提高运行速度。多体交叉存储器就是基于这种思想提出的。
+	\end{tcolorbox}
+	
+	\subsection{单体多字存储器}
+	在单体多字系统中，每个存储单元存储$m$个字，总线宽度也为$m$个字，一次并行读出$m$个字。在一个存取周期内，从同一地址取出$m$条指令，然后将指令逐条送至CPU执行，即每隔$1/m$存取周期，CPU向主存取一条指令。这显然提高了单体存储器的工作速度。
+	
+	缺点：只有指令和数据在主存中连续存放时，这种方法才能有效提升存取速度。一旦遇到转移指令，或操作数不能连续存放时，这种方法的提升效果就不明显。
+	
+	\subsection{多体并行存储器}
+	多体并行存储器由多体模块组成。每个模块都有相同的容量和存取速度，各模块都有独立的读/写控制电路、地址寄存器和数据寄存器。它们既能并行工作，又能交叉工作。
+	
+	多体并行存储器分为高位交叉编址和低位交叉编址两种。
+	
+	\subsubsection{高位交叉编址 (顺序方式)}
+	高位地址表示模块号（或体号），低位地址为模块内地址（或体内地址）。如图\ref{fig:high_cross_addressing}所示，存储器共有4个模块$M_0 \sim M_3$，每个模块有$n$个单元，各模块的地址范围如图中所示。
+	
+	\begin{figure}[h]
+		\centering
+		\caption{高位交叉编址的多体存储器}
+		\label{fig:high_cross_addressing}
+		\includegraphics[width=0.5\textwidth]{图37.png} % 请替换为实际图片路径
+	\end{figure}
+	
+	在高位交叉方式下，总把低位的体内地址送到由高位体号确定的模块内进行译码。访问一个连续主块时，总是先在一个模块内访问，等到该模块访问完才转到下一个模块访问，CPU总是按顺序访问存储模块，各模块不能被并行访问，因此不能提高存储器的吞吐率。
+	
+	\begin{tcolorbox}[colframe=black, colback=white]
+		\kaishu \textbf{注 意} \quad 模块内的地址是连续的，存取方式仍是串行存取，因此这种存储器仍是顺序存储器。
+	\end{tcolorbox}
+	
+	\subsubsection{低位交叉编址 (交叉方式)}
+	\begin{tcolorbox}[colframe=black, colback=white]
+		\kaishu \textbf{命题追踪} \quad 交叉存储器中数据的存放方式（2017）
+	\end{tcolorbox}
+	低位地址为模块号，高位地址为模块内地址。如图\ref{fig:low_cross_addressing}所示，每个模块按“模$m$”交叉编址，模块号 = 单元地址 \% $m$，假定有$m$个模块，每个模块有$k$个单元，则单元$0, m, \cdots, (k - 1)m$位于$M_0$；单元$1, m + 1, \cdots, (k - 1)m + 1$位于$M_1$；以此类推。
+	
+	\begin{figure}[h]
+		\centering
+		\caption{低位交叉编址的多体存储器}
+		\label{fig:low_cross_addressing}
+		\includegraphics[width=0.4\textwidth]{图38.png} % 请替换为实际图片路径
+	\end{figure}
+	在低位交叉方式下，总是把高位的体内地址送到由低位体号所确定的模块内进行译码。程序连续存放在相邻模块中，因此称采用此编址方式的存储器为交叉存储器。
+	
+	交叉存储器可以采用轮流启动或同时启动两种方式。
+	\begin{itemize}
+		\item 轮流启动方式
+		若每个模块一次读/写的位数正好等于数据总线位数，模块的存取周期为$T$，总线周期为$r$，为实现轮流启动方式，存储器交叉模块数应大于或等于
+		\[ m = T/r \]
+	\end{itemize}
+	
+	\begin{tcolorbox}[colframe=black, colback=white]
+		\kaishu \textbf{命题追踪} \quad 交叉存储器存取时间和带宽的计算（2012、2013）
+	\end{tcolorbox}
+	
+	按每隔$1/m$个存取周期轮流启动各模块，则每隔$1/m$个存取周期就可读出或写入一个数据，存取速度提高$m$倍，图\ref{fig:low_cross_access_time}展示了4体交叉轮流启动的时间关系。交叉存储器要求其模块数大于或等于$m$，以保证启动某模块后经过$m \times r$的时间后再次启动该模块时，其上次的存取操作已经完成（以保证流水线不间断）。这样，连续存取$m$个字所需的时间为
+	\[ t_1 = T + (m - 1)r \]
+	而顺序方式连续读取$m$个字所需的时间为$t_2 = mT$。可见交叉存储器的带宽大大提高。
+	
+	\begin{figure}[h]
+		\centering
+		\caption{低位交叉轮流启动的存取时间示意图}
+		\label{fig:low_cross_access_time}
+		\includegraphics[width=0.5\textwidth]{图39.png} % 请替换为实际图片路径
+	\end{figure}
+	
+	\begin{tcolorbox}[colframe=black, colback=white]
+		\kaishu \textbf{命题追踪} \quad 交叉存储器中访存冲突的分析（2015）
+	\end{tcolorbox}
+	
+	在理想情况下，$m$体交叉存储器每隔$1/m$存取周期可读/写一个数据，若相邻的$m$次访问的访存地址出现在同一个模块内，则会发生访存冲突，此时需延迟发生冲突的访问请求。
+	
+	\begin{itemize}
+		\item 同时启动方式
+		
+		若所有模块一次并行读/写的总位数正好等于数据总线位数，则可以同时启动所有模块进行读/写。设每个模块一次读/写的位数为16位，模块数$m = 4$，数据总线位数为64位，4个模块一共提供64位，正好构成一个存储字，因此应该同时启动4个模块进行并行读/写。
+	\end{itemize}
+	
+\end{document}

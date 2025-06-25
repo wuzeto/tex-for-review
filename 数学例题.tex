@@ -1,0 +1,241 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{multicol}
+
+\usepackage{amsmath}
+\usepackage{geometry}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{extarrows}
+\usepackage{makecell}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{pgfplots}
+\usepackage{amsthm}
+
+\theoremstyle{remark}
+\newtheorem{remark}{注}
+
+\pgfplotsset{compat=1.18}  % 设置兼容版本（推荐）
+\usepackage{tikz}
+\usepackage{tikz}
+\usetikzlibrary{shapes, arrows.meta, positioning, chains, decorations.pathreplacing, calligraphy}
+\usepackage[dvipsnames, svgnames, x11names]{xcolor}
+\usepackage{tcolorbox}
+\usepackage[normalem]{ulem}
+% 设置页面边距
+\geometry{a3paper, landscape, margin=0.5cm}
+
+\title{数学例题集}
+\author{}
+\date{}
+
+\begin{document}
+	\maketitle
+	\begin{multicols}{2}
+	\section*{16 二重积分}
+	\subsection*{例16.1}
+	证明：\(\sum_{n = 1}^{\infty}(u_{n + 1}-u_n)\)收敛\(\Leftrightarrow\lim_{n\rightarrow\infty}u_n\)存在.
+	
+	\subsection*{例16.2}
+	记\(\sum_{n = 1}^{\infty}u_n\)的部分和\(S_n = u_1 + u_2+\cdots+u_n\)，若\(\lim_{n\rightarrow\infty}u_n = 0\)，\(\lim_{n\rightarrow\infty}S_{2n}=S\)（或\(\lim_{n\rightarrow\infty}S_{2n + 1}=S\)），证明：\(\sum_{n = 1}^{\infty}u_n=S\).
+	
+	\subsection*{例16.3}
+	判别级数\(\sum_{n = 0}^{\infty}\frac{1}{n!}\)的敛散性.
+	
+	\subsection*{例16.4}
+	以下结论，正确的是（~~~~）.
+	\begin{enumerate}[label=(\Alph*)]
+		\item \(\sum_{n = 1}^{\infty}\ln\left(1+\frac{1}{n}\right)\)收敛，\(\sum_{n = 1}^{\infty}\frac{1}{n}\)收敛
+		\item \(\sum_{n = 1}^{\infty}\ln\left(1+\frac{1}{n}\right)\)收敛，\(\sum_{n = 1}^{\infty}\frac{1}{n}\)发散
+		\item \(\sum_{n = 1}^{\infty}\ln\left(1+\frac{1}{n}\right)\)发散，\(\sum_{n = 1}^{\infty}\frac{1}{n}\)收敛
+		\item \(\sum_{n = 1}^{\infty}\ln\left(1+\frac{1}{n}\right)\)发散，\(\sum_{n = 1}^{\infty}\frac{1}{n}\)发散
+	\end{enumerate}
+	
+	\subsection*{例16.5}
+	设正项级数\(\sum_{n = 1}^{\infty}a_n\)收敛，证明：级数\(\sum_{n = 1}^{\infty}a_n^2\)收敛.
+	
+	\subsection*{例16.6}
+	\begin{enumerate}
+		\item 设\(\sum_{n = 1}^{\infty}u_n\)是正项级数，若\(\sum_{n = 1}^{\infty}\sqrt{u_nu_{n + 1}}\)收敛，且\(\{u_n\}\)单调减少，证明：\(\sum_{n = 1}^{\infty}u_n\)收敛；
+		\item 设\(\sum_{n = 1}^{\infty}u_n\)和\(\sum_{n = 1}^{\infty}v_n\)都是正项级数，且\(\sum_{n = 1}^{\infty}u_n\)和\(\sum_{n = 1}^{\infty}v_n\)都收敛，证明：\(\sum_{n = 1}^{\infty}u_nv_n\)收敛.
+	\end{enumerate}
+	
+	\subsection*{例16.7}
+	设有方程\(x^{n}+nx - 1 = 0\)，其中\(n\)为正整数。证明此方程存在唯一的正实根\(x_{n}\)，并证明当\(\alpha>1\)时，级数\(\sum_{n = 1}^{\infty}x_{n}^{\alpha}\)收敛。
+	
+	\subsection*{例16.8}
+	设\(\alpha>0\)，级数\(\sum_{n = 2}^{\infty}\sin(n^{-\alpha}\ln n)\)收敛，则（~~~）。
+	\begin{enumerate}[label=(\Alph*)]
+		\item \(\alpha\leqslant1\)
+		\item \(\alpha<1\)
+		\item \(\alpha\geqslant1\)
+		\item \(\alpha>1\)
+	\end{enumerate}
+	
+	\subsection*{例16.9}
+	设\(a_{n}>0\)，\(p > 1\)，且\(\lim_{n\rightarrow\infty}[n^{p}(e^{\frac{1}{n}} - 1)a_{n}]=1\)，若级数\(\sum_{n = 1}^{\infty}a_{n}\)收敛，则\(p\)的取值范围是\_\_\_\_\_\_\_。
+	
+	\subsection*{例16.10}
+	设数列\(\{a_{n}\}\)，\(\{b_{n}\}\)满足\(0 < a_{n}<\frac{\pi}{2}\)，\(0 < b_{n}<\frac{\pi}{2}\)，\(\cos a_{n}-a_{n}=\cos b_{n}\)，且级数\(\sum_{n = 1}^{\infty}b_{n}\)收敛。
+	\begin{enumerate}
+		\item 证明：\(\lim_{n\rightarrow\infty}a_{n}=0\)；
+		\item 证明：级数\(\sum_{n = 1}^{\infty}\frac{a_{n}}{b_{n}}\)收敛。
+	\end{enumerate}
+	
+	\subsection*{例16.11}
+	设\(a > 0\)，则下列对级数\(\sum_{n = 1}^{\infty}\frac{a^{n}n!}{n^{n}}\)的敛散性说法正确的是（~~~）。
+	\begin{enumerate}[label=(\Alph*)]
+		\item 当\(0 < a < e\)时，原级数收敛；当\(a\geqslant e\)时，原级数发散
+		\item 当\(0 < a < e\)时，原级数发散；当\(a\geqslant e\)时，原级数收敛
+		\item 当\(0 < a < e\)时，原级数收敛；当\(a\geqslant e\)时，原级数收敛
+		\item 当\(0 < a < e\)时，原级数发散；当\(a\geqslant e\)时，原级数发散
+	\end{enumerate}
+	
+	\subsection*{例16.12}
+	级数\(\sum_{n = 1}^{\infty}\left[e^{\frac{\sin^{2}\alpha n}{n^{2}}}+\left(\cos\frac{1}{\sqrt{n}}\right)^{n^{2}} - 1\right]\)（~~~）。
+	\begin{enumerate}[label=(\Alph*)]
+		\item 收敛
+		\item 发散
+		\item 敛散性与\(\alpha\)有关
+		\item 无法判断
+	\end{enumerate}
+	
+	\subsection*{例16.13}
+	判别级数\(\sum_{n = 2}^{\infty}\frac{1}{n\ln n}\)的敛散性。
+	
+	\subsection*{例16.14}
+	判别级数\(\sum_{n = 1}^{\infty}(-1)^{n - 1}\cdot\frac{1}{n}\)的敛散性。
+	
+	\subsection*{例16.15}
+	判别级数\(\sum_{n = 1}^{\infty}\frac{(-1)^{n}}{\sqrt{n}-\ln n}\)的敛散性。
+	
+	\subsection*{例16.16}
+	判别级数\(\sum_{n = 2}^{\infty}\frac{(-1)^{n}}{\sqrt{n}+(-1)^{n}}\)的敛散性。
+	
+	\subsection*{例16.17}
+	已知级数\(\sum_{n = 1}^{\infty}(-1)^{n - 1}u_{n}\)条件收敛，\(u_{n}>0\)，则级数\(\sum_{n = 1}^{\infty}(u_{2n}-2u_{2n - 1})\)（~~~~）。
+	\begin{enumerate}[label=(\Alph*)]
+		\item 发散
+		\item 绝对收敛
+		\item 条件收敛
+		\item 敛散性无法判断
+	\end{enumerate}
+	
+	\subsection*{例16.18}
+	级数\(\sum_{n = 1}^{\infty}\left(\frac{1}{\sqrt{n}}-\frac{1}{\sqrt{n + 1}}\right)\sin(n + k)\)（\(k\)为常数）（~~~~）。
+	\begin{enumerate}[label=(\Alph*)]
+		\item 绝对收敛
+		\item 条件收敛
+		\item 发散
+		\item 敛散性与\(k\)有关
+	\end{enumerate}
+	
+	\subsection*{例16.19}
+	若\(\sum_{n = 1}^{\infty}nu_{n}\)绝对收敛，\(\sum_{n = 1}^{\infty}\frac{v_{n}}{n}\)条件收敛，则（~~~）。
+	\begin{enumerate}[label=(\Alph*)]
+		\item \(\sum_{n = 1}^{\infty}u_{n}v_{n}\)条件收敛
+		\item \(\sum_{n = 1}^{\infty}u_{n}v_{n}\)绝对收敛
+		\item \(\sum_{n = 1}^{\infty}(u_{n}+v_{n})\)收敛
+		\item \(\sum_{n = 1}^{\infty}(u_{n}+v_{n})\)发散
+	\end{enumerate}
+	
+	\subsection*{例16.20}
+	如果数项级数\(\sum_{n = 1}^{\infty}u_{n}\)收敛，则以下级数中必收敛的是（~~~）。
+	\begin{enumerate}[label=(\Alph*)]
+		\item \(\sum_{n = 1}^{\infty}(-1)^{n}\frac{u_{n}}{n}\)
+		\item \(\sum_{n = 1}^{\infty}u_{n}^{2}\)
+		\item \(\sum_{n = 1}^{\infty}(u_{2n - 1}-u_{2n})\)
+		\item \(\sum_{n = 1}^{\infty}(u_{n}+u_{n + 1})\)
+	\end{enumerate}
+	
+	\subsection*{例16.21}
+	级数\(\sum_{n = 1}^{\infty}(-1)^{n + 1}\frac{\sqrt{n + 1}-\sqrt{n}}{n^{p}}\)条件收敛，则\(p\)的取值范围为\_\_\_\_。
+	
+	\subsection*{例16.22}
+	设\(a_{n}=\sum_{k = 1}^{n}\frac{1}{k}\)，则级数\(\sum_{n = 1}^{\infty}a_{n}x^{n}\)的收敛半径为\_\_\_\_。
+	
+	\subsection*{例16.23}
+	幂级数\(\sum_{n = 1}^{\infty}\frac{(-1)^{n - 1}}{2n - 1}x^{2n}\)的收敛域为\_\_\_\_。
+	
+	\subsection*{例16.24}
+	设\(f(x)=\sum_{n = 0}^{\infty}x^{n}\)，\(g(x)=\int_{0}^{x}f(t)dt\)，则\(f(x)\)与\(g(x)\)的收敛域分别为（~~~）。
+	\begin{enumerate}[label=(\Alph*)]
+		\item \((-1,1), (-1,1)\)
+		\item \((-1,1), [-1,1)\)
+		\item \([-1,1), (-1,1)\)
+		\item \([-1,1), [-1,1]\)
+	\end{enumerate}
+	
+	\subsection*{例16.25}
+	已知\(\sum_{n = 1}^{\infty}\frac{n!}{n^{n}}e^{-nx}\)的收敛域为\((a, +\infty)\)，则\(a = \)  。
+	
+	\subsection*{例16.26}
+	设\(\sum_{n = 1}^{\infty}a_{n}(x + 1)^{n}\)在点\(x = 1\)处条件收敛，则幂级数\(\sum_{n = 1}^{\infty}na_{n}(x - 1)^{n}\)在点\(x = 2\)处（  ）。
+	\begin{enumerate}[label=(\Alph*)]
+		\item 绝对收敛
+		\item 条件收敛
+		\item 发散
+		\item 敛散性不确定
+	\end{enumerate}
+	
+	\subsection*{例16.27}
+	幂级数\(\sum_{n = 2}^{\infty}\left(\frac{1}{n\ln n}+\frac{1}{2^{n}}\right)x^{n}\)的收敛域为  。
+	
+	\subsection*{例16.28}
+	求\(\sum_{n = 1}^{\infty}\left(1+\frac{1}{2}+\cdots+\frac{1}{n}\right)x^{n}\)的和函数。
+	
+	\subsection*{例16.29}
+	设函数\(y = f(x)\)满足\(y'' + 2y' + 5y = 0\)，且\(f(0)=1\)，\(f'(0)= - 1\)。
+	\begin{enumerate}
+		\item 求\(f(x)\)的表达式；
+		\item 设\(a_{n}=\int_{n\pi}^{+\infty}f(x)dx\)，求\(\sum_{n = 1}^{\infty}a_{n}\)。
+	\end{enumerate}
+	
+	\subsection*{例16.30}
+	求级数\(\sum_{n = 1}^{\infty}\frac{x^{n}}{n}\)的和函数。
+	
+	
+	
+	\subsection*{例16.31}
+	求级数\(\sum_{n = 1}^{\infty}nx^{n}\)的和函数。
+	
+	\subsection*{例16.32}
+	求幂级数\(\sum_{n = 1}^{\infty}\frac{(-1)^{n - 1}}{2n - 1}x^{2n}\)的和函数。
+	
+	\subsection*{例16.33}
+	设数列\(\{a_n\}\)满足\(a_1 = 1\)，\((n + 1)a_{n + 1}=\left(n + \frac{1}{2}\right)a_n\)，证明：当\(\vert x\vert < 1\)时，幂级数\(\sum_{n = 1}^{\infty}a_nx^n\)收敛，并求其和函数。
+	
+	\subsection*{例16.34}
+	设\(a_n = \int_{0}^{1}x^n\sqrt{1 - x^2}\,\mathrm{d}x\)，\(b_n = \int_{0}^{\frac{\pi}{2}}\sin^n t\,\mathrm{d}t\)，\(n = 1, 2, \cdots\)，计算\(\sum_{n = 1}^{\infty}\frac{(-1)^{n - 1}a_n}{b_n}\)。
+	
+	\subsection*{例16.35}
+	设\(f(x) = \int_{0}^{\sin x}\sin t^2\,\mathrm{d}t\)，\(g(x) = \sum_{n = 0}^{\infty}\frac{x^{2n + 1}}{n! + 2}\)，当\(x \to 0\)时，\(f(x)\)是\(g(x)\)的（  ）。
+	\begin{enumerate}[label=(\Alph*)]
+		\item 高阶无穷小
+		\item 低阶无穷小
+		\item 等价无穷小
+		\item 同阶非等价无穷小
+	\end{enumerate}
+	
+	\subsection*{例16.36}
+	函数\(f(x) = \ln(1 - x + x^2)\)关于\(x\)的幂级数展开式为\(\underline{\quad\quad}\)。
+	
+	\subsection*{例16.37}
+	将函数\(f(x) = \arctan\frac{1 + x}{1 - x}\)展开为\(x\)的幂级数。
+	
+	\subsection*{例16.38}
+	设\(f(x) = \begin{cases} 
+		x, & 0 \leqslant x \leqslant \frac{1}{2}, \\
+		2 - 2x, & \frac{1}{2} < x \leqslant 1, 
+	\end{cases}\)，\(S(x) = \frac{a_0}{2} + \sum_{n = 1}^{\infty}a_n\cos n\pi x\)，\(-\infty < x < +\infty\)，其中\(a_n = 2\int_{0}^{1}f(x)\cos n\pi x\,\mathrm{d}x\)（\(n = 0, 1, 2, \cdots\)），则\(S\left(-\frac{5}{2}\right) = \underline{\quad\quad}\)。
+	
+	\subsection*{例16.39}
+	将函数\(f(x) = 1 - x^2\)（\(0 \leqslant x \leqslant \pi\)）展开成余弦级数，并求级数\(\sum_{n = 1}^{\infty}\frac{(-1)^{n + 1}}{n^2}\)。
+\end{multicols}
+\end{document}

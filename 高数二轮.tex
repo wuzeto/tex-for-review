@@ -1,0 +1,3522 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{amsmath}
+\usepackage{geometry}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{extarrows}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{pgfplots}
+\usepackage{mathdots}
+\usepackage{float}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{esint}
+\theoremstyle{remark}
+\newtheorem{remark}{注}
+\usepackage{amsmath, amsthm, amssymb, bm}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{property}{Property}
+\newtheorem{corollary}{Corollary}
+\pgfplotsset{compat=1.18}  % 设置兼容版本（推荐）
+\usepackage{tikz}
+\usepackage{tikz}
+\usetikzlibrary{shapes, arrows.meta, positioning, chains, decorations.pathreplacing, calligraphy}
+\usepackage[dvipsnames, svgnames, x11names]{xcolor}
+\usepackage{tcolorbox}
+\usepackage[normalem]{ulem}
+% 设置页面边距
+\geometry{a4paper, margin=2cm}
+
+\title{数一二轮笔记高数}
+\author{}
+\date{}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	
+	\section{函数}
+	
+	\subsection*{知识点}
+	
+	\begin{enumerate}
+		\item 函数的定义：映射 $ f: D \subseteq \mathbb{R}^n \to \mathbb{R} $ 称为定义在 $ D $ 上的 $ n $ 元函数，记作 $ u = f(x), x \in D $。
+		
+		当 $ n = 1 $ 时，$ y = f(x), x \in D \subseteq \mathbb{R} $ 称为一元函数；当 $ n = 2 $ 时，$ z = f(x, y), (x, y) \in D \subseteq \mathbb{R}^2 $ 称为二元函数。二元或二元以上的函数称为多元函数。
+		
+		\item 函数的两要素为定义域与对应法则；函数的表示方法主要有表格法、图形法和解析法。
+		
+		\item 一元函数 $ y = f(x), x \in D $ 的图形是平面点集 $ C = \{(x, y) \mid y = f(x), x \in D\} \subseteq D \times f(D) $，通常是一条平面曲线。二元函数 $ z = f(x, y), (x, y) \in D $ 的图形通常是一张空间的曲面。
+		
+		\item 几个特殊类型的一元函数：
+		\begin{enumerate}
+			\item 绝对值函数：$$ y = |x| = 
+			\begin{cases}
+				x, & x \geq 0 \\
+				-x, & x < 0
+			\end{cases} $$
+			
+			\item 符号函数：$$ y = \text{sgn}(x) = 
+			\begin{cases}
+				-1, & x < 0 \\
+				0, & x = 0 \\
+				1, & x > 0
+			\end{cases} $$
+			
+			\item 取整函数：$$ y = [x] = n, \quad n \leq x < n+1, \quad n = 0, \pm 1, \pm 2, \dots $$ 表示不超过 $ x $ 的最大整数。
+			
+			\item Dirichlet 函数：$$ y = D(x) = 
+			\begin{cases}
+				1, & \text{当 } x \text{ 是有理数时} \\
+				0, & \text{当 } x \text{ 是无理数时}
+			\end{cases} $$
+			
+			\item 取最大值函数：$ y = \max\{f(x), g(x)\} $，取最小值函数：$ y = \min\{f(x), g(x)\} $。
+		\end{enumerate}
+		
+		\item 取整函数的性质：$$ [x] \leq x < [x] + 1 \quad \text{或} \quad x - 1 < [x] \leq x. $$
+		
+		\item 设有函数 $ f(x) $（定义在 $ A $）和 $ g(x) $（定义在 $ B $），且 $ A \cap B \neq \emptyset $，则它们的加（减）、乘法和除法定义如下：
+		\begin{align*}
+			(f \pm g)(x) &= f(x) \pm g(x), \quad x \in A \cap B \\
+			(f \cdot g)(x) &= f(x) \cdot g(x), \quad x \in A \cap B \\
+			\left( \frac{f}{g} \right)(x) &= \frac{f(x)}{g(x)}, \quad x \in A \cap B - \{x \mid g(x) = 0\}.
+		\end{align*}
+		
+		\item 一元复合函数：设有函数链 $ u = g(x), x \in D \subseteq \mathbb{R} $ 和 $ y = f(u), u \in D_1 \subseteq \mathbb{R} $，若 $ g(D) \subseteq D_1 $，称 $ y = f[g(x)] $（定义在 $ x \in D $）为 $ f $ 与 $ g $ 确定的复合函数，记为 $ f \circ g $，其中 $ u $ 称为中间变量。
+		
+		\item 初等函数：由基本初等函数与常值函数经过有限次四则运算或有限次复合运算得到的由一个统一的解析式表示的函数。
+		
+		\item 一元函数的反函数：若函数 $ f: D \to f(D) $ 是单射，则存在逆映射 $ f^{-1}: f(D) \to D $，称此逆映射 $ f^{-1} $ 为 $ f $ 的反函数，且有 $ f^{-1}(f(x)) = x $ 和 $ f(f^{-1}(x)) = x $。
+		
+		\item 一元反函数 $ f^{-1} $ 的定义域就是函数 $ f $ 的值域，一元反函数 $ f^{-1} $ 的值域就是函数 $ f $ 的定义域，且函数 $ y = f(x) $ 和反函数 $ y = f^{-1}(x) $ 的图形关于直线 $ y = x $ 对称。
+		
+		\item 严格单调的一元函数必有反函数，且 $ f $ 严格单调递增（减）时，$ f^{-1} $ 也严格单调递增（减）。
+		
+		\item 函数 $ f(x) $ 定义在对称区间 $ (-l, l) $ 上，如果对于任意 $ x \in (-l, l) $，有 $ f(-x) = -f(x) $，称 $ f $ 为 $ (-l, l) $ 上的奇函数；若 $ f(-x) = f(x) $，称 $ f $ 为 $ (-l, l) $ 上的偶函数。
+		
+		\item 若 $ f $ 是奇函数，且存在反函数 $ f^{-1} $，则 $ f^{-1} $ 也是奇函数。
+		
+		\item 函数 $ f $ 定义在 $ \mathbb{R} $ 上，若存在 $ T \in \mathbb{R} $，使得对于任意 $ x \in \mathbb{R} $，有 $ f(x + T) = f(x) $，称 $ f $ 为周期函数，$ T $ 称为 $ f $ 的周期。
+		
+		\item 若 $ T $ 是 $ f $ 的周期，则 $ T $ 的任意整数倍 $ mT $ 也是 $ f $ 的周期。
+		
+		\item 若 $ T_1 $、$ T_2 $ 是 $ f $ 的周期，则 $ T_1 \pm T_2 $ 也是 $ f $ 的周期。
+		
+		\item 周期函数的和与差不一定是周期函数。
+		
+		\item 任意周期函数不一定存在最小正周期，但非常数的连续周期函数存在最小正周期。
+		
+		\item 常用恒等式：
+		\begin{enumerate}
+			\item $ \arcsin x + \arccos x = \frac{\pi}{2}, \quad x \in [-1, 1] $
+			\item $ \arctan x + \operatorname{arccot} x = \frac{\pi}{2}, \quad x \in (-\infty, +\infty) $
+			\item $ \arctan x + \arctan \frac{1}{x} = \frac{\pi}{2}, \quad x \neq 0 $
+		\end{enumerate}
+		
+		\item 求解函数方程的常用方法：
+		\begin{enumerate}
+			\item 利用初等变换求函数表达式；
+			\item 利用函数的连续性求函数表达式；
+			\item 利用导数的概念和性质求函数表达式；
+			\item 利用不定积分和定积分的概念和性质求函数表达式；
+		\end{enumerate}
+	\end{enumerate}
+	
+
+		
+		\section{数列的极限}
+		
+		\subsection*{知识点}
+		
+		\begin{enumerate}
+			\item 确界的定义：设 $ E \subseteq \mathbb{R} $，$ \beta \in \mathbb{R} $ 满足：
+			\begin{enumerate}
+				\item $ \forall x \in E, x \leq \beta $；
+				\item $ \forall \varepsilon > 0, \exists x_0 \in E $，使得 $ x_0 > \beta - \varepsilon $，
+			\end{enumerate}
+			则称 $ \beta $ 为数集 $ E $ 的上确界，记作 $ \beta = \sup E $。同理可定义下确界 $ \alpha = \inf E $。
+			
+			\item 连续性公理：有上（下）界的数集一定存在上（下）确界。
+			
+			\item 数列极限的定义：$$
+			\lim_{n \to \infty} a_n = a \iff \forall \varepsilon > 0, \exists N \in \mathbb{N}^+, \text{当 } n > N \text{ 时}, |a_n - a| < \varepsilon.
+			$$
+			
+			\item 若数列 $ \{a_n\} $ 存在极限，则该数列的极限唯一。
+			
+			\item 若数列 $ \{a_n\} $ 存在极限，则该数列一定有界，即 $ \exists M > 0 $，使得 $ |a_n| \leq M $ 对所有 $ n = 1, 2, \dots $ 成立。
+			
+			\item 若数列 $ \{a_n\} $ 存在极限 $ a $，且 $ a > 0 $（或 $ a < 0 $），则 $ \exists N \in \mathbb{N}^+ $，当 $ n > N $ 时，有 $ a_n > 0 $（或 $ a_n < 0 $）。
+			
+			\item 若 $ \lim_{n \to \infty} a_n = a $，且 $ a_n \geq 0 $（对所有 $ n = 1, 2, \dots $），则 $ a \geq 0 $。
+			
+			\item 若 $ \lim_{n \to \infty} a_n = a $，且 $ a \ne 0 $，则 $ \exists N \in \mathbb{N}^+ $，当 $ n > N $ 时，恒有 $ |a_n| > \frac{|a|}{2} $。
+			
+			\item 若 $ \lim_{n \to \infty} a_n = a $，则 $ \lim_{n \to \infty} |a_n| = |a| $，反之不一定成立。
+			
+			\item $ \lim_{n \to \infty} |a_n| = 0 \iff \lim_{n \to \infty} a_n = 0 $。
+			
+			\item 设 $ a_n > 0 $（对所有 $ n = 1, 2, \dots $），且 $ \lim_{n \to \infty} a_n = a > 0 $，则 $ \lim_{n \to \infty} \sqrt{a_n} = \sqrt{a} $。
+			
+			\item 若数列 $ \{a_n\} $ 有界，又 $ \lim_{n \to \infty} b_n = 0 $，则 $ \lim_{n \to \infty} a_n b_n = 0 $。
+			
+			\item 若数列 $ \{a_n\} $ 和 $ \{b_n\} $ 都存在极限，则 $ \{a_n \pm b_n\} $、$ \{a_n b_n\} $ 和 $ \left\{\frac{a_n}{b_n}\right\} $（当 $ \lim_{n \to \infty} b_n \ne 0 $）也存在极限，且有：
+			\begin{align*}
+				(1)\ & \lim_{n \to \infty}(a_n \pm b_n) = \lim_{n \to \infty} a_n \pm \lim_{n \to \infty} b_n \\
+				(2)\ & \lim_{n \to \infty}(k a_n) = k \cdot \lim_{n \to \infty} a_n,\quad \text{其中 } k \text{ 为常数} \\
+				(3)\ & \lim_{n \to \infty}(a_n b_n) = \lim_{n \to \infty} a_n \cdot \lim_{n \to \infty} b_n \\
+				(4)\ & \lim_{n \to \infty} \frac{a_n}{b_n} = \frac{\lim_{n \to \infty} a_n}{\lim_{n \to \infty} b_n},\quad \text{若 } \lim_{n \to \infty} b_n \ne 0
+			\end{align*}
+			
+			\item 数列 $ \{a_n\} $ 收敛，$ \{b_n\} $ 发散，则 $ \{a_n + b_n\} $ 必发散；数列 $ \{a_n\} $、$ \{b_n\} $ 都发散，则数列 $ \{a_n + b_n\} $ 和 $ \{a_n b_n\} $ 可能收敛，也可能发散。
+			
+			\item 几个重要的数列极限：
+			\begin{enumerate}
+				\item $ \lim_{n \to \infty} a^{1/n} = 1 \quad (a > 0) $
+				\item $ \lim_{n \to \infty} \sqrt[n]{n} = 1 $
+				\item 当 $ |q| < 1 $ 时，$ \lim_{n \to \infty} q^n = 0 $；当 $ |q| > 1 $ 时，极限不存在；$ \lim_{n \to \infty} (-1)^n $ 不存在。
+				\item $ \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n = e $
+				\item $ \lim_{n \to \infty} \left(1 + \frac{1}{2} + \frac{1}{3} + \cdots + \frac{1}{n} - \ln n\right) = \gamma $（欧拉常数）
+			\end{enumerate}
+			
+			\item 夹逼准则：若对任意 $ n \in \mathbb{N}^+ $，有 $ b_n \leq a_n \leq c_n $，且 $ \lim_{n \to \infty} b_n = \lim_{n \to \infty} c_n = a $，则 $ \lim_{n \to \infty} a_n = a $。
+			
+			\item 单调有界准则：单调有界数列一定收敛；单调无界数列是确定符号的无穷大量。
+			
+			\item 闭区间套定理：设 $ [a_n, b_n] $ 是一列闭区间，满足 $ a_n \leq a_{n+1} \leq b_{n+1} \leq b_n $，则存在 $ \xi \in \mathbb{R} $，使得 $ a_n \leq \xi \leq b_n $。如果 $ \lim_{n \to \infty} |a_n - b_n| = 0 $，则存在唯一的 $ \xi $，使得 $ \lim_{n \to \infty} a_n = \lim_{n \to \infty} b_n = \xi $。
+			
+			\item Weierstrass 定理（凝聚定理）：有界数列必有收敛子列。
+			
+			\item 若数列 $ \{a_n\} $ 收敛，则其任何子数列 $ \{a_{n_k}\} $ 也收敛，且 $ \lim_{k \to \infty} a_{n_k} = \lim_{n \to \infty} a_n $。
+			
+			\item 拉链定理：$$
+			\lim_{n \to \infty} a_n = a \iff \lim_{n \to \infty} a_{2n} = \lim_{n \to \infty} a_{2n+1} = a
+			$$
+			
+			\item $ p $-拉链定理：$$
+			\lim_{n \to \infty} a_n = a \iff \lim_{n \to \infty} a_{pn} = \lim_{n \to \infty} a_{pn+1} = \cdots = \lim_{n \to \infty} a_{pn+(p-1)} = a,\quad p \in \mathbb{N}^+
+			$$
+			
+			\item 判定数列发散的方法：
+			\begin{enumerate}
+				\item 如果能找到一个发散的子数列，则原数列发散；
+				\item 如果能找到两个子数列收敛于不同的极限，则原数列也发散。
+			\end{enumerate}
+			
+			\item Cauchy 收敛准则：
+			$$
+			\lim_{n \to \infty} a_n = a \iff \forall \varepsilon > 0, \exists N \in \mathbb{N}^+, \forall n, m > N, |a_n - a_m| < \varepsilon
+			$$
+			或等价地：
+			$$
+			\lim_{n \to \infty} a_n = a \iff \forall \varepsilon > 0, \exists N \in \mathbb{N}^+, \forall n > N, \forall p \in \mathbb{N}^+, |a_{n+p} - a_n| < \varepsilon
+			$$
+			
+			\item Cauchy 命题：若 $ \lim_{n \to \infty} a_n = a $，则
+			$$
+			\lim_{n \to \infty} \frac{a_1 + a_2 + \cdots + a_n}{n} = a
+			$$
+			
+			\item 设 $ a_n > 0 $，若 $ \lim_{n \to \infty} \frac{a_{n+1}}{a_n} = a $，则 $ \lim_{n \to \infty} \sqrt[n]{a_n} = a $。
+			
+			\item 若 $ \lim_{n \to \infty} a_n = A $，$ \lim_{n \to \infty} b_n = B $，则
+			$$
+			\lim_{n \to \infty} \frac{a_1 b_n + a_2 b_{n-1} + \cdots + a_n b_1}{n} = AB
+			$$
+			
+			\item Stolz 定理（$\frac{\infty}{\infty}$ 型）：设 $ \{b_n\} $ 严格单调递增且趋于 $ +\infty $，若
+			$$
+			\lim_{n \to \infty} \frac{a_n - a_{n-1}}{b_n - b_{n-1}} = A,
+			$$
+			则
+			$$
+			\lim_{n \to \infty} \frac{a_n}{b_n} = A \quad (A \text{ 为有限数或 } \pm \infty)
+			$$
+			
+			\item Stolz 定理（$\frac{0}{0}$ 型）：设 $ \{b_n\} $ 严格单调减少，且 $ \lim_{n \to \infty} a_n = \lim_{n \to \infty} b_n = 0 $，若
+			$$
+			\lim_{n \to \infty} \frac{a_n - a_{n-1}}{b_n - b_{n-1}} = A,
+			$$
+			则
+			$$
+			\lim_{n \to \infty} \frac{a_n}{b_n} = A
+			$$
+		
+				\item \textbf{Stolz 定理}（$\frac{\infty}{\infty}$ 型）：
+				设 $\{b_n\}$ 严格单调递增且趋于 $ +\infty $，若
+				$$
+				\lim_{n \to \infty} \frac{a_n - a_{n-1}}{b_n - b_{n-1}} = A,
+				$$
+				则
+				$$
+				\lim_{n \to \infty} \frac{a_n}{b_n} = A \quad (A \text{ 为有限数或 } \pm\infty)
+				$$
+				
+				\item \textbf{Stolz 定理}（$\frac{0}{0}$ 型）：
+				设 $\{b_n\}$ 严格单调减少且趋于 $ 0 $，若
+				$$
+				\lim_{n \to \infty} \frac{a_n - a_{n-1}}{b_n - b_{n-1}} = A,
+				$$
+				则
+				$$
+				\lim_{n \to \infty} \frac{a_n}{b_n} = A.
+				$$
+				
+				\item \textbf{压缩映射}：
+				设函数 $ f $ 在区间 $[a, b]$ 上有定义，且满足 $ f([a, b]) \subseteq [a, b] $。若存在常数 $ r \in (0, 1) $，使得对任意 $ x, y \in [a, b] $，都有
+				$$
+				|f(x) - f(y)| \leq r|x - y|,
+				$$
+				则称 $ f $ 是 $[a, b]$ 上的压缩映射，$ r $ 称为压缩常数。
+				
+				\item 若函数 $ f(x) $ 在 $[a, b]$ 上可导，且 $ |f'(x)| \leq r < 1 $，则 $ f $ 是 $[a, b]$ 上的压缩映射。
+				
+				\item \textbf{不动点}：
+				若存在 $ a^* \in [a, b] $，使得 $ f(a^*) = a^* $，则称 $ a^* $ 是 $ f(x) $ 在 $[a, b]$ 上的一个不动点。
+				
+				\item \textbf{压缩映射原理}（又称不动点定理）：
+				\begin{enumerate}
+					\item 函数 $ f(x) $ 在 $[a, b]$ 上存在唯一不动点 $ a^* $；
+					\item 对任意初始值 $ a_1 \in [a, b] $，由迭代公式 $ a_{n+1} = f(a_n) $ 生成的数列 $ \{a_n\} $ 收敛于 $ a^* $；
+					\item 存在估计误差：
+					$$
+					|a_n - a^*| \leq \frac{r^{n-1}}{1 - r} |a_2 - a_1| \quad (\text{先验估计})
+					$$
+					和
+					$$
+					|a_n - a^*| \leq \frac{1}{1 - r} |a_n - a_{n-1}| \quad (\text{事后估计})
+					$$
+				\end{enumerate}
+				
+				\item \textbf{定积分的极限表示}：
+				设函数 $ f(x) $ 在 $[a, b]$ 上可积，则
+				\begin{enumerate}
+					\item 左和极限：
+					$$
+					\int_a^b f(x)\,dx = \lim_{n \to \infty} \frac{b - a}{n} \sum_{k=1}^{n} f\left(a + \frac{(k - 1)(b - a)}{n}\right)
+					$$
+					\item 右和极限：
+					$$
+					\int_a^b f(x)\,dx = \lim_{n \to \infty} \frac{b - a}{n} \sum_{k=1}^{n} f\left(a + \frac{k(b - a)}{n}\right)
+					$$
+					\item 中点和极限：
+					$$
+					\int_a^b f(x)\,dx = \lim_{n \to \infty} \frac{b - a}{n} \sum_{k=1}^{n} f\left(a + \frac{(2k - 1)(b - a)}{2n}\right)
+					$$
+				\end{enumerate}
+				
+				\item \textbf{Wallis 公式}：
+				\begin{enumerate}
+					\item
+					$$
+					\lim_{n \to \infty} \sqrt{n} \cdot \frac{2 \cdot 4 \cdots (2n)}{1 \cdot 3 \cdots (2n - 1)} = \sqrt{\frac{\pi}{2}}
+					$$
+					或等价地：
+					$$
+					\lim_{n \to \infty} \sqrt{n} \cdot \frac{(2n)!!}{(2n - 1)!!} = \sqrt{\frac{\pi}{2}}
+					$$
+					\item
+					$$
+					\frac{(2n)!}{(n!)^2} \sim \frac{4^n}{\sqrt{\pi n}}, \quad \text{当 } n \to \infty
+					$$
+				\end{enumerate}
+				
+				\item \textbf{Stirling 公式}：
+				\begin{enumerate}
+					\item 精确形式：
+					$$
+					n! = \sqrt{2\pi n} \left(\frac{n}{e}\right)^n e^{\theta_n}, \quad \text{其中 } 0 < \theta_n \leq \frac{1}{12n}
+					$$
+					\item 近似形式：
+					$$
+					n! \sim \sqrt{2\pi n} \left(\frac{n}{e}\right)^n, \quad \text{当 } n \to \infty
+					$$
+				\end{enumerate}
+				
+				\item \textbf{数列极限的计算方法总结}：
+				\begin{enumerate}
+					\item 利用数列极限的定义进行计算或证明；
+					\item 利用初等变换和数列极限的四则运算法则；
+					\item 利用夹逼准则求解；
+					\item 利用单调有界准则求解；
+					\item 利用函数极限和 Heine 定理（归结原则）；
+					\item 利用 Cauchy 收敛准则判断或证明；
+					\item 利用 Cauchy 命题处理平均型数列；
+					\item 利用 Stolz 公式处理不定型数列；
+					\item 利用定积分的概念与性质（如和式的极限）；
+					\item 利用级数收敛的必要条件或性质。
+				\end{enumerate}
+			\end{enumerate}
+
+		
+		\section{函数的极限与连续}
+		
+		\subsection*{知识点}
+		
+		\begin{enumerate}
+			\item 一元函数极限的定义：
+			$$
+			\lim_{x \to x_0} f(x) = A \iff \forall \varepsilon > 0, \exists \delta > 0, \text{当 } 0 < |x - x_0| < \delta \text{ 时}, |f(x) - A| < \varepsilon.
+			$$
+			
+			\item 多元函数极限的定义：
+			$$
+			\lim_{P \to P_0} f(P) = A \iff \forall \varepsilon > 0, \exists \delta > 0, \text{当 } P \in U(P_0, \delta) \text{ 时}, |f(P) - A| < \varepsilon.
+			$$
+			
+			\item 二元函数极限的几种特殊情况：
+			\begin{enumerate}
+				\item
+				$$
+				\lim_{\substack{x \to \infty \\ y \to \infty}} f(x, y) = A \iff \forall \varepsilon > 0, \exists X > 0, Y > 0, \text{当 } |x| > X, |y| > Y \text{ 时}, |f(x) - A| < \varepsilon.
+				$$
+				\item
+				$$
+				\lim_{\substack{x \to x_0 \\ y \to \infty}} f(x, y) = A \iff \forall \varepsilon > 0, \exists \delta > 0, Y > 0, \text{当 } x \in U(x_0, \delta), |y| > Y \text{ 时}, |f(x, y) - A| < \varepsilon.
+				$$
+				\item
+				$$
+				\lim_{\substack{x \to -\infty \\ y \to y_0}} f(x, y) = A \iff \forall \varepsilon > 0, \exists X > 0, \delta > 0, \text{当 } x < -X, y \in U(y_0, \delta) \text{ 时}, |f(x, y) - A| < \varepsilon.
+				$$
+			\end{enumerate}
+			
+			\item 右极限定义：
+			$$
+			f(x_0 + 0) = \lim_{x \to x_0^+} f(x) = A \iff \forall \varepsilon > 0, \exists \delta > 0, \text{当 } 0 < x - x_0 < \delta \text{ 时}, |f(x) - A| < \varepsilon.
+			$$
+			
+			左极限定义：
+			$$
+			f(x_0 - 0) = \lim_{x \to x_0^-} f(x) = A \iff \forall \varepsilon > 0, \exists \delta > 0, \text{当 } -\delta < x - x_0 < 0 \text{ 时}, |f(x) - A| < \varepsilon.
+			$$
+			
+			\item 左右极限等价定理：
+			$$
+			\lim_{x \to x_0} f(x) = A \iff \lim_{x \to x_0^-} f(x) = \lim_{x \to x_0^+} f(x) = A.
+			$$
+			
+			\item 累次极限定义：
+			设 $ f(x, y) $ 在点 $ (x_0, y_0) $ 的去心邻域内有定义，称
+			$$
+			\lim_{x \to x_0} \lim_{y \to y_0} f(x, y) \quad \text{和} \quad \lim_{y \to y_0} \lim_{x \to x_0} f(x, y)
+			$$
+			分别为 $ f(x, y) $ 在点 $ (x_0, y_0) $ 处的“先 $ y $ 后 $ x $”和“先 $ x $ 后 $ y $”的二次极限，统称为累次极限。
+			
+			\item 二重极限与累次极限的关系：
+			\begin{enumerate}
+				\item 当二重极限存在时，两个累次极限可能都存在、也可能都不存在，甚至一个存在另一个不存在。
+				\item 当二重极限不存在时，两个累次极限可能都存在且相等、也可能都存在但不相等，或者一个存在另一个不存在。
+				\item 若 $\lim_{(x, y) \to (x_0, y_0)} f(x, y) = A$，当 $ y \ne y_0 $ 时，$\lim_{x \to x_0} f(x, y)$ 存在，则 $\lim_{y \to y_0} \lim_{x \to x_0} f(x, y) = A$；
+				当 $ x \ne x_0 $ 时，$\lim_{y \to y_0} f(x, y)$ 存在，则 $\lim_{x \to x_0} \lim_{y \to y_0} f(x, y) = A$。
+			\end{enumerate}
+			
+			\item 函数极限表示定理：
+			$$
+			\lim_{P \to P_0} f(P) = A \iff f(P) = A + o(1), \text{其中 } o(1) \text{ 是 } P \to P_0 \text{ 时的无穷小量}.
+			$$
+			
+			\item 函数极限的唯一性：若 $\lim_{P \to P_0} f(P) = A$，则极限 $ A $ 唯一。
+			
+			\item 函数极限的局部有界性：若 $\lim_{P \to P_0} f(P) = A$，则存在 $ M > 0 $ 和 $ \delta > 0 $，使得对任意 $ P \in U(P_0, \delta) $，都有 $ |f(P)| \leq M $。
+			
+			\item 函数极限的保号性：
+			\begin{enumerate}
+				\item 若 $\lim_{P \to P_0} f(P) = A > 0 (< 0)$，则存在 $ \delta > 0 $，使得对任意 $ P \in U(P_0, \delta) $，都有 $ f(P) > 0 (< 0) $。
+				\item 若 $\lim_{P \to P_0} f(P) = A$，且存在 $ \delta > 0 $，使得对任意 $ P \in U(P_0, \delta) $，都有 $ f(P) \geq 0 (\leq 0) $，则 $ A \geq 0 (\leq 0) $。
+				\item 若 $\lim_{P \to P_0} f(P) = A \ne 0$，则存在 $ \delta > 0 $，使得对任意 $ P \in U(P_0, \delta) $，都有 $ |f(P)| > \frac{|A|}{2} $。
+			\end{enumerate}
+			
+			\item 函数极限的四则运算法则：
+			设 $\lim_{P \to P_0} f(P)$ 和 $\lim_{P \to P_0} g(P)$ 存在，则：
+			\begin{align*}
+				(1)\ & \lim_{P \to P_0} [f(P) \pm g(P)] = \lim_{P \to P_0} f(P) \pm \lim_{P \to P_0} g(P) \\
+				(2)\ & \lim_{P \to P_0} [f(P) \cdot g(P)] = \lim_{P \to P_0} f(P) \cdot \lim_{P \to P_0} g(P) \\
+				(3)\ & \lim_{P \to P_0} \frac{f(P)}{g(P)} = \frac{\lim_{P \to P_0} f(P)}{\lim_{P \to P_0} g(P)}, \quad \text{若 } \lim_{P \to P_0} g(P) \ne 0
+			\end{align*}
+			
+			\item 一元复合函数极限：
+			设 $\lim_{x \to x_0} \varphi(x) = a$，且在 $ x_0 $ 的某个去心邻域内恒有 $ \varphi(x) \ne a $，又设 $\lim_{u \to a} f(u) = A$，则
+			$$
+			\lim_{x \to x_0} f(\varphi(x)) = \lim_{u \to a} f(u) = A.
+			$$
+			类似地，若 $\lim_{x \to x_0} \varphi(x) = \infty$，则 $\lim_{x \to x_0} f(\varphi(x)) = \lim_{u \to \infty} f(u)$。
+			\item 复合函数的极限存在定理中条件$\forall x \in \dot{U}(x_{0}, \delta)$，$\varphi(x) \neq a$不可缺少，否则结论不一定成立。例如函数链$\varphi(x) \equiv 0$，$f(u)= \begin{cases}1, & u=0 \\ 0, & u \neq 0\end{cases}$，有$\lim _{x \to 0} \varphi(x)=0$，$\lim _{u \to 0} f(u)=0$，但$\lim _{x \to 0} f(\varphi(x))=1$。
+			
+			\item Heine归结原理：$\lim _{P \to P_{0}} f(P)=A$当且仅当对满足条件$\forall n \in N^{+}$，$P_{n} \neq P_{0}$，$\lim _{n \to \infty} P_{n}=P_{0}$的每个点列$\{P_{n}\}$，都有$\lim _{n \to \infty} f(P_{n})=A$。特别地，$\lim _{x \to x_{0}} f(x)=A$当且仅当对满足条件$\forall n \in N^{+}$，$x_{n} \neq x_{0}$，$\lim _{n \to \infty} x_{n}=x_{0}$的每个数列$\{x_{n}\}$，都有$\lim _{n \to \infty} f(x_{n})=A$。
+			
+			\item 判断一元函数极限不存在的方法：
+			\begin{enumerate}
+				\item 左、右极限至少有一个不存在；
+				\item 左、右极限存在但不相等；
+				\item 存在一个子列$x_{n} \to x_{0}(n \to \infty)$，使得$\lim _{n \to \infty} f(x_{n})$不存在；
+				\item 存在两个子列$x_{n} \to x_{0}$，$x_{n}' \to x_{0}(n \to \infty)$，但$\lim _{n \to \infty} f(x_{n}) \neq \lim _{n \to \infty} f(x_{n}')$。
+			\end{enumerate}
+			
+			\item 判断二元函数极限不存在的方法：
+			\begin{enumerate}
+				\item 径向路径的极限与辐角（或斜率）有关；
+				\item 某特殊路径的极限不存在；
+				\item 两特殊路径极限存在但不相等；
+				\item 二元函数在某去心邻域内连续，而两个二次极限存在而不相等。
+			\end{enumerate}
+			
+			\item 夹逼准则：若$g(P) \leq f(P) \leq h(P)$且$\lim _{P \to P_{0}} g(P)=\lim _{P \to P_{0}} h(P)=A$，则$\lim _{P \to P_{0}} f(P)=A$。
+			
+			\item 单调有界准则：
+			\begin{enumerate}
+				\item 函数$f(x)$在$(a, b)$内单调增加，若$f(x)$在$(a, b)$内有上界，则$\lim _{x \to b^{-}} f(x)$存在且为有限数；若$f(x)$在$(a, b)$内无上界，则$\lim _{x \to b^{-}} f(x)$为正无穷大。
+				\item 函数$f(x)$在区间$(a, b)$上单调减少，若$f(x)$在$(a, b)$内有下界，则$\lim _{x \to a^{+}} f(x)$存在且为有限数；若$f(x)$在$(a, b)$内无下界，则$\lim _{x \to a^{+}} f(x)$为负无穷大。
+			\end{enumerate}
+			
+			\item Cauchy收敛准则：$\lim _{P \to P_{0}} f(P)=A \Leftrightarrow \forall \varepsilon>0$，$\exists \delta>0$，当$\forall P'$，$P^{\prime \prime} \in \dot{U}(P_{0}, \delta)$时，有$|f(P')-f(P^{\prime \prime})|<\varepsilon$。
+			
+			\item 常用极限：
+			\begin{enumerate}
+				\item $\lim _{x \to 0} \frac{\sin x}{x}=1$。
+				\item $\lim _{x \to \infty}\left(1+\frac{1}{x}\right)^{x}=e$或$\lim _{x \to 0}(1+x)^{\frac{1}{x}}=e$。
+				\item $\lim _{x \to+\infty} \arctan x=\frac{\pi}{2}$，$\lim _{x \to-\infty} \arctan x=-\frac{\pi}{2}$。
+				\item $\lim _{x \to 0^{+}} \ln x=-\infty$，$\lim _{x \to+\infty} \ln x=+\infty$。
+				\item 当$a>1$时，$\lim _{x \to +\infty} a^{x}=+\infty$，$\lim _{x \to -\infty} a^{x}=0$；当$0<a<1$时，$\lim _{x \to +\infty} a^{x}=0$，$\lim _{x \to -\infty} a^{x}=+\infty$。
+				\item 若$\mu>0$，则$\lim _{x \to +\infty} \frac{x^{\mu}}{e^{x}}=0$，$\lim _{x \to 0^{+}} x^{\mu} \ln x=0$，$\lim _{x \to 0^{+}} x^{x}=1$。
+				\item 不存在或为无穷大的极限：$\lim _{x \to 0} e^{\frac{1}{x}}$，$\lim _{x \to 0} \sin \frac{1}{x}$，$\lim _{x \to 0} \cos \frac{1}{x}$，$\lim _{x \to 0} \arctan \frac{1}{x}$。
+			\end{enumerate}
+			
+			\item 无穷小与无穷大：
+			\begin{enumerate}
+				\item 若$\lim _{x \to x_{0}} f(x)=0$，称$f(x)$为$x \to x_{0}$时的无穷小量，记作$f(x)=o(1)(x \to x_{0})$；
+				\item 若$\lim _{x \to x_{0}} f(x)=\infty$（或$+\infty$，$-\infty$），称$f(x)$为$x \to x_{0}$时的无穷大量；
+				\item 若$\exists \delta>0$，$\exists M>0$，$\forall x \in \dot{U}(x_{0}, \delta)$，有$|f(x)| \leq M$，则称$f(x)$在$x \to x_{0}$时局部有界，记作$f(x)=O(1)(x \to x_{0})$；
+				\item 若$\forall M>0$，$\forall \delta>0$，$\exists x^{*} \in \dot{U}(x_{0}, \delta)$，使得$|f(x^{*})|>M$，则称$f(x)$为$x \to x_{0}$时的无界变量；
+				\item 有限个无穷小的和是无穷小；
+				\item 有限个无穷小（大）的乘积是无穷小（大）；
+				\item 无限个无穷小的乘积不一定是无穷小；
+				\item 有界函数与无穷小的乘积是无穷小；
+				\item 有界函数与无穷大的和是无穷大；
+				\item 无穷大一定是无界函数，无界函数不一定是无穷大；
+				\item 无穷大的倒数是无穷小，非零无穷小的倒数是无穷大；
+				\item 若$\lim _{x \to x^{*}} f(x)=\infty$且$\lim _{x \to x^{*}} g(x)=B \neq 0$，则$\lim _{x \to x^{*}} f(x) g(x)=\infty$。
+			\end{enumerate}
+			
+			\item 无穷小的比较：设$\alpha$，$\beta$是同一过程下的无穷小，
+			\begin{enumerate}
+				\item 若$\lim \frac{\beta}{\alpha}=0$，称$\beta$是比$\alpha$高阶的无穷小，记作$\beta=o(\alpha)$；
+				\item 若$\lim \frac{\beta}{\alpha}=A \neq 0$，称$\beta$与$\alpha$是同阶无穷小；
+				\item 若$\lim \frac{\beta}{\alpha}=1$，称$\beta$与$\alpha$是等价无穷小，记作$\beta \sim \alpha$；
+				\item 若$\lim \frac{\beta}{\alpha^{k}}=A \neq 0(k>0)$，称$\beta$是$\alpha$的$k$阶无穷小；
+				\item 若$\forall x \in \dot{U}(x_{0}, \delta)$，$\exists M>0$使得$\left|\frac{\beta}{\alpha}\right| \leq M$，记作$\beta=O(\alpha)$。
+			\end{enumerate}
+			
+			\item 常见无穷大的比较关系：
+			\begin{enumerate}
+				\item 数列中：$\ln n \ll n^{\varepsilon} \ll a^{n} \ll n! \ll n^{n}(a>1, \varepsilon>0)$；
+				\item 函数中（当$x \to +\infty$）：$\ln x \ll x^{\varepsilon} \ll a^{x} \ll x^{x}(a>1, \varepsilon>0)$。
+			\end{enumerate}
+			
+			\item 等价无穷小代换定理：设$\alpha \sim \alpha'$，$\beta \sim \beta'$，且$\lim \frac{\beta'}{\alpha'}$存在，则$\lim \frac{\beta}{\alpha}=\lim \frac{\beta'}{\alpha'}$（无穷小及极限中自变量的变化过程相同）。
+			
+			\item 等价无穷小代换规则：设$\alpha$，$\beta$，$\gamma$是同一过程下的无穷小。
+			\end{enumerate}
+
+			
+			\begin{enumerate}
+				\setcounter{enumi}{27} % 从上一部分的27条之后继续编号
+				
+				\item 等价无穷小代换规则：
+				\begin{enumerate}
+					\item 和差取低阶规则：若$\beta=o(\alpha)$，则$\alpha \pm \beta \sim \alpha$。
+					\item 和差不等价代换规则：若$\alpha \sim \alpha'$，$\beta \sim \beta'$且$\alpha$，$\beta$不等价，则$\alpha-\beta \sim \alpha'-\beta'$，且有$\lim \frac{\alpha-\beta}{\gamma}=\lim \frac{\alpha'-\beta'}{\gamma}$。
+					\item 因式替换规则：若$\alpha \sim \beta$，函数$\varphi(x)$存在极限或有界，则$\lim \alpha \varphi(x)=\lim \beta \varphi(x)$。
+				\end{enumerate}
+				
+				\item 常用等价无穷小（当$x \to 0$时）：
+				
+				\begin{align*}
+					&\sin x \sim x,\quad \tan x \sim x,\quad 1-\cos x \sim \frac{1}{2}x^2,\\
+					&\arcsin x \sim x,\quad e^x-1 \sim x,\quad a^x-1 \sim x\ln a\ (a>0,a\neq1),\\
+					&\ln(1+x) \sim x,\quad (1+x)^\mu -1 \sim \mu x\ (\mu\neq0).
+				\end{align*}
+				
+				
+				\item 无穷小运算：
+				\[
+				o(o(\alpha))=o(\alpha),\quad o(\alpha)o(\beta)=o(\alpha\beta),\quad \alpha \cdot o(\beta)=o(\alpha\beta),\quad o(\alpha) \pm o(\alpha)=o(\alpha).
+				\]
+				
+				\item 洛必达法则：设函数$f(x)$，$g(x)$在$U(a,\delta)$内可导，$g'(x) \neq 0$，且$\lim_{x \to a} f(x)=\lim_{x \to a} g(x)=0$（或$\lim_{x \to a} |f(x)|=\lim_{x \to a} |g(x)|=+\infty$），若$\lim_{x \to a} \frac{f'(x)}{g'(x)}$存在（或为无穷大），则$\lim_{x \to a} \frac{f(x)}{g(x)}=\lim_{x \to a} \frac{f'(x)}{g'(x)}$。
+				
+				\item $\frac{*}{\infty}$型的Stolz定理：设$T>0$为常数，若函数$f(x)$，$g(x)$在$[a,+\infty)$内闭有界，满足$g(x+T)>g(x)$对$\forall x \in [a,+\infty)$成立，且$\lim_{x \to +\infty} g(x)=+\infty$，$\lim_{x \to +\infty} \frac{f(x+T)-f(x)}{g(x+T)-g(x)}=l$，则$\lim_{x \to +\infty} \frac{f(x)}{g(x)}=l$（$l$为有限数或$\pm\infty$）。
+				
+				\item $\frac{0}{0}$型的Stolz定理：设$T>0$为常数，若对$\forall x \in [a,+\infty)$有$0<g(x+T)<g(x)$，且$\lim_{x \to +\infty} f(x)=\lim_{x \to +\infty} g(x)=0$，$\lim_{x \to +\infty} \frac{f(x+T)-f(x)}{g(x+T)-g(x)}=l$，则$\lim_{x \to +\infty} \frac{f(x)}{g(x)}=l$（$l$为有限数或$\pm\infty$）。
+				
+				\item 常用函数带Peano余项的$n$阶Taylor公式：
+				\begin{enumerate}
+					\item $e^x = 1 + x + \frac{x^2}{2!} + \cdots + \frac{x^n}{n!} + o(x^n)$；
+					\item $\sin x = x - \frac{x^3}{3!} + \cdots + (-1)^{m-1} \frac{x^{2m-1}}{(2m-1)!} + o(x^{2m})$；
+					\item $\cos x = 1 - \frac{x^2}{2!} + \cdots + (-1)^m \frac{x^{2m}}{(2m)!} + o(x^{2m})$；
+					\item $\ln(1+x) = x - \frac{x^2}{2} + \frac{x^3}{3} - \cdots + (-1)^{n-1} \frac{x^n}{n} + o(x^n)$；
+					\item $(1+x)^\alpha = 1 + \alpha x + \frac{\alpha(\alpha-1)}{2!}x^2 + \cdots + \frac{\alpha(\alpha-1)\cdots(\alpha-n+1)}{n!}x^n + o(x^n)$。
+				\end{enumerate}
+				
+				\item 函数连续的等价形式：函数$y=f(x)$在点$x_0$的某邻域$U(x_0)$内有定义，则
+				\[
+				\lim_{x \to x_0} f(x) = f(x_0) \Leftrightarrow \lim_{\Delta x \to 0} \Delta y = 0 \Leftrightarrow \lim_{x \to x_0^+} f(x) = \lim_{x \to x_0^-} f(x) = f(x_0).
+				\]
+				
+				\item 函数$f(x)$在点$x_0$连续的充要条件是$f(x)$在点$x_0$既左连续又右连续。
+				
+				\item 若函数$f(x)$在点$x_0$连续，则$|f(x)|$在点$x_0$处也连续。
+				
+				\item 间断点的类型：第一类间断点（可去、跳跃），第二类间断点（无穷、振荡等）。
+				
+				\item 连续函数的四则运算法则：若函数$f(x)$和$g(x)$在点$x_0$连续，则$f(x) \pm g(x)$、$f(x)g(x)$、$\frac{f(x)}{g(x)}$（$g(x_0) \neq 0$）也在点$x_0$连续。
+				
+				\item 严格单调的连续函数存在严格单调的连续反函数，且单调性相同。
+				
+				\item 若$\lim_{x \to x_0} \varphi(x) = u_0$，函数$f(u)$在点$u_0$连续，则$\lim_{x \to x_0} f[\varphi(x)] = f(u_0) = f[\lim_{x \to x_0} \varphi(x)]$，即连续函数与极限符号可以交换次序。
+				
+				\item 若$u = \varphi(x)$在点$x_0$连续，且$\varphi(x_0) = u_0$，$f(u)$在点$u_0$连续，则$y = f[\varphi(x)]$在点$x_0$连续。
+				
+				\item 一切初等函数在其定义区间内连续，因此当$x_0 \in (a,b) \subset D$时，有$\lim_{x \to x_0} f(x) = f(x_0)$。
+				
+				\item 有界性定理：设$f(x)$在$[a,b]$上连续，则$f(x)$在$[a,b]$上有界，且存在最大值和最小值。
+				
+				\item 介值定理：设$f(x)$在$[a,b]$上连续，且$f(a)=A$，$f(b)=B$，则对于任意介于$A$，$B$之间的常数$c$，存在$\xi \in (a,b)$，使得$f(\xi)=c$。
+				
+				\item 零点存在定理：
+				\begin{enumerate}
+					\item 设$f(x)$在$[a,b]$上连续，且$f(a)f(b)<0$，则存在$\xi \in (a,b)$，使得$f(\xi)=0$；
+					\item 设$f(x)$在$[a,b]$上连续，且$f(a)f(b) \leq 0$，则存在$\xi \in [a,b]$，使得$f(\xi)=0$；
+					\item 设$f(x)$在$[a,+\infty)$上连续，且$f(a)f(+\infty)<0$，则存在$\xi \in (a,+\infty)$，使得$f(\xi)=0$；
+					\item 设$f(x)$在$(-\infty,+\infty)$上连续，且$f(-\infty)f(+\infty)<0$，则存在$\xi \in \mathbb{R}$，使得$f(\xi)=0$。
+				\end{enumerate}
+				
+				\item 渐近线的分类：
+				\begin{enumerate}
+					\item 若$\lim_{x \to \infty} f(x) = A$，称$y=A$为函数$f(x)$的水平渐近线；
+					\item 若$\lim_{x \to x_0} f(x) = \infty$，称$x=x_0$为函数$f(x)$的铅直渐近线；
+					\item 若$\lim_{x \to \infty} \frac{y}{x} = k \neq 0$，$\lim_{x \to \infty} (f(x)-kx) = b$，称$y=kx+b$为函数$f(x)$的斜渐近线。
+				\end{enumerate}
+				
+				\item 函数极限的计算方法：
+				\begin{enumerate}
+					\item 利用“$\varepsilon$-$\delta$”语言证明函数极限；
+					\item 利用恒等变形、变量代换及极限的四则运算法则计算；
+					\item 利用无穷小代换和两个重要极限计算；
+					\item 利用夹逼准则计算或证明；
+					\item 利用单调有界准则计算或证明；
+					\item 利用Cauchy收敛准则计算或证明；
+					\item 利用函数的连续性计算；
+					\item 利用导数的定义计算；
+					\item 利用洛必达法则计算；
+					\item 利用Taylor公式计算；
+					\item 利用中值定理计算；
+					\item 利用函数形式的Stolz公式计算。
+					\item 利用变量代换将多元函数的极限化为一元函数的极限计算。
+				\end{enumerate}
+			\end{enumerate}
+			
+			
+			\section{导数与微分}
+			
+			\subsection*{知识点}
+			
+			\begin{enumerate}
+				\item 导数的定义：函数$f(x)$在$x_{0}$点及其附近有定义，则
+				\[
+				\begin{aligned}
+					f'(x_{0}) & = \lim_{\Delta x \to 0} \frac{\Delta y}{\Delta x} = \lim_{\Delta x \to 0} \frac{f(x_{0}+\Delta x)-f(x_{0})}{\Delta x} \\
+					& = \lim_{h \to 0} \frac{f(x_{0}+h)-f(x_{0})}{h} = \lim_{x \to x_{0}} \frac{f(x)-f(x_{0})}{x-x_{0}}.
+				\end{aligned}
+				\]
+				
+				\item 左右导数的定义：若函数$f(x)$在$(x_{0}-\delta, x_{0})$或$(x_{0}, x_{0}+\delta)$内有定义，则
+				\[
+				f_{-}'(x_{0}) = \lim_{\Delta x \to 0^{-}} \frac{f(x_{0}+\Delta x)-f(x_{0})}{\Delta x} = \lim_{x \to x_{0}^{-}} \frac{f(x)-f(x_{0})}{x-x_{0}},
+				\]
+				\[
+				f_{+}'(x_{0}) = \lim_{\Delta x \to 0^{+}} \frac{f(x_{0}+\Delta x)-f(x_{0})}{\Delta x} = \lim_{x \to x_{0}^{+}} \frac{f(x)-f(x_{0})}{x-x_{0}}.
+				\]
+				
+				\item 函数$f(x)$在$x_{0}$点可导的充要条件是$f_{+}'(x_{0}) = f_{-}'(x_{0})$。
+				
+				\item 判断一元函数在一点处不可导的方法：
+				\begin{enumerate}
+					\item 函数$f(x)$在$x = x_{0}$点处不连续；
+					\item $f_{+}'(x_{0})$和$f_{-}'(x_{0})$至少有一个不存在；
+					\item $f_{+}'(x_{0})$和$f_{-}'(x_{0})$都存在，但$f_{+}'(x_{0}) \neq f_{-}'(x_{0})$。
+				\end{enumerate}
+				
+				\item 有限增量公式：若函数$f(x)$在$x_{0}$点可导，则
+				\begin{enumerate}
+					\item $\Delta y = f'(x_{0})\Delta x + o(\Delta x)$；
+					\item $\Delta y = f'(x_{0})\Delta x + \omega(x)\Delta x$，其中$\lim_{x \to x_{0}} \omega(x) = \omega(x_{0}) = 0$；
+					\item $f(x) = f(x_{0}) + f'(x_{0})(x - x_{0}) + o(x - x_{0})$；
+					\item $f(x) = f(x_{0}) + f'(x_{0})(x - x_{0}) + \omega(x)(x - x_{0})$，其中$\lim_{x \to x_{0}} \omega(x) = \omega(x_{0}) = 0$。
+				\end{enumerate}
+				
+				\item 微分的定义：函数$f(x)$在$x_{0}$点及其附近有定义，若$\Delta y = A\Delta x + o(\Delta x)$（其中$A$是与$\Delta x$无关的常数），则称函数$f(x)$在$x_{0}$点可微，且$dy|_{x=x_{0}} = A\Delta x$。
+				
+				\item 局部线性化（以直代曲）：函数$y = f(x)$在$x = x_{0}$处可导，在$x_{0}$点及其附近用切线近似代替曲线，其误差仅为$o(x - x_{0})$，即$f(x) = f(x_{0}) + f'(x_{0})(x - x_{0}) + o(x - x_{0})$ $(x \to x_{0})$，称为函数$f(x)$在$(x_{0}, f(x_{0}))$处可以局部线性化（以直代曲）。
+			\end{enumerate}
+
+\begin{enumerate}
+	\setcounter{enumi}{7}
+	
+	\item 一元函数可微、可导与连续的关系：
+	\begin{enumerate}
+		\item 函数$f(x)$在$x_0$点可微的充要条件是$f(x)$在$x_0$点可导，且$\mathrm{d}y|_{x=x_0} = f'(x_0)\mathrm{d}x$。
+		\item 函数$f(x)$在$x_0$点可微（可导），则$f(x)$在$x_0$点一定连续。
+		\item 函数$f(x)$在$x_0$点连续，但不一定可微（可导），包括以下情况：
+		\begin{enumerate}
+			\item $f'_+(x_0)$和$f'_-(x_0)$都存在，但$f'_+(x_0) \neq f'_-(x_0)$，称$x_0$为角点；
+			\item $f'(x_0) = \infty$，称有无穷导数（几何上有铅直切线）；
+			\item $f'(x_0) = \infty$且两侧导数异号，称$x_0$为尖点；
+			\item $f'_+(x_0)$和$f'_-(x_0)$不存在且无限振荡。
+		\end{enumerate}
+	\end{enumerate}
+	
+	\item 导函数的定义：若函数$f(x)$在区间$I$上有定义，则
+	\[
+	f'(x) = \lim_{\Delta x \to 0} \frac{f(x+\Delta x)-f(x)}{\Delta x} = \lim_{h \to 0} \frac{f(x+h)-f(x)}{h}, \quad x \in I
+	\]
+	若$f(x)$在$(a,b)$内每点可导，称在$(a,b)$内可导；若在$(a,b)$内可导且$f'_+(a)$和$f'_-(b)$存在，称在$[a,b]$上可导。
+	
+	\item 高阶导数的定义：若$f(x)$在$x=x_0$附近可导，则
+	\[
+	f''(x_0) = \lim_{\Delta x \to 0} \frac{f'(x_0+\Delta x)-f'(x_0)}{\Delta x} = \lim_{x \to x_0} \frac{f'(x)-f'(x_0)}{x-x_0}
+	\]
+	对$n \geq 2$，递归定义$n$阶导数$\frac{\mathrm{d}^n y}{\mathrm{d}x^n} = f^{(n)}(x) = (f^{(n-1)}(x))'$。
+	
+	\item 导函数的性质：
+	\begin{enumerate}
+		\item 可导偶函数的导函数为奇函数；
+		\item 可导奇函数的导函数为偶函数；
+		\item 可导周期函数的导函数仍为同周期的周期函数。
+	\end{enumerate}
+	
+	\item 达布定理：若$f(x)$在$[a,b]$上可导，则对介于$f'_+(a)$和$f'_-(b)$之间的任意常数$c$，存在$\xi \in [a,b]$使得$f'(\xi) = c$。
+	
+	\item 若$f(x)$在$(a,b)$内可导且$f'(x) \neq 0$，则$f(x)$在$(a,b)$内单调。
+	
+	\item 单侧导数与导函数单侧极限是不同概念，单侧导数存在时导函数单侧极限不一定存在。
+	
+	\item 单侧导数极限定理：若$f(x)$在$(a,b)$内可导，在$a$处右连续，且$f'(x)$在$a$处右极限$f'(a^+) = A$（$A$为有限数或$\pm\infty$），则$f(x)$在$a$处存在右导数$f'_+(a) = A$，即$f'(x)$在$a$处右连续。
+	
+	\item 导数极限定理：若$f(x)$在$a$的邻域$U(a)$内连续，在$\dot{U}(a)$内可导，且导函数$f'(x)$在$a$处存在极限，则$f(x)$在$a$处可导且$f'(x)$在$a$处连续。
+	
+	\item 若$f(x)$在$(a,b)$内可导，则导函数$f'(x)$在$(a,b)$内无第一类间断点。
+	
+	\item 若$f(x)$在$(a,b)$内可导且导函数$f'(x)$单调，则$f'(x)$在$(a,b)$内连续。
+	
+	\item 导数的四则运算法则：设$u=u(x), v=v(x)$可导，$c$为常数，则
+	\begin{enumerate}
+		\item $(u \pm v)' = u' \pm v'$；
+		\item $(Cu)' = Cu'$；
+		\item $(uv)' = u'v + uv'$；
+		\item $\left(\dfrac{u}{v}\right)' = \dfrac{u'v - uv'}{v^2} \ (v \neq 0)$。
+	\end{enumerate}
+	
+	\item 高阶导数的运算法则：设$u=u(x), v=v(x)$有$n$阶导数，则
+	\begin{enumerate}
+		\item $(u \pm v)^{(n)} = u^{(n)} \pm v^{(n)}$；
+		\item $(Cu)^{(n)} = Cu^{(n)}$；
+		\item 莱布尼茨公式：$(uv)^{(n)} = \sum_{k=0}^{n} \binom{n}{k} u^{(n-k)} v^{(k)}$。
+	\end{enumerate}
+	
+	\item 常用函数的高阶导数公式：
+	\begin{enumerate}
+		\item $(a^x)^{(n)} = a^x \ln^n a \ (a>0)$，特别地$(e^x)^{(n)} = e^x$；
+		\item $(\sin kx)^{(n)} = k^n \sin\left(kx + n \cdot \dfrac{\pi}{2}\right)$；
+		\item $(\cos kx)^{(n)} = k^n \cos\left(kx + n \cdot \dfrac{\pi}{2}\right)$；
+		\item $(x^\alpha)^{(n)} = \alpha(\alpha-1)\cdots(\alpha-n+1)x^{\alpha-n}$，特别地$\left(\dfrac{1}{x}\right)^{(n)} = (-1)^n \dfrac{n!}{x^{n+1}}$；
+		\item $(\ln x)^{(n)} = (-1)^{n-1} \dfrac{(n-1)!}{x^n}$；
+		\item $(e^{ax} \sin bx)^{(n)} = (a^2 + b^2)^{\frac{n}{2}} e^{ax} \sin(bx + n\varphi)$，其中$\varphi = \arctan\dfrac{b}{a}$。
+	\end{enumerate}
+	
+	\item 反函数求导法则：设$x = \varphi(y)$在区间$I_y$内单调可导且$\varphi'(y) \neq 0$，则反函数$y = f(x)$在$I_x = f(I_y)$内可导，且$f'(x) = \dfrac{1}{\varphi'(y)}$，即$\dfrac{\mathrm{d}y}{\mathrm{d}x} = \dfrac{1}{\dfrac{\mathrm{d}x}{\mathrm{d}y}}$。
+	
+	\item 复合函数求导法则：设$u = \varphi(x)$在$x=x_0$可导，$y = f(u)$在$u_0 = \varphi(x_0)$可导，则复合函数$y = f[\varphi(x)]$在$x=x_0$可导，且$(f[\varphi(x)])'|_{x=x_0} = f'(u_0)\varphi'(x_0)$，即$\dfrac{\mathrm{d}y}{\mathrm{d}x} = \dfrac{\mathrm{d}y}{\mathrm{d}u} \cdot \dfrac{\mathrm{d}u}{\mathrm{d}x}$。
+	
+	\item 参数方程求导法：设$x = \varphi(t), y = \psi(t)$在$(a,b)$内可导且$\varphi'(t) \neq 0$，则：
+	\begin{enumerate}
+		\item $x = \varphi(t)$在$(a,b)$上严格单调连续，存在反函数$t = \varphi^{-1}(x)$；
+		\item 参数方程确定函数$y = y(x) = \psi(\varphi^{-1}(x))$；
+		\item $y'(x) = \dfrac{\psi'(t)}{\varphi'(t)}|_{t=\varphi^{-1}(x)}$；
+		\item 若二阶可导，$y''(x) = \dfrac{\psi''(t)\varphi'(t) - \psi'(t)\varphi''(t)}{(\varphi'(t))^3}$。
+	\end{enumerate}
+	
+	\item 微分形式不变性：设$y = f(u)$，无论$u$是中间变量还是自变量，微分形式$\mathrm{d}y = f'(u)\mathrm{d}u$保持不变。
+
+	
+	\item 微分的四则运算法则：设 \(u=u(x)\)，\(v=v(x)\) 可导，\(c\) 为常数，则
+	\begin{enumerate}
+		\item \(d(u \pm v) = du \pm dv\)；
+		\item \(d(Cu) = Cdu\)；
+		\item \(d(uv) = vdu + udv\)；
+		\item \(d\left(\dfrac{u}{v}\right) = \dfrac{vdu - udv}{v^2}\)。
+	\end{enumerate}
+	
+	\item 偏导数的定义：若函数 \(z = f(x, y)\) 在点 \((x_0, y_0)\) 的邻域内有定义，则
+	\[
+	f_x(x_0) = \lim_{\Delta x \to 0} \frac{\Delta_x z}{\Delta x} = \lim_{\Delta x \to 0} \frac{f(x_0 + \Delta x, y_0) - f(x_0, y_0)}{\Delta x},
+	\]
+	\[
+	f_y(x_0) = \lim_{\Delta y \to 0} \frac{\Delta_y z}{\Delta y} = \lim_{\Delta y \to 0} \frac{f(x_0, y_0 + \Delta y) - f(x_0, y_0)}{\Delta y}。
+	\]
+	
+	\item 高阶偏导数的定义：若函数 \(z = f(x, y)\) 在点 \((x_0, y_0)\) 的邻域内存在偏导数，则
+	\[
+	f_{xx}(x, y) = \frac{\partial^2 z}{\partial x^2} = \frac{\partial}{\partial x}\left(\frac{\partial z}{\partial x}\right), \quad f_{yy}(x, y) = \frac{\partial^2 z}{\partial y^2} = \frac{\partial}{\partial y}\left(\frac{\partial z}{\partial y}\right),
+	\]
+	\[
+	f_{xy}(x, y) = \frac{\partial^2 z}{\partial x \partial y} = \frac{\partial}{\partial y}\left(\frac{\partial z}{\partial x}\right), \quad f_{yx}(x, y) = \frac{\partial^2 z}{\partial y \partial x} = \frac{\partial}{\partial x}\left(\frac{\partial z}{\partial y}\right)。
+	\]
+	对 \(n \geq 2\)，递归定义 \(n\) 阶导数 \(\frac{\partial^n z}{\partial x^{n-1} \partial y} = \frac{\partial}{\partial y}\left(\frac{\partial^{n-1} z}{\partial x^{n-1}}\right)\)。
+	
+	\item 若偏导函数 \(f_{xy}(x, y)\) 和 \(f_{yx}(x, y)\) 都在点 \((x_0, y_0)\) 连续，则 \(f_{xy}(x_0, y_0) = f_{yx}(x_0, y_0)\)。
+	
+	\item 方向导数的定义：若函数 \(u = f(x, y, z)\) 在点 \(P_0(x_0, y_0, z_0)\) 的邻域内有定义，则
+	\[
+	\frac{\partial f(P_0)}{\partial l} = \lim_{h \to 0} \frac{\Delta_l u}{h} = \lim_{h \to 0} \frac{f(x_0 + h\cos\alpha, y_0 + h\cos\beta, z_0 + h\cos\gamma) - f(x_0, y_0, z_0)}{h},
+	\]
+	其中 \(\cos\alpha, \cos\beta, \cos\gamma\) 为方向向量 \(l\) 的方向余弦。
+	
+	\item 方向导数的计算公式：\(\frac{\partial f(P_0)}{\partial l} = \frac{\partial f}{\partial x}\cos\alpha + \frac{\partial f}{\partial y}\cos\beta + \frac{\partial f}{\partial z}\cos\gamma\)。
+	
+	\item 梯度：若 \(u = f(x, y, z)\) 在点 \((x, y, z)\) 处偏导存在，则 \(\nabla f(x, y, z) = \text{grad }u = \left(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}, \frac{\partial f}{\partial z}\right)\)。
+	
+	\item 函数 \(f\) 在点 \(P_0(x_0, y_0, z_0)\) 处沿 \(l\) 方向的方向导数等于该点的梯度在 \(l\) 方向上的投影。若 \(l\) 方向的单位向量为 \(l_0 = (\cos\alpha, \cos\beta, \cos\gamma)\)，则 \(\frac{\partial f(P_0)}{\partial l} = \text{grad }f(P_0) \cdot l_0\)。
+	
+	\item 设函数 \(f\) 在点 \(P_0(x_0, y_0, z_0)\) 处可微，则该点的梯度方向是方向导数最大的方向（沿梯度方向函数增加最快），梯度的模等于该点最大方向导数的值。
+	
+	\item 全微分的定义：设函数 \(z = f(x, y)\) 在点 \((x_0, y_0)\) 的邻域内有定义，若存在与 \(\Delta x, \Delta y\) 无关的常数 \(A, B\)，使得 \(\Delta z = A\Delta x + B\Delta y + o(\rho)\)（\(\rho = \sqrt{(\Delta x)^2 + (\Delta y)^2}\)），则称 \(z = f(x, y)\) 在点 \((x_0, y_0)\) 处可微，且 \(dz|_{(x_0, y_0)} = A\Delta x + B\Delta y\)。
+	
+	\item 多元函数可微、偏导数存在与连续的关系：
+	\begin{enumerate}
+		\item 函数在某点可微，则该点的偏导数都存在，且 \(dz = \frac{\partial z}{\partial x}dx + \frac{\partial z}{\partial y}dy\)；
+		\item 函数在某点可微，则在该点连续；
+		\item 函数在某点可微，则在该点沿任意方向的方向导数都存在；
+		\item 函数在某点偏导数都存在，不一定可微；
+		\item 函数在某点连续，不一定可微；
+		\item 函数在某点偏导数都存在，不能断定函数在该点连续或极限存在；
+		\item 函数在某点连续，偏导数可能存在也可能不存在；
+		\item 函数在某点沿任意方向的方向导数都存在，不一定可微；
+		\item 函数的偏导函数在某点的邻域内有界，则函数在该点连续；
+		\item 函数的偏导函数在某点的邻域内连续，则函数在该点可微；
+		\item 函数在某点可微，偏导函数在该点不一定连续。
+	\end{enumerate}
+	
+	\item 判断多元函数在一点处不可微的方法：
+	\begin{enumerate}
+		\item 函数 \(f(x, y)\) 在点 \((x_0, y_0)\) 处不连续；
+		\item 函数 \(f(x, y)\) 在点 \((x_0, y_0)\) 处的偏导数至少有一个不存在；
+		\item 极限 \(\lim_{\rho \to 0} \frac{\Delta f - f_x(x_0, y_0)\Delta x - f_y(x_0, y_0)\Delta y}{\rho}\) 不存在或存在但不等于零。
+	\end{enumerate}
+	
+	\item 多元复合函数求导法则：分段用乘，分叉用加，单路全导，叉路偏导。例如，若函数 \(u = \varphi(x, y)\) 及 \(v = \psi(x, y)\) 都在点 \((x, y)\) 具有对 \(x, y\) 的偏导数，\(z = f(u, v)\) 在对应点 \((u, v)\) 具有连续偏导数，则复合函数 \(z = f[\varphi(x, y), \psi(x, y)]\) 在点 \((x, y)\) 的偏导数存在，且
+	\[
+	\frac{\partial z}{\partial x} = \frac{\partial z}{\partial u} \cdot \frac{\partial u}{\partial x} + \frac{\partial z}{\partial v} \cdot \frac{\partial v}{\partial x}, \quad \frac{\partial z}{\partial y} = \frac{\partial z}{\partial u} \cdot \frac{\partial u}{\partial y} + \frac{\partial z}{\partial v} \cdot \frac{\partial v}{\partial y}。
+	\]
+	
+	\item 隐函数存在定理：
+	\begin{enumerate}
+		\item 设 \(F(x, y)\) 在点 \(P(x_0, y_0)\) 的邻域内具有一阶连续偏导数，且 \(F(x_0, y_0) = 0\)，\(F_y(x_0, y_0) \neq 0\)，则方程 \(F(x, y) = 0\) 在点 \(P\) 的邻域内唯一确定单值可导函数 \(y = y(x)\)，满足 \(y_0 = y(x_0)\)，且 \(\frac{dy}{dx} = -\frac{F_x}{F_y}\)；
+		\item 设 \(F(x, y, z)\) 在点 \(P(x_0, y_0, z_0)\) 的邻域内具有一阶连续偏导数，且 \(F(x_0, y_0, z_0) = 0\)，\(F_z(x_0, y_0, z_0) \neq 0\)，则方程 \(F(x, y, z) = 0\) 在点 \(P\) 的邻域内唯一确定单值可导函数 \(z = z(x, y)\)，满足 \(z_0 = z(x_0, y_0)\)，且 \(\frac{\partial z}{\partial x} = -\frac{F_x}{F_z}\)，\(\frac{\partial z}{\partial y} = -\frac{F_y}{F_z}\)；
+		\item 设 \(F(x, y, u, v)\) 和 \(G(x, y, u, v)\) 在点 \(P(x_0, y_0, u_0, v_0)\) 的邻域内具有一阶连续偏导数，且 \(F(P) = 0\)，\(G(P) = 0\)，雅可比行列式 \(J|_P = \frac{\partial(F, G)}{\partial(u, v)}|_P \neq 0\)，则方程组 \(\begin{cases} F(x, y, u, v) = 0 \\ G(x, y, u, v) = 0 \end{cases}\) 在点 \(P\) 的邻域内唯一确定一组单值可导函数 \(u = u(x, y)\)，\(v = v(x, y)\)，满足 \(u_0 = u(x_0, y_0)\)，\(v_0 = v(x_0, y_0)\)，且
+		\[
+		\frac{\partial u}{\partial x} = -\frac{1}{J} \frac{\partial(F, G)}{\partial(x, v)}, \quad \frac{\partial u}{\partial y} = -\frac{1}{J} \frac{\partial(F, G)}{\partial(y, v)},
+		\]
+		\[
+		\frac{\partial v}{\partial x} = -\frac{1}{J} \frac{\partial(F, G)}{\partial(u, x)}, \quad \frac{\partial v}{\partial y} = -\frac{1}{J} \frac{\partial(F, G)}{\partial(u, y)}。
+		\]
+	\end{enumerate}
+
+	
+	\item Lagrange 中值定理：如果函数 \(f(x)\) 在闭区间 \([a, b]\) 上连续，在开区间 \((a, b)\) 内可导，则至少存在一点 \(\xi \in (a, b)\)，使 \(f'(\xi)=\frac{f(b)-f(a)}{b-a}\) 。
+	
+	\item 有限增量公式：如果函数 \(f(x)\) 在闭区间 \([a, b]\) 上连续，在开区间 \((a, b)\) 内可导，则：
+	\begin{enumerate}
+		\item \(f(b)-f(a)=f'(\xi)(b-a)\)，其中 \(\xi \in (a, b)\) ；
+		\item \(f(b)=f(a)+f'(a+\theta(b-a))(b-a)\)，其中 \(\theta \in (0,1)\) ；
+		\item \(\Delta y=f'(x_{0}+\theta \Delta x) \Delta x\)，其中 \(\theta \in (0,1)\) 。
+	\end{enumerate}
+	
+	\item Cauchy 中值定理：如果函数 \(f(x)\) 及 \(\varphi(x)\) 在闭区间 \([a, b]\) 上连续，在开区间 \((a, b)\) 内可导，且 \(\varphi'(x) \neq 0(a<x<b)\)，则在 \((a, b)\) 内至少存在一点 \(\xi\)，使得 \(\frac{f(b)-f(a)}{\varphi(b)-\varphi(a)}=\frac{f'(\xi)}{\varphi'(\xi)}\) 。
+	
+	\item Taylor 多项式唯一性定理：设函数 \(f(x)\) 在含有 \(x_{0}\) 的某个邻域内有定义，且
+	\[
+	f(x)=c_{0}+c_{1}\left(x-x_{0}\right)+\cdots+c_{n}\left(x-x_{0}\right)^{n}+o\left(\left(x-x_{0}\right)^{n}\right)\left(x \to x_{0}\right),
+	\]
+	则系数 \(c_{0}, c_{1}, \cdots, c_{n}\) 是唯一确定的 。
+	
+	\item 带 Peano 余项的 n 阶 Taylor 中值定理：设函数 \(f(x)\) 在 \(x_{0}\) 处具有 \(n\) 阶导数，则
+	\[
+	f(x)=\sum_{k=0}^{n} \frac{f^{(k)}\left(x_{0}\right)}{k !}\left(x-x_{0}\right)^{k}+o\left(\left(x-x_{0}\right)^{n}\right) \quad\left(x \to x_{0}\right)
+	\] 。
+		
+		\item 带Lagrange余项的n阶Taylor中值定理：设函数\(f(x)\)在含有\(x_0\)的某个开区间\((a, b)\)内具有直到\(n+1\)阶导数，则对\(\forall x \in (a, b)\)，至少存在介于\(x_0\)与\(x\)之间的一点\(\xi\)，使得
+		\[
+		f(x) = \sum_{k=0}^{n} \frac{f^{(k)}(x_0)}{k!}(x - x_0)^k + \frac{f^{(n+1)}(\xi)}{(n+1)!}(x - x_0)^{n+1} \quad (x \to x_0)
+		\]。
+		
+		\item 二元函数Lagrange中值定理：设函数\(f(x, y)\)在\((x_0, y_0)\)的某个邻域内可导，\((x_0 + h, y_0 + k)\)为\((x_0, y_0)\)邻域内任一点，则存在\(\theta(0 < \theta < 1)\)，使得
+		\[
+		f(x_0 + h, y_0 + k) - f(x_0, y_0) = hf_x(x_0 + \theta h, y_0 + \theta k) + kf_y(x_0 + \theta h, y_0 + \theta k)
+		\]。
+		
+		\item 二元函数带Lagrange余项的n阶Taylor中值定理：设函数\(f(x, y)\)在\((x_0, y_0)\)的某个邻域内具有直到\(n+1\)阶导数，\((x_0 + h, y_0 + k)\)为邻域内任一点，则存在\(\theta(0 < \theta < 1)\)，使得
+		\[
+		\begin{aligned}
+			f(x_0 + h, y_0 + k) = & \sum_{k=0}^{n} \frac{1}{k!}\left(h\frac{\partial}{\partial x} + k\frac{\partial}{\partial y}\right)^k f(x_0, y_0) + \\
+			& \frac{1}{(n+1)!}\left(h\frac{\partial}{\partial x} + k\frac{\partial}{\partial y}\right)^{n+1} f(x_0 + \theta h, y_0 + \theta k)
+		\end{aligned}
+		\]。
+		
+		\item n元函数带Lagrange余项的一阶Taylor中值定理：设\(f(x)\)是n元函数，\(x_0 \in \mathbb{R}^n\)，若\(f(x)\)在\(x_0\)的某邻域内具有二阶连续偏导，则对点\(x_0\)的某邻域内的点\(x\)，存在\(\theta(0 < \theta < 1)\)，使得
+		\[
+		f(x) = f(x_0) + \nabla f(x_0)(x - x_0)^T + \frac{1}{2}(x - x_0)\nabla^2 f(x_0 + \theta(x - x_0))(x - x_0)^T
+		\]。
+		
+		\item 常用基本初等函数带Lagrange余项的n阶Maclaurin公式：
+		\begin{enumerate}
+			\item \(e^x = 1 + x + \frac{x^2}{2!} + \cdots + \frac{x^n}{n!} + \frac{e^{\theta x}}{(n+1)!}x^{n+1} \quad (0 < \theta < 1, -\infty < x < +\infty)\)；
+			\item \(\sin x = x - \frac{x^3}{3!} + \cdots + (-1)^{m-1}\frac{x^{2m-1}}{(2m-1)!} + (-1)^m\frac{\cos\theta x}{(2m+1)!}x^{2m+1} \quad (0 < \theta < 1, -\infty < x < +\infty)\)；
+			\item \(\cos x = 1 - \frac{x^2}{2!} + \cdots + (-1)^m\frac{x^{2m}}{(2m)!} + (-1)^{m+1}\frac{\cos\theta x}{(2m+2)!}x^{2m+2} \quad (0 < \theta < 1, -\infty < x < +\infty)\)；
+			\item \(\ln(1+x) = x - \frac{x^2}{2} + \frac{x^3}{3} + \cdots + (-1)^{n-1}\frac{x^n}{n} + (-1)^n\frac{x^{n+1}}{(n+1)(1+\theta x)^{n+1}} \quad (0 < \theta < 1, x > -1)\)；
+			\item \((1+x)^\alpha = 1 + \alpha x + \frac{\alpha(\alpha-1)}{2!}x^2 + \cdots + \frac{\alpha(\alpha-1)\cdots(\alpha-n+1)}{n!}x^n + \frac{\alpha(\alpha-1)\cdots(\alpha-n+1)}{(n+1)!}(1+\theta x)^{\alpha-n-1}x^{n+1} \quad (0 < \theta < 1, x > -1)\)；
+			\item 特别地，\(\frac{1}{1+x} = 1 - x + x^2 - x^3 + \cdots + (-1)^n x^n + (-1)^{n+1}\frac{x^{n+1}}{(1+\theta x)^{n+2}} \quad (0 < \theta < 1, x > -1)\)。
+		\end{enumerate}
+		\item 反函数存在定理:若函数 \(x = x(u, v)\) 和 \(y = y(u, v)\) 在点 \((u, v)\) 的某一邻域内具有一阶连续偏导数，且 \(\frac{\partial(x, y)}{\partial(u, v)} \neq 0\)，则方程组 \(x = x(u, v)\)、\(y = y(u, v)\) 在点 \((u, v)\) 对应的点 \((x, y)\) 的某一邻域内能唯一确定一组单值且具有连续偏导数的反函数 \(u = u(x, y)\)、\(v = v(x, y)\)，且满足：
+		\[
+		\frac{\partial u}{\partial x} = \frac{1}{J} \frac{\partial y}{\partial v}, \quad
+		\frac{\partial u}{\partial y} = -\frac{1}{J} \frac{\partial x}{\partial v}, \quad
+		\frac{\partial v}{\partial x} = -\frac{1}{J} \frac{\partial y}{\partial u}, \quad
+		\frac{\partial v}{\partial y} = \frac{1}{J} \frac{\partial x}{\partial u},
+		\]
+		其中 \(J = \frac{\partial(x, y)}{\partial(u, v)}\) 为雅可比行列式。
+		
+	\end{enumerate}
+	
+	\section{微分中值定理}
+	
+	\subsection*{知识点}
+	\begin{enumerate}
+		\item 设函数 \(f(x)\) 在点 \(x_{0}\) 处存在右导数 \(f_{+}'(x_{0})\)：
+		\begin{enumerate}
+			\item 若 \(f_{+}'(x_{0})>0\)，则存在 \(\delta>0\)，得当 \(x_{0}<x<x_{0}+\delta\) 时，有 \(f(x)>f(x_{0})\)。
+			\item 若存在 \(\delta\) 使得当 \(x_{0}<x<x_{0}+\delta\) 时，有 \(f(x) \geq f(x_{0})\)，则 \(f_{+}'(x_{0}) \geq 0\)。
+			\item 与右导数非负情形类似，同理可得左导数非正、左导数非负和右导数非正的结论。
+		\end{enumerate}
+		
+		\item (Fermat引理) 设函数 $f(x)$ 在点 $x_{0}$ 处可导，当 $x \in U(x_{0}, \delta)$ 时，恒有 $f(x) \leqslant f(x_{0})$（或 $f(x) \geq f(x_{0})$），那么 $f'(x_{0})=0$。
+		
+		\item (Rolle定理) 如果函数 $f(x)$ 在闭区间 $[a, b]$ 上连续，在开区间 $(a, b)$ 内可导，且 $f(a)=f(b)$，则至少存在一点 $\xi \in(a, b)$，使 $f'(\xi)=0$。
+		
+		\item Rolle定理的推广：如果函数 $f(x)$ 在 $(-\infty,+\infty)$ 内可导，且 $\lim _{x \to -\infty} f(x)=\lim _{x \to +\infty} f(x)$，则至少存在一点 $\xi \in(-\infty,+\infty)$，使 $f'(\xi)=0$。
+		
+		\item (Lagrange中值定理) 如果函数 $f(x)$ 在闭区间 $[a, b]$ 上连续，在开区间 $(a, b)$ 内可导，则至少存在一点 $\xi \in(a, b)$ 使 $f'(\xi)=\frac{f(b)-f(a)}{b-a}$。
+		
+		\item (有限增量公式) 如果函数 $f(x)$ 在闭区间 $[a, b]$ 上连续，在开区间 $(a, b)$ 内可导，则：
+		\begin{enumerate}
+			\item $f(b)-f(a)=f'(\xi)(b-a)$，其中 $\xi \in(a, b)$。
+			\item $f(b)=f(a)+f'(a+\theta(b-a))(b-a)$，其中 $\theta \in(0,1)$。
+			\item $\Delta y=f'(x_{0}+\theta \Delta x) \Delta x$，其中 $\theta \in(0,1)$。
+		\end{enumerate}
+		
+		\item (Cauchy中值定理) 如果函数 $f(x)$ 及 $\varphi(x)$ 在闭区间 $[a, b]$ 上连续，在开区间 $(a, b)$ 内可导，且 $\varphi'(x) \neq 0(a<x<b)$，则在 $(a, b)$ 内至少存在一点 $\xi$ 使得 $\frac{f(b)-f(a)}{\varphi(b)-\varphi(a)}=\frac{f'(\xi)}{\varphi'(\xi)}$。
+		
+		\item (Taylor多项式唯一性定理) 设函数 $f(x)$ 在含有 $x_{0}$ 的某个邻域内有定义，且
+		\[
+		f(x)=c_{0}+c_{1}\left(x-x_{0}\right)+\cdots+c_{n}\left(x-x_{0}\right)^{n}+o\left(\left(x-x_{0}\right)^{n}\right)\left(x \to x_{0}\right),
+		\]
+		则系数 $c_{0}, c_{1}, \cdots, c_{n}$ 是唯一确定的。
+		
+		\item (带Peano余项的 $n$ 阶Taylor中值定理) 设函数 $f(x)$ 在 $x_{0}$ 处具有 $n$ 阶导数，则
+		\[
+		f(x)=\sum_{k=0}^{n} \frac{f^{(k)}\left(x_{0}\right)}{k !}\left(x-x_{0}\right)^{k}+o\left(\left(x-x_{0}\right)^{n}\right) \quad\left(x \to x_{0}\right)。
+		\]
+	\end{enumerate}
+	
+	\section{*不等式}
+	
+	\subsection*{知识点}
+	
+	\begin{enumerate}
+		\item 三角不等式：对\(a_i, b_i \in \mathbb{R}\)，\(i = 1, 2, \cdots, n\)，有
+		\begin{enumerate}
+			\item \(|\|a\| - \|b\|| \leqslant \|a \pm b\| \leqslant \|a\| + \|b\|\)，其中\(a = (a_1, a_2, \cdots, a_n)^T \in \mathbb{R}^n\)，\(b = (b_1, b_2, \cdots, b_n)^T \in \mathbb{R}^n\)；
+			\item \(\sqrt{\sum_{i=1}^{n}(a_i + b_i)^2} \leqslant \sqrt{\sum_{i=1}^{n}a_i^2} + \sqrt{\sum_{i=1}^{n}b_i^2}\)。
+		\end{enumerate}
+		
+		\item Cauchy-Schwarz不等式：对\(a_i, b_i \in \mathbb{R}\)，\(i = 1, 2, \cdots, n\)，有
+		\begin{enumerate}
+			\item \(|a \cdot b| \leqslant \|a\| \cdot \|b\|\)，其中\(a = (a_1, a_2, \cdots, a_n)^T \in \mathbb{R}^n\)，\(b = (b_1, b_2, \cdots, b_n)^T \in \mathbb{R}^n\)；
+			\item \((\sum_{i=1}^{n}a_i b_i)^2 \leqslant (\sum_{i=1}^{n}a_i^2)(\sum_{i=1}^{n}b_i^2)\)，等号成立的充要条件为\(\frac{a_1}{b_1} = \frac{a_2}{b_2} = \cdots = \frac{a_n}{b_n}\)（当某\(b_i = 0\)时，对应\(a_i = 0\)）。
+		\end{enumerate}
+		
+		\item Bernoulli不等式：设\(n \in \mathbb{N}^+\)，则
+		\begin{enumerate}
+			\item \((1+a_1)(1+a_2)\cdots(1+a_n) \geqslant 1 + a_1 + a_2 + \cdots + a_n\)，其中\(a_i > -1\)（\(i = 1, 2, \cdots, n\)）且同号；
+			\item \((1+h)^n \geqslant 1 + nh\)，其中\(h > -1\)；
+			\item \((A+B)^n \geqslant A^n + nA^{n-1}B\)，其中\(A > 0\)，\(A + B > 0\)；
+			\item 设\(x > -1\)，若\(0 < \alpha < 1\)，则\((1+x)^\alpha \leqslant 1 + \alpha x\)；若\(\alpha < 0\)或\(\alpha > 1\)，则\((1+x)^\alpha \geqslant 1 + \alpha x\)。
+		\end{enumerate}
+		
+		\item 平均值不等式：设\(n \in \mathbb{N}^+\)，\(a_i > 0\)（\(i = 1, 2, \cdots, n\)），则
+		\[
+		\frac{n}{\frac{1}{a_1} + \frac{1}{a_2} + \cdots + \frac{1}{a_n}} \leqslant \sqrt[n]{a_1a_2\cdots a_n} \leqslant \frac{a_1 + a_2 + \cdots + a_n}{n} \leqslant \sqrt{\frac{a_1^2 + a_2^2 + \cdots + a_n^2}{n}},
+		\]
+		其中\(HM = \frac{n}{\frac{1}{a_1} + \frac{1}{a_2} + \cdots + \frac{1}{a_n}}\)为调和平均值，\(GM = \sqrt[n]{a_1a_2\cdots a_n}\)为几何平均值，\(AM = \frac{a_1 + a_2 + \cdots + a_n}{n}\)为算术平均值，\(QM = \sqrt{\frac{a_1^2 + a_2^2 + \cdots + a_n^2}{n}}\)为平方平均值。
+	
+		
+		\item 幂平均不等式：设 \(n \in \mathbb{N}^+\)，\(a_i > 0\)（\(i = 1, 2, \cdots, n\)），\(k_1, k_2 \in \mathbb{R}\) 且 \(k_1 \leq k_2\)，则
+		\[
+		\sqrt[k_1]{\frac{a_1^{k_1} + a_2^{k_1} + \cdots + a_n^{k_1}}{n}} \leq \sqrt[k_2]{\frac{a_1^{k_2} + a_2^{k_2} + \cdots + a_n^{k_2}}{n}}
+		\]。
+		
+		\item 对数不等式：
+		\begin{enumerate}
+			\item 当 \(x > -1\) 且 \(x \neq 0\) 时，\(\frac{x}{1 + x} < \ln(1 + x) < x\)；
+			\item 当 \(x > 0\) 时，\(\ln x \leq x - 1\)。
+		\end{enumerate}
+		
+		\item \(\frac{1}{n + 1} < \ln\left(1 + \frac{1}{n}\right) < \frac{1}{n}\)（\(n\) 为正整数）。
+		
+		\item 当 \(0 < x < \frac{\pi}{2}\) 时，\(\sin x < x < \tan x\)。
+		
+		\item 当 \(x > 0\) 时，\(\sin x > x - \frac{1}{6}x^3\)。
+		
+		\item Jordan 不等式：当 \(0 < |x| < \frac{\pi}{2}\) 时，\(\sin x > \frac{2}{\pi}x\)。
+		
+		\item 指数不等式：对任意 \(x \in \mathbb{R}\)，\(e^x > 1 + x\)。
+		
+		\item 指数不等式：当 \(x > 0\) 时，\(e^x > 1 + x + \frac{x^2}{2}\)。
+		
+		\item 凸函数的等价条件：设 \(\varphi(x)\) 是区间 \([a, b]\) 上的凸函数，则以下三式等价：
+		\begin{enumerate}
+			\item \(\varphi(\lambda x_1 + (1 - \lambda)x_2) \geq \lambda\varphi(x_1) + (1 - \lambda)\varphi(x_2)\)（\(x_1, x_2 \in [a, b]\)，\(0 \leq \lambda \leq 1\)）；
+			\item \(\varphi(x_2) \leq \varphi(x_1) + \varphi'(x_1)(x_2 - x_1)\)（\(x_1, x_2 \in [a, b]\)）；
+			\item \(\varphi''(x) \leq 0\)（\(x \in (a, b)\)）。
+		\end{enumerate}
+		
+		\item Jensen 不等式：
+		\begin{enumerate}
+			\item 若 \(f(x)\) 在区间 \(I\) 上是下凸函数，且 \(x_i \in I\)（\(i = 1, 2, \cdots, n\)），则
+			\[
+			\frac{f(x_1) + f(x_2) + \cdots + f(x_n)}{n} \geq f\left(\frac{x_1 + x_2 + \cdots + x_n}{n}\right),
+			\]
+			对严格下凸函数，等式成立当且仅当 \(x_1 = x_2 = \cdots = x_n\)；
+			\item 若 \(f(x)\) 在区间 \(I\) 上是下凸函数，\(x_i \in I\)，\(0 < t_i < 1\)（\(i = 1, 2, \cdots, n\)）且 \(t_1 + t_2 + \cdots + t_n = 1\)，则
+			\[
+			t_1f(x_1) + t_2f(x_2) + \cdots + t_nf(x_n) \geq f(t_1x_1 + t_2x_2 + \cdots + t_nx_n)。
+			\]
+		\end{enumerate}
+		
+		\item 常用不等式的证明方法：
+		\begin{enumerate}
+			\item 用 Lagrange 中值定理证明；
+			\item 用 Cauchy 中值定理证明；
+			\item 用 Taylor 中值定理证明；
+			\item 用函数单调性和极值、最值证明；
+			\item 用凹凸性证明。
+		\end{enumerate}
+	\end{enumerate}
+	
+	
+	\section{导数的综合应用}
+	
+	\subsection*{知识点}
+	
+	\begin{enumerate}
+		\item 导数的几何意义：
+		\begin{enumerate}
+			\item \(f'(x_0)\) 是平面光滑曲线 \(y = f(x)\) 在点 \((x_0, y_0)\) 处的切线斜率；
+			\item \(f_x'(x_0, y_0)\) 是空间曲线 \(\begin{cases} z = f(x, y) \\ y = y_0 \end{cases}\) 在点 \(P(x_0, y_0, z_0)\) 处切线的斜率；
+			\item \(f_y'(x_0, y_0)\) 是空间曲线 \(\begin{cases} z = f(x, y) \\ x = x_0 \end{cases}\) 在点 \(P(x_0, y_0, z_0)\) 处切线的斜率。
+		\end{enumerate}
+		
+		\item 微分的几何意义：
+		\begin{enumerate}
+			\item 函数 \(y = f(x)\) 在 \(x = x_0\) 处的微分 \(dy\) 是曲线在该点处切线的增量；
+			\item 一元函数局部线性化：以切线近似代替曲线，误差为自变量增量的高阶无穷小，即 \(f(x) = f(x_0) + f'(x_0)(x - x_0) + o(x - x_0)\)（\(x \to x_0\)）；
+			\item 函数 \(z = f(x, y)\) 在点 \((x_0, y_0)\) 处的微分 \(dz\) 是曲面在该点处切平面的增量；
+			\item 二元函数局部线性化：以切平面近似代替曲面，误差为自变量增量的高阶无穷小，即 \(f(x, y) = f(x_0, y_0) + f_x'(x_0, y_0)(x - x_0) + f_y'(x_0, y_0)(y - y_0) + o(\rho)\)，其中 \(\rho = \sqrt{(x - x_0)^2 + (y - y_0)^2}\)。
+		\end{enumerate}
+		
+		\item 平面曲线的切线与法线：
+		\begin{enumerate}
+			\item 直角坐标方程 \(y = f(x)\)：
+			\begin{itemize}
+				\item 切线斜率为 \(f'(x_0)\)，切向量 \(T = (1, f'(x_0))^T\)；
+				\item 切线方程：\(y - y_0 = f'(x_0)(x - x_0)\) 或 \(\frac{x - x_0}{1} = \frac{y - y_0}{f'(x_0)}\)；
+				\item 法线方程：\(y - y_0 = -\frac{1}{f'(x_0)}(x - x_0)\) 或 \((x - x_0) + f'(x_0)(y - y_0) = 0\)。
+			\end{itemize}
+			
+			\item 参数方程 \(x = \varphi(t)\)，\(y = \psi(t)\)（\(\alpha \leq t \leq \beta\)）：
+			\begin{itemize}
+				\item 向量值函数形式：\(r = r(t) = (\varphi(t), \psi(t))^T\)（\(\alpha \leq t \leq \beta\)）；
+				\item 切向量：\(T = r'(t_0) = (\varphi'(t_0), \psi'(t_0))^T \parallel (1, f'(x_0))^T\)，其中 \(f'(x_0) = \frac{\psi'(t_0)}{\varphi'(t_0)}\)；
+			\end{itemize}
+		\end{enumerate}
+
+	\item 平面曲线的切线与法线方程：
+	\begin{enumerate}
+		\item 对于参数方程 \(x = \varphi(t)\)，\(y = \psi(t)\)，在 \(t = t_0\) 处，切线方程为 \(\frac{x - x_0}{\varphi'(t_0)} = \frac{y - y_0}{\psi'(t_0)}\)，法线方程为 \(\varphi'(t_0)(x - x_0) + \psi'(t_0)(y - y_0) = 0\) 。
+	\end{enumerate}
+	
+	\item 空间曲线的切线与法平面：
+	\begin{enumerate}
+		\item 参数方程情形 \(x = \varphi(t)\)，\(y = \psi(t)\)，\(z = \omega(t)\)，切向量为 \(T = (\varphi'(t_0), \psi'(t_0), \omega'(t_0))^T\)，切线方程为 \(\frac{x - x_0}{\varphi'(t_0)} = \frac{y - y_0}{\psi'(t_0)} = \frac{z - z_0}{\omega'(t_0)}\)，法平面方程为 \(\varphi'(t_0)(x - x_0) + \psi'(t_0)(y - y_0) + \omega'(t_0)(z - z_0) = 0\) 。
+		\item 一般式方程 \(\begin{cases} F(x, y, z) = 0 \\ G(x, y, z) = 0 \end{cases}\)，切向量为 \(T = \left( \frac{\partial(F, G)}{\partial(y, z)}, \frac{\partial(F, G)}{\partial(z, x)}, \frac{\partial(F, G)}{\partial(x, y)} \right)\)，切线方程为 \(\frac{x - x_0}{\left. \frac{\partial(F, G)}{\partial(y, z)} \right|_P} = \frac{y - y_0}{\left. \frac{\partial(F, G)}{\partial(z, x)} \right|_P} = \frac{z - z_0}{\left. \frac{\partial(F, G)}{\partial(x, y)} \right|_P}\)，法平面方程为 \(\left. \frac{\partial(F, G)}{\partial(y, z)} \right|_P (x - x_0) + \left. \frac{\partial(F, G)}{\partial(z, x)} \right|_P (y - y_0) + \left. \frac{\partial(F, G)}{\partial(x, y)} \right|_P (z - z_0) = 0\) 。
+	\end{enumerate}
+	
+	\item 空间曲面的切平面与法线：
+	\begin{enumerate}
+		\item 隐式方程 \(F(x, y, z) = 0\)，法向量为 \(n = (F_x(x_0, y_0, z_0), F_y(x_0, y_0, z_0), F_z(x_0, y_0, z_0))\)，切平面方程为 \(F_x(x_0, y_0, z_0)(x - x_0) + F_y(x_0, y_0, z_0)(y - y_0) + F_z(x_0, y_0, z_0)(z - z_0) = 0\)，法线方程为 \(\frac{x - x_0}{F_x(x_0, y_0, z_0)} = \frac{y - y_0}{F_y(x_0, y_0, z_0)} = \frac{z - z_0}{F_z(x_0, y_0, z_0)}\) 。
+		\item 显式方程 \(z = f(x, y)\)，法向量为 \(n = (-f_x(x_0, y_0), -f_y(x_0, y_0), 1)\)，切平面方程为 \(f_x(x_0, y_0)(x - x_0) + f_y(x_0, y_0)(y - y_0) = z - z_0\)，法线方程为 \(\frac{x - x_0}{-f_x(x_0, y_0)} = \frac{y - y_0}{-f_y(x_0, y_0)} = \frac{z - z_0}{1}\) 。
+	\end{enumerate}
+	
+	\item 弧微分公式：
+	\begin{enumerate}
+		\item 通用公式为 \(ds = \sqrt{(dx)^2 + (dy)^2}\)（\(dx > 0\)） 。
+		\item 参数方程 \(x = \varphi(t)\)，\(y = \psi(t)\) 时，\(ds = \sqrt{\varphi'^2(t) + \psi'^2(t)}dt\)（\(dt > 0\)） 。
+		\item 直角坐标方程 \(y = y(x)\) 时，\(ds = \sqrt{1 + y'^2}dx\)（\(dx > 0\)） 。
+		\item 极坐标方程 \(r = r(\theta)\) 时，\(ds = \sqrt{r^2(\theta) + r'^2(\theta)}d\theta\)（\(d\theta > 0\)） 。
+	\end{enumerate}
+	
+	\item 曲率与曲率圆：
+	\begin{enumerate}
+		\item 曲率 \(K = \frac{|y''|}{(1 + y'^2)^{\frac{3}{2}}}\) 。
+		\item 曲率圆方程为 \((x - \xi)^2 + (y - \eta)^2 = R^2\)，其中 \(R = \frac{1}{K}\)，\(\xi = x - \frac{y'(1 + y'^2)}{y''}\)，\(\eta = y + \frac{1 + y'^2}{y''}\) 。
+	\end{enumerate}
+	
+	\item 函数单调性判定：
+	\begin{enumerate}
+		\item 若在 \((a, b)\) 内 \(f'(x) > 0\)（\(f'(x) < 0\)），则 \(f(x)\) 在 \([a, b]\) 上严格单调增加（减少） 。
+		\item 若在 \((a, b)\) 内 \(f'(x) \geq 0\)（\(f'(x) \leq 0\)），则 \(f(x)\) 在 \((a, b)\) 内单调增加（减少） 。
+	\end{enumerate}
+	
+	\item 极值判定条件：
+	\begin{enumerate}
+		\item 必要条件：可导函数在极值点处导数为0 。
+		\item 第一充分条件：在 \(x_0\) 邻域内，导数左正右负取极大值，左负右正取极小值，不变号则无极值 。
+		\item 第二充分条件：\(f'(x_0) = 0\) 时，\(f''(x_0) < 0\) 取极大值，\(f''(x_0) > 0\) 取极小值 。
+		\item 第三充分条件：\(f^{(k)}(x_0) = 0\)（\(k = 1, \cdots, n - 1\)）且 \(f^{(n)}(x_0) \neq 0\)，\(n\) 为偶数时，\(f^{(n)}(x_0) < 0\) 取极大值，\(f^{(n)}(x_0) > 0\) 取极小值；\(n\) 为奇数时无极值 。
+	\end{enumerate}
+	
+	\item 凸函数性质：
+	\begin{enumerate}
+		\item 下凸函数定义：\(f(\lambda x_1 + (1 - \lambda) x_2) \leq \lambda f(x_1) + (1 - \lambda) f(x_2)\)（\(\lambda \in [0, 1]\)） 。
+		\item 充要条件：\(f(x_2) \geq f(x_1) + f'(x_1)(x_2 - x_1)\) 。
+		\item 二阶导数判定：\(f''(x) \geq 0\) 为下凸函数，\(f''(x) \leq 0\) 为上凸函数 。
+		\item 下凸函数局部极小值点即全局最小值点 。
+	\end{enumerate}
+	
+	\item 牛顿迭代法：
+	\begin{enumerate}
+		\item 迭代公式：\(x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}\)（\(n = 0, 1, 2, \cdots\)） 。
+		\item 收敛性：若 \(f(x)\) 在 \([a, b]\) 上二阶可导，\(f(a) < 0\)，\(f(b) > 0\)，\(f'(x) > 0\)，\(f''(x) > 0\)，则取 \(x_0 = b\) 时，迭代点列收敛于唯一实根 \(r\) 。
+	\end{enumerate}
+	
+	\item 多元函数极值：
+	\begin{enumerate}
+		\item 必要条件：\(n\) 元函数在极值点处梯度为0，即 \(\nabla f(x_0) = 0\) 。
+		\item 充分条件：二阶连续可导且梯度为0时，Hesse矩阵正定取极小值，负定取极大值，不定为鞍点 。
+		\item 二元函数特例：设 \(f_x(x_0, y_0) = 0\)，\(f_y(x_0, y_0) = 0\)，\(A = f_{xx}(x_0, y_0)\)，\(B = f_{xy}(x_0, y_0)\)，\(C = f_{yy}(x_0, y_0)\)，若 \(A > 0\) 且 \(AC - B^2 > 0\) 取极小值，\(A < 0\) 且 \(AC - B^2 > 0\) 取极大值 。
+	\end{enumerate}
+
+	\item 二元函数极值充分条件（续）：
+	\begin{enumerate}
+		\item 如果 \(AC - B^2 < 0\)，则 \(f(x, y)\) 在 \((x_0, y_0)\) 处不取极值。
+	\end{enumerate}
+	
+	\item 条件极值问题：
+	\begin{enumerate}
+		\item 求 \(\min f(x, y)\)，约束条件为 \(\varphi(x, y) = 0\)，引入拉格朗日函数 \(F(x, y) = f(x, y) + \lambda \varphi(x, y)\)，通过解方程组 \(\begin{cases} f_x(x, y) + \lambda \varphi_x(x, y) = 0 \\ f_y(x, y) + \lambda \varphi_y(x, y) = 0 \\ \varphi(x, y) = 0 \end{cases}\) 求极值点。
+	\end{enumerate}
+	
+	\item 方程实根个数的判定方法：
+	\begin{enumerate}
+		\item 若 \(\lim_{x \to a^+} f(x) \cdot \lim_{x \to b^-} f(x) < 0\)，函数 \(f(x)\) 在 \((a, b)\) 内可导且 \(f'(x) \neq 0\)，则方程 \(f(x) = 0\) 在 \((a, b)\) 内有且只有一个实根。
+		\item 若 \(\lim_{x \to a^+} f(x)\) 与 \(\lim_{x \to b^-} f(x)\) 都大于零或为正无穷大，函数 \(f(x)\) 在 \((a, b)\) 内可导，存在 \(x_0 \in (a, b)\) 使得 \(f'(x_0) = 0\) 且 \(f(x_0) < 0\)，当 \(a < x < x_0\) 时 \(f'(x) < 0\)，当 \(x_0 < x < b\) 时 \(f'(x) > 0\)，则方程 \(f(x) = 0\) 在 \((a, b)\) 内有且仅有两个实根。
+		\item 若 \(\lim_{x \to a^+} f(x)\) 与 \(\lim_{x \to b^-} f(x)\) 都小于零或为负无穷大，函数 \(f(x)\) 在 \((a, b)\) 内可导，存在 \(x_0 \in (a, b)\) 使得 \(f'(x_0) = 0\) 且 \(f(x_0) > 0\)，当 \(a < x < x_0\) 时 \(f'(x) > 0\)，当 \(x_0 < x < b\) 时 \(f'(x) < 0\)，则方程 \(f(x) = 0\) 在 \((a, b)\) 内有且仅有两个实根。
+	\end{enumerate}
+\end{enumerate}
+	\section{不定积分与定积分的计算}
+	\subsection*{知识点}
+	\begin{enumerate}
+		\item 原函数：如果在区间 \(I\) 上，\(F'(x) = f(x)\)，称 \(F(x)\) 是 \(f(x)\) 在区间 \(I\) 上的原函数。
+		\item 不定积分：设 \(F(x)\) 是 \(f(x)\) 在区间 \(I\) 上的一个原函数，则 \(\int f(x)dx = F(x) + C\)，其中 \(C\) 为积分常数。
+		\item 导数与不定积分的互逆运算：
+		\begin{enumerate}
+			\item \(\left(\int f(x)dx\right)' = f(x)\)，或 \(d\left(\int f(x)dx\right) = f(x)dx\)；
+			\item \(\int f'(x)dx = f(x) + C\)，或 \(\int df(x) = f(x) + C\)。
+		\end{enumerate}
+		\item 不定积分的运算法则：\(\int(\alpha f(x) + \beta g(x))dx = \alpha \int f(x)dx + \beta \int g(x)dx\)。
+		\item 不定积分的换元法（配元法）：设 \(f(x)\) 有原函数，\(u = \varphi(x)\) 可导，则 \(\int f(\varphi(x))\varphi'(x)dx = \int f(\varphi(x))d\varphi(x)\)。
+		\item 常用配元形式：
+		\begin{enumerate}
+			\item \(\int f(ax + b)dx = \frac{1}{a}\int f(ax + b)d(ax + b)\)；
+			\item \(\int f(x^n)x^{n-1}dx = \frac{1}{n}\int f(x^n)d(x^n)\)（万能凑幂法）；
+			\item \(\int f(x^n)\frac{1}{x}dx = \frac{1}{n}\int f(x^n)\frac{1}{x^n}d(x^n)\)（万能凑幂法）；
+			\item \(\int f(\sin x)\cos xdx = \int f(\sin x)d(\sin x)\)；
+			\item \(\int f(\cos x)\sin xdx = -\int f(\cos x)d(\cos x)\)；
+			\item \(\int f(\tan x)\sec^2 xdx = \int f(\tan x)d(\tan x)\)；
+			\item \(\int f(e^x)e^xdx = \int f(e^x)d(e^x)\)；
+		\end{enumerate}
+	
+	\item 常用配元形式（续）：
+	\begin{enumerate}
+		\item \(\int f(\ln x) \frac{1}{x}dx = \int f(\ln x)d(\ln x)\)。
+	\end{enumerate}
+	
+	\item 不定积分的换元积分法：设 \(x = \psi(t)\) 单调可微，且 \(\psi'(t) \neq 0\)，\(f(\psi(t))\psi'(t)\) 有原函数，则 \(\int f(x)dx = \left.\int f(\psi(t))\psi'(t)dt\right|_{t = \psi^{-1}(x)}\)。
+	
+	\item 三角代换：
+	\begin{enumerate}
+		\item \(\int f(x, \sqrt{a^2 - x^2})dx\)，令 \(x = a\sin t\) 或 \(x = a\cos t\)；
+		\item \(\int f(x, \sqrt{a^2 + x^2})dx\)，令 \(x = a\tan t\)；
+		\item \(\int f(x, \sqrt{x^2 - a^2})dx\)，令 \(x = a\sec t\)。
+	\end{enumerate}
+	
+	\item 双曲代换：
+	\begin{enumerate}
+		\item \(\int f(x, \sqrt{a^2 + x^2})dx\)，令 \(x = a\sinh t\)；
+		\item \(\int f(x, \sqrt{x^2 - a^2})dx\)，令 \(x = a\cosh t\)。
+	\end{enumerate}
+	
+	\item 倒数代换：若分母中因子的幂次较高，可用倒数代换 \(t = \frac{1}{x}\)。
+	
+	\item 无理代换：
+	\begin{enumerate}
+		\item \(\int f(x, \sqrt[n]{ax + b})dx\)，令 \(t = \sqrt[n]{ax + b}\)；
+		\item \(\int f(x, \sqrt[n]{\frac{ax + b}{cx + d}})dx\)，令 \(t = \sqrt[n]{\frac{ax + b}{cx + d}}\)；
+		\item \(\int f(x, \sqrt[n]{ax + b}, \sqrt[m]{ax + b})dx\)，令 \(t = \sqrt[p]{ax + b}\)（\(p\) 是 \(m, n\) 的最小公倍数）。
+	\end{enumerate}
+	
+	\item 三角函数有理式的积分 \(\int R(\sin x, \cos x)dx\)：
+	\begin{enumerate}
+		\item 万能代换：令 \(t = \tan\frac{x}{2}\)，则 \(\sin x = \frac{2t}{1 + t^2}\)，\(\cos x = \frac{1 - t^2}{1 + t^2}\)，\(dx = \frac{2}{1 + t^2}dt\)；
+		\item 若 \(R(-\sin x, \cos x) = -R(\sin x, \cos x)\)，令 \(t = \cos x\)；
+		\item 若 \(R(\sin x, -\cos x) = -R(\sin x, \cos x)\)，令 \(t = \sin x\)；
+		\item 若 \(R(-\sin x, -\cos x) = R(\sin x, \cos x)\)，令 \(t = \tan x\)。
+	\end{enumerate}
+	
+	\item 欧拉代换：对形如 \(\int R(x, \sqrt{ax^2 + bx + c})dx\)（\(R\) 为有理函数，\(a > 0\)）：
+	\begin{enumerate}
+		\item 令 \(\sqrt{ax^2 + bx + c} = t \pm \sqrt{a}x\)；
+		\item 令 \(\sqrt{ax^2 + bx + c} = xt \pm \sqrt{c}\)；
+		\item 若 \(ax^2 + bx + c = a(x - \lambda)(x - \mu)\)，令 \(\sqrt{ax^2 + bx + c} = t(x - \lambda)\)；
+		\item 若 \(ax^2 + bx + c = a(x - \lambda)(x - \mu)\)，令 \(t = \sqrt{a \cdot \frac{x - \mu}{x - \lambda}}\)。
+	\end{enumerate}
+	
+	\item 定积分的重要结论：
+	\begin{enumerate}
+		\item 设非负函数 \(f(x)\) 在 \([a, b]\) 上连续，若 \(\int_{a}^{b}f(x)dx = 0\)，则 \(f(x) \equiv 0\)（\(\forall x \in [a, b]\)）。
+	\end{enumerate}
+	
+	\item 定积分的性质：设 \(f(x), g(x)\) 在 \([a, b]\) 上可积，\(\alpha, \beta\) 为常数：
+	\begin{enumerate}
+		\item 线性性：\(\int_{a}^{b}(\alpha f(x) + \beta g(x))dx = \alpha\int_{a}^{b}f(x)dx + \beta\int_{a}^{b}g(x)dx\)；
+		\item 区间可加性：\(\int_{a}^{b}f(x)dx = \int_{a}^{c}f(x)dx + \int_{c}^{b}f(x)dx\)；
+		\item 保号性：若 \(f(x) \geq 0\)，则 \(\int_{a}^{b}f(x)dx \geq 0\)；若 \(f(x)\) 连续非负且不恒为零，则 \(\int_{a}^{b}f(x)dx > 0\)；
+		\item 比较定理：若 \(f(x) \leq g(x)\)，则 \(\int_{a}^{b}f(x)dx \leq \int_{a}^{b}g(x)dx\)；
+		\item 定积分绝对值不等式：\(\left|\int_{a}^{b}f(x)dx\right| \leq \int_{a}^{b}|f(x)|dx\)；
+		\item 估值定理：若 \(m \leq f(x) \leq M\)，则 \(m(b - a) \leq \int_{a}^{b}f(x)dx \leq M(b - a)\)。
+	\end{enumerate}
+	
+	\item 微积分基本定理：设 \(f(x)\) 在 \([a, b]\) 上可积，\(F(x)\) 是其原函数，则 \(\int_{a}^{b}f(x)dx = F(b) - F(a)\)。
+	
+	\item 变限积分函数的性质：
+	\begin{enumerate}
+		\item 若 \(f(x)\) 在 \([a, b]\) 上可积，则 \(\Phi(x) = \int_{a}^{x}f(t)dt\) 在 \([a, b]\) 上连续；
+		\item 若 \(f(x)\) 在 \([a, b]\) 上连续，则 \(\Phi(x)\) 在 \([a, b]\) 上可导，且 \(\Phi'(x) = f(x)\)。
+	\end{enumerate}
+	
+	\item 原函数存在定理：若 \(f(x)\) 在 \([a, b]\) 上连续，则 \(f(x)\) 在 \([a, b]\) 上存在原函数。
+	
+	\item 变限积分函数的求导公式：设 \(f(x)\) 连续，\(\varphi(x), \psi(x)\) 可导，则：
+	\begin{enumerate}
+		\item \(\frac{d}{dx}\int_{a}^{\varphi(x)}f(t)dt = f(\varphi(x))\varphi'(x)\)；
+		\item \(\frac{d}{dx}\int_{\psi(x)}^{\varphi(x)}f(t)dt = f(\varphi(x))\varphi'(x) - f(\psi(x))\psi'(x)\)。
+	\end{enumerate}
+	
+	\item 定积分的换元积分法：设 \(f(x)\) 在 \([a, b]\) 上连续，\(x = \varphi(t)\) 满足 \(\varphi(\alpha) = a\)，\(\varphi(\beta) = b\)，\(\varphi(t)\) 在 \([\alpha, \beta]\)（或 \([\beta, \alpha]\)）上有连续导数且 \(\varphi(t) \in [a, b]\)，则 \(\int_{a}^{b}f(x)dx = \int_{\alpha}^{\beta}f(\varphi(t))\varphi'(t)dt\)。
+	
+	\item 定积分的分部积分法：设 \(u(x), v(x)\) 在 \([a, b]\) 上有连续导数，则 \(\int_{a}^{b}u dv = \left.uv\right|_{a}^{b} - \int_{a}^{b}v du\)。
+	
+	\item 定积分的对称性：
+	\begin{enumerate}
+		\item 若 \(f(x)\) 在 \([0, a]\) 上连续，则 \(\int_{0}^{a}f(x)dx = \int_{0}^{a}f(a - x)dx\)；
+		\item 若 \(f(x)\) 在 \([a, b]\) 上连续，则 \(\int_{a}^{b}f(x)dx = \int_{a}^{b}f(a + b - x)dx\)。
+	\end{enumerate}
+	
+	\item 不定积分的分部积分法：设 \(u = u(x)\) 及 \(v = v(x)\) 具有连续导数，则 \(\int u\ dv = uv - \int v\ du\)。    
+	\item 分部积分法中函数选取原则：按“反对幂指三”顺序，前者为 \(u\)，后者为 \(v'\)。其中“反”指反三角函数，“对”指对数函数，“幂”指幂函数，“指”指指数函数，“三”指三角函数。    
+	\item 不定积分的循环积分法：通过分部积分产生关于所求积分的方程，解方程得结果，尤其适用于被积函数含指数函数和三角函数的情况。    
+	\item 不定积分的配对积分法：为计算 \(I(x) = \int f(x)\ dx\)，找积分 \(J(x) = \int g(x)\ dx\) 及常数 \(a, b, c, d\)（\(ad - bc \neq 0\)），通过计算 \(aI(x) + bJ(x)\) 和 \(cI(x) + dJ(x)\) 求出 \(I(x)\)。    
+	\item 不定积分的递推法：若被积函数含参数 \(n \in N^+\)，为计算 \(I_n(x) = \int f_n(x)\ dx\)，先化为含参数更小的积分 \(I_{n-k}(x)\)，形成递推关系，直至化为易求积分。    
+	\item “积不出来”的积分（无法用初等函数表示）：    
+	\begin{align*}
+		&\int e^{-x^2}\ dx,\ \int \frac{1}{\ln x}\ dx,\ \int \frac{\sin x}{x}\ dx,\ \int \frac{\cos x}{x}\ dx, \\
+		&\int \sin x^2\ dx,\ \int \cos x^2\ dx,\ \int \frac{e^x}{x}\ dx,\ \int \sqrt{1 + x^3}\ dx, \\
+		&\int \frac{dx}{\sqrt{1 - k^2 \sin^2 x}},\ \int \sqrt{1 - k^2 \sin^2 x}\ dx\ (0 < k < 1)。
+	\end{align*}    
+	\item 定积分的定义：\(\int_{a}^{b} f(x)\ dx = \lim_{\lambda \to 0} \sum_{k=1}^{n} f(\xi_k) \Delta x_k\)（通过分解、近似、求和、取极限得到）。    
+	\item 定积分的必要条件：若 \(f(x)\) 在 \([a, b]\) 上可积，则 \(f(x)\) 在 \([a, b]\) 上有界。    
+	\item 定积分的充分条件：    
+	\begin{enumerate}
+		\item 若 \(f(x)\) 在 \([a, b]\) 上连续，则可积；    
+		\item 若 \(f(x)\) 在 \([a, b]\) 上有界且仅有有限个间断点，则可积；    
+		\item 若 \(f(x)\) 在 \([a, b]\) 上单调，则可积。    
+	\end{enumerate}    
+	\item 定积分的几何意义：    
+	\begin{enumerate}
+		\item 若 \(f(x) \geq 0\)，\(\int_{a}^{b} f(x)\ dx\) 表示曲线 \(y = f(x)\) 与直线 \(x = a\)、\(x = b\)、\(x\) 轴围成的曲边梯形面积；    
+		\item 若 \(f(x) \leq 0\)，\(\int_{a}^{b} f(x)\ dx\) 表示上述曲边梯形面积的负值；    
+		\item 若 \(f(x)\) 有正有负，\(\int_{a}^{b} f(x)\ dx\) 表示各部分面积的代数和。    
+	\end{enumerate}    
+	\item 定积分的对称性（续）：    
+	\begin{enumerate}
+		\item 若 \(f(x)\) 在 \([-a, a]\) 上连续：    
+		- 若 \(f(x)\) 为奇函数，则 \(\int_{-a}^{a} f(x)\ dx = 0\)；    
+		- 若 \(f(x)\) 为偶函数，则 \(\int_{-a}^{a} f(x)\ dx = 2\int_{0}^{a} f(x)\ dx\)。    
+		\item 若 \(f(x)\) 在 \([0, a]\) 上连续：    
+		- 若 \(f(x) = -f(a - x)\)，则 \(\int_{0}^{a} f(x)\ dx = 0\)；    
+		- 若 \(f(x) = f(a - x)\)，则 \(\int_{0}^{a} f(x)\ dx = 2\int_{0}^{\frac{a}{2}} f(x)\ dx\)。    
+	\end{enumerate}    
+	\item 周期函数的积分：设 \(f(x)\) 是以 \(T\) 为周期的连续函数，则对任意实数 \(a\)，有 \(\int_{a}^{a+T} f(x)\ dx = \int_{0}^{T} f(x)\ dx = \int_{-\frac{T}{2}}^{\frac{T}{2}} f(x)\ dx\)。    
+	\item 几个重要的定积分公式：    
+	\begin{enumerate}
+		\item \(\int_{0}^{a} \sqrt{a^2 - x^2}\ dx = \frac{1}{4}\pi a^2\)；    
+		\item \(\int_{0}^{\frac{\pi}{2}} f(\sin x)\ dx = \int_{0}^{\frac{\pi}{2}} f(\cos x)\ dx\)；    
+		\item \(\int_{0}^{\pi} x f(\sin x)\ dx = \frac{\pi}{2} \int_{0}^{\pi} f(\sin x)\ dx\)；    
+		\item \(\int_{0}^{2\pi} f(a\cos x + b\sin x)\ dx = 2\int_{0}^{\pi} f\left(\sqrt{a^2 + b^2}\cos x\right)\ dx\)；    
+		\item \(\int_{a}^{b} \frac{f(x)}{f(x) + f(a + b - x)}\ dx = \frac{b - a}{2}\)；    
+		\item \(\int_{0}^{\frac{\pi}{2}} \sin^n x\ dx = \int_{0}^{\frac{\pi}{2}} \cos^n x\ dx = 
+		\begin{cases} 
+			\frac{(n-1)!!}{n!!}, & n \text{为奇数}, \\
+			\frac{(n-1)!!}{n!!} \cdot \frac{\pi}{2}, & n \text{为偶数}.
+		\end{cases}\)    
+	\end{enumerate}
+		\end{enumerate}
+		
+	\section{重积分}
+	\subsection*{知识点}
+		\begin{enumerate}
+			\item 二重积分的定义：\(\iint_{D} f(x, y) d \sigma=\lim _{d(T) \to 0} \sum_{k=1}^{n} f(\xi_{k}, \eta_{k}) \Delta \sigma_{k}\)
+			\item 二重积分的几何意义：
+			\begin{enumerate}
+				\item 若 \(f(x, y) \geq 0\)，\(\iint_{D} f(x, y) d \sigma\) 表示以 \(z=f(x, y)\) 为顶、\(D\) 为底的曲顶柱体的体积。
+				\item 代数体积示例：
+				\begin{enumerate}
+					\item \(\iint_{x^{2}+y^{2} \leq a^{2}} \sqrt{a^{2}-x^{2}-y^{2}} d x d y=\frac{2}{3} \pi a^{3}\)；
+					\item \(\iint_{\substack{1-\frac{x}{a}-\frac{y}{b} \geq 0 \\ x \geq 0, y \geq 0}} \left(1-\frac{x}{a}-\frac{y}{b}\right) d x d y=\frac{1}{6} a b\)。
+				\end{enumerate}
+			\end{enumerate}
+			\item 二重积分的物理意义：平面薄片的质量为 \(M=\iint_{D} \mu(x, y) d \sigma\)，其中 \(\mu(x, y)\) 为面密度。
+			\item 二重积分存在的必要条件：二元函数 \(f(x, y)\) 在平面有界闭区域 \(D\) 上有界。
+			\item 二重积分存在的充分条件：
+			\begin{enumerate}
+				\item 若函数 \(f(x, y)\) 在有界闭区域 \(D\) 上连续，则 \(f(x, y)\) 在 \(D\) 上可积；
+				\item 若有界函数 \(f(x, y)\) 在有界闭区域 \(D\) 上除有限个点或有限条光滑曲线外都连续，则 \(f(x, y)\) 在 \(D\) 上可积。
+			\end{enumerate}
+			\item 二重积分的性质：
+			\begin{enumerate}
+				\item 线性：\(\iint_{D}(k f(x, y)+l g(x, y)) d \sigma=k \iint_{D} f(x, y) d \sigma+l \iint_{D} g(x, y) d \sigma\)，其中 \(k, l \in R\)；
+				\item 区域可加性：\(\iint_{D_{1} \cup D_{2}} f(x, y) d \sigma=\iint_{D_{1}} f(x, y) d \sigma+\iint_{D_{2}} f(x, y) d \sigma\)，其中 \(D_{1} \cap D_{2}=\varnothing\)；
+				\item 保号性：若 \(\forall(x, y) \in D\)，\(f(x, y) \geq 0\)，则 \(\iint_{D} f(x, y) d \sigma \geq 0\)；
+				\item 比较性：若 \(\forall(x, y) \in D\)，\(f(x, y) \leq g(x, y)\)，则 \(\iint_{D} f(x, y) d \sigma \leq \iint_{D} g(x, y) d \sigma\)；
+				\item 绝对值不等式：\(\left|\iint_{D} f(x, y) d \sigma\right| \leq \iint_{D}|f(x, y)| d \sigma\)；
+				\item 估值定理：若 \(\forall(x, y) \in D\)，\(m \leq f(x, y) \leq M\)，则 \(m \sigma \leq \iint_{D} f(x, y) d \sigma \leq M \sigma\)。
+			\end{enumerate}
+			\item 二重积分在直角坐标系下的计算：
+			\begin{enumerate}
+				\item X-型区域 \(D = \{(x, y) | y_{1}(x) \leq y \leq y_{2}(x), a \leq x \leq b\}\)，则 \(\iint_{D} f(x, y) d \sigma = \int_{a}^{b} d x \int_{y_{1}(x)}^{y_{2}(x)} f(x, y) d y\)；
+				\item Y-型区域 \(D = \{(x, y) | x_{1}(y) \leq x \leq x_{2}(y), c \leq y \leq d\}\)，则 \(\iint_{D} f(x, y) d \sigma = \int_{c}^{d} d y \int_{x_{1}(y)}^{x_{2}(y)} f(x, y) d x\)；
+				\item 若积分区域既是 X 型又是 Y 型，积分次序由被积函数决定，即 \(\iint_{D} f(x, y) d \sigma = \int_{a}^{b} d x \int_{y_{1}(x)}^{y_{2}(x)} f(x, y) d y = \int_{c}^{d} d y \int_{x_{1}(y)}^{x_{2}(y)} f(x, y) d x\)；
+				\item 若积分区域既非 X 型又非 Y 型，先划分为若干 X 型或 Y 型区域，再利用区域可加性计算；
+				\item 若积分区域 \(D = \{(x, y) | a \leq x \leq b, c \leq y \leq d\}\) 且被积函数 \(f(x, y) = g(x) h(y)\)，则 \(\iint_{D} f(x, y) d x d y = \left(\int_{a}^{b} g(x) d x\right)\left(\int_{c}^{d} h(y) d y\right)\)。
+			\end{enumerate}
+			\item 二重积分的对称性：设函数 \(f(x, y)\) 在有界闭区域 \(D\) 上连续，\(I = \iint_{D} f(x, y) d \sigma\)，则：
+			\begin{enumerate}
+				\item 若 \(D\) 关于 \(y\) 轴对称，记 \(D_{1} = \{(x, y) | (x, y) \in D, x \geq 0\}\)：
+	若 \(f(-x, y) = -f(x, y)\)，则 \(I = 0\)；
+	若 \(f(-x, y) = f(x, y)\)，则 \(I = 2 \iint_{D_{1}} f(x, y) d \sigma\)；
+				\item 若 \(D\) 关于 \(x\) 轴对称，记 \(D_{2} = \{(x, y) | (x, y) \in D, y \geq 0\}\)：
+	若 \(f(x, -y) = -f(x, y)\)，则 \(I = 0\)；
+	若 \(f(x, -y) = f(x, y)\)，则 \(I = 2 \iint_{D_{2}} f(x, y) d \sigma\)；
+				\item 若 \(D\) 关于原点对称，记 \(D_{3} = \{(x, y) | (x, y) \in D, y \geq kx, k \in R\}\)：
+	若 \(f(-x, -y) = -f(x, y)\)，则 \(I = 0\)；
+	若 \(f(-x, -y) = f(x, y)\)，则 \(I = 2 \iint_{D_{3}} f(x, y) d \sigma\)；
+				\item 若 \(D\) 关于直线 \(y = x\) 对称，记 \(D_{4} = \{(x, y) | (x, y) \in D, y \geq x\}\)，则 \(\iint_{D} f(x, y) d \sigma = \iint_{D} f(y, x) d \sigma\)：
+	若 \(f(x, y) = -f(y, x)\)，则 \(I = 0\)；
+	若 \(f(x, y) = f(y, x)\)，则 \(I = 2 \iint_{D_{4}} f(x, y) d \sigma\)。
+			\end{enumerate}
+
+		
+		\item 二重积分的对称性（续）：
+		\begin{enumerate}
+			\item 若积分区域 \(D\) 关于直线 \(y = -x\) 对称，记 \(D_5 = \{(x, y) \mid (x, y) \in D, y \geq -x\}\)，则：
+			\[
+			\iint_D f(x, y) \, d\sigma = \iint_D f(-y, -x) \, d\sigma
+			\]
+若 \(f(x, y) = -f(-y, -x)\)，则 \(I = 0\)；
+若 \(f(x, y) = f(-y, -x)\)，则 \(I = 2\iint_{D_5} f(x, y) \, d\sigma\)。
+			\item 若积分区域 \(D\) 关于变量 \(x\) 和 \(y\) 具有轮换对称性（边界方程互换 \(x, y\) 后不变），则：
+			\[
+			\iint_D f(x, y) \, d\sigma = \iint_D f(y, x) \, d\sigma
+			\]
+		\end{enumerate}
+		
+		\item 二重积分在极坐标系下的计算：令 \(x = \rho \cos\theta\)，\(y = \rho \sin\theta\)，则 \(d\sigma = \rho \, d\rho \, d\theta\)，且：
+		\[
+		\iint_D f(x, y) \, d\sigma = \iint_D f(\rho \cos\theta, \rho \sin\theta) \rho \, d\rho \, d\theta
+		\]
+		\begin{enumerate}
+			\item 先\(\rho\)后\(\theta\)积分：
+若极点在区域 \(D\) 外，\(D = \{(\rho, \theta) \mid \rho_1(\theta) \leq \rho \leq \rho_2(\theta), \alpha \leq \theta \leq \beta\}\)，则：
+			\[
+			\iint_D f(x, y) \, d\sigma = \int_\alpha^\beta d\theta \int_{\rho_1(\theta)}^{\rho_2(\theta)} f(\rho \cos\theta, \rho \sin\theta) \rho \, d\rho
+			\]
+若极点在区域 \(D\) 的边界上，\(D = \{(\rho, \theta) \mid 0 \leq \rho \leq \rho(\theta), \alpha \leq \theta \leq \beta\}\)，则：
+			\[
+			\iint_D f(x, y) \, d\sigma = \int_\alpha^\beta d\theta \int_0^{\rho(\theta)} f(\rho \cos\theta, \rho \sin\theta) \rho \, d\rho
+			\]
+若极点在区域 \(D\) 内，\(D = \{(\rho, \theta) \mid 0 \leq \rho \leq \rho(\theta), 0 \leq \theta \leq 2\pi\}\)，则：
+			\[
+			\iint_D f(x, y) \, d\sigma = \int_0^{2\pi} d\theta \int_0^{\rho(\theta)} f(\rho \cos\theta, \rho \sin\theta) \rho \, d\rho
+			\]
+			\item 先\(\theta\)后\(\rho\)积分：若 \(D = \{(\rho, \theta) \mid \theta_1(\rho) \leq \theta \leq \theta_2(\rho), \rho_1 \leq \rho \leq \rho_2\}\)，则：
+			\[
+			\iint_D f(x, y) \, d\sigma = \int_{\rho_1}^{\rho_2} \rho \, d\rho \int_{\theta_1(\rho)}^{\theta_2(\rho)} f(\rho \cos\theta, \rho \sin\theta) \, d\theta
+			\]
+		\end{enumerate}
+		
+		\item 二重积分的一般变量代换：设变换 \(T\)：\(\begin{cases} x = x(u, v) \\ y = y(u, v) \end{cases}\) 将 \(D' \to D\)，满足：
+		\begin{enumerate}
+			\item \(x(u, v), y(u, v)\) 在 \(D'\) 上有一阶连续偏导数；
+			\item 雅可比行列式 \(J(u, v) = \dfrac{\partial(x, y)}{\partial(u, v)} \neq 0\)；
+			\item 变换 \(T\) 是一一对应的，则：
+			\[
+			\iint_D f(x, y) \, dx \, dy = \iint_{D'} f(x(u, v), y(u, v)) |J(u, v)| \, du \, dv
+			\]
+		\end{enumerate}
+		
+		\item 二重积分的分部积分公式：设 \(\partial D\) 为闭区域 \(D\) 的分段光滑正向边界，\(u(x, y), v(x, y)\) 在 \(D\) 上有一阶连续偏导数，则：
+		\[
+		\iint_D u \frac{\partial v}{\partial x} \, dx \, dy = \oint_{\partial D} uv \, dy - \iint_D v \frac{\partial u}{\partial x} \, dx \, dy
+		\]
+		\[
+		\iint_D u \frac{\partial v}{\partial y} \, dx \, dy = -\oint_{\partial D} uv \, dx - \iint_D v \frac{\partial u}{\partial y} \, dx \, dy
+		\]
+		
+		\item 三重积分的定义：\(\iiint_\Omega f(x, y, z) \, dV = \lim_{d(T) \to 0} \sum_{k=1}^n f(\xi_k, \eta_k, \zeta_k) \Delta V_k\)
+		
+		\item 三重积分的物理意义：空间物体的质量 \(M = \iiint_\Omega \rho(x, y, z) \, dV\)，其中 \(\rho(x, y, z)\) 为体密度。
+		
+		\item 三重积分的对称性：
+		\begin{enumerate}
+			\item 若区域 \(\Omega\) 关于 \(xOy\) 面对称：
+若 \(f(x, y, -z) = -f(x, y, z)\)，则 \(\iiint_\Omega f(x, y, z) \, dV = 0\)；
+若 \(f(x, y, -z) = f(x, y, z)\)，则 \(\iiint_\Omega f(x, y, z) \, dV = 2\iiint_{\Omega_1} f(x, y, z) \, dV\)，其中 \(\Omega_1\) 为 \(\Omega\) 在 \(xOy\) 面上半部分。
+			\item 若 \(\Omega\) 关于变量 \(x, y\) 具有轮换对称性（边界方程互换 \(x, y\) 后不变），则：
+			\[
+			\iiint_\Omega f(x, y, z) \, dV = \iiint_\Omega f(y, x, z) \, dV
+			\]
+		\end{enumerate}
+		
+		\item 三重积分在直角坐标系下的计算：
+		\begin{enumerate}
+			\item 投影法（先一后二）：若 \(\Omega = \{(x, y, z) \mid (x, y) \in D_{xy}, z_1(x, y) \leq z \leq z_2(x, y)\}\)，则：
+			\[
+			\iiint_\Omega f(x, y, z) \, dV = \iint_{D_{xy}} dx \, dy \int_{z_1(x, y)}^{z_2(x, y)} f(x, y, z) \, dz
+			\]
+			\item 截面法（先二后一）：若 \(\Omega = \{(x, y, z) \mid a \leq z \leq b, (x, y) \in D_z\}\)，则：
+			\[
+			\iiint_\Omega f(x, y, z) \, dV = \int_a^b dz \iint_{D_z} f(x, y, z) \, dx \, dy
+			\]
+		\end{enumerate}
+		
+		\item 三重积分在柱面坐标系下的计算：
+		\begin{enumerate}
+			\item 坐标关系：\(x = \rho \cos\theta\)，\(y = \rho \sin\theta\)，\(z = z\)；
+			\item 体积元素：\(dV = \rho \, d\theta \, d\rho \, dz\)；
+			\item 积分公式：
+			\[
+			\iiint_\Omega f(x, y, z) \, dV = \iiint_\Omega f(\rho \cos\theta, \rho \sin\theta, z) \rho \, d\theta \, d\rho \, dz
+			\]
+			\item 若 \(\Omega = \{(\rho, \theta, z) \mid \alpha \leq \theta \leq \beta, \rho_1(\theta) \leq \rho \leq \rho_2(\theta), z_1(\rho \cos\theta, \rho \sin\theta) \leq z \leq z_2(\rho \cos\theta, \rho \sin\theta)\}\)，则：
+			\[
+			\iiint_\Omega f(x, y, z) \, dV = \int_\alpha^\beta d\theta \int_{\rho_1(\theta)}^{\rho_2(\theta)} \rho \, d\rho \int_{z_1(\rho \cos\theta, \rho \sin\theta)}^{z_2(\rho \cos\theta, \rho \sin\theta)} f \, dz
+			\]
+			\item 适用范围：积分区域或被积函数用柱面坐标表示时变量分离。
+		\end{enumerate}
+		
+		\item 三重积分在球面坐标系下的计算：
+		\begin{enumerate}
+			\item 坐标关系：\(x = r \sin\varphi \cos\theta\)，\(y = r \sin\varphi \sin\theta\)，\(z = r \cos\varphi\)；
+			\item 体积元素：\(dV = r^2 \sin\varphi \, dr \, d\varphi \, d\theta\)；
+		\end{enumerate}
+		
+		\item 三重积分在球面坐标系下的计算（续）：
+		\begin{enumerate}
+			\item 积分表达式：\(\iiint_{\Omega} f(x, y, z) \, dV = \iiint_{\Omega} f(r \sin\varphi \cos\theta, r \sin\varphi \sin\theta, r \cos\varphi) r^2 \sin\varphi \, dr \, d\varphi \, d\theta\)；
+			\item 若积分区域为 \(\Omega = \{(\rho, \theta, \varphi) \mid \alpha \leq \theta \leq \beta, \varphi_1(\theta) \leq \varphi \leq \varphi_2(\theta), r_1(\theta, \varphi) \leq r \leq r_2(\theta, \varphi)\}\)，则：
+			\[
+			\iiint_{\Omega} f(x, y, z) \, dV = \int_{\alpha}^{\beta} d\theta \int_{\varphi_1(\theta)}^{\varphi_2(\theta)} \sin\varphi \, d\varphi \int_{r_1(\theta, \varphi)}^{r_2(\theta, \varphi)} f(r \sin\varphi \cos\theta, r \sin\varphi \sin\theta, r \cos\varphi) r^2 \, dr;
+			\]
+			\item 适用范围：积分区域表面或被积函数用球面坐标表示时变量易分离。
+		\end{enumerate}
+		
+		\item 三重积分的一般变量代换：设变换 \(T\)：\(\begin{cases} x = x(u, v, w) \\ y = y(u, v, w) \\ z = z(u, v, w) \end{cases}\) 将 \(\Omega' \to \Omega\)，满足：
+		\begin{enumerate}
+			\item \(x, y, z\) 在 \(\Omega'\) 上有一阶连续偏导数；
+			\item 雅可比行列式 \(J(u, v, w) = \dfrac{\partial(x, y, z)}{\partial(u, v, w)} \neq 0\)；
+			\item 变换 \(T\) 一一对应，则：
+			\[
+			\iiint_{\Omega} f(x, y, z) \, dxdydz = \iiint_{\Omega'} f(x(u, v, w), y(u, v, w), z(u, v, w)) |J(u, v, w)| \, dudvdw.
+			\]
+		\end{enumerate}
+		
+		\item 空间曲面面积计算：
+		\begin{enumerate}
+			\item 若 \(z = f(x, y)\)，\((x, y) \in D_{xy}\)，则 \(S = \iint_{D_{xy}} \sqrt{1 + f_x'^2(x, y) + f_y'^2(x, y)} \, dxdy\)；
+			\item 若 \(x = g(y, z)\)，\((y, z) \in D_{yz}\)，则 \(S = \iint_{D_{yz}} \sqrt{1 + g_y'^2(y, z) + g_z'^2(y, z)} \, dydz\)；
+			\item 若 \(y = h(x, z)\)，\((x, z) \in D_{xz}\)，则 \(S = \iint_{D_{xz}} \sqrt{1 + h_x'^2(x, z) + h_z'^2(x, z)} \, dxdz\)；
+			\item 若 \(\sum: F(x, y, z) = 0\)，\((x, y) \in D_{xy}\) 且 \(F_z \neq 0\)，则 \(S = \iint_{D_{xy}} \dfrac{\sqrt{F_x^2 + F_y^2 + F_z^2}}{|F_z|} \, dxdy\)；
+			\item 若曲面由参数方程 \(x = x(u, v), y = y(u, v), z = z(u, v)\)，\((u, v) \in D\)，则 \(S = \iint_D \sqrt{EG - F^2} \, dudv\)，其中 \(E = x_u^2 + y_u^2 + z_u^2\)，\(F = x_u x_v + y_u y_v + z_u z_v\)，\(G = x_v^2 + y_v^2 + z_v^2\)；
+			\item 平面曲线 \(y = f(x)\)（\(a \leq x \leq b\)）绕 \(x\) 轴旋转的曲面面积：\(S = \int_a^b 2\pi f(x) \sqrt{1 + (f'(x))^2} \, dx\)。
+		\end{enumerate}
+		
+		\item 平面薄片的质心：
+		\[
+		\overline{x} = \frac{M_y}{M} = \frac{\iint_D x \mu(x, y) \, d\sigma}{\iint_D \mu(x, y) \, d\sigma}, \quad \overline{y} = \frac{M_x}{M} = \frac{\iint_D y \mu(x, y) \, d\sigma}{\iint_D \mu(x, y) \, d\sigma},
+		\]
+		其中 \(M\) 为薄片质量。
+		
+		\item 空间物体的质心：
+		\[
+		\overline{x} = \frac{M_{yz}}{M}, \quad \overline{y} = \frac{M_{xz}}{M}, \quad \overline{z} = \frac{M_{xy}}{M},
+		\]
+		其中 \(M = \iiint_{\Omega} \rho(x, y, z) \, dV\)，\(M_{yz} = \iiint_{\Omega} x \rho \, dV\)，\(M_{xz} = \iiint_{\Omega} y \rho \, dV\)，\(M_{xy} = \iiint_{\Omega} z \rho \, dV\)。
+		
+		\item 平面薄片的转动惯量：
+		\[
+		I_x = \iint_D y^2 \mu(x, y) \, d\sigma, \quad I_y = \iint_D x^2 \mu \, d\sigma, \quad I_0 = \iint_D (x^2 + y^2) \mu \, d\sigma.
+		\]
+		
+		\item 空间物体的转动惯量：
+		\[
+		I_x = \iiint_{\Omega} (y^2 + z^2) \rho \, dV, \quad I_y = \iiint_{\Omega} (x^2 + z^2) \rho \, dV, \quad I_z = \iiint_{\Omega} (x^2 + y^2) \rho \, dV, \quad I_0 = \iiint_{\Omega} (x^2 + y^2 + z^2) \rho \, dV.
+		\]
+		
+		\item 空间物体对质点的引力：设物体 \(\Omega\) 密度为 \(\rho(x, y, z)\)，质点质量为 \(m\) 位于 \((a, b, c)\)，则引力分量为：
+		\[
+		F_x = \iiint_{\Omega} K m \rho \frac{x - a}{r^3} \, dV, \quad F_y = \iiint_{\Omega} K m \rho \frac{y - b}{r^3} \, dV, \quad F_z = \iiint_{\Omega} K m \rho \frac{z - c}{r^3} \, dV,
+		\]
+		其中 \(r = \sqrt{(x - a)^2 + (y - b)^2 + (z - c)^2}\)，\(K\) 为引力常数。
+	\end{enumerate}
+	\section{曲线积分与曲面积分}
+	\subsection*{知识点}
+		\begin{enumerate}
+			\item 对弧长曲线积分的定义：
+			\begin{enumerate}
+				\item 平面曲线：\(\int_{L} f(x, y) ds = \lim_{\lambda \to 0} \sum_{k=1}^{n} f(\xi_k, \eta_k) \Delta s_k\)；
+				\item 空间曲线：\(\int_{L} f(x, y, z) ds = \lim_{\lambda \to 0} \sum_{k=1}^{n} f(\xi_k, \eta_k, \zeta_k) \Delta s_k\)。
+			\end{enumerate}
+			\item 对弧长曲线积分的物理意义：空间非均匀曲线形构件的质量 \(M = \int_{L} \mu(x, y, z) ds\)。
+			\item 对弧长曲线积分的几何意义：\(A = \int_{L} |f(x, y)| ds\) 表示以 \(L\) 为准线、母线平行于 \(z\) 轴、高为 \(z = |f(x, y)|\) 的柱面侧面积。
+			\item 弧长计算公式：若曲线 \(L: x = x(t), y = y(t) \ (a \leq t \leq b)\)，则弧长 \(s = \int_{L} ds = \int_{a}^{b} \sqrt{x'^2(t) + y'^2(t)} dt\)。
+			\item 对弧长曲线积分存在的充分条件：当 \(f(x, y, z)\) 在光滑曲线 \(L\) 上连续时，积分 \(\int_{L} f(x, y, z) ds\) 存在。
+			\item 对弧长曲线积分的方向无关性：\(\int_{\widehat{AB}} f(x, y, z) ds = \int_{\widehat{BA}} f(x, y, z) ds\)。
+			\item 对弧长曲线积分的性质：
+			\begin{enumerate}
+				\item 线性性：\(\int_{L}[\alpha f(x, y, z) + \beta g(x, y, z)] ds = \alpha \int_{L} f ds + \beta \int_{L} g ds\)；
+				\item 区域可加性：若 \(L = L_1 \cup L_2\)，则 \(\int_{L} f ds = \int_{L_1} f ds + \int_{L_2} f ds\)。
+			\end{enumerate}
+			\item 对弧长曲线积分的计算（“三代一定”法）：
+			\begin{enumerate}
+				\item 平面参数方程：\(L: x = x(t), y = y(t) \ (\alpha \leq t \leq \beta)\)，则 \(\int_{L} f(x, y) ds = \int_{\alpha}^{\beta} f(x(t), y(t)) \sqrt{x'^2(t) + y'^2(t)} dt\)；
+				\item 直角坐标方程：\(L: y = y(x) \ (a \leq x \leq b)\)，则 \(\int_{L} f(x, y) ds = \int_{a}^{b} f(x, y(x)) \sqrt{1 + y'^2(x)} dx\)；
+				\item 极坐标方程：\(L: r = r(\theta) \ (\alpha \leq \theta \leq \beta)\)，则 \(\int_{L} f(x, y) ds = \int_{\alpha}^{\beta} f(r(\theta)\cos\theta, r(\theta)\sin\theta) \sqrt{r^2(\theta) + r'^2(\theta)} d\theta\)；
+				\item 空间参数方程：\(\Gamma: x = x(t), y = y(t), z = z(t) \ (\alpha \leq t \leq \beta)\)，\\则 \(\int_{\Gamma} f(x, y, z) ds = \int_{\alpha}^{\beta} f(x(t), y(t), z(t)) \sqrt{x'^2(t) + y'^2(t) + z'^2(t)} dt\)。
+			\end{enumerate}
+			\item 对弧长曲线积分的对称性：若曲线 \(L\) 关于 \(x\) 轴对称，\(L_1\) 为 \(L\) 位于 \(x\) 轴上方部分：
+			\begin{enumerate}
+				\item 若 \(f(x, -y) = f(x, y)\)，则 \(\int_{L} f ds = 2\int_{L_1} f ds\)；
+				\item 若 \(f(x, -y) = -f(x, y)\)，则 \(\int_{L} f ds = 0\)。
+			\end{enumerate}
+			\item 对坐标曲线积分的定义：
+			\begin{enumerate}
+				\item \(\int_{L} P(x, y) dx = \lim_{\lambda \to 0} \sum_{k=1}^{n} P(\xi_k, \eta_k) \Delta x_k\)；
+				\item \(\int_{L} Q(x, y) dy = \lim_{\lambda \to 0} \sum_{k=1}^{n} Q(\xi_k, \eta_k) \Delta y_k\)；
+				\item 组合形式：\(\int_{L} P dx + Q dy = \int_{L} P dx + \int_{L} Q dy\)。
+			\end{enumerate}
+			\item 对坐标曲线积分的物理模型：
+			\begin{enumerate}
+				\item 变力沿曲线做功：\(W = \int_{L} \vec{F}(x, y) \cdot d\vec{r} = \int_{L} P dx + Q dy\)；
+				\item 环流量：\(\Gamma = \oint_{L} P dx + Q dy\)。
+			\end{enumerate}
+			\item 对坐标曲线积分的性质：
+			\begin{enumerate}
+				\item 方向相反性：\(\int_{L} P dx + Q dy = -\int_{L^-} P dx + Q dy\)（\(L^-\) 为 \(L\) 的反向曲线）；
+				\item 区域可加性：若 \(L = L_1 \cup L_2 \cup \cdots \cup L_n\)，则 \(\int_{L} P dx + Q dy = \sum_{k=1}^{n} \int_{L_k} P dx + Q dy\)。
+			\end{enumerate}
+			\item 对坐标曲线积分的计算（“二代一定”法）：
+			\begin{enumerate}
+				\item 参数方程：\(L: x = \varphi(t), y = \psi(t)\)，起点对应 \(t = \alpha\)，终点对应 \(t = \beta\)，则 \(\int_{L} P dx + Q dy = \int_{\alpha}^{\beta} [P(\varphi(t), \psi(t))\varphi'(t) + Q(\varphi(t), \psi(t))\psi'(t)] dt\)；
+				\item 直角坐标方程（\(y = \psi(x)\)）：起点 \(x = a\)，终点 \(x = b\)，则 \(\int_{L} P dx + Q dy = \int_{a}^{b} [P(x, \psi(x)) + Q(x, \psi(x))\psi'(x)] dx\)；
+				\item 直角坐标方程（\(x = \varphi(y)\)）：起点 \(y = c\)，终点 \(y = d\)，则 \(\int_{L} P dx + Q dy = \int_{c}^{d} [P(\varphi(y), y)\varphi'(y) + Q(\varphi(y), y)] dy\)。
+			\end{enumerate}
+		\item 空间曲线坐标积分计算：若空间曲线 \(\Gamma: x = \varphi(t), y = \psi(t), z = \omega(t)\)，起点对应 \(t = \alpha\)，终点对应 \(t = \beta\)，则
+		\[
+		\begin{aligned}
+			&\int_{\Gamma} P(x, y, z)dx + Q(x, y, z)dy + R(x, y, z)dz \\
+			=& \int_{\alpha}^{\beta} \left[P(\varphi(t), \psi(t), \omega(t))\varphi'(t) + Q(\varphi(t), \psi(t), \omega(t))\psi'(t) + R(\varphi(t), \psi(t), \omega(t))\omega'(t)\right]dt
+		\end{aligned}
+		\]
+		
+		\item 两类曲线积分的关系：
+		\begin{enumerate}
+			\item \(\int_{L} Pdx + Qdy = \int_{L} (P\cos\alpha + Q\cos\beta)ds\)，其中 \(\cos\alpha, \cos\beta\) 为曲线切向量的方向余弦，或表示为向量形式 \(\int_{L} \vec{A} \cdot d\vec{r} = \int_{\Gamma} \vec{A} \cdot \vec{T}ds\)；
+			\item 格林公式（平面闭曲线情形）：若 \(L\) 为闭曲线，围成区域 \(D\)，则 \(\oint_{L} Pdx + Qdy = \iint_{D} \left(\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}\right)dxdy\)，也可表示为 \(\oint_{L} \vec{A} \cdot \vec{T}ds = \iint_{D} (\text{rot}\vec{A} \cdot \vec{n})dxdy\)；
+			\item 散度与环流量关系：\(\oint_{L} -Qdx + Pdy = \iint_{D} \left(\frac{\partial P}{\partial x} + \frac{\partial Q}{\partial y}\right)dxdy\)，或 \(\oint_{L} (\vec{A} \cdot \vec{n})ds = \iint_{D} \text{div}\vec{A}dxdy\)。
+		\end{enumerate}
+		
+		\item 格林公式的推广应用：
+		\begin{enumerate}
+			\item 含奇点情形：若 \(D\) 内存在奇点 \(M_0(x_0, y_0)\)，\(L\) 为包围 \(M_0\) 的闭曲线，\(\ell\) 为包围 \(M_0\) 的小闭曲线，则 \(\oint_{L} Pdx + Qdy = \iint_{D'} \left(\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}\right)dxdy + \oint_{\ell} Pdx + Qdy\)，当 \(\frac{\partial Q}{\partial x} = \frac{\partial P}{\partial y}\) 时，\(\oint_{L} Pdx + Qdy = \oint_{\ell} Pdx + Qdy\)；
+			\item 非闭曲线补全法：若 \(L\) 为非闭曲线，可补辅助曲线 \(\ell\) 形成闭区域 \(D\)，则 \(\int_{L} Pdx + Qdy = \iint_{D} \left(\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}\right)dxdy - \int_{\ell} Pdx + Qdy\)。
+		\end{enumerate}
+		
+		\item 积分与路径无关的条件：设 \(P(x, y), Q(x, y)\) 在单连通区域 \(D\) 内有一阶连续导数，以下命题等价：
+		\begin{enumerate}
+			\item 曲线积分 \(\int_{L} Pdx + Qdy\) 在 \(D\) 内与路径无关，仅与起止点有关；
+			\item \(D\) 内沿任意闭曲线的积分值为零；
+			\item 在 \(D\) 内恒有 \(\frac{\partial P}{\partial y} = \frac{\partial Q}{\partial x}\)；
+			\item \(Pdx + Qdy\) 是 \(D\) 内某函数 \(u(x, y)\) 的全微分。
+		\end{enumerate}
+		
+		\item 原函数相关概念：
+		\begin{enumerate}
+			\item 若 \(du(x, y) = Pdx + Qdy\)，则 \(u(x, y)\) 称为 \(Pdx + Qdy\) 的原函数（或 \(\vec{F}=(P, Q)\) 的势函数）；
+			\item 原函数计算方法：凑微分法、不定积分法、曲线积分法（如取固定起点计算变限积分）。
+		\end{enumerate}
+		
+		\item 对面积的曲面积分（第一类曲面积分）：
+		\begin{enumerate}
+			\item 定义：\(\iint_{\sum} f(x, y, z)dS = \lim_{\lambda \to 0} \sum_{i=1}^{n} f(\xi_i, \eta_i, \zeta_i)\Delta S_i\)；
+			\item 物理意义：曲面 \(\sum\) 的质量 \(M = \iint_{\sum} \rho(x, y, z)dS\)；
+			\item 几何意义：曲面 \(\sum\) 的面积 \(S = \iint_{\sum} dS\)；
+			\item 性质：
+			\begin{enumerate}
+				\item 区域可加性：若 \(\sum = \sum_1 \cup \sum_2\)，则 \(\iint_{\sum} f dS = \iint_{\sum_1} f dS + \iint_{\sum_2} f dS\)；
+				\item 线性性：\(\iint_{\sum} (\alpha f + \beta g)dS = \alpha\iint_{\sum} f dS + \beta\iint_{\sum} g dS\)；
+			\end{enumerate}
+			\item 对称性：若 \(\sum\) 关于 \(xOy\) 面对称，\(\sum_1\) 为 \(\sum\) 在 \(xOy\) 面上方部分：
+			\begin{enumerate}
+				\item 若 \(f(x, y, -z) = -f(x, y, z)\)，则 \(\iint_{\sum} f dS = 0\)；
+				\item 若 \(f(x, y, -z) = f(x, y, z)\)，则 \(\iint_{\sum} f dS = 2\iint_{\sum_1} f dS\)；
+			\end{enumerate}
+			\item 计算方法（一投二代三换）：
+			\begin{enumerate}
+				\item 显式方程：\(\sum: z = z(x, y)\)，\((x, y) \in D_{xy}\)，则 \(\iint_{\sum} f dS = \iint_{D_{xy}} f(x, y, z(x, y))\sqrt{1 + z_x'^2 + z_y'^2}dxdy\)；
+				\item 隐式方程：\(\sum\) 由 \(F(x, y, z) = 0\) 确定，\((x, y) \in D_{xy}\) 且 \(F_z \neq 0\)，则\\ \(\iint_{\sum} f dS = \iint_{D_{xy}} f(x, y, z(x, y))\frac{\sqrt{F_x'^2 + F_y'^2 + F_z'^2}}{|F_z'|}dxdy\)；
+				\item 参数方程：\(\sum: x = x(u, v), y = y(u, v), z = z(u, v)\)，\((u, v) \in D_{uv}\)，则\\ \(\iint_{\sum} f dS = \iint_{D_{uv}} f(x(u, v), y(u, v), z(u, v))\sqrt{EG - F^2}dudv\)，其中\\ \(E = x_u'^2 + y_u'^2 + z_u'^2\)，\(F = x_u'x_v' + y_u'y_v' + z_u'z_v'\)，\(G = x_v'^2 + y_v'^2 + z_v'^2\)；
+			\end{enumerate}
+		\end{enumerate}
+		\item 对面积曲面积分计算（续）：
+		\begin{enumerate}
+			\item 球面坐标参数方程：若 \(\sum: x = R\sin\varphi\cos\theta, y = R\sin\varphi\sin\theta, z = R\cos\varphi\)，则 
+			\[
+			\iint_{\sum} f(x, y, z)dS = \iint_{D_{\varphi\theta}} f(R\sin\varphi\cos\theta, R\sin\varphi\sin\theta, R\cos\varphi)R^2\sin\varphi d\varphi d\theta
+			\]
+			\item 柱面坐标参数方程：若 \(\sum: x = R\cos\theta, y = R\sin\theta, z = z\)，则 
+			\[
+			\iint_{\sum} f(x, y, z)dS = \iint_{D_{z\theta}} f(R\cos\theta, R\sin\theta, z)R d\theta dz
+			\]
+		\end{enumerate}
+		
+		\item 有向曲面投影：有向曲面 \(\Delta S\) 在 \(xOy\) 面的投影为 
+		\[
+		(\Delta S)_{xy} = \Delta S \cdot \cos\gamma = 
+		\begin{cases} 
+			(\Delta\sigma)_{xy}, & \cos\gamma > 0, \\
+			-(\Delta\sigma)_{xy}, & \cos\gamma < 0, \\
+			0, & \cos\gamma = 0 
+		\end{cases}
+		\]
+		类似定义在 \(yOz\) 和 \(zOx\) 面的投影 \( (\Delta S)_{yz}, (\Delta S)_{zx} \)。
+		
+		\item 对坐标曲面积分（第二类曲面积分）定义：
+		\begin{enumerate}
+			\item \(\iint_{\sum} P(x, y, z)dydz = \lim_{\lambda\to0} \sum_{k=1}^n P(\xi_k, \eta_k, \zeta_k)(\Delta S_k)_{yz}\)
+			\item \(\iint_{\sum} Q(x, y, z)dzdx = \lim_{\lambda\to0} \sum_{k=1}^n Q(\xi_k, \eta_k, \zeta_k)(\Delta S_k)_{zx}\)
+			\item \(\iint_{\sum} R(x, y, z)dxdy = \lim_{\lambda\to0} \sum_{k=1}^n R(\xi_k, \eta_k, \zeta_k)(\Delta S_k)_{xy}\)
+			\item 向量形式：\(\iint_{\sum} \vec{v}\cdot d\vec{S} = \iint_{\sum} P dydz + Q dzdx + R dxdy = \lim_{\lambda\to0} \sum_{k=1}^n \vec{v}(\xi_k, \eta_k, \zeta_k)\cdot\Delta\vec{S}_k\)
+		\end{enumerate}
+		
+		\item 对坐标曲面积分的物理模型：
+		\begin{enumerate}
+			\item 单位时间流体流向曲面指定侧的流量：\(\Phi = \iint_{\sum} P dydz + Q dzdx + R dxdy\)
+			\item 通过曲面的电通量、磁通量等场量：\(N = \iint_{\sum} \vec{v}\cdot d\vec{S}\)
+		\end{enumerate}
+		
+		\item 对坐标曲面积分的性质：
+		\begin{enumerate}
+			\item 区域可加性：若 \(\sum = \sum_1 \cup \sum_2\)，则 
+			\[
+			\iint_{\sum} \cdots = \iint_{\sum_1} \cdots + \iint_{\sum_2} \cdots
+			\]
+			\item 方向相反性：\(\iint_{\sum^-} \cdots = -\iint_{\sum} \cdots\)（\(\sum^-\) 为 \(\sum\) 的反向曲面）
+		\end{enumerate}
+		
+		\item 对坐标曲面积分的对称性：若 \(\sum\) 关于 \(xOy\) 面对称，\(\sum_1\) 为上半部分：
+		\begin{enumerate}
+			\item 若 \(R(x, y, -z) = R(x, y, z)\)，则 \(\iint_{\sum} R dxdy = 0\)
+			\item 若 \(R(x, y, -z) = -R(x, y, z)\)，则 \(\iint_{\sum} R dxdy = 2\iint_{\sum_1} R dxdy\)
+		\end{enumerate}
+		
+		\item 对坐标曲面积分的计算（“一投二代三定”法）：
+		\begin{enumerate}
+			\item \(P dydz\) 计算：\(\sum: x = x(y, z)\)，\((y, z)\in D_{yz}\)，前侧（\(x'_y, x'_z\) 对应法向量前向）取正，后侧取负：
+			\[
+			\iint_{\sum} P dydz = \pm\iint_{D_{yz}} P(x(y, z), y, z) dydz
+			\]
+			\item \(Q dzdx\) 计算：\(\sum: y = y(x, z)\)，\((x, z)\in D_{xz}\)，右侧取正，左侧取负：
+			\[
+			\iint_{\sum} Q dzdx = \pm\iint_{D_{xz}} Q(x, y(x, z), z) dzdx
+			\]
+			\item \(R dxdy\) 计算：\(\sum: z = z(x, y)\)，\((x, y)\in D_{xy}\)，上侧取正，下侧取负：
+			\[
+			\iint_{\sum} R dxdy = \pm\iint_{D_{xy}} R(x, y, z(x, y)) dxdy
+			\]
+			\item 参数方程法：若 \(\sum: x=x(u,v),y=y(u,v),z=z(u,v)\)，雅可比行列式 \(A=\frac{\partial(y,z)}{\partial(u,v)}, B=\frac{\partial(z,x)}{\partial(u,v)}, C=\frac{\partial(x,y)}{\partial(u,v)}\)，则 
+			\[
+			\iint_{\sum} \cdots = \pm\iint_{D_{uv}} (PA + QB + RC) dudv
+			\]
+			其中符号由 \((A,B,C)\) 与曲面法向量夹角决定（锐角取正，钝角取负）。
+		\end{enumerate}
+		
+		\item 两类曲面积分的关系：设曲面法向量方向余弦为 \(\cos\alpha,\cos\beta,\cos\gamma\)，则 
+		\begin{enumerate}
+			\item \(\iint_{\sum} P dydz + Q dzdx + R dxdy = \iint_{\sum} (P\cos\alpha + Q\cos\beta + R\cos\gamma) dS\)
+			\item 向量形式：\(\iint_{\sum} \vec{v}\cdot d\vec{S} = \iint_{\sum} \vec{v}\cdot\vec{n} dS = \iint_{\sum} v_n dS\)（\(v_n\) 为 \(\vec{v}\) 在法向量方向的分量）
+		\end{enumerate}
+		
+		\item Gauss 公式（高斯公式）：设空间闭区域 \(\Omega\) 由分片光滑闭曲面 \(\sum\) 围成，\(\sum\) 取外侧，\(P,Q,R\) 在 \(\Omega\) 上有一阶连续偏导数，则 
+		\[
+		\oiint_{\sum} P dydz + Q dzdx + R dxdy = \oiint_{\sum} (\vec{A}\cdot\vec{n}) dS = \iiint_{\Omega} \left(\frac{\partial P}{\partial x} + \frac{\partial Q}{\partial y} + \frac{\partial R}{\partial z}\right) dV
+		\]
+		其中 \(\vec{A}=(P,Q,R)\)，\(\text{div}\vec{A} = \frac{\partial P}{\partial x} + \frac{\partial Q}{\partial y} + \frac{\partial R}{\partial z}\) 为散度，公式表明闭曲面积分与区域内散度的体积分等价。
+	
+	\item Gauss公式简化曲面积分的计算：
+	\begin{enumerate}
+		\item 有向曲面Σ为闭曲面：
+		\begin{enumerate}
+			\item 若函数 \(P, Q, R\) 在Σ所围区域Ω上有一阶连续偏导数，且 \(\frac{\partial P}{\partial x} + \frac{\partial Q}{\partial y} + \frac{\partial R}{\partial z}\) 较简单，则：
+			\[
+			\oint_{\sum} P dydz + Q dzdx + R dxdy = \iiint_{\Omega} \left(\frac{\partial P}{\partial x} + \frac{\partial Q}{\partial y} + \frac{\partial R}{\partial z}\right) dV
+			\]
+			\item 若Ω内存在奇点 \(M_0(x_0, y_0, z_0)\)，以 \(M_0\) 为中心作闭曲面 \(\sum_1\)（Σ和 \(\sum_1\) 取外侧，围成区域 \(\Omega'\)），则：
+			\[
+			\oint_{\sum} P dydz + Q dzdx + R dxdy = \iiint_{\Omega'} \left(\frac{\partial P}{\partial x} + \frac{\partial Q}{\partial y} + \frac{\partial R}{\partial z}\right) dV + \oint_{\sum_1} P dydz + Q dzdx + R dxdy
+			\]
+			当 \(\frac{\partial P}{\partial x} + \frac{\partial Q}{\partial y} + \frac{\partial R}{\partial z} \equiv 0\) 时，\(\oint_{\sum} \cdots = \oint_{\sum_1} \cdots\)。
+		\end{enumerate}
+		\item 有向曲面Σ为非闭曲面：
+		\begin{enumerate}
+			\item 若 \(\frac{\partial P}{\partial x} + \frac{\partial Q}{\partial y} + \frac{\partial R}{\partial z} \equiv 0\)，补辅助曲面 \(\sum_1^-\) 与Σ构成闭曲面外侧，则：
+			\[
+			\iint_{\sum} P dydz + Q dzdx + R dxdy = \iint_{\sum_1} P dydz + Q dzdx + R dxdy
+			\]
+			\item 若 \(\frac{\partial P}{\partial x} + \frac{\partial Q}{\partial y} + \frac{\partial R}{\partial z}\) 较简单，补辅助曲面 \(\sum_1^-\) 构成闭曲面外侧，则：
+			\[
+			\iint_{\sum} \cdots = \iiint_{\Omega'} \left(\frac{\partial P}{\partial x} + \frac{\partial Q}{\partial y} + \frac{\partial R}{\partial z}\right) dV + \iint_{\sum_1} \cdots
+			\]
+		\end{enumerate}
+	\end{enumerate}
+	
+	\item Stokes定理（斯托克斯公式）：设Γ为空间有向闭曲线，Σ是由Γ张成的有向曲面（法向与Γ满足右手法则），\(P, Q, R\) 在含Σ的区域Ω内有一阶连续偏导数，则：
+	\[
+	\iint_{\sum} \left(\frac{\partial R}{\partial y} - \frac{\partial Q}{\partial z}\right) dydz + \left(\frac{\partial P}{\partial z} - \frac{\partial R}{\partial x}\right) dzdx + \left(\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}\right) dxdy = \oint_{\Gamma} P dx + Q dy + R dz
+	\]
+	向量形式：\(\oint_{\Gamma} \vec{A} \cdot \vec{T} ds = \iint_{\sum} (\text{rot}\vec{A} \cdot \vec{n}) dS\)，行列式记忆形式：
+	\[
+	\iint_{\sum} \begin{vmatrix} 
+		dydz & dzdx & dxdy \\
+		\frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
+		P & Q & R 
+	\end{vmatrix} = \iint_{\sum} \begin{vmatrix} 
+		\cos\alpha & \cos\beta & \cos\gamma \\
+		\frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
+		P & Q & R 
+	\end{vmatrix} dS = \oint_{\Gamma} P dx + Q dy + R dz
+	\]
+	
+	\item Stokes公式简化曲线积分的计算：
+	\begin{enumerate}
+		\item 若Γ为平面与曲面的交线，可将曲线积分化为以Γ为边界的平面区域Σ上的曲面积分；
+		\item 当 \(\frac{\partial R}{\partial y} - \frac{\partial Q}{\partial z}\)、\(\frac{\partial P}{\partial z} - \frac{\partial R}{\partial x}\)、\(\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}\) 较简单时，直接应用公式转化积分。
+	\end{enumerate}
+	
+	\item 空间曲线积分与路径无关的条件：设 \(P, Q, R\) 在单连通区域 \(G \subset \Omega\) 内有一阶连续偏导数，以下命题等价：
+	\begin{enumerate}
+		\item 曲线积分 \(\int_{L} P dx + Q dy + R dz\) 在 \(G\) 内与路径无关，仅与起止点有关；
+		\item \(G\) 内沿任意闭曲线的积分值为零；
+		\item 在 \(G\) 内恒有：
+		\[
+		\frac{\partial P}{\partial y} = \frac{\partial Q}{\partial x}, \quad \frac{\partial Q}{\partial z} = \frac{\partial R}{\partial y}, \quad \frac{\partial R}{\partial x} = \frac{\partial P}{\partial z}
+		\]
+		\item 在 \(G\) 内存在原函数 \(u(x, y, z)\) 满足 \(du = P dx + Q dy + R dz\)，且原函数可表示为：
+		\[
+		u(x, y, z) = \int_{(x_0, y_0, z_0)}^{(x, y, z)} P dx + Q dy + R dz = \int_{x_0}^{x} P(x, y_0, z_0) dx + \int_{y_0}^{y} Q(x, y, z_0) dy + \int_{z_0}^{z} R(x, y, z) dz
+		\]
+	\end{enumerate}
+\end{enumerate}
+\section{积分中值定理}
+\subsection*{知识点}
+\begin{enumerate}
+	\item 定积分中值定理：
+	\begin{enumerate}
+		\item 若 \(f(x)\) 在 \([a, b]\) 上可积且 \(m \leq f(x) \leq M\)，则存在 \(\eta \in [m, M]\)，使得 \(\int_{a}^{b} f(x) dx = \eta(b - a)\)；
+		\item 若 \(f(x)\) 在 \([a, b]\) 上连续，则存在 \(\xi \in [a, b]\)，使得 \(\int_{a}^{b} f(x) dx = f(\xi)(b - a)\)。
+	\end{enumerate}
+	\item 积分第一中值定理：
+	\begin{enumerate}
+		\item 若 \(f(x)\) 在 \([a, b]\) 上可积（\(m \leq f(x) \leq M\)），\(g(x)\) 可积且不变号，则存在 \(\eta \in [m, M]\)，使得 \(\int_{a}^{b} f(x)g(x) dx = \eta \int_{a}^{b} g(x) dx\)；
+		\item 若 \(f(x)\) 在 \([a, b]\) 上连续，\(g(x)\) 可积且不变号，则存在 \(\xi \in [a, b]\)，使得 \(\int_{a}^{b} f(x)g(x) dx = f(\xi) \int_{a}^{b} g(x) dx\)。
+	\end{enumerate}
+	\item 积分第二中值定理：
+	\begin{enumerate}
+		\item 若 \(f(x)\) 在 \([a, b]\) 上单调，\(g(x)\) 可积，则存在 \(\xi \in [a, b]\)，使得 \(\int_{a}^{b} f(x)g(x) dx = f(a)\int_{a}^{\xi} g(x) dx + f(b)\int_{\xi}^{b} g(x) dx\)；
+		\item 若 \(f(x)\) 单调递减且非负，\(g(x)\) 可积，则存在 \(\xi \in [a, b]\)，使得 \(\int_{a}^{b} f(x)g(x) dx = f(a)\int_{a}^{\xi} g(x) dx\)；
+		\item 若 \(f(x)\) 单调递增且非负，\(g(x)\) 可积，则存在 \(\xi \in [a, b]\)，使得 \(\int_{a}^{b} f(x)g(x) dx = f(b)\int_{\xi}^{b} g(x) dx\)。
+	\end{enumerate}
+	\item 二重积分中值定理：若 \(f(x, y)\) 在平面闭区域 \(D\) 上连续，\(\sigma\) 为 \(D\) 的面积，则存在 \((\xi, \eta) \in D\)，使得 \(\iint_{D} f(x, y) dxdy = f(\xi, \eta)\sigma\)。
+	\item 三重积分中值定理：若 \(f(x, y, z)\) 在空间闭区域 \(\Omega\) 上连续，\(V\) 为 \(\Omega\) 的体积，则存在 \((\xi, \eta, \zeta) \in \Omega\)，使得 \(\iiint_{\Omega} f(x, y, z) dxdydz = f(\xi, \eta, \zeta)V\)。
+	\item 第一型曲线积分中值定理：若 \(f(x, y, z)\) 在光滑有界曲线 \(\Gamma\) 上连续，\(L\) 为 \(\Gamma\) 的长度，则存在 \((\xi, \eta, \zeta) \in \Gamma\)，使得 \(\int_{\Gamma} f(x, y, z) ds = f(\xi, \eta, \zeta)L\)。
+	\item 第一型曲面积分中值定理：若 \(f(x, y, z)\) 在光滑有界闭曲面 \(\sum\) 上连续，\(A\) 为 \(\sum\) 的面积，则存在 \((\xi, \eta, \zeta) \in \sum\)，使得 \(\iint_{\sum} f(x, y, z) dS = f(\xi, \eta, \zeta)A\)。
+\end{enumerate}
+\section{*积分不等式}
+\subsection*{知识点}
+\begin{enumerate}
+	\item \textbf{Cauchy-Schwarz 等式}：设 \(f(x)\)，\(g(x)\) 在 \([a,b]\) 上可积，则
+	\[
+	\left(\int_{a}^{b} f(x) g(x) d x\right)^{2} \leq \int_{a}^{b} f^{2}(x) d x \int_{a}^{b} g^{2}(x) d x \quad \text{}
+	\]
+	
+	\item \textbf{Hadamard 不等式}：设 \(f(x)\) 在 \([a, b]\) 上连续，且对任意的 \(t \in[0,1]\) 及任意 \(x_{1}\)，\(x_{2} \in[a, b]\)，满足 \(f(t x_{1}+(1-t) x_{2}) \leq t f(x_{1})+(1-t) f(x_{2})\)，则
+	\[
+	f\left(\frac{x_{1}+x_{2}}{2}\right) \leq \frac{1}{x_{2}-x_{1}} \int_{x_{1}}^{x_{2}} f(x) d x \leq \frac{1}{2}\left(f\left(x_{1}\right)+f\left(x_{2}\right)\right) \quad \text{}
+	\]
+	
+	\item \textbf{Chebyshev 不等式}：设 \(p(x)\)，\(f(x)\)，\(g(x)\) 在 \([a, b]\) 上可积，且 \(p(x)>0\)，而 \(f(x)\) 与 \(g(x)\) 在 \([a, b]\) 上具有相同的单调性，则
+	\[
+	\int_{a}^{b} p(x) f(x) d x \int_{a}^{b} p(x) g(x) d x \leq \int_{a}^{b} p(x) d x \int_{a}^{b} p(x) f(x) g(x) d x \quad \text{}
+	\]
+	
+	\item \textbf{Kantorovich 不等式}：设 \(f(x)\) 是 \([a, b]\) 上的正连续函数，\(M\) 和 \(m\) 为 \(f(x)\) 在 \([a, b]\) 上的最大值和最小值，则
+	\[
+	(b-a)^{2} \leq \int_{a}^{b} \frac{d x}{f(x)} \int_{a}^{b} f(x) d x \leq \frac{(m+M)^{2}}{4 m M}(b-a)^{2} \quad \text{}
+	\]
+	
+	\item \textbf{Young 不等式}：设 \(a\)，\(b>0\)，函数 \(f(x)\) 在 \([0,+\infty)\) 上连续且单调递增，\(f(0)=0\)，\(f^{-1}(x)\) 为 \(f(x)\) 的反函数，则
+	\[
+	a b \leq \int_{0}^{a} f(x) d x+\int_{0}^{b} f^{-1}(y) d y
+	\]
+	其中等号当且仅当 \(f(a)=b\) 时成立 \(\quad \text{}\)。
+	
+	\item \textbf{Hölder 不等式}：设 \(f(x)\)，\(g(x)\) 在 \([a, b]\) 上可积，\(p>1\)，\(q>1\) 且 \(\frac{1}{p}+\frac{1}{q}=1\)，则
+	\[
+	\int_{a}^{b}|f(t) g(t)| d t \leq\left(\int_{a}^{b}|f(t)|^{p} d t\right)^{\frac{1}{p}}\left(\int_{a}^{b}|g(t)|^{q} d t\right)^{\frac{1}{q}} \quad \text{}
+	\]
+	
+	\item \textbf{Minkowski 不等式}：设 \(f(x)\)，\(g(x)\) 在 \([a, b]\) 上可积，\(p \geq 1\)，则
+	\[
+	\left(\int_{a}^{b}|f(t)+g(t)|^{p} d t\right)^{\frac{1}{p}} \leq\left(\int_{a}^{b}|f(t)|^{p} d t\right)^{\frac{1}{p}}+\left(\int_{a}^{b}|g(t)|^{p} d t\right)^{\frac{1}{p}} \quad \text{}
+	\]
+\end{enumerate}
+
+\section{含参积分和积分的极限}
+\subsection*{知识点}
+\begin{enumerate}
+	\item \textbf{含参变量积分的定义}：
+	\begin{enumerate}
+		\item 设函数 \(f(x, y)\) 在矩形区域 \(D = \{(x, y) | a \leq x \leq b, \alpha \leq y \leq \beta\}\) 上连续，则 \(\varphi(x) = \int_{\alpha}^{\beta} f(x, y) d y\)（\(a \leq x \leq b\)）称为含参变量 \(x\) 的积分 \(\quad \text{}\)。
+		\item 积分 \(\Phi(x) = \int_{\alpha(x)}^{\beta(x)} f(x, y) d y\)（\(a \leq x \leq b\)）也称为含参变量 \(x\) 的积分，其中 \(\alpha(x)\)，\(\beta(x)\) 为定义在 \([a, b]\) 上的函数 \(\quad \text{}\)。
+	\end{enumerate}
+	
+	\item \textbf{连续性定理}：
+	\begin{enumerate}
+		\item 若 \(f(x, y)\) 在矩形区域 \(D = \{(x, y) | a \leq x \leq b, \alpha \leq y \leq \beta\}\) 上连续，则 \(\varphi(x) = \int_{\alpha}^{\beta} f(x, y) d y\) 在 \([a, b]\) 上连续 \(\quad \text{}\)。
+		\item 若 \(f(x, y)\) 在 \(D\) 上连续，\(\alpha(x)\)，\(\beta(x)\) 在 \([a, b]\) 上连续，且 \(\alpha \leq \alpha(x) \leq \beta\)，\(\alpha \leq \beta(x) \leq \beta\)，则 \(\Phi(x) = \int_{\alpha(x)}^{\beta(x)} f(x, y) d y\) 在 \([a, b]\) 上连续 \(\quad \text{}\)。
+	\end{enumerate}
+	
+	\item \textbf{极限与积分交换定理}：若 \(f(x, y)\) 在矩形区域 \(D\) 上连续，则对任意 \(x_{0} \in [a, b]\)，有
+	\[
+	\lim _{x \to x_{0}} \int_{\alpha}^{\beta} f(x, y) d y = \int_{\alpha}^{\beta} \lim _{x \to x_{0}} f(x, y) d y \quad \text{}
+	\]
+	
+	\item \textbf{微分定理}：
+	\begin{enumerate}
+		\item 若 \(f(x, y)\) 及其偏导函数 \(f_{x}(x, y)\) 在 \(D\) 上连续，则 \(\varphi(x)\) 在 \([a, b]\) 上可微，且
+		\[
+		\varphi'(x) = \int_{\alpha}^{\beta} \frac{\partial f(x, y)}{\partial x} d y \quad \text{}
+		\]
+		\item 若 \(f(x, y)\) 及其偏导函数 \(f_{x}(x, y)\) 在 \(D\) 上连续，\(\alpha(x)\)，\(\beta(x)\) 在 \([a, b]\) 上可微，且 \(\alpha \leq \alpha(x) \leq \beta\)，\(\alpha \leq \beta(x) \leq \beta\)，则 \(\Phi(x)\) 在 \([a, b]\) 上可微，且满足 Leibniz 公式：
+		\[
+		\Phi'(x) = \int_{\alpha(x)}^{\beta(x)} \frac{\partial f(x, y)}{\partial x} d y + f(x, \beta(x)) \beta'(x) - f(x, \alpha(x)) \alpha'(x) \quad \text{}
+		\]
+		\[
+		 \int_{a}^{b} dx \int_{\alpha}^{\beta} f(x,y) dy = \int_{\alpha}^{\beta} dy \int_{a}^{b} f(x,y) dx
+		\]
+	\end{enumerate}
+
+	\item 若 \(f(x, y)\) 是矩形区域 \(D = \{(x, y) | a \leq x \leq b, \alpha \leq y \leq \beta\}\) 上的连续函数，\(\varphi(x) = \int_{\alpha}^{\beta} f(x, y) dy\) 和 \(\psi(y) = \int_{a}^{b} f(x, y) dx\) 分别在 \([a, b]\) 和 \([\alpha, \beta]\) 上可积，则
+	\[
+	\int_{a}^{b} dx \int_{\alpha}^{\beta} f(x, y) dy = \int_{\alpha}^{\beta} dy \int_{a}^{b} f(x, y) dx
+	\]
+\end{enumerate}
+
+\section{反常积分}
+\subsection*{知识点}
+\begin{enumerate}
+	\item \textbf{内闭可积}：设 \(I\) 为区间，若函数 \(f(x)\) 对任意有界闭区间 \([a, b] \subset I\) 均在 \([a, b]\) 上可积，则称 \(f(x)\) 在 \(I\) 上内闭可积。
+	
+	\item \textbf{无穷区间反常积分的定义}：
+	\begin{enumerate}
+		\item 若 \(f(x)\) 在 \([a, +\infty)\) 上内闭可积，且极限 \(\lim_{b \to +\infty} \int_{a}^{b} f(x) dx\) 存在且有限，则称反常积分 \(\int_{a}^{+\infty} f(x) dx\) 收敛，且
+		\[
+		\int_{a}^{+\infty} f(x) dx = \lim_{b \to +\infty} \int_{a}^{b} f(x) dx
+		\]
+		\item 若 \(f(x)\) 在 \((-\infty, b]\) 上内闭可积，且极限 \(\lim_{a \to -\infty} \int_{a}^{b} f(x) dx\) 存在且有限，则称反常积分 \(\int_{-\infty}^{b} f(x) dx\) 收敛，且
+		\[
+		\int_{-\infty}^{b} f(x) dx = \lim_{a \to -\infty} \int_{a}^{b} f(x) dx
+		\]
+		\item 若反常积分 \(\int_{-\infty}^{0} f(x) dx\) 和 \(\int_{0}^{+\infty} f(x) dx\) 均收敛，则称反常积分 \(\int_{-\infty}^{+\infty} f(x) dx\) 收敛，且
+		\[
+		\int_{-\infty}^{+\infty} f(x) dx = \int_{-\infty}^{0} f(x) dx + \int_{0}^{+\infty} f(x) dx
+		\]
+		\item 若 \(\int_{a}^{+\infty} |f(x)| dx\) 收敛，则称 \(\int_{a}^{+\infty} f(x) dx\) 绝对收敛；若 \(\int_{a}^{+\infty} f(x) dx\) 收敛但 \(\int_{a}^{+\infty} |f(x)| dx\) 发散，则称 \(\int_{a}^{+\infty} f(x) dx\) 条件收敛（类似定义 \(\int_{-\infty}^{b} f(x) dx\) 的绝对收敛与条件收敛）。
+	\end{enumerate}
+	
+	\item \textbf{无穷区间反常积分的计算}：记 \(F(+\infty) = \lim_{x \to +\infty} F(x)\)，\(F(-\infty) = \lim_{x \to -\infty} F(x)\)，则
+	\begin{enumerate}
+		\item \(\int_{a}^{+\infty} f(x) dx = \left. F(x) \right|_{a}^{+\infty} = F(+\infty) - F(a)\)
+		\item \(\int_{-\infty}^{b} f(x) dx = \left. F(x) \right|_{-\infty}^{b} = F(b) - F(-\infty)\)
+		\item \(\int_{-\infty}^{+\infty} f(x) dx = \left. F(x) \right|_{-\infty}^{+\infty} = F(+\infty) - F(-\infty)\)
+	\end{enumerate}
+
+	\item \textbf{无界函数反常积分的定义}：
+	\begin{enumerate}
+		\item 设函数 \(f(x)\) 在 \((a, b]\) 上内闭可积，在点 \(a\) 及其右邻域内无界，若极限 \(\lim_{\varepsilon \to 0^{+}} \int_{a+\varepsilon}^{b} f(x) dx\) 存在且有限，则称反常积分 \(\int_{a}^{b} f(x) dx\) 在 \((a, b]\) 上收敛，且
+		\[
+		\int_{a}^{b} f(x) dx = \lim_{\varepsilon \to 0^{+}} \int_{a+\varepsilon}^{b} f(x) dx
+		\]
+		\item 设函数 \(f(x)\) 在 \([a, b)\) 上内闭可积，在点 \(b\) 及其左邻域内无界，若极限 \(\lim_{\varepsilon \to 0^{+}} \int_{a}^{b-\varepsilon} f(x) dx\) 存在且有限，则称反常积分 \(\int_{a}^{b} f(x) dx\) 在 \([a, b)\) 上收敛，且
+		\[
+		\int_{a}^{b} f(x) dx = \lim_{\varepsilon \to 0^{+}} \int_{a}^{b-\varepsilon} f(x) dx
+		\]
+		\item 设 \(x = c \in (a, b)\) 为函数 \(f(x)\) 的无穷间断点，若反常积分 \(\int_{a}^{c} f(x) dx\) 和 \(\int_{c}^{b} f(x) dx\) 都收敛，则反常积分 \(\int_{a}^{b} f(x) dx\) 收敛，且
+		\[
+		\int_{a}^{b} f(x) dx = \int_{a}^{c} f(x) dx + \int_{c}^{b} f(x) dx
+		\]
+		\item 函数 \(f(x)\) 的无穷间断点称为瑕点，无界函数的反常积分称为瑕积分。
+		\item 若 \(\int_{a}^{b} |f(x)| dx\) 在 \((a, b]\) 上收敛，则称反常积分 \(\int_{a}^{b} f(x) dx\) 在 \((a, b]\) 上绝对收敛；若 \(\int_{a}^{b} f(x) dx\) 收敛但 \(\int_{a}^{b} |f(x)| dx\) 发散，则称反常积分 \(\int_{a}^{b} f(x) dx\) 在 \((a, b]\) 上条件收敛（类似定义 \(\int_{a}^{b} f(x) dx\) 在 \([a, b)\) 上的绝对收敛与条件收敛）。
+	\end{enumerate}
+	
+	\item \textbf{无界函数反常积分的计算}：设 \(F(x)\) 为 \(f(x)\) 在 \((a, b]\) 上的一个原函数，则：
+	\begin{enumerate}
+		\item 若 \(x = a\) 为 \(f(x)\) 的瑕点，则 \(\int_{a}^{b} f(x) dx = F(b) - F(a+0)\)；
+		\item 若 \(x = b\) 为 \(f(x)\) 的瑕点，则 \(\int_{a}^{b} f(x) dx = F(b-0) - F(a)\)；
+		\item 若 \(x = c \in (a, b)\) 为 \(f(x)\) 的瑕点，则 \(\int_{a}^{b} f(x) dx = F(b) - F(c+0) + F(c-0) - F(a)\)。
+	\end{enumerate}
+	
+	\item 若被积函数在积分区间上仅存在有限个第一类间断点，则为常义积分，非反常积分。反常积分与常义积分可通过换元转化。
+	
+	\item 当积分同时含两类反常积分时，需划分区间分别讨论。
+	
+	\item \textbf{主值意义下的反常积分}：
+	\begin{enumerate}
+		\item 若 \(f(x)\) 在 \((-\infty, +\infty)\) 内连续，定义
+		\[
+		\text{v.p.} \int_{-\infty}^{+\infty} f(x) dx = \lim_{a \to +\infty} \int_{-a}^{a} f(x) dx
+		\]
+		\item 若 \(f(x)\) 在 \([a, b]\) 上除 \(x = c(a < c < b)\) 外连续，且 \(x = c\) 为无穷间断点，定义
+		\[
+		\text{v.p.} \int_{a}^{b} f(x) dx = \lim_{\varepsilon \to 0^{+}} \left( \int_{a}^{c-\varepsilon} f(x) dx + \int_{c+\varepsilon}^{b} f(x) dx \right)
+		\]
+	\end{enumerate}
+	
+	\item \textbf{无穷限反常积分的性质}：
+	\begin{enumerate}
+		\item 若 \(\int_{a}^{+\infty} f(x) dx\) 收敛，则 \(\int_{A}^{+\infty} f(x) dx (A > a)\) 收敛，且 \(\lim_{A \to +\infty} \int_{A}^{+\infty} f(x) dx = 0\)；
+		\item 若 \(\int_{a}^{+\infty} f(x) dx\) 收敛，则 \(\int_{a}^{+\infty} kf(x) dx\) 收敛，且 \(\int_{a}^{+\infty} kf(x) dx = k \int_{a}^{+\infty} f(x) dx\)；
+		\item 若 \(\int_{a}^{+\infty} f(x) dx\) 与 \(\int_{a}^{+\infty} g(x) dx\) 收敛，则 \(\int_{a}^{+\infty} [f(x) \pm g(x)] dx\) 收敛，且
+		\[
+		\int_{a}^{+\infty} (f(x) \pm g(x)) dx = \int_{a}^{+\infty} f(x) dx \pm \int_{a}^{+\infty} g(x) dx
+		\]
+	\end{enumerate}
+	
+	\item \textbf{两个重要的反常积分}：
+	\begin{enumerate}
+		\item \(p\) 积分：\(\int_{1}^{+\infty} \frac{1}{x^p} dx\) 当 \(p > 1\) 时收敛，\(p \leq 1\) 时发散；
+		\item 瑕积分：\(\int_{a}^{b} \frac{1}{(x-a)^q} dx\) 当 \(q < 1\) 时收敛，\(q \geq 1\) 时发散。
+	\end{enumerate}
+	
+	\item \textbf{无穷限反常积分与数项级数的对照}：
+	
+	\begin{table}[H]
+		\centering
+		\begin{tabular}{ll}
+			\toprule
+			数项级数 & 无穷限反常积分 \\
+			\midrule
+			通项 $u_n$ & 被积函数 $f(x)$ \\
+			部分和 $s_n = \sum_{k=1}^{n} u_k$ & 定积分 $\int_{a}^{A} f(x)\,dx$ \\
+			级数的和 $s = \sum_{n=1}^{+\infty} u_n$ & 反常积分的值 $\int_{a}^{+\infty} f(x)\,dx$ \\
+			$\lim_{n \to \infty} s_n = s$ & $\int_{a}^{+\infty} f(x)\,dx = \lim_{A \to +\infty} \int_{a}^{A} f(x)\,dx$ \\
+			级数的余项 $r_m = \sum_{k=m+1}^{+\infty} u_k$ & 反常积分的余项 $\int_{A}^{+\infty} f(x)\,dx$ \\
+			\bottomrule
+		\end{tabular}
+		\caption{数项级数与无穷限反常积分的类比}
+	\end{table}
+	
+	
+	\item 设 \(f(x)\) 在 \([0, +\infty)\) 上单调，积分 \(\int_{0}^{+\infty} f(x) dx\) 收敛，则
+	\[
+	\lim_{h \to 0^{+}} h \sum_{n=1}^{\infty} f(nh) = \int_{0}^{+\infty} f(x) dx
+	\]
+	
+	\item 设 \(f(x)\) 在 \((0, 1)\) 内单调，反常积分 \(\int_{0}^{1} f(x) dx\) 收敛，则
+	\[
+	\lim_{n \to \infty} \frac{1}{n} \sum_{k=1}^{n-1} f\left(\frac{k}{n}\right) = \int_{0}^{1} f(x) dx
+	\]
+	
+	\item \textbf{正值函数反常积分的收敛性}：
+	\begin{enumerate}
+		\item 设 \(f(x) \geq 0\)，对任意 \(A > a\)，若存在常数 \(M\) 使得 \(\int_{a}^{A} f(x) dx \leq M\)，则 \(\int_{a}^{+\infty} f(x) dx\) 收敛；
+		\item 设 \(f(x), g(x)\) 在 \([a, +\infty)\) 上连续，满足 \(0 \leq f(x) \leq g(x)\)：
+		\begin{itemize}
+			\item 若 \(\int_{a}^{+\infty} g(x) dx\) 收敛，则 \(\int_{a}^{+\infty} f(x) dx\) 收敛；
+			\item 若 \(\int_{a}^{+\infty} f(x) dx\) 发散，则 \(\int_{a}^{+\infty} g(x) dx\) 发散；
+		\end{itemize}
+		\item 设 \(f(x), g(x)\) 在 \((a, b]\) 上连续，\(a\) 为瑕点，满足 \(0 \leq f(x) \leq g(x)\)：
+		\begin{itemize}
+			\item 若 \(\int_{a}^{b} g(x) dx\) 收敛，则 \(\int_{a}^{b} f(x) dx\) 收敛；
+			\item 若 \(\int_{a}^{b} f(x) dx\) 发散，则 \(\int_{a}^{b} g(x) dx\) 发散；
+		\end{itemize}
+	\end{enumerate}
+
+	\item \textbf{比较判别法的极限形式}：
+	\begin{enumerate}
+		\item 设 \(f(x), g(x)\) 是 \([a, +\infty)\) 上的非负连续函数，\(g(x) > 0\)，且 \(\lim_{x \to +\infty} \frac{f(x)}{g(x)} = \rho\)：
+		\begin{itemize}
+			\item 当 \(0 < \rho < +\infty\) 时，\(\int_{a}^{+\infty} f(x) dx\) 与 \(\int_{a}^{+\infty} g(x) dx\) 同敛散；
+			\item 当 \(\rho = 0\) 时，若 \(\int_{a}^{+\infty} g(x) dx\) 收敛，则 \(\int_{a}^{+\infty} f(x) dx\) 收敛；
+			\item 当 \(\rho = +\infty\) 时，若 \(\int_{a}^{+\infty} g(x) dx\) 发散，则 \(\int_{a}^{+\infty} f(x) dx\) 发散。
+		\end{itemize}
+		\item 设 \(f(x), g(x)\) 是 \((a, b]\) 上的非负连续函数，\(a\) 为瑕点，\(g(x) > 0\)，且 \(\lim_{x \to a^+} \frac{f(x)}{g(x)} = \rho\)：
+		\begin{itemize}
+			\item 当 \(0 < \rho < +\infty\) 时，\(\int_{a}^{b} f(x) dx\) 与 \(\int_{a}^{b} g(x) dx\) 同敛散；
+			\item 当 \(\rho = 0\) 时，若 \(\int_{a}^{b} g(x) dx\) 收敛，则 \(\int_{a}^{b} f(x) dx\) 收敛；
+			\item 当 \(\rho = +\infty\) 时，若 \(\int_{a}^{b} g(x) dx\) 发散，则 \(\int_{a}^{b} f(x) dx\) 发散。
+		\end{itemize}
+	\end{enumerate}
+	
+	\item \textbf{Cauchy 判别法 1}：
+	\begin{enumerate}
+		\item 对充分大的 \(x\)，若 \(f(x) = \frac{\varphi(x)}{x^\lambda}\)（\(\lambda > 0\)），且：
+		\begin{itemize}
+			\item \(\lambda > 1\) 且 \(\varphi(x) \leqslant c < +\infty\)，则 \(\int_{a}^{+\infty} f(x) dx\) 收敛；
+			\item \(\lambda \leqslant 1\) 且 \(\varphi(x) \geqslant c > 0\)，则 \(\int_{a}^{+\infty} f(x) dx\) 发散。
+		\end{itemize}
+		\item 设 \(a\) 为瑕点，对接近 \(a\) 的 \(x\)，若 \(f(x) = \frac{\varphi(x)}{(x-a)^\lambda}\)（\(\lambda > 0\)），且：
+		\begin{itemize}
+			\item \(\lambda < 1\) 且 \(\varphi(x) \leqslant c < +\infty\)，则 \(\int_{a}^{b} f(x) dx\) 收敛；
+			\item \(\lambda \geqslant 1\) 且 \(\varphi(x) \geqslant c > 0\)，则 \(\int_{a}^{b} f(x) dx\) 发散。
+		\end{itemize}
+	\end{enumerate}
+	
+	\item \textbf{Cauchy 判别法 2}：
+	\begin{enumerate}
+		\item 若 \(f(x)\) 是 \(\frac{1}{x}\) 当 \(x \to +\infty\) 时的 \(\lambda\) 阶无穷小量（\(\lambda > 0\)）：
+		\begin{itemize}
+			\item \(\lambda > 1\) 时，\(\int_{a}^{+\infty} f(x) dx\) 收敛；
+			\item \(\lambda \leqslant 1\) 时，\(\int_{a}^{+\infty} f(x) dx\) 发散。
+		\end{itemize}
+		\item 若 \(f(x)\) 是 \(\frac{1}{x-a}\) 当 \(x \to a^+\) 时的 \(\lambda\) 阶无穷大量（\(\lambda > 0\)）：
+		\begin{itemize}
+			\item \(\lambda < 1\) 时，\(\int_{a}^{b} f(x) dx\) 收敛；
+			\item \(\lambda \geqslant 1\) 时，\(\int_{a}^{b} f(x) dx\) 发散。
+		\end{itemize}
+	\end{enumerate}
+	
+	\item \textbf{任意函数反常积分的收敛性}：
+	\begin{enumerate}
+		\item 若 \(\int_{a}^{+\infty} |f(x)| dx\) 收敛，则 \(\int_{a}^{+\infty} f(x) dx\) 收敛（绝对收敛必收敛）。
+		\item 设 \(\int_{a}^{+\infty} f(x) dx\) 和 \(\int_{a}^{+\infty} g(x) dx\)：
+		\begin{itemize}
+			\item 均绝对收敛，则 \(\int_{a}^{+\infty} (f(x)+g(x)) dx\) 绝对收敛；
+			\item 一个绝对收敛，一个条件收敛，则 \(\int_{a}^{+\infty} (f(x)+g(x)) dx\) 条件收敛；
+			\item 均条件收敛，则 \(\int_{a}^{+\infty} (f(x)+g(x)) dx\) 可能绝对收敛或条件收敛。
+		\end{itemize}
+		\item 若 \(\int_{a}^{+\infty} f(x) dx\) 绝对收敛，且 \(g(x)\) 在 \([a, +\infty)\) 上有界，则 \(\int_{a}^{+\infty} f(x)g(x) dx\) 绝对收敛。
+		\item \textbf{Abel 判别法}：
+		\begin{itemize}
+			\item 若 \(\int_{a}^{+\infty} f(x) dx\) 收敛，\(g(x)\) 在 \([a, +\infty)\) 上单调有界，则 \(\int_{a}^{+\infty} f(x)g(x) dx\) 收敛；
+			\item 若 \(\int_{a}^{b} f(x) dx\) 收敛，\(g(x)\) 在 \([a, b)\) 上单调有界，则 \(\int_{a}^{b} f(x)g(x) dx\) 收敛。
+		\end{itemize}
+		\item \textbf{Dirichlet 判别法}：
+		\begin{itemize}
+			\item 若对任意 \(A > a\)，\(\int_{a}^{A} f(x) dx\) 有界，\(g(x)\) 在 \([a, +\infty)\) 上单调且 \(\lim_{x \to +\infty} g(x) = 0\)，则 \(\int_{a}^{+\infty} f(x)g(x) dx\) 收敛；
+			\item 若对任意 \(b' > a\)，\(\int_{a}^{b'} f(x) dx\) 有界，\(g(x)\) 在 \([a, b)\) 上单调且 \(\lim_{x \to b^-} g(x) = 0\)，则 \(\int_{a}^{b} f(x)g(x) dx\) 收敛。
+		\end{itemize}
+		\item \textbf{Cauchy 收敛准则}：
+		\begin{itemize}
+			\item \(\int_{a}^{+\infty} f(x) dx\) 收敛 \(\Leftrightarrow\) 对 \(\forall \varepsilon > 0\)，\(\exists X > a\)，当 \(A, B > X\) 时，\(|\int_{A}^{B} f(x) dx| < \varepsilon\)；
+			\item \(\int_{a}^{b} f(x) dx\)（\(a\) 为瑕点）收敛 \(\Leftrightarrow\) 对 \(\forall \varepsilon > 0\)，\(\exists \delta > 0\)，当 \(x', x'' \in (b-\delta, b)\) 时，\(|\int_{x'}^{x''} f(x) dx| < \varepsilon\)。
+		\end{itemize}
+	\end{enumerate}
+	
+	\item \textbf{Γ 函数}：\(\Gamma(s) = \int_{0}^{+\infty} e^{-x}x^{s-1} dx\)（\(s > 0\)），性质如下：
+	\begin{enumerate}
+		\item 递推公式：\(\Gamma(s+1) = s\Gamma(s)\)（\(s > 0\)）；
+		\item \(\lim_{s \to 0^+} \Gamma(s) = +\infty\)；
+		\item 余元公式：\(\Gamma(s)\Gamma(1-s) = \frac{\pi}{\sin \pi s}\)（\(0 < s < 1\)）。
+	\end{enumerate}
+	
+	\item \textbf{几个重要反常积分结论}：
+	\begin{enumerate}
+		\item \textbf{Dirichlet 积分}：\(\int_{0}^{+\infty} \frac{\sin x}{x} dx = \frac{\pi}{2}\)；
+		\item \textbf{Gauss 积分}：\(\int_{0}^{+\infty} e^{-x^2} dx = \frac{\sqrt{\pi}}{2}\)；
+		\item \textbf{Euler 积分}：\(\int_{0}^{\frac{\pi}{2}} \ln \sin x dx = -\frac{\pi}{2} \ln 2\)；
+		\item \textbf{Froullani 积分}：\(\int_{0}^{+\infty} \frac{f(ax)-f(bx)}{x} dx = (f(0)-f(+\infty))\ln \frac{b}{a}\)；
+		\item \textbf{Fresnel 积分}：\(\int_{-\infty}^{+\infty} \sin x^2 dx = \frac{\sqrt{2\pi}}{4}\)。
+	\end{enumerate}
+\end{enumerate}
+
+\section{常数项级数}
+\subsection*{知识点}
+\begin{enumerate}
+	\item \textbf{数项级数定义}：形如 \(\sum_{n=1}^{\infty} u_{n} = u_1 + u_2 + \cdots + u_n + \cdots\)，其中 \(u_n\) 为一般项，部分和 \(S_n\) 与一般项满足：\(S_n = S_{n-1} + u_n\)，\(u_n = S_n - S_{n-1}\)。
+	
+	\item \textbf{级数收敛定义}：若部分和数列 \(\{S_n\}\) 收敛于 \(s\)，则称级数 \(\sum_{n=1}^{\infty} u_n\) 收敛，\(s\) 为级数的和。
+	
+	\item \textbf{收敛必要条件}：若级数 \(\sum_{n=1}^{\infty} u_n\) 收敛，则 \(\lim_{n \to \infty} u_n = 0\)。
+	
+	\item \textbf{收敛充要条件}：
+	\begin{enumerate}
+		\item 级数收敛 \(\Leftrightarrow\) \(\lim_{n \to \infty} r_n = 0\)，其中 \(r_n = \sum_{k=n+1}^{\infty} u_k\) 为余项；
+		\item 级数收敛 \(\Leftrightarrow\) \(\lim_{n \to \infty} S_{2n} = \lim_{n \to \infty} S_{2n-1}\)；
+		\item 级数收敛 \(\Leftrightarrow\) \(\lim_{n \to \infty} S_{2n}\)（或 \(\lim_{n \to \infty} S_{2n-1}\)）存在且 \(\lim_{n \to \infty} u_n = 0\)；
+		\item （Cauchy 准则）\(\forall \varepsilon > 0\)，\(\exists N \in N^+\)，当 \(n > N\) 且 \(p \in N^+\) 时，\(|u_{n+1} + u_{n+2} + \cdots + u_{n+p}| < \varepsilon\)；
+		\item 级数 \(\sum_{n=1}^{\infty} (u_{n+1} - u_n)\) 收敛 \(\Leftrightarrow\) 数列 \(\{u_n\}\) 收敛。
+	\end{enumerate}
+	
+	\item \textbf{线性运算性质}：
+	\begin{enumerate}
+		\item 若 \(\sum_{n=1}^{\infty} u_n\) 收敛，\(C\) 为常数，则 \(\sum_{n=1}^{\infty} C u_n\) 收敛且 \(\sum_{n=1}^{\infty} C u_n = C \sum_{n=1}^{\infty} u_n\)；
+		\item 若 \(\sum_{n=1}^{\infty} u_n\) 和 \(\sum_{n=1}^{\infty} v_n\) 均收敛，则 \(\sum_{n=1}^{\infty} (u_n \pm v_n)\) 收敛且 \(\sum_{n=1}^{\infty} (u_n \pm v_n) = \sum_{n=1}^{\infty} u_n \pm \sum_{n=1}^{\infty} v_n\)；
+		\item 若 \(\sum_{n=1}^{\infty} u_n\) 收敛，\(\sum_{n=1}^{\infty} v_n\) 发散，则 \(\sum_{n=1}^{\infty} (u_n \pm v_n)\) 发散；
+		\item 若 \(\sum_{n=1}^{\infty} u_n\) 和 \(\sum_{n=1}^{\infty} v_n\) 均发散，则 \(\sum_{n=1}^{\infty} (u_n \pm v_n)\) 敛散性不定。
+	\end{enumerate}
+	
+	\item \textbf{重组性质}：
+	\begin{enumerate}
+		\item 收敛级数加括号后仍收敛，且和不变；
+		\item 若 \(\sum_{n=1}^{\infty} (u_{2n-1} + u_{2n})\) 发散，则 \(\sum_{n=1}^{\infty} u_n\) 发散；
+		\item 若 \(\sum_{n=1}^{\infty} (u_{2n-1} + u_{2n})\) 收敛，\(\sum_{n=1}^{\infty} u_n\) 敛散性不定；
+		\item 若 \(\sum_{n=1}^{\infty} (u_{2n-1} + u_{2n})\) 收敛且 \(\lim_{n \to \infty} u_n = 0\)，则 \(\sum_{n=1}^{\infty} u_n\) 收敛；
+		\item 去掉、增加或改变有限项，级数敛散性不变，但和可能改变。
+	\end{enumerate}
+	
+	\item \textbf{正项级数基本性质}：正项级数 \(\sum_{n=1}^{\infty} u_n\) 的部分和数列 \(\{S_n\}\) 单调递增，其收敛充要条件是 \(\{S_n\}\) 有上界。
+	
+	\item \textbf{比较审敛法}：若存在 \(N > 0\)，当 \(n > N\) 时 \(u_n \leq v_n\)，则：
+	\begin{itemize}
+		\item \(\sum_{n=1}^{\infty} v_n\) 收敛 \(\Rightarrow\) \(\sum_{n=1}^{\infty} u_n\) 收敛；
+		\item \(\sum_{n=1}^{\infty} u_n\) 发散 \(\Rightarrow\) \(\sum_{n=1}^{\infty} v_n\) 发散。
+	\end{itemize}
+	
+	\item \textbf{比较审敛法极限形式}：设 \(\lim_{n \to \infty} \frac{u_n}{v_n} = l\)，则：
+	\begin{enumerate}
+		\item 当 \(0 < l < +\infty\) 时，\(\sum_{n=1}^{\infty} u_n\) 与 \(\sum_{n=1}^{\infty} v_n\) 同敛散；
+		\item 当 \(l = 0\) 时，\(\sum_{n=1}^{\infty} v_n\) 收敛 \(\Rightarrow\) \(\sum_{n=1}^{\infty} u_n\) 收敛；
+		\item 当 \(l = +\infty\) 时，\(\sum_{n=1}^{\infty} v_n\) 发散 \(\Rightarrow\) \(\sum_{n=1}^{\infty} u_n\) 发散。
+	\end{enumerate}
+	
+	\item \textbf{比较法的比值形式}：若存在 \(N > 0\)，当 \(n > N\) 时 \(\frac{u_{n+1}}{u_n} \leq \frac{v_{n+1}}{v_n}\)，则：
+	\begin{itemize}
+		\item \(\sum_{n=1}^{\infty} v_n\) 收敛 \(\Rightarrow\) \(\sum_{n=1}^{\infty} u_n\) 收敛；
+		\item \(\sum_{n=1}^{\infty} u_n\) 发散 \(\Rightarrow\) \(\sum_{n=1}^{\infty} v_n\) 发散。
+	\end{itemize}
+	
+	\item \textbf{常用参考级数}：
+	\begin{enumerate}
+		\item 几何级数 \(\sum_{n=0}^{\infty} q^n\)：\(|q| < 1\) 时收敛，和为 \(\frac{1}{1-q}\)；\(|q| \geq 1\) 时发散；
+		\item \(p\)-级数 \(\sum_{n=1}^{\infty} \frac{1}{n^p}\)：\(p > 1\) 时收敛；\(p \leq 1\) 时发散。
+	\end{enumerate}
+	
+	\item \textbf{D'Alembert判别法（比值审敛法）}：设 \(u_n > 0\) 且 \(\lim_{n \to \infty} \frac{u_{n+1}}{u_n} = D\)，则：
+	\begin{enumerate}
+		\item 当 \(D < 1\) 时，\(\sum_{n=1}^{\infty} u_n\) 收敛；
+		\item 当 \(D > 1\) 时，\(\sum_{n=1}^{\infty} u_n\) 发散（此时 \(\lim_{n \to \infty} u_n \neq 0\)）；
+		\item 当 \(D = 1\) 时，无法判定。
+	\end{enumerate}
+	
+	\item \textbf{Cauchy判别法（根值审敛法）}：设 \(u_n > 0\) 且 \(\lim_{n \to \infty} \sqrt[n]{u_n} = C\)，则：
+	\begin{enumerate}
+		\item 当 \(C < 1\) 时，\(\sum_{n=1}^{\infty} u_n\) 收敛；
+		\item 当 \(C > 1\) 时，\(\sum_{n=1}^{\infty} u_n\) 发散（此时 \(\lim_{n \to \infty} u_n \neq 0\)）；
+		\item 当 \(C = 1\) 时，无法判定。
+	\end{enumerate}
+	
+	\item \textbf{Raabe判别法}：设 \(u_n > 0\) 且 \(\lim_{n \to \infty} n\left(\frac{u_n}{u_{n+1}} - 1\right) = R\)，则：
+	\begin{enumerate}
+		\item 当 \(R > 1\) 时，\(\sum_{n=1}^{\infty} u_n\) 收敛；
+		\item 当 \(R < 1\) 时，\(\sum_{n=1}^{\infty} u_n\) 发散；
+		\item 当 \(R = 1\) 时，无法判定。
+	\end{enumerate}
+	
+	\item \textbf{Bertrand判别法}：设 \(u_n > 0\) 且 \(\lim_{n \to \infty} \ln n \cdot n\left(\frac{u_n}{u_{n+1}} - 1\right) = B\)，则：
+	\begin{enumerate}
+		\item 当 \(B > 1\) 时，\(\sum_{n=1}^{\infty} u_n\) 收敛；
+		\item 当 \(B < 1\) 时，\(\sum_{n=1}^{\infty} u_n\) 发散；
+		\item 当 \(B = 1\) 时，无法判定。
+	\end{enumerate}
+	
+	\item \textbf{Kummer判别法}：
+	\begin{enumerate}
+		\item 正项级数 \(\sum_{n=1}^{\infty} u_n\) 收敛的充要条件是存在 \(\alpha > 0\) 和正项数列 \(\{c_n\}\)，使得当 \(n\) 充分大时，\(c_n \cdot \frac{u_n}{u_{n+1}} - c_{n+1} \geq \alpha > 0\)；
+		\item 正项级数 \(\sum_{n=1}^{\infty} u_n\) 发散的充要条件是存在发散的正项级数 \(\sum_{n=1}^{\infty} \frac{1}{c_n}\)，使得当 \(n\) 充分大时，\(c_n \cdot \frac{u_n}{u_{n+1}} - c_{n+1} \leq 0\)；
+		\item 若 \(\lim_{n \to \infty} \left(c_n \cdot \frac{u_n}{u_{n+1}} - c_{n+1}\right) = K\)，则当 \(K > 0\) 时收敛，\(K < 0\) 时发散，\(K = 0\) 时无法判定。
+	\end{enumerate}
+	
+	\item \textbf{积分判别法}：若 \(f(x) > 0\) 在 \([1, +\infty)\) 上单调减少，则 \(\int_{1}^{+\infty} f(x) dx\) 与 \(\sum_{n=1}^{\infty} f(n)\) 同敛散。
+	
+	\item \textbf{判别正项级数敛散性的常用方法}：
+	\begin{enumerate}
+		\item \textbf{判阶法}：若 \(\lim_{n \to \infty} u_n = 0\)，且 \(u_n\) 是 \(\frac{1}{n^p}\) 的 \(p\) 阶无穷小量，则 \(p > 1\) 时收敛，\(p \leq 1\) 时发散；
+		\item \textbf{放缩法}：通过放大 \(u_n\) 到收敛级数或缩小 \(u_n\) 到发散级数来判断；
+		\item \textbf{比值法、根值法、积分判别法}：直接应用对应审敛法；
+		\item \textbf{部分和有界性}：若部分和数列有界则收敛，否则发散。
+	\end{enumerate}
+	
+	\item \textbf{绝对收敛与条件收敛}：
+	\begin{enumerate}
+		\item 若 \(\sum_{n=1}^{\infty} |u_n|\) 收敛，则 \(\sum_{n=1}^{\infty} u_n\) 绝对收敛；
+		\item 若 \(\sum_{n=1}^{\infty} u_n\) 收敛但 \(\sum_{n=1}^{\infty} |u_n|\) 发散，则 \(\sum_{n=1}^{\infty} u_n\) 条件收敛。
+	\end{enumerate}
+	
+	\item \textbf{绝对值判别法}：若 \(\sum_{n=1}^{\infty} |u_n|\) 收敛，则 \(\sum_{n=1}^{\infty} u_n\) 收敛。
+	
+	\item \textbf{级数重排性质}：绝对收敛级数重排后和不变，条件收敛级数重排后敛散性可能改变。
+	
+	\item \textbf{线性组合敛散性}：
+	\begin{enumerate}
+		\item 若 \(\sum_{n=1}^{\infty} u_n\) 与 \(\sum_{n=1}^{\infty} v_n\) 都绝对收敛，则 \(\sum_{n=1}^{\infty} (u_n + v_n)\) 绝对收敛；
+		\item 若 \(\sum_{n=1}^{\infty} u_n\) 绝对收敛，\(\sum_{n=1}^{\infty} v_n\) 条件收敛，则 \(\sum_{n=1}^{\infty} (u_n + v_n)\) 条件收敛；
+		\item 若两者都条件收敛，\(\sum_{n=1}^{\infty} (u_n + v_n)\) 可能绝对或条件收敛。
+	\end{enumerate}
+	
+	\item \textbf{夹逼定理}：若 \(\sum_{n=1}^{\infty} u_n\) 和 \(\sum_{n=1}^{\infty} v_n\) 收敛，且 \(u_n \leq w_n \leq v_n\)，则 \(\sum_{n=1}^{\infty} w_n\) 收敛。
+	
+	\item \textbf{Leibniz判别法（交错级数）}：若 \(u_n > 0\) 满足 \(u_n \geq u_{n+1}\) 且 \(\lim_{n \to \infty} u_n = 0\)，则 \(\sum_{n=1}^{\infty} (-1)^{n-1} u_n\) 收敛，且余项 \(|r_n| \leq u_{n+1}\)。
+	
+	\item \textbf{Abel判别法}：若 \(\sum_{n=1}^{\infty} u_n\) 收敛，数列 \(\{v_n\}\) 单调有界，则 \(\sum_{n=1}^{\infty} u_n v_n\) 收敛。
+	
+	\item \textbf{Dirichlet判别法}：若 \(\sum_{n=1}^{\infty} u_n\) 的部分和有界，数列 \(\{v_n\}\) 单调且 \(\lim_{n \to \infty} v_n = 0\)，则 \(\sum_{n=1}^{\infty} u_n v_n\) 收敛。
+	
+	\item \textbf{Cauchy收敛准则}：
+	\begin{enumerate}
+		\item 级数 \(\sum_{n=1}^{\infty} u_n\) 收敛 \(\Leftrightarrow\) \(\forall \varepsilon > 0\)，\(\exists N > 0\)，当 \(n > N\) 时，\(|\sum_{k=n+1}^{n+p} u_k| < \varepsilon\) 对任意 \(p \in N^+\) 成立；
+		\item 级数 \(\sum_{n=1}^{\infty} u_n\) 发散 \(\Leftrightarrow\) 存在 \(\varepsilon_0 > 0\)，对任意 \(N > 0\)，存在 \(n_0 > N\) 和 \(p_0 \in N^+\)，使得 \(|\sum_{k=n_0+1}^{n_0+p_0} u_k| \geq \varepsilon_0\)。
+	\end{enumerate}
+
+
+\item \textbf{判别任意项级数敛散性的常用方法}：
+\begin{enumerate}
+	\item 绝对值判别法：先判断其绝对值级数是否收敛，若收敛则原级数绝对收敛，必然收敛。
+	\item Leibniz判别法：对于交错级数，若满足通项绝对值单调递减且趋于零，则级数收敛。
+	\item 部分和极限法：证明偶次部分和与奇次部分和的极限存在且相等，或证明某一部分和极限存在且通项趋于零。
+	\item Abel/ Dirichlet判别法：将通项分解为乘积形式，利用数列的单调性、有界性及级数部分和的有界性等条件判别。
+	\item Cauchy准则：通过验证对任意小的正数，存在相应的N，使得足够大的n之后的任意区间和的绝对值小于该正数来判断收敛性。
+	\item 夹逼判别法：若级数通项介于两个收敛级数之间，则该级数收敛。
+\end{enumerate}
+
+\item \textbf{判别级数发散的常用方法}：
+\begin{enumerate}
+	\item 通项极限法：证明通项极限不存在或不为零，直接得出发散。
+	\item Cauchy准则否定形式：存在某个正数，对任意大的N，都存在更大的n和区间使得和的绝对值不小于该正数。
+	\item 加括号发散法：原级数加括号后得到的新级数发散，则原级数发散。
+	\item 部分和无界法：对于正项级数，证明其部分和数列无上界，从而发散。
+	\item 分解发散法：将级数表示为收敛级数与发散级数的和，从而发散。
+	\item 审敛法否定形式：利用各种收敛判别法的逆否命题，证明不满足收敛条件则发散。
+\end{enumerate}
+\end{enumerate}
+
+\section{幂级数与傅里叶级数}
+\subsection*{知识点}
+\begin{enumerate}
+	\item \textbf{幂级数基本概念}：
+	\begin{enumerate}
+		\item 收敛点与收敛域：若数值级数 \(\sum_{k=0}^{\infty}a_kx_0^k\) 收敛，则 \(x_0\) 为收敛点，所有收敛点的集合为收敛域。
+		\item 和函数与余项：在收敛域内，部分和函数的极限为和函数 \(S(x)\)，余项 \(R_n(x)=S(x)-S_n(x)\) 且 \(\lim_{n\to\infty}R_n(x)=0\)。
+	\end{enumerate}
+	
+	\item \textbf{Abel定理}：
+	\begin{enumerate}
+		\item 若幂级数在 \(x_0\neq0\) 处收敛，则在 \(|x|<|x_0|\) 时绝对收敛。
+		\item 若幂级数在 \(x_1\) 处发散，则在 \(|x|>|x_1|\) 时发散。
+	\end{enumerate}
+	
+	\item \textbf{收敛半径计算}：对于幂级数 \(\sum_{n=0}^{\infty}a_nx^n\)，若 \(\lim_{n\to\infty}\sqrt[n]{|a_n|}=L\) 或 \(\lim_{n\to\infty}\frac{|a_{n+1}|}{|a_n|}=L\)，则收敛半径 \(R=\frac{1}{L}\)（\(L=0\) 时 \(R=+\infty\)，\(L=+\infty\) 时 \(R=0\)）。
+	
+	\item \textbf{收敛域基本特点}：
+	\begin{enumerate}
+		\item 幂级数至少在 \(x=0\) 处收敛，收敛域非空。
+		\item 收敛区间为 \((-R,R)\)，端点处的收敛性需单独判断。
+		\item 形如 \(\sum_{n=0}^{\infty}a_n(x-x_0)^n\) 的幂级数，收敛区间为 \((x_0-R,x_0+R)\)，其中 \(R\) 为对应 \(\sum_{n=0}^{\infty}a_nx^n\) 的收敛半径。
+	\end{enumerate}
+	
+	\item 幂级数的代数性质：设 \(\sum_{n=0}^{\infty}a_nx^n\) 和 \(\sum_{n=0}^{\infty}b_nx^n\) 的收敛半径为 \(R_1\) 和 \(R_2\)，记 \(R = \min\{R_1, R_2\}\)，则当 \(x \in (-R, R)\) 时：
+	\begin{enumerate}
+		\item 加法：\(\sum_{n=0}^{\infty}a_nx^n \pm \sum_{n=0}^{\infty}b_nx^n = \sum_{n=0}^{\infty}(a_n \pm b_n)x^n\)；
+		\item 乘法：\(\left(\sum_{n=0}^{\infty}a_nx^n\right)\left(\sum_{n=0}^{\infty}b_nx^n\right) = \sum_{n=0}^{\infty}c_nx^n\)，其中 \(c_n = a_0b_n + a_1b_{n-1} + \cdots + a_nb_0\)。
+	\end{enumerate}
+	
+	\item 和函数的分析性质：
+	\begin{enumerate}
+		\item 连续性：若收敛半径大于0，则对 \(\forall x_0 \in \Omega\)（收敛域），有 \(\lim_{x \to x_0}S(x) = S(x_0)\)，即和函数在收敛域内连续。
+		\item 可积性：和函数在收敛域 \(\Omega\) 内可积，且可逐项积分：\(\int_{0}^{x}S(t)dt = \sum_{n=0}^{\infty}\frac{a_n}{n+1}x^{n+1}\)。
+		\item 可导性：和函数在收敛区间 \((-R, R)\) 内无限次可导，且可逐项求导：\(S'(x) = \sum_{n=0}^{\infty}na_nx^{n-1}\)。
+		\item 收敛半径不变性：逐项积分或求导后幂级数的收敛半径不变，但收敛域可能变化。
+	\end{enumerate}
+	
+	\item 常用幂级数的和函数：
+	\begin{enumerate}
+		\item \(\sum_{n=0}^{\infty}x^n = \frac{1}{1-x}\)（\(|x| < 1\)）；
+		\item \(\sum_{n=0}^{\infty}\frac{x^n}{n!} = e^x\)（\(x \in (-\infty, +\infty)\)）；
+		\item \(\sum_{n=0}^{\infty}(-1)^n\frac{x^{2n+1}}{(2n+1)!} = \sin x\)（\(x \in (-\infty, +\infty)\)）；
+		\item \(\sum_{n=1}^{\infty}(-1)^{n-1}\frac{x^n}{n} = \ln(1+x)\)（\(x \in (-1, 1]\)）。
+	\end{enumerate}
+	
+	\item 泰勒级数与麦克劳林级数：
+	\begin{enumerate}
+		\item 展开条件：若 \(f(x)\) 在 \((x_0 - R, x_0 + R)\) 内可展开为幂级数 \(f(x) = \sum_{n=0}^{\infty}a_n(x - x_0)^n\)，则系数唯一为 \(a_n = \frac{f^{(n)}(x_0)}{n!}\)。
+		\item 泰勒级数：\(\sum_{n=0}^{\infty}\frac{f^{(n)}(x_0)}{n!}(x - x_0)^n\)，当 \(x_0 = 0\) 时称为麦克劳林级数 \(\sum_{n=0}^{\infty}\frac{f^{(n)}(0)}{n!}x^n\)。
+		\item 充要条件：\(f(x)\) 的泰勒级数在 \(U_{\delta}(x_0)\) 内收敛于 \(f(x)\) 当且仅当 \(\lim_{n \to \infty}R_n(x) = 0\)（余项极限为零）。
+		\item 充分条件：若 \(f(x)\) 在 \((x_0 - R, x_0 + R)\) 内有任意阶导数，且存在 \(M > 0\) 使得 \(|f^{(n)}(x)| \leq M\)，则可展开为泰勒级数。
+	\end{enumerate}
+	
+	\item 幂级数展开方法：
+	\begin{enumerate}
+		\item 直接展开法：求导、验证余项、计算系数、写出展开式。
+		\item 间接展开法：通过加减、数乘、复合、积分、求导等运算，利用基本展开式推导。
+	\end{enumerate}
+	
+	\item 常用初等函数展开式：
+	\begin{enumerate}
+		\item \(e^x = \sum_{n=0}^{\infty}\frac{x^n}{n!}\)（\(x \in (-\infty, +\infty)\)）；
+		\item \(\sin x = \sum_{n=0}^{\infty}\frac{(-1)^n}{(2n+1)!}x^{2n+1}\)（\(x \in (-\infty, +\infty)\)）；
+		\item \(\cos x = \sum_{n=0}^{\infty}\frac{(-1)^n}{(2n)!}x^{2n}\)（\(x \in (-\infty, +\infty)\)）；
+		\item \(\ln(1+x) = \sum_{n=1}^{\infty}\frac{(-1)^{n-1}}{n}x^n\)（\(x \in (-1, 1]\)）；
+		\item \((1+x)^{\alpha} = \sum_{n=0}^{\infty}\frac{\alpha(\alpha-1)\cdots(\alpha-n+1)}{n!}x^n\)，收敛域随 \(\alpha\) 变化：
+		\begin{itemize}
+			\item \(\alpha \leq -1\) 时，\(x \in (-1, 1)\)；
+			\item \(-1 < \alpha < 0\) 时，\(x \in (-1, 1]\)；
+			\item \(\alpha > 0\) 时，\(x \in [-1, 1]\)。
+		\end{itemize}
+		\item 特例：\(\frac{1}{1-x} = \sum_{n=0}^{\infty}x^n\)，\(\frac{1}{1+x} = \sum_{n=0}^{\infty}(-1)^nx^n\)（\(|x| < 1\)）。
+	\end{enumerate}
+	
+	\item 三角函数系的正交性：在 \([-\pi, \pi]\) 上：
+	\begin{enumerate}
+		\item \(\int_{-\pi}^{\pi}\cos nx \cos mx dx = 
+		\begin{cases} 
+			0, & m \neq n, \\
+			\pi, & m = n 
+		\end{cases}\)；
+		\item \(\int_{-\pi}^{\pi}\sin nx \sin mx dx = 
+		\begin{cases} 
+			0, & m \neq n, \\
+			\pi, & m = n 
+		\end{cases}\)；
+		\item \(\int_{-\pi}^{\pi}\cos nx \sin mx dx = 0\)（任意 \(n, m\)）。
+	\end{enumerate}
+	
+	\item 周期为 \(2\pi\) 的傅里叶级数：设 \(f(x)\) 是周期为 \(2\pi\) 的可积函数，其傅里叶级数为  
+	\[
+	f(x) \leftrightarrow \frac{a_0}{2} + \sum_{n=1}^{\infty} (a_n \cos nx + b_n \sin nx)
+	\]  
+	其中系数为  
+	\[
+	a_n = \frac{1}{\pi} \int_{-\pi}^{\pi} f(x) \cos nx \, dx \ (n=0,1,2,\cdots), \quad b_n = \frac{1}{\pi} \int_{-\pi}^{\pi} f(x) \sin nx \, dx \ (n=1,2,\cdots)
+	\]  
+	也可在任意长度为 \(2\pi\) 的区间 \([a, a+2\pi]\) 上计算：  
+	\[
+	a_n = \frac{1}{\pi} \int_{a}^{a+2\pi} f(x) \cos nx \, dx, \quad b_n = \frac{1}{\pi} \int_{a}^{a+2\pi} f(x) \sin nx \, dx
+	\]
+	
+	\item 奇偶函数的傅里叶级数：  
+	\begin{enumerate}
+		\item 若 \(f(x)\) 为奇函数（周期 \(2\pi\)），则展开为正弦级数：  
+		\[
+		f(x) \leftrightarrow \sum_{n=1}^{\infty} b_n \sin nx, \quad b_n = \frac{2}{\pi} \int_{0}^{\pi} f(x) \sin nx \, dx
+		\]
+		\item 若 \(f(x)\) 为偶函数（周期 \(2\pi\)），则展开为余弦级数：  
+		\[
+		f(x) \leftrightarrow \frac{a_0}{2} + \sum_{n=1}^{\infty} a_n \cos nx, \quad a_n = \frac{2}{\pi} \int_{0}^{\pi} f(x) \cos nx \, dx
+		\]
+	\end{enumerate}
+	
+	\item Dirichlet 收敛定理：若周期为 \(2\pi\) 的函数 \(f(x)\) 满足：  
+	\begin{enumerate}
+		\item 在 \([-\pi, \pi]\) 上连续或仅有有限个第一类间断点；  
+		\item 在 \([-\pi, \pi]\) 上仅有有限个单调区间，  
+	\end{enumerate}  
+	则其傅里叶级数收敛于  
+	\[
+	S(x) = \frac{f(x+0) + f(x-0)}{2} \quad (\forall x \in (-\infty, +\infty))
+	\]
+	
+	\item 周期为 \(2l\) 的傅里叶级数：设 \(f(x)\) 周期为 \(2l\)，则其在 \([-l, l]\) 上的展开式为  
+	\[
+	f(x) \leftrightarrow \frac{a_0}{2} + \sum_{n=1}^{\infty} \left(a_n \cos \frac{n\pi}{l}x + b_n \sin \frac{n\pi}{l}x\right)
+	\]  
+	系数为  
+	\[
+	a_n = \frac{1}{l} \int_{-l}^{l} f(x) \cos \frac{n\pi}{l}x \, dx \ (n=0,1,2,\cdots), \quad b_n = \frac{1}{l} \int_{-l}^{l} f(x) \sin \frac{n\pi}{l}x \, dx \ (n=1,2,\cdots)
+	\]
+	
+	\item 函数在 \([0, l]\) 上的正弦/余弦级数展开：  
+	\begin{enumerate}
+		\item 正弦级数：对 \(f(x)\) 作周期奇延拓（周期 \(2l\)），则  
+		\[
+		f(x) \leftrightarrow \sum_{n=1}^{\infty} b_n \sin \frac{n\pi}{l}x, \quad b_n = \frac{2}{l} \int_{0}^{l} f(x) \sin \frac{n\pi}{l}x \, dx
+		\]
+		\item 余弦级数：对 \(f(x)\) 作周期偶延拓（周期 \(2l\)），则  
+		\[
+		f(x) \leftrightarrow \frac{a_0}{2} + \sum_{n=1}^{\infty} a_n \cos \frac{n\pi}{l}x, \quad a_n = \frac{2}{l} \int_{0}^{l} f(x) \cos \frac{n\pi}{l}x \, dx
+		\]
+	\end{enumerate}
+	
+	\item 重要数项级数的和：  
+	\begin{enumerate}
+		\item \(\sum_{n=1}^{\infty} \frac{(-1)^{n-1}}{n} = \ln 2\)  
+		\item \(\sum_{n=0}^{\infty} \frac{1}{n!} = e\)  
+		\item \(\sum_{n=0}^{\infty} \frac{(-1)^n}{(2n+1)!} = \sin 1\)  
+		\item \(\sum_{n=0}^{\infty} \frac{(-1)^n}{(2n)!} = \cos 1\)  
+		\item \(\sum_{n=1}^{\infty} \frac{1}{n^2} = \frac{\pi^2}{6}\)  
+		\item \(\sum_{n=1}^{\infty} \frac{1}{(2n-1)^2} = \frac{\pi^2}{8}\)  
+		\item \(\sum_{n=1}^{\infty} \frac{(-1)^{n-1}}{n^2} = \frac{\pi^2}{12}\)  
+	\end{enumerate}
+\end{enumerate}
+
+\section{空间解析几何}
+\subsection*{知识点}
+\begin{enumerate}
+
+
+\item 向量的概念：
+\begin{enumerate}
+	\item 向量的表示：\(a=(a_{1}, a_{2}, a_{3})=a_{1}i+a_{2}j+a_{3}k\)
+	\item 向量的模：\(|a|=\sqrt{a_{1}^{2}+a_{2}^{2}+a_{3}^{3}}\)
+	\item 向量的方向余弦：\(\cos ^{2}\alpha+\cos ^{2}\beta+\cos ^{2}\gamma=1\)，其中 
+	\[
+	\cos\alpha=\frac{a_{1}}{\sqrt{a_{1}^{2}+a_{2}^{2}+a_{3}^{3}}}, \cos\beta=\frac{a_{2}}{\sqrt{a_{1}^{2}+a_{2}^{2}+a_{3}^{3}}}, \cos\gamma=\frac{a_{3}}{\sqrt{a_{1}^{2}+a_{2}^{2}+a_{3}^{3}}}
+	\]
+	\item 向量的单位化：\(e_{a}=\frac{a}{|a|}=\frac{1}{|a|}(a_{1}, a_{2}, a_{3})=(\cos\alpha, \cos\beta, \cos\gamma)\)
+	\item 基本单位向量：\(i=(1,0,0)\)，\(j=(0,1,0)\)，\(k=(0,0,1)\)
+\end{enumerate}
+
+\item 向量的运算：
+\begin{enumerate}
+	\item 向量的加减运算：\(a\pm b=(a_{1}\pm b_{1}, a_{2}\pm b_{2}, a_{3}\pm b_{3})\)
+	\item 向量的数乘运算：\(\lambda a=(\lambda a_{1}, \lambda a_{2}, \lambda a_{3})\)
+	\item 向量的数量积：\(a\cdot b=|a||b|\cos(\widehat{a,b})=a_{1}b_{1}+a_{2}b_{2}+a_{3}b_{3}\)
+	\item 向量积：\(a\times b=
+	\begin{vmatrix}
+		i & j & k \\
+		a_{1} & a_{2} & a_{3} \\
+		b_{1} & b_{2} & b_{3}
+	\end{vmatrix}\)
+	\item 向量的混合积：\([a\ b\ c]=a\cdot(b\times c)=
+	\begin{vmatrix}
+		a_{1} & a_{2} & a_{3} \\
+		b_{1} & b_{2} & b_{3} \\
+		c_{1} & c_{2} & c_{3}
+	\end{vmatrix}\)
+\end{enumerate}
+
+\item 向量之间的关系：
+\begin{enumerate}
+	\item 两向量的夹角：\(\cos(\hat{a,b})=\frac{a\cdot b}{|a||b|}=\frac{a_{1}b_{1}+a_{2}b_{2}+a_{3}b_{3}}{\sqrt{a_{1}^{2}+a_{2}^{2}+a_{3}^{2}}\sqrt{b_{1}^{2}+b_{2}^{2}+b_{3}^{2}}}\)
+	\item 向量的投影：\(Prj_{a}b=(b)_{a}=|b|\cos\theta=\frac{a\cdot b}{1}=e_{a}\cdot b\)
+	\item 两向量垂直：\(a\perp b\Leftrightarrow a\cdot b=0\Leftrightarrow a_{1}b_{1}+a_{2}b_{2}+a_{3}b_{3}=0\)
+	\item 两向量平行：\(a\parallel b\Leftrightarrow a\times b=0\Leftrightarrow\frac{a_{1}}{b_{1}}=\frac{a_{2}}{b_{2}}=\frac{a_{3}}{b_{3}}\Leftrightarrow a=\lambda b\)
+	\item 三向量共面：\([a\ b\ c]=0\)
+	\item 平行四边形的面积：\(S=|a\times b|=|a||b|\sin(\widehat{a,b})\)
+	\item 平行六面体的体积：\(V=|a\cdot(b\times c)|\)
+\end{enumerate}
+
+\item 平面方程：
+\begin{enumerate}
+	\item 一般式方程：\(Ax+By+Cz+D=0(A^{2}+B^{2}+C^{2}\neq0)\)
+	\item 点法式方程：\(A(x-x_{0})+B(y-y_{0})+C(z-z_{0})=0\)
+	\item 截距式方程：\(\frac{x}{a}+\frac{y}{b}+\frac{z}{c}=1\)
+	\item 三点式方程：\(\begin{vmatrix}
+		x-x_{1} & y-y_{1} & z-z_{1} \\
+		x_{2}-x_{1} & y_{2}-y_{1} & z_{2}-z_{1} \\
+		x_{3}-x_{1} & y_{3}-y_{1} & z_{3}-z_{1}
+	\end{vmatrix}=0\)
+	\item 向量式方程：\(n\cdot(r-r_{0})=0\)
+\end{enumerate}
+
+\item 直线方程：
+\begin{enumerate}
+	\item 一般式方程：\(\begin{cases}
+		A_{1}x+B_{1}y+C_{1}z+D_{1}=0, \\
+		A_{2}x+B_{2}y+C_{2}z+D_{2}=0
+	\end{cases}\)
+	\item 对称式方程：\(\frac{x-x_{0}}{m}=\frac{y-y_{0}}{n}=\frac{z-z_{0}}{p}\)
+	\item 参数式方程：\(x=x_{0}+mt\)，\(y=y_{0}+nt\)，\(z=z_{0}+pt\)
+	\item 两点式方程：\(\frac{x-x_{0}}{x_{1}-x_{0}}=\frac{y-y_{0}}{y_{1}-y_{0}}=\frac{z-z_{0}}{z_{1}-z_{0}}\)
+	\item 向量式方程：\(r=r_{0}+st\)
+\end{enumerate}
+
+\item 面线之间的夹角：
+\begin{enumerate}
+	\item 两平面间的夹角：\(\cos\theta=\frac{|n_{1}\cdot n_{2}|}{|n_{1}||n_{2}|}=\frac{|A_{1}A_{2}+B_{1}B_{2}+C_{1}C_{2}|}{\sqrt{A_{1}^{2}+B_{1}^{2}+C_{1}^{2}}\sqrt{A_{2}^{2}+B_{2}^{2}+C_{2}^{2}}}\)
+	\item 两直线间的夹角：\(\cos\theta=\frac{|s_{1}\cdot s_{2}|}{|s_{1}||s_{2}|}=\frac{|m_{1}m_{2}+n_{1}n_{2}+p_{1}p_{2}|}{\sqrt{m_{1}^{2}+n_{1}^{2}+p_{1}^{2}}\sqrt{m_{2}^{2}+n_{2}^{2}+p_{2}^{2}}}\)
+	\item 平面与直线间的夹角：\(\sin\theta=\frac{|s\cdot n|}{|s||n|}=\frac{|mA+nB+pC|}{\sqrt{m^{2}+n^{2}+p^{2}}\sqrt{A^{2}+B^{2}+C^{2}}}\)
+\end{enumerate}
+
+\item 平面之间的位置关系：
+\begin{enumerate}
+	\item 两面交于一条直线\(\Leftrightarrow\frac{A_{1}}{A_{2}}\)、\(\frac{B_{1}}{B_{2}}\)、\(\frac{C_{1}}{C_{2}}\)不成比例
+	\item 两平面平行但不重合\(\Leftrightarrow\frac{A_{1}}{A_{2}}=\frac{B_{1}}{B_{2}}=\frac{C_{1}}{C_{2}}\neq\frac{D_{1}}{D_{2}}\)
+	\item 两平面重合\(\Leftrightarrow\frac{A_{1}}{A_{2}}=\frac{B_{1}}{B_{2}}=\frac{C_{1}}{C_{2}}=\frac{D_{1}}{D_{2}}\)
+\end{enumerate}
+
+\item 两平面垂直：\(n_1 \cdot n_2 = 0 \Leftrightarrow A_1A_2 + B_1B_2 + C_1C_2 = 0\)
+
+\item 直线之间的位置关系：
+\begin{enumerate}
+	\item 两直线平行：\(s_1 \parallel s_2 \Leftrightarrow \frac{m_1}{m_2} = \frac{n_1}{n_2} = \frac{p_1}{p_2}\)
+	\item 两直线平行但不重合：\(s_1 \parallel s_2\)，且\(\overrightarrow{M_1M_2}\)与\(s_1\)不平行
+	\item 两直线垂直：\(s_1 \cdot s_2 = 0 \Leftrightarrow m_1m_2 + n_1n_2 + p_1p_2 = 0\)
+	\item 两直线相交：\(s_1\)与\(s_2\)不平行，且\([\overrightarrow{M_1M_2}\ s_1\ s_2] = 0\)
+	\item 两直线异面：\([\overrightarrow{M_1M_2}\ s_1\ s_2] \neq 0\)
+\end{enumerate}
+
+\item 平面与直线间的位置关系：
+\begin{enumerate}
+	\item 平面与直线平行：\(s \cdot n = 0 \Leftrightarrow mA + nB + pC = 0\)
+	\item 平面与直线相交：\(s \cdot n \neq 0 \Leftrightarrow mA + nB + pC \neq 0\)
+	\item 平面与直线垂直：\(s \times n = 0 \Leftrightarrow \frac{m}{A} = \frac{n}{B} = \frac{p}{C}\)
+	\item 平面束方程：过直线\(L: \begin{cases} A_1x + B_1y + C_1z + D_1 = 0 \\ A_2x + B_2y + C_2z + D_2 = 0 \end{cases}\)（\(\lambda^2 + \mu^2 \neq 0\)）的平面束方程为\(\lambda(A_1x + B_1y + C_1z + D_1) + \mu(A_2x + B_2y + C_2z + D_2) = 0\)
+\end{enumerate}
+
+\item 点到平面的距离：点\(M(x_0, y_0, z_0)\)到平面\(\pi: Ax + By + Cz + D = 0\)的距离为\(d = \frac{|\overrightarrow{M_1M_0} \cdot n|}{|n|} = \frac{|Ax_0 + By_0 + Cz_0 + D|}{\sqrt{A^2 + B^2 + C^2}}\)
+
+\item 点到直线的距离：点\(M(x_0, y_0, z_0)\)到直线\(L: \frac{x - x_1}{m} = \frac{y - y_1}{n} = \frac{z - z_1}{p}\)的距离为\(d = \frac{|\overrightarrow{M_0M_1} \times s|}{|s|} = \frac{1}{\sqrt{m^2 + n^2 + p^2}} \left| \begin{vmatrix} i & j & k \\ x_1 - x_0 & y_1 - y_0 & z_1 - z_0 \\ m & n & p \end{vmatrix} \right|\)
+
+\item 异面直线的距离：已知直线\(L_1: \frac{x - x_1}{m_1} = \frac{y - y_1}{n_1} = \frac{z - z_1}{p_1}\)和\(L_2: \frac{x - x_2}{m_2} = \frac{y - y_2}{n_2} = \frac{z - z_2}{p_2}\)，若异面，公垂线方向向量\(s = s_1 \times s_2\)，距离为\(d = \frac{|\overrightarrow{M_1M_2} \cdot s|}{|s|} = \frac{|\overrightarrow{M_1M_2}\ s_1\ s_2|}{|s_1 \times s_2|}\)
+
+\item 点在平面上的投影：
+\begin{enumerate}
+	\item 求垂线方程：\(\frac{x - x_0}{A} = \frac{y - y_0}{B} = \frac{z - z_0}{C}\)
+	\item 改写成参数方程：\(x = x_0 + At\)，\(y = y_0 + Bt\)，\(z = z_0 + Ct\)
+	\item 代入平面方程求参数，得投影点坐标
+\end{enumerate}
+
+\item 点在直线上的投影：
+\begin{enumerate}
+	\item 求垂面方程：\(m(x - x_0) + n(y - y_0) + p(z - z_0) = 0\)
+	\item 直线改写成参数方程：\(x = x_0 + mt\)，\(y = y_0 + nt\)，\(z = z_0 + pt\)
+	\item 代入垂面方程求参数，得投影点坐标
+\end{enumerate}
+
+\item 直线在平面上的投影：
+\begin{enumerate}
+	\item 求\(s = (m, n, p)\)与\(n = (A, B, C)\)的向量积\(n_1 = s \times n = (A_1, B_1, C_1)\)，得垂直平面\(\pi_1: A_1(x - x_0) + B_1(y - y_0) + C_1(z - z_0) = 0\)，投影为\(\begin{cases} A_1(x - x_0) + B_1(y - y_0) + C_1(z - z_0) = 0 \\ Ax + By + Cz + D = 0 \end{cases}\)
+	\item 或用平面束求垂面再联立
+	\item 或取直线上两点求投影，连结成线
+\end{enumerate}
+
+\item 空间曲面的方程：
+\begin{enumerate}
+	\item 一般方程：\(F(x, y, z) = 0\)
+	\item 参数方程：\(x = x(u, v)\)，\(y = y(u, v)\)，\(z = z(u, v)\)，\((u, v) \in D\)
+\end{enumerate}
+
+\item 空间曲线的方程：
+\begin{enumerate}
+	\item 一般方程：\(\begin{cases} F(x, y, z) = 0 \\ G(x, y, z) = 0 \end{cases}\)
+	\item 参数方程：\(x = x(t)\)，\(y = y(t)\)，\(z = z(t)\)，\(t \in [a, b]\)
+\end{enumerate}
+
+\item 旋转曲面要素：定点与动点到旋转轴距离不变，且在垂直于轴的平面上
+
+\item 平面曲线旋转曲面：
+\begin{enumerate}
+	\item 曲线\(\begin{cases} F(y, z) = 0 \\ x = 0 \end{cases}\)绕\(y\)轴：\(F(y, \pm\sqrt{x^2 + z^2}) = 0\)
+	\item 绕\(z\)轴：\(F(\pm\sqrt{x^2 + y^2}, z) = 0\)
+\end{enumerate}
+
+\item 空间曲线绕\(z\)轴旋转面：曲线\(\Gamma: x = \varphi(t)\)，\(y = \phi(t)\)，\(z = \psi(t)\)，旋转面方程为\(x = \sqrt{\varphi^2(t) + \phi^2(t)}\cos\theta\)，\(y = \sqrt{\varphi^2(t) + \phi^2(t)}\sin\theta\)，\(z = \psi(t)\)，\(0 \leq \theta \leq 2\pi\)，\(t \in [a, b]\)
+
+\item 曲线绕直线旋转面求法：
+\begin{enumerate}
+	\item 动点\(M(x, y, z)\)由曲线上点\(M_0(x_0, y_0, z_0)\)绕直线\(L\)旋转而成，\(M_1(x_1, y_1, z_1) \in L\)
+	\item \(M_0\)满足曲线方程\(\begin{cases} F(x_0, y_0, z_0) = 0 \\ G(x_0, y_0, z_0) = 0 \end{cases}\)
+	\item 距离相等：\(|\overrightarrow{MM_1} \times s| = |\overrightarrow{M_0M_1} \times s|\)
+	\item 垂直条件：\(\overrightarrow{M_0M} \cdot s = 0\)
+	\item 消去\(x_0, y_0, z_0\)得旋转面方程
+\end{enumerate}
+
+
+\item 准线为平面曲线$\begin{cases}F(x, y)=0\\z=0\end{cases}$，母线平行于$z$轴的柱面方程为$F(x, y)=0$。
+
+\item 准线为空间曲线$\begin{cases}F(x, y, z)=0\\G(x, y, z)=0\end{cases}$，母线平行于坐标轴（$z$轴）的柱面方程：在方程组中消去变量$z$，得到柱面方程$H(x, y)=0$。
+
+\item 空间曲线$\begin{cases}F(x, y, z)=0\\G(x, y, z)=0\end{cases}$在坐标面（如$xOy$面）上的投影求法：
+\begin{enumerate}
+	\item 在方程组中消去$z$得投影柱面方程$H(x, y)=0$；
+	\item 在$xOy$面上的投影为$\begin{cases}H(x, y)=0\\z=0\end{cases}$。
+\end{enumerate}
+
+\item 空间曲线$x=x(t)$，$y=y(t)$，$z=z(t)$在$xOy$面上的投影为$x=x(t)$，$y=y(t)$，$z=0$。
+
+\item 准线为$\begin{cases}F(x, y, z)=0\\G(x, y, z)=0\end{cases}$，母线方向为$u=(A, B, C)$的柱面方程求法：
+\begin{enumerate}
+	\item 准线上任取一点$(x_0, y_0, z_0)$满足$\begin{cases}F(x_0, y_0, z_0)=0\\G(x_0, y_0, z_0)=0\end{cases}$；
+	\item 过该点的母线方程为$\frac{x-x_0}{A}=\frac{y-y_0}{B}=\frac{z-z_0}{C}=t$；
+	\item 改写成参数方程$x_0=x-At$，$y_0=y-Bt$，$z_0=z-Ct$；
+	\item 代入$F(x_0, y_0, z_0)=0$消去参数$t$，得柱面方程$H(x, y, z)=0$。
+\end{enumerate}
+
+\item 空间曲线$\begin{cases}F(x, y, z)=0\\G(x, y, z)=0\end{cases}$在平面$Ax+By+Cz+D=0$上的投影求法：
+\begin{enumerate}
+	\item 求准线为原曲线、母线方向为平面法向量$u=(A, B, C)$的柱面方程；
+	\item 投影为$\begin{cases}H(x, y, z)=0\\Ax+By+Cz+D=0\end{cases}$。
+\end{enumerate}
+
+\item 顶点为$M_0(x_0, y_0, z_0)$，准线为$\begin{cases}F(x, y, z)=0\\G(x, y, z)=0\end{cases}$的锥面方程求法：
+\begin{enumerate}
+	\item 动点$M(x, y, z)$在过顶点和准线上点$M_1(x_1, y_1, z_1)$的联线上；
+	\item $M_1$满足$\begin{cases}F(x_1, y_1, z_1)=0\\G(x_1, y_1, z_1)=0\end{cases}$；
+	\item 三点共线，有$\frac{x_1-x_0}{x-x_0}=\frac{y_1-y_0}{y-y_0}=\frac{z_1-z_0}{z-z_0}$，参数形式为$x_1=x_0+t(x-x_0)$，$y_1=y_0+t(y-y_0)$，$z_1=z_0+t(z-z_0)$；
+	\item 代入准线方程消去参数$t$，得锥面方程。
+\end{enumerate}
+
+\item 二次曲面参数方程：
+\begin{enumerate}
+	\item 球面$x^2+y^2+z^2=a^2$：$\begin{cases}x=a\sin\varphi\cos\theta\\y=a\sin\varphi\sin\theta\\z=a\cos\varphi\end{cases}$（$0\leq\theta\leq2\pi$，$0\leq\varphi\leq\pi$）；
+	\item 椭球面$\frac{x^2}{a^2}+\frac{y^2}{b^2}+\frac{z^2}{c^2}=1$：$\begin{cases}x=a\sin\varphi\cos\theta\\y=b\sin\varphi\sin\theta\\z=c\cos\varphi\end{cases}$（$0\leq\theta\leq2\pi$，$0\leq\varphi\leq\pi$）；
+	\item 单叶双曲面$\frac{x^2}{a^2}+\frac{y^2}{b^2}-\frac{z^2}{c^2}=1$：$\begin{cases}x=a\sec\varphi\cos\theta\\y=b\sec\varphi\sin\theta\\z=c\tan\varphi\end{cases}$（$0\leq\theta\leq2\pi$，$-\frac{\pi}{2}<\varphi<\frac{\pi}{2}$）；
+	\item 双叶双曲面$-\frac{x^2}{a^2}-\frac{y^2}{b^2}+\frac{z^2}{c^2}=1$：$\begin{cases}x=a\tan\varphi\cos\theta\\y=b\tan\varphi\sin\theta\\z=c\sec\varphi\end{cases}$（$0\leq\theta\leq2\pi$，$-\frac{\pi}{2}<\varphi<\frac{\pi}{2}$）；
+	\item 椭圆抛物面$z=\frac{x^2}{a^2}+\frac{y^2}{b^2}$：$\begin{cases}x=a u\cos\theta\\y=b u\sin\theta\\z=u^2\end{cases}$（$0\leq\theta\leq2\pi$，$u\geq0$）；
+	\item 双曲抛物面$z=\frac{x^2}{a^2}-\frac{y^2}{b^2}$：$\begin{cases}x=a u\sec\theta\\y=b u\tan\theta\\z=u^2\end{cases}$；
+	\item 圆锥面$x^2+y^2=k^2 z^2$：$\begin{cases}x=k z\cos\theta\\y=k z\sin\theta\\z=z\end{cases}$（$0\leq\theta\leq2\pi$，$z\in R$）；
+	\item 椭圆锥面$\frac{x^2}{a^2}+\frac{y^2}{b^2}=\frac{z^2}{c^2}$：$\begin{cases}x=a u\cos\theta\\y=b u\sin\theta\\z=c u\end{cases}$（$0\leq\theta\leq2\pi$，$u\in R$）；
+	\item 圆柱面$x^2+y^2=a^2$：$x=a\cos\theta$，$y=a\sin\theta$，$z=z$（$0\leq\theta\leq2\pi$，$z\in R$）；
+	\item 椭圆柱面$\frac{x^2}{a^2}+\frac{y^2}{b^2}=1$：$x=a\cos\theta$，$y=b\sin\theta$，$z=z$（$0\leq\theta\leq2\pi$，$z\in R$）；
+	\item 双曲柱面$\frac{x^2}{a^2}-\frac{y^2}{b^2}=1$：$x=a\sec\theta$，$y=b\tan\theta$，$z=z$（$-\frac{\pi}{2}<\theta<\frac{\pi}{2}$，$z\in R$）。
+\item 抛物柱面：\(y^{2} = 2px\)。
+\end{enumerate}
+\item 二次曲面的标准化及分类：设二次曲面方程为
+\[
+f(x_1, x_2, x_3) = a_{11}x_1^2 + a_{22}x_2^2 + a_{33}x_3^2 + 2a_{12}x_1x_2 + 2a_{13}x_1x_3 + 2a_{23}x_2x_3 + b_1x_1 + b_2x_2 + b_3x_3 + c = 0
+\]
+令
+\[
+x = \begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix}, \quad b = \begin{bmatrix} b_1 \\ b_2 \\ b_3 \end{bmatrix}, \quad A = \begin{bmatrix} a_{11} & a_{12} & a_{13} \\ a_{12} & a_{22} & a_{23} \\ a_{13} & a_{23} & a_{33} \end{bmatrix}
+\]
+则
+\[
+f = x^T A x + b^T x + c = 0
+\]
+求矩阵 \(A\) 的特征值 \(\lambda_1, \lambda_2, \lambda_3\) 及对应的两两正交的单位特征向量 \(Q = (\xi_1, \xi_2, \xi_3)\)，作正交变换 \(x = Qy\) 使 \(Q^T A Q = \text{diag}(\lambda_1, \lambda_2, \lambda_3)\)，记 \(b^T Q = (b_1', b_2', b_3')\)，方程化为
+\[
+\lambda_1 y_1^2 + \lambda_2 y_2^2 + \lambda_3 y_3^2 + b_1' y_1 + b_2' y_2 + b_3' y_3 + c = 0
+\]
+设矩阵 \(A\) 的秩为 \(r\)，正惯性指数为 \(p\)，负惯性指数为 \(q (q = r - p)\)。
+
+\begin{enumerate}
+	\item 当 \(r = 3\) 时，方程可化为 \(\lambda_1 z_1^2 + \lambda_2 z_2^2 + \lambda_3 z_3^2 = d\)：
+	\begin{itemize}
+		\item \(p = 3\)，\(d > 0\)：椭球面（\(\lambda_1 = \lambda_2 = \lambda_3\) 时为球面）；
+		\item \(p = 3\)，\(d = 0\)：坐标原点；
+		\item \(p = 3\)，\(d < 0\)：虚椭球面；
+		\item \(p = 2\)，\(d > 0\) 或 \(p = 1\)，\(d < 0\)：单叶双曲面；
+		\item \(p = 2\)，\(d < 0\) 或 \(p = 1\)，\(d > 0\)：双叶双曲面。
+	\end{itemize}
+	\item 当 \(r = 2\) 时，方程可化为 \(\lambda_1 z_1^2 + \lambda_2 z_2^2 = a z_3 (a \neq 0)\)：
+	\begin{itemize}
+		\item \(p = 2\)：椭圆抛物面（\(\lambda_1 = \lambda_2\) 时为旋转抛物面）；
+		\item \(p = 1\)：双曲抛物面。
+	\end{itemize}
+	\item 当 \(r = 2\) 时，方程可化为 \(\lambda_1 z_1^2 + \lambda_2 z_2^2 = d\)：
+	\begin{itemize}
+		\item \(p = 2\)，\(d > 0\)：椭圆柱面；
+		\item \(p = 2\)，\(d = 0\)：平行于坐标轴的直线；
+		\item \(p = 2\)，\(d < 0\)：虚椭圆柱面；
+		\item \(p = 1\)，\(d \neq 0\)：双曲柱面；
+		\item \(p = 1\)，\(d = 0\)：相交的两个平面。
+	\end{itemize}
+	\item 当 \(r = 1\) 时，方程可化为 \(\lambda_1 z_1^2 + b z_2 + c z_3 = d\)：
+	\begin{itemize}
+		\item \(b \neq 0\)，\(c = 0\) 或 \(b = 0\)，\(c \neq 0\)：抛物柱面；
+		\item \(b = c = 0\)，\(\lambda_1\) 与 \(d\) 同号：两个平行平面；
+		\item \(b = c = 0\)，\(\lambda_1\) 与 \(d\) 异号：两个虚平行平面；
+		\item \(b = c = d = 0\)：一个平面。
+	\end{itemize}
+\end{enumerate}
+\end{enumerate}
+\section{常微分方程}  
+\subsection*{知识点}
+\begin{enumerate}
+
+\item 基本型一阶微分方程的求解：  
+\begin{enumerate}
+	\item 可分离变量方程  
+	
+形式：\(g(y) \, dy = f(x) \, dx\)  
+	
+解法：两边积分 \(\int g(y) \, dy = \int f(x) \, dx\)  
+	\item 齐次方程  
+	
+形式：\(\frac{dy}{dx} = \varphi\left(\frac{y}{x}\right)\)  
+	
+解法：令 \(u = \frac{y}{x}\)，则 \(y' = x u' + u\)，化为可分离变量方程。  
+	\item 一阶线性方程  
+	
+形式：\(y' + P(x)y = Q(x)\)  
+	
+通解：\(y = e^{-\int P(x) \, dx} \left( \int Q(x) e^{\int P(x) \, dx} \, dx + C \right)\)  
+	\item Bernoulli 方程  
+	
+形式：\(y' + P(x)y = Q(x)y^n\)（\(n \neq 0, 1\)）  
+	
+解法：令 \(z = y^{1-n}\)，化为一阶线性方程 \(\frac{dz}{dx} + (1-n)P(x)z = (1-n)Q(x)\)  
+	\item 全微分方程  
+	
+形式：\(P(x,y)dx + Q(x,y)dy = 0\)，满足 \(\frac{\partial Q}{\partial x} = \frac{\partial P}{\partial y}\)  
+	
+解法：曲线积分法、不定积分法、分组凑微分法。  
+\end{enumerate}  
+
+\item 其他一阶方程解法：  
+\begin{enumerate}
+	\item 变量代换法：通过自变量、因变量或混合代换化简方程。  
+	\item 变量互换法：交换自变量与因变量角色。  
+	\item 积分因子法：乘以积分因子化为全微分方程。  
+\end{enumerate}  
+
+\item 可降阶的高阶方程：  
+\begin{enumerate}
+	\item 缺 \(y\) 及 \(y'\)：\(y'' = f(x)\)，直接积分两次。  
+	\item 缺 \(y\)：\(y'' = f(x, y')\)，令 \(p(x) = y'\)，则 \(y'' = p'\)。  
+	\item 缺 \(x\)：\(y'' = f(y, y')\)，令 \(p(y) = y'\)，则 \(y'' = p \frac{dp}{dy}\)。  
+\end{enumerate}  
+
+\item 线性微分方程解的结构：  
+\begin{enumerate}
+	\item 若 \(y_1, y_2\) 是齐次方程 \(y'' + P(x)y' + Q(x)y = 0\) 的解，则 \(C_1y_1 + C_2y_2\) 也是解。  
+	\item 若 \(y_1, y_2\) 线性无关，则 \(C_1y_1 + C_2y_2\) 是齐次方程通解。  
+	\item 非齐次方程通解 = 齐次通解 \(Y\) + 特解 \(y^*\)。  
+	\item 特解叠加性：\(y_1^*\)、\(y_2^*\) 分别对应 \(f_1(x)\)、\(f_2(x)\)，则 \(y_1^* + y_2^*\) 对应 \(f_1(x) + f_2(x)\)。  
+\end{enumerate}  
+
+\item Liouville 公式：若 \(y_1(x)\) 是齐次方程非零解，则另一线性无关解为  
+\[
+y_2(x) = y_1 \int \frac{1}{y_1^2} e^{-\int P(x) \, dx} \, dx
+\]  
+通解为 \(y = C_1y_1 + C_2y_1 \int \frac{1}{y_1^2} e^{-\int P(x) \, dx} \, dx\)。  
+
+\item 常数变易法（二阶非齐次方程）：  
+设齐次通解为 \(y = C_1y_1 + C_2y_2\)，假设非齐次解为 \(y = c_1(x)y_1 + c_2(x)y_2\)，解方程组  
+\[
+\begin{cases}
+	c_1'(x)y_1 + c_2'(x)y_2 = 0 \\
+	c_1'(x)y_1' + c_2'(x)y_2' = f(x)
+\end{cases}
+\]  
+其中 \(w(x) = \begin{vmatrix} y_1 & y_2 \\ y_1' & y_2' \end{vmatrix} \neq 0\)，得  
+\[
+c_1(x) = C_1 - \int \frac{y_2 f(x)}{w(x)} \, dx, \quad c_2(x) = C_2 + \int \frac{y_1 f(x)}{w(x)} \, dx
+\]  
+非齐次通解为 \(y = C_1y_1 + C_2y_2 - y_1 \int \frac{y_2 f(x)}{w(x)} \, dx + y_2 \int \frac{y_1 f(x)}{w(x)} \, dx\)。  
+
+\item 二阶常系数齐次方程：  
+特征方程 \(r^2 + pr + q = 0\)，特征根 \(r_1, r_2\)：  
+\begin{enumerate}
+	\item \(r_1 \neq r_2\)：通解 \(y = C_1 e^{r_1 x} + C_2 e^{r_2 x}\)  
+	\item \(r_1 = r_2 = r\)：通解 \(y = (C_1 + C_2 x) e^{r x}\)  
+	\item \(r_1, r_2 = \alpha \pm i\beta\)：通解 \(y = e^{\alpha x}(C_1 \cos\beta x + C_2 \sin\beta x)\)  
+\end{enumerate}
+\item 二阶常系数非齐次线性微分方程 \(y'' + py' + qy = f(x)\) 的特解形式：  
+\begin{enumerate}
+	\item 若 \(f(x) = e^{\lambda x} P_m(x)\)（\(P_m(x)\) 为 \(m\) 次多项式），则特解为  
+	\[
+	y^* = x^k e^{\lambda x} Q_m(x)
+	\]  
+	其中 \(k\) 为 \(\lambda\) 作为特征根的重数（\(k=0,1,2\)）。  
+	\item 若 \(f(x) = e^{\lambda x}(P_m(x)\cos\theta x + Q_l(x)\sin\theta x)\)，则特解为  
+	\[
+	y^* = x^k e^{\lambda x}(R_n(x)\cos\theta x + S_n(x)\sin\theta x)
+	\]  
+	其中 \(k\) 为 \(\lambda \pm i\theta\) 作为特征根的重数（\(k=0,1\)），\(n = \max\{m, l\}\)。  
+\end{enumerate}  
+
+\item Euler 方程  
+
+形式：形如 \(x^n y^{(n)} + a_1 x^{n-1} y^{(n-1)} + \cdots + a_n y = f(x)\)。  
+
+解法：令 \(x = e^t\) 或 \(t = \ln x\)，记 \(D = \frac{d}{dt}\)，则 \(x^k \frac{d^k y}{dx^k} = D(D-1)\cdots(D-k+1)y\)，转化为常系数线性方程。  
+
+\item 积分方程解法 \(y(x) = \int_0^x g(x, y(t))dt + h(x)\)  
+\begin{enumerate}
+	\item 变量代换：将 \(g(x, y(t))\) 中的 \(x\) 移至积分号外或积分限。  
+	\item 求导：转化为微分方程。  
+	\item 解方程：利用积分方程确定初始条件。  
+\end{enumerate}  
+
+\item 微分方程应用问题  
+\begin{enumerate}
+	\item 两类问题：几何应用（如切线、弧长等），物理/力学应用（如运动、振动等）。  
+	\item 两种方法：规律“翻译”（直接转化物理定律），微量平衡分析（分析微元变化）。  
+	\item 步骤：列方程 → 解方程 → 分析解的性质。  
+\end{enumerate}  
+
+\item 微分方程几何应用常用量  
+\begin{enumerate}
+	\item 切线方程：\(Y - y = f'(x)(X - x)\)  
+	\item 法线方程：\(Y - y = -\frac{1}{f'(x)}(X - x)\)  
+	\item 弧微分：\(ds = \sqrt{(dx)^2 + (dy)^2} = \sqrt{1 + y'^2}dx\)  
+	\item 弧长：\(l = \int_{x_0}^x \sqrt{1 + y'^2}dx\)  
+	\item 曲率：\(\rho = \left|\frac{d\alpha}{ds}\right| = \frac{|y''|}{(1 + y'^2)^{3/2}}\)  
+\end{enumerate}
+\end{enumerate}
+
+
+\section{行列式与矩阵}
+\subsection*{知识点}
+\begin{enumerate}
+	\item \textbf{n 阶行列式的性质  }
+	\begin{enumerate}
+		\item 行列式与转置行列式相等。  
+		\item 互换两行（列），行列式变号。  
+		\item 某行（列）公因子可提至行列式外。  
+		\item 行（列）元素为两数之和时，行列式可拆分为两行列式之和。  
+		\item 某行（列）乘常数加到另一行（列），行列式不变。  
+		\item 某行（列）元素与代数余子式乘积之和等于行列式值。  
+		\item 某行（列）元素与另一行（列）代数余子式乘积之和为零。  
+		\item 行列式乘法：设 \(D_1 = |a_{ij}|_n\)，\(D_2 = |b_{ij}|_n\)，令 \(c_{ij} = \sum_{k=1}^n a_{ik}b_{kj}\)，则 \(D = |c_{ij}|_n = D_1D_2\)。  
+	\end{enumerate}
+	
+	\item Crammer 法则：用于解线性方程组。  
+	
+	\item 矩阵的概念  
+	\begin{enumerate}
+		\item 定义：\(m \times n\) 实数排列成的数表 \(A = (a_{ij})_{m \times n}\)，元素为 \(a_{ij}\)。  
+		\item 三种初等变换：  
+互换两行；
+		  
+某行乘（除）非零数；  
+		
+某行乘常数加到另一行。  
+	\end{enumerate}
+	
+	\item 矩阵的运算性质  
+	\begin{enumerate}
+		\item 加法：  
+交换律：\(A + B = B + A\)；  
+		
+结合律：\((A + B) + C = A + (B + C)\)。  
+		\item 数乘：  
+分配律：\(\gamma(A + B) = \gamma A + \gamma B\)，\((\gamma + \lambda)A = \gamma A + \lambda A\)；  
+		
+结合律：\((\gamma\lambda)A = \gamma(\lambda A) = \lambda(\gamma A)\)。  
+		\item 乘法：  
+若 \(A\) 是 \(m \times k\) 矩阵，\(B\) 是 \(k \times n\) 矩阵，则 \(C = AB\) 是 \(m \times n\) 矩阵，其中 \(c_{ij} = \sum_{k=1}^k a_{ik}b_{kj}\)；  
+		
+分配律：\(A(B + C) = AB + AC\)，\((B + C)A = BA + CA\)；  
+		
+结合律：\(R(AB) = (RA)B = A(RB)\)，\((AB)C = A(BC)\)；  
+		
+交换律一般不成立：\(AB \neq BA\)。  
+		\item 转置：  
+\((A')' = A\)，\((A + B)' = A' + B'\)；  
+		
+\((kA)' = kA'\)，\((AB)' = B'A'\)。  
+	\end{enumerate}
+
+
+\item 逆矩阵性质  
+\[
+\left(A^{-1}\right)^{-1} = A, \quad (AB)^{-1} = B^{-1}A^{-1}, \quad (kA)^{-1} = \frac{1}{k}A^{-1}, \quad \left(A'\right)^{-1} = \left(A^{-1}\right)'
+\]  
+注：一般情况下 \((A \pm B)^{-1} \neq A^{-1} \pm B^{-1}\)。  
+
+\item 方阵的行列式  
+\[
+\left|A'\right| = |A|, \quad |kA| = k^n|A|, \quad |AB| = |A||B|
+\]  
+
+\item 方阵的幂  
+\[
+A^kA^l = A^{k+l} = A^lA^k, \quad \left(A^k\right)^l = A^{kl}, \quad \left(A^m\right)' = \left(A'\right)^m
+\]  
+
+\item 判定 \(n\) 阶方阵 \(A\) 可逆的方法  
+\begin{enumerate}
+	\item \(A\) 可逆 \(\Leftrightarrow |A| \neq 0\)；  
+	\item 存在矩阵 \(B\) 使 \(AB = E\)（或 \(BA = E\)）；  
+	\item \(n\) 阶数字阵 \(A\) 可逆 \(\Leftrightarrow R(A) = n\)；  
+	\item 不存在非零矩阵 \(B\) 使 \(AB = O\)（或 \(BA = O\)）；  
+	\item \(A\) 的行（列）向量组线性无关；  
+	\item \(A\) 与单位阵 \(E_n\) 等价；  
+	\item \(A\) 经初等行变换可化成 \(E_n\)；  
+	\item \(A\) 可表示为有限个初等方阵的乘积；  
+	\item \(A\) 的特征值全不为零；  
+	\item \(A^*\) 可逆。  
+\end{enumerate}  
+
+\item 求 \(A^{-1}\) 的方法  
+\begin{enumerate}
+	\item 公式法：\(A^{-1} = \frac{1}{|A|}A^*\)，其中 \(A^*\) 为伴随矩阵；  
+	\item 初等变换法：  
+	\[
+	(A \vdots E) \xrightarrow{初等行变换} (E \vdots A^{-1}), \quad \left(\begin{array}{c} A \\ \hline E \end{array}\right) \xrightarrow{初等列变换} \left(\begin{array}{c} E \\ \hline A^{-1} \end{array}\right)
+	\]  
+	\item 若 \(AB = E\)（或 \(BA = E\)），则 \(A^{-1} = B\)；  
+	\item 分块矩阵求逆。  
+\end{enumerate}  
+
+\item 矩阵秩的性质  
+\begin{enumerate}
+	\item \(0 \leq R(A) \leq \min\{m, n\}\)；  
+	\item \(A = O \Leftrightarrow R(A) = 0\)；  
+	\item \(R(A') = R(A)\)；  
+	\item \(R(A + B) \leq R(A) + R(B)\)；  
+	\item \(R(kA) = 
+	\begin{cases} 
+		0, & k = 0, \\
+		R(A), & k \neq 0;
+	\end{cases}\)  
+	\item 分块矩阵行列式（\(A, D\) 为方阵）：  
+	- 若 \(A\) 可逆，\(\left|\begin{array}{ll} A & B \\ C & D \end{array}\right| = |A|\left|D - CA^{-1}B\right|\)；  
+	- 若 \(D\) 可逆，\(\left|\begin{array}{ll} A & B \\ C & D \end{array}\right| = |D|\left|A - BD^{-1}C\right|\)；  
+	- 若 \(A, B, C, D\) 同阶且 \(A\) 可逆、\(AC = CA\)，则 \(\left|\begin{array}{ll} A & B \\ C & D \end{array}\right| = |AD - CB|\)。  
+	\item 分块对角矩阵：  
+	若 \(A = \left(\begin{array}{llll} A_1 & & & \\ & A_2 & & \\ & & \ddots & \\ & & & A_s \end{array}\right)\)，则  
+	\[
+	A^m = \left(\begin{array}{llll} A_1^m & & & \\ & A_2^m & & \\ & & \ddots & \\ & & & A_s^m \end{array}\right), \quad |A| = \prod_{i=1}^s |A_i|
+	\]  
+	若 \(|A_i| \neq 0\)，则 \(A^{-1} = \left(\begin{array}{llll} A_1^{-1} & & & \\ & A_2^{-1} & & \\ & & \ddots & \\ & & & A_s^{-1} \end{array}\right)\)。  
+\end{enumerate}
+\end{enumerate}
+
+\section{n维向量空间与线性方程组  }
+\begin{enumerate}
+
+
+\item n维向量  
+
+定义：n个数构成的有序数组，如行向量\(\alpha=(a_1,a_2,\cdots,a_n)\)，列向量\(\alpha=(a_1,a_2,\cdots,a_n)'\)，同维向量组成向量组。  
+
+线性运算：  
+
+加法：\(\alpha+\beta=(a_1+b_1,a_2+b_2,\cdots,a_n+b_n)\)  
+
+数乘：\(k\alpha=(ka_1,ka_2,\cdots,ka_n)\)  
+
+减法：\(\alpha-\beta=\alpha+(-\beta)=(a_1-b_1,a_2-b_2,\cdots,a_n-b_n)\)  
+
+运算律：  
+\begin{enumerate}
+\item \(\alpha+\beta=\beta+\alpha\)  
+\item \((\alpha+\beta)+\gamma=\alpha+(\beta+\gamma)\)  
+\item \(\alpha+0=\alpha\)  
+\item \(\alpha+(-\alpha)=0\)  
+\item \(1\alpha=\alpha\)  
+\item \(k(l\alpha)=(kl)\alpha\)  
+\item \(k(\alpha+\beta)=k\alpha+k\beta\)  
+\item \((k+l)\alpha=k\alpha+l\alpha\)  
+\end{enumerate}
+\item 线性组合与线性相关  
+
+定义1：若\(\alpha=k_1\alpha_1+\cdots+k_m\alpha_m\)，则\(\alpha\)是\(\alpha_1,\cdots,\alpha_m\)的线性组合。  
+
+定义2：若存在不全为0的\(k_1,\cdots,k_m\)使\(k_1\alpha_1+\cdots+k_m\alpha_m=0\)，则向量组线性相关，否则线性无关。  
+
+定理：  
+
+1. 线性相关\(\Leftrightarrow\)至少一个向量可由其余向量线性表示。  
+
+2. 线性相关\(\Leftrightarrow Ax=0\)有非零解（\(A=(\alpha_1,\cdots,\alpha_m)\)）。  
+
+3. 若\(\alpha_1,\cdots,\alpha_m\)线性无关，\(\alpha_1,\cdots,\alpha_m,\beta\)线性相关，则\(\beta\)可唯一由\(\alpha_1,\cdots,\alpha_m\)线性表示。  
+
+注：  
+单个零向量相关，非零向量无关；含零向量的组必相关；基本向量组\(e_1,\cdots,e_n\)无关；含相等向量的组相关；\(m>n\)时，\(m\)个\(n\)维向量必相关；\(n\)个\(n\)维向量无关\(\Leftrightarrow\)对应行列式非零；\(n\)维空间中线性无关组最多含\(n\)个向量。  
+
+\item 等价向量组  
+
+若向量组\(T_1\)中每个向量可由\(T_2\)线性表示，则\(T_1\)可由\(T_2\)表示；若\(T_1\)与\(T_2\)互相可表示，则等价。  
+性质：自反性、对称性、传递性。  
+
+\item 极大线性无关组  
+
+定义：向量组\(A\)中存在\(r\)个向量\(\alpha_1,\cdots,\alpha_r\)满足： 
+ 
+1. 线性无关；  
+
+2. 任意\(r+1\)个向量相关（若存在）。  
+
+性质：  
+
+极大无关组与原向量组等价；  
+
+任意两个极大无关组等价。  
+
+定理：向量组的任意两个极大无关组含向量个数相同。  
+
+\item 向量组的秩  
+定义：极大无关组所含向量个数，记为\(R(\alpha_1,\cdots,\alpha_s)\)。
+
+\item 关于向量组的秩的结论：
+\begin{enumerate}
+	\item 零向量组的秩为0；
+	\item 向量组$\alpha_1,\alpha_2,\cdots,\alpha_s$线性无关$\Leftrightarrow R(\alpha_1,\alpha_2,\cdots,\alpha_s)=s$，向量组$\alpha_1,\alpha_2,\cdots,\alpha_s$线性相关$\Rightarrow R(\alpha_1,\alpha_2,\cdots,\alpha_s)<s$；
+	\item 若向量组$\alpha_1,\alpha_2,\cdots,\alpha_s$可由向量组$\beta_1,\beta_2,\cdots,\beta_t$线性表示，则$R(\alpha_1,\alpha_2,\cdots,\alpha_s)\leq R(\beta_1,\beta_2,\cdots,\beta_t)$；
+	\item 等价的向量组必有相同的秩。
+\end{enumerate}
+\begin{remark}
+	两个有相同秩的向量组不一定等价，但两个向量组有相同的秩且其中一个可被另一个线性表示时，这两个向量组等价。
+\end{remark}
+
+\item 向量空间的基与维数：
+\begin{enumerate}
+	\item 定义：设$V$是向量空间，若$r$个向量$\alpha_1,\alpha_2,\cdots,\alpha_r\in V$满足：
+	\begin{enumerate}
+		\item $\alpha_1,\alpha_2,\cdots,\alpha_r$线性无关；
+		\item $V$中任一向量均可由$\alpha_1,\alpha_2,\cdots,\alpha_r$线性表示，
+	\end{enumerate}
+	则称$\alpha_1,\alpha_2,\cdots,\alpha_r$是$V$的一个基，$r$为$V$的维数，记作$\dim V=r$，称$V$是$r$维向量空间。
+	\item 注：
+	\begin{enumerate}
+		\item 仅含零向量的向量空间无基，规定维数为0；
+		\item 向量空间的基是其作为向量组的极大无关组，维数是向量组的秩；
+		\item 向量空间的基不唯一。
+	\end{enumerate}
+\end{enumerate}
+
+\item 基变换与坐标变换：
+\begin{enumerate}
+	\item 设$\alpha_1,\alpha_2,\cdots,\alpha_r$及$\beta_1,\beta_2,\cdots,\beta_r$为向量空间$V$的两组基（均为列向量），则存在$r$阶可逆阵$P$，使
+	\[
+	(\beta_1,\beta_2,\cdots,\beta_r)=(\alpha_1,\alpha_2,\cdots,\alpha_r)P
+	\]
+	称此为基$\alpha_1,\alpha_2,\cdots,\alpha_r$到基$\beta_1,\beta_2,\cdots,\beta_r$的基变换公式，$P$为过渡阵。
+	\item 设$\alpha\in V$，$\alpha$在基$\alpha_1,\alpha_2,\cdots,\alpha_r$和基$\beta_1,\beta_2,\cdots,\beta_r$下的坐标分别为$x=(x_1,x_2,\cdots,x_r)'$及$y=(y_1,y_2,\cdots,y_r)'$，则坐标变换公式为
+	\[
+	x=Py \quad 或 \quad y=P^{-1}x
+	\]
+\end{enumerate}
+
+\item 线性方程组：
+\begin{enumerate}
+	\item 一般式：
+	\[
+	\begin{cases}
+		a_{11}x_1+a_{12}x_2+\cdots+a_{1n}x_n=b_1 \\
+		a_{21}x_1+a_{22}x_2+\cdots+a_{2n}x_n=b_2 \\
+		\vdots \\
+		a_{m1}x_1+a_{m2}x_2+\cdots+a_{mn}x_n=b_m
+	\end{cases}
+	\]
+	矩阵形式为$Ax=b$，其中
+	\[
+	A=\begin{pmatrix}
+		a_{11} & a_{12} & \cdots & a_{1n} \\
+		a_{21} & a_{22} & \cdots & a_{2n} \\
+		\vdots & \vdots & & \vdots \\
+		a_{m1} & a_{m2} & \cdots & a_{mn}
+	\end{pmatrix}, \quad x=\begin{pmatrix}
+		x_1 \\
+		x_2 \\
+		\vdots \\
+		x_n
+	\end{pmatrix}, \quad b=\begin{pmatrix}
+		b_1 \\
+		b_2 \\
+		\vdots \\
+		b_m
+	\end{pmatrix}
+	\]
+	若$b=0$，称为齐次线性方程组；否则为非齐次线性方程组。
+\end{enumerate}
+
+\item 齐次线性方程组$AX=0$：
+\begin{enumerate}
+	\item 记$S=\{X|AX=0,X\in R^n\}$，则$S$为$n-R(A)$维向量空间；
+	\item 任意齐次线性方程组均有解；
+	\item $AX=0$只有零解（唯一解）$\Leftrightarrow R(A)=n$；
+	\item $AX=0$有非零解（无穷多解）$\Leftrightarrow R(A)=r<n$；
+	\item 当$R(A)=m<n$时，$AX=0$有非零解；
+	\item 齐次线性方程组的解的任意线性组合仍为其解。
+\end{enumerate}
+
+\item 非齐次线性方程组$AX=b$（$A=(\alpha_1,\alpha_2,\cdots,\alpha_n)$）：
+\begin{enumerate}
+	\item $AX=b$有解$\Leftrightarrow b$可由向量组$\alpha_1,\alpha_2,\cdots,\alpha_n$线性表示$\Leftrightarrow \{\alpha_1,\alpha_2,\cdots,\alpha_n\}$与$\{\alpha_1,\alpha_2,\cdots,\alpha_n,b\}$等价$\Leftrightarrow R(A)=R(A|b)$；
+	\item $AX=b$无解$\Leftrightarrow R(A)\neq R(A|b)$（$R(A)=R(A|b)-1$）；
+	\item $AX=b$有唯一解$\Leftrightarrow R(A)=R(A|b)=n$；
+	\item $AX=b$有无穷多解$\Leftrightarrow R(A)=R(A|b)=r<n$；
+	\item $AX=b$的任意两解之差是其导出组$AX=0$的解，$AX=b$的解与其导出组$AX=0$的解之和仍为$AX=b$的解；
+	\item 当$R(A)=R(A|b)=r<n$时，设$AX=b$的特解为$\eta^*$，导出组的基础解系为$\tau_1,\tau_2,\cdots,\tau_{n-r}$，则通解为
+	\[
+	X=\eta^*+k_1\tau_1+k_2\tau_2+\cdots+k_{n-r}\tau_{n-r}, \quad k_1,k_2,\cdots,k_{n-r}\in R
+	\]
+	\item 设$A$为$m\times n$阵，$R(A)=m$，则对任意向量$b$，方程组$AX=b$均有解。
+\end{enumerate}
+\item 非齐次线性方程组解的线性组合性质：  
+设\(\tau_1,\tau_2,\cdots,\tau_s\)为\(AX=b\)的解，对实数\(k_1,k_2,\cdots,k_s\)，  
+\begin{enumerate}
+	\item 若\(k_1+k_2+\cdots+k_s=1\)，则\(k_1\tau_1+k_2\tau_2+\cdots+k_s\tau_s\)为\(AX=b\)的解；  
+	\item 若\(k_1+k_2+\cdots+k_s=0\)，则\(k_1\tau_1+k_2\tau_2+\cdots+k_s\tau_s\)为导出组\(AX=0\)的解。  
+\end{enumerate}  
+\end{enumerate}
+\section{相似矩阵及二次型}
+\begin{enumerate}
+	\item 向量的内积  
+	\begin{enumerate}
+		\item 定义：设\(x=(x_1,x_2,\cdots,x_n)'\)，\(y=(y_1,y_2,\cdots,y_n)'\)，内积为  
+		\[
+		[x,y]=x_1y_1+x_2y_2+\cdots+x_ny_n=x'y
+		\]  
+		\item 性质：  
+		1. \([x,y]=[y,x]\)；  
+		
+		2. \(k[x,y]=[kx,y]=[x,ky]\)；  
+		
+		3. \([x+y,z]=[x,z]+[y,z]\)；  
+		
+		4. \([x,x]\geq0\)，且\([x,x]=0\Leftrightarrow x=0\)；  
+		
+		5. \([x,y]^2\leq[x,x][y,y]\)（施瓦茨不等式）。  
+	\end{enumerate}  
+	
+	\item 向量的长度及夹角  
+	\begin{enumerate}
+		\item 长度（范数）定义：\(\|x\|=\sqrt{[x,x]}=\sqrt{x_1^2+x_2^2+\cdots+x_n^2}\)  
+		\item 长度性质：  
+		1. 非负性：\(x\neq0\)时，\(\|x\|>0\)；\(x=0\)时，\(\|x\|=0\)；  
+		
+		2. 齐次性：\(\|\lambda x\|=|\lambda|\|x\|\)；  
+		
+		3. 三角不等式：\(\|x+y\|\leq\|x\|+\|y\|\)。  
+		\item 夹角定义：非零向量\(x,y\)的夹角\(\theta\)满足  
+		\[
+		\cos\theta=\frac{[x,y]}{\|x\|\cdot\|y\|}, \quad \theta=\arccos\frac{[x,y]}{\|x\|\cdot\|y\|}
+		\]  
+	\end{enumerate}  
+	
+	\item 正交向量组  
+	\begin{enumerate}
+		\item 正交定义：\([x,y]=0\)时，\(x\)与\(y\)正交；两两正交的向量组为正交向量组。  
+		\item 定理：正交向量组必线性无关。  
+		\item 规范正交向量组定义：满足  
+		
+		1. 两两正交；  
+		
+		2. \(\|e_i\|=1\)（\(i=1,2,\cdots,n\)）。  
+		\item 施密特正交化过程：  
+		
+		设\(\alpha_1,\alpha_2,\cdots,\alpha_r\)线性无关，  
+		1. 正交化：  
+		
+		\begin{align*}
+			b_1&=\alpha_1, \\
+			b_2&=\alpha_2-\frac{[\alpha_2,b_1]}{\|b_1\|^2}b_1, \\
+			b_3&=\alpha_3-\frac{[\alpha_3,b_1]}{\|b_1\|^2}b_1-\frac{[\alpha_3,b_2]}{\|b_2\|^2}b_2, \\
+			&\vdots \\
+			b_r&=\alpha_r-\sum_{i=1}^{r-1}\frac{[\alpha_r,b_i]}{\|b_i\|^2}b_i.
+		\end{align*}
+		
+		2. 规范化：\(e_i=\frac{b_i}{\|b_i\|}\)（\(i=1,2,\cdots,r\)）。  
+	\end{enumerate}  
+	
+	\item 正交矩阵与正交变换  
+	\begin{enumerate}
+		\item 定义：满足\(AA'=E\)的\(n\)阶矩阵\(A\)为正交矩阵。  
+		\item 性质：  
+		
+		1. \(A'=A^{-1}\)；  
+		
+		2. \(AA'=A'A=E\)；  
+		
+		3. \(A'\)（或\(A^{-1}\)）也是正交矩阵；  
+		
+		4. 两正交矩阵之积仍为正交矩阵。  
+	\end{enumerate}  
+
+
+\item ⑤ 设 \(A\) 是正交矩阵，则 \(|A| = 1\) 或 \(|A| = -1\)。  
+\begin{theorem}
+	\(n\) 阶方阵 \(A\) 是正交矩阵的充要条件是 \(A\) 的 \(n\) 个行向量（或列向量）构成 \(\mathbb{R}^n\) 的一个规范正交向量组。
+\end{theorem}
+\begin{definition}
+	若 \(P\) 为正交阵，则线性变换 \(y = Px\) 称为正交变换。
+\end{definition}
+\begin{property}
+	正交变换保持向量的长度不变。
+\end{property}
+
+\item 特征值与特征向量
+\begin{definition}
+	设 \(A\) 是 \(n\) 阶矩阵，若存在数 \(\lambda\) 和非零列向量 \(x\) 使得 \(Ax = \lambda x\)，则称 \(\lambda\) 为 \(A\) 的特征值，\(x\) 为对应于 \(\lambda\) 的特征向量。
+\end{definition}
+\begin{remark}
+	\begin{enumerate}
+		\item \(Ax = \lambda x\) 等价于 \((A - \lambda E)x = 0\)，其有非零解当且仅当 \(|A - \lambda E| = 0\)（特征方程），\(f(\lambda) = |A - \lambda E|\) 为特征多项式。
+		\item \(n\) 阶矩阵 \(A\) 必有 \(n\) 个复特征值（重根按重数计）。
+		\item 若 \(x, y\) 是对应 \(\lambda\) 的特征向量，则 \(k_1x + k_2y\)（\(k_1, k_2\) 不全为零）也是对应 \(\lambda\) 的特征向量。
+	\end{enumerate}
+\end{remark}
+
+(1) 特征根和特征向量的求法  
+第一步：解特征方程  
+\[
+|A - \lambda E| = \left|\begin{array}{cccc}
+	a_{11} - \lambda & a_{12} & \cdots & a_{1n} \\
+	a_{21} & a_{22} - \lambda & \cdots & a_{2n} \\
+	\vdots & \vdots & & \vdots \\
+	a_{n1} & a_{n2} & \cdots & a_{nn} - \lambda
+\end{array}\right| = 0
+\]  
+求出特征值 \(\lambda_1, \lambda_2, \cdots, \lambda_s\)。  
+第二步：对每个 \(\lambda_i\)，解 \((A - \lambda_i E)x = 0\)，求基础解系 \(\alpha_1, \alpha_2, \cdots, \alpha_r\)，对应 \(\lambda_i\) 的所有特征向量为 \(k_1\alpha_1 + k_2\alpha_2 + \cdots + k_r\alpha_r\)。
+
+(2) 特征值与特征向量的性质  
+\begin{theorem}
+	设 \(n\) 阶方阵 \(A = (a_{ij})\) 的特征值为 \(\lambda_1, \lambda_2, \cdots, \lambda_n\)，则：  
+	\begin{enumerate}
+		\item \(\lambda_1 + \lambda_2 + \cdots + \lambda_n = a_{11} + a_{22} + \cdots + a_{nn}\)；  
+		\item \(\lambda_1\lambda_2\cdots\lambda_n = |A|\)。
+	\end{enumerate}
+\end{theorem}
+\begin{theorem}
+	属于不同特征值的特征向量线性无关。
+\end{theorem}
+\begin{theorem}
+	矩阵 \(A\) 和 \(A'\) 有相同的特征值。
+\end{theorem}
+\begin{theorem}
+	若 \(\lambda\) 是 \(A\) 的特征值，则 \(\lambda^k\) 是 \(A^k\) 的特征值。
+\end{theorem}
+\begin{theorem}
+	若 \(\lambda\) 是可逆矩阵 \(A\) 的特征值，则 \(\lambda^{-1}\) 是 \(A^{-1}\) 的特征值。
+\end{theorem}
+
+\item 相似矩阵与相似变换  
+\begin{definition}
+	设 \(A, B\) 是 \(n\) 阶矩阵，若存在可逆矩阵 \(P\) 使 \(P^{-1}AP = B\)，则称 \(B\) 是 \(A\) 的相似矩阵，\(P^{-1}AP\) 为相似变换，\(P\) 为相似变换矩阵。
+\end{definition}
+
+(1) 相似矩阵的性质  
+\begin{enumerate}
+	\item 相似关系是等价关系：  
+	- 自反性：\(A \sim A\)；  
+	- 对称性：若 \(A \sim B\)，则 \(B \sim A\)；  
+	- 传递性：若 \(A \sim B\) 且 \(B \sim C\)，则 \(A \sim C\)。  
+	\item 若 \(A \sim B\)，则 \(A^m \sim B^m\)（\(m\) 为正整数）。  
+	\item 若 \(A \sim B\)，则 \(A\) 与 \(B\) 的特征多项式相同，特征值相同。  
+\end{enumerate}
+
+(2) 方阵对角化  
+\begin{theorem}
+	\(n\) 阶矩阵 \(A\) 可对角化（即存在可逆矩阵 \(P\) 使 \(P^{-1}AP = \Lambda\) 为对角阵）的充要条件是 \(A\) 有 \(n\) 个线性无关的特征向量。
+\end{theorem}
+\begin{corollary}
+	若 \(A\) 的 \(n\) 个特征值互不相等，则 \(A\) 可对角化。
+\end{corollary}
+
+(3) 利用对角矩阵计算矩阵的幂及矩阵多项式  
+\begin{theorem}
+	设 \(\varphi(A) = a_0E + a_1A + a_2A^2 + \cdots + a_mA^m\)，若存在可逆矩阵 \(P\) 使 \(P^{-1}AP = \Lambda = \text{diag}(\lambda_1, \lambda_2, \cdots, \lambda_n)\)，则 \(\varphi(A) = P\varphi(\Lambda)P^{-1}\)，其中 \(\varphi(\Lambda) = \text{diag}(\varphi(\lambda_1), \varphi(\lambda_2), \cdots, \varphi(\lambda_n))\)。
+\end{theorem}
+
+	\item \textbf{定理 1}：设存在可逆矩阵 \(P\) 使 \(P^{-1}AP = B\) 为对角矩阵，则 \(A^k = PB^kP^{-1}\)，\(\varphi(A) = P\varphi(B)P^{-1}\)。
+	\item \textbf{定理 2（哈密顿-凯莱定理）}：设 \(f(\lambda)\) 是矩阵 \(A\) 的特征多项式，则 \(f(A) = 0\)。
+	
+	\item \textbf{实对称矩阵}
+	\begin{enumerate}
+		\item \textbf{实对称矩阵的性质}
+		\begin{theorem}
+			实对称矩阵的特征值均为实数。
+		\end{theorem}
+		\begin{theorem}
+			设 \(\lambda_1, \lambda_2\) 是实对称阵 \(A\) 的不同特征值，\(p_1, p_2\) 为对应特征向量，则 \(p_1\) 与 \(p_2\) 正交。
+		\end{theorem}
+		\begin{theorem}
+			对 \(n\) 阶实对称矩阵 \(A\)，必存在正交矩阵 \(P\)，使 \(P^{-1}AP = \Lambda\)，其中 \(\Lambda\) 是以特征值为对角元的对角矩阵。
+		\end{theorem}
+		\begin{theorem}
+			若 \(\lambda\) 是 \(n\) 阶实对称矩阵 \(A\) 的 \(k\) 重特征值，则 \(R(A - \lambda E) = n - k\)，对应 \(\lambda\) 恰有 \(k\) 个线性无关的特征向量。
+		\end{theorem}
+		\item \textbf{利用正交矩阵对角化的步骤}
+		\begin{enumerate}
+			\item 求 \(A\) 的全部特征值 \(\lambda_1, \lambda_2, \cdots, \lambda_s\)，重数依次为 \(k_1, k_2, \cdots, k_s\)（\(\sum k_i = n\)）。
+			\item 对每个 \(k_i\) 重特征值 \(\lambda_i\)，解 \((A - \lambda_i E)x = 0\) 得 \(k_i\) 个线性无关特征向量，再正交化、单位化，得 \(k_i\) 个单位正交特征向量，共 \(n\) 个。
+			\item 以这 \(n\) 个向量构成正交阵 \(P\)，则 \(P^{-1}AP = \Lambda\)。
+		\end{enumerate}
+	\end{enumerate}
+	
+	\item \textbf{二次型及其有关概念}
+	\begin{enumerate}
+		\item \textbf{概念}
+		\begin{definition}
+			含 \(n\) 个变量的二次齐次函数
+			\[
+			f(x_1, x_2, \cdots, x_n) = \sum_{i=1}^n a_{ii}x_i^2 + 2\sum_{1\leq i<j\leq n}a_{ij}x_ix_j
+			\]
+			称为二次型。当 \(a_{ij}\) 为实数时，称实二次型。
+		\end{definition}
+		\begin{definition}
+			仅含平方项的二次型 \(f = k_1y_1^2 + k_2y_2^2 + \cdots + k_ny_n^2\) 称为标准形；若平方项系数仅为 \(1, -1, 0\)，称为规范形。
+		\end{definition}
+		\item \textbf{矩阵表示}
+		
+		记 \(A = (a_{ij})\)（\(a_{ij} = a_{ji}\)），\(x = (x_1, x_2, \cdots, x_n)'\)，则二次型可表示为 \(f = x'Ax\)，其中 \(A\) 为对称矩阵。
+	\end{enumerate}
+	
+	\item \textbf{合同矩阵及其性质}
+	\begin{enumerate}
+		\item \textbf{定义}
+		\begin{definition}
+			若存在可逆矩阵 \(C\) 使 \(B = C'AC\)，则称矩阵 \(A\) 与 \(B\) 合同。
+		\end{definition}
+		\item \textbf{性质}
+		\begin{theorem}
+			若 \(A\) 与 \(B\) 合同且 \(A\) 是对称矩阵，则 \(B\) 也是对称矩阵，且 \(R(A) = R(B)\)。
+		\end{theorem}
+	\end{enumerate}
+	
+	\item \textbf{化二次型为标准形}
+	
+	通过可逆线性变换 \(x = Cy\)（\(C\) 可逆），将二次型 \(f = x'Ax\) 化为标准形 \(f = y'(\Lambda)y\)，其中 \(\Lambda\) 为对角矩阵。常用方法：
+	\begin{itemize}
+		\item \textbf{正交变换法}：利用实对称矩阵可正交对角化的性质，取 \(C\) 为正交矩阵，此时标准形系数为 \(A\) 的特征值。
+		\item \textbf{配方法}：通过变量替换逐步消去交叉项，化为平方和。
+	\end{itemize}
+
+	 \item 
+	则
+	\[
+	\begin{aligned}
+		f&=(y_1,y_2,\cdots,y_n)\begin{pmatrix}
+			k_1&\\
+			&k_2\\
+			&&\ddots\\
+			&&&k_n
+		\end{pmatrix}\begin{pmatrix}
+			y_1\\
+			y_2\\
+			\vdots\\
+			y_n
+		\end{pmatrix}\\
+		&=k_1y_1^2+k_2y_2^2+\cdots+k_ny_n^2
+	\end{aligned}
+	\]
+	因此化二次型为标准形实际上是寻求可逆矩阵$C$，使$C'AC$为对角阵。
+	
+	由于对任意实对称矩阵$A$，总有正交矩阵$P$，使$P'AP=\Lambda$，将此结论应用于二次型，有以下结论：
+	
+	\begin{theorem}
+		任给二次型$f=\sum_{i,j=1}^na_{ij}x_ix_j(a_{ij}=a_{ji})$，总有正交变换$x=Py$使$f$化为标准形
+		\[
+		f=\lambda_1y_1^2+\lambda_2y_2^2+\cdots+\lambda_ny_n^2
+		\]
+		其中，$\lambda_1,\lambda_2,\cdots,\lambda_n$是$f$的矩阵$A=(a_{ij})$的特征值。
+	\end{theorem}
+	
+	\begin{corollary}
+		任给二次型$f=\sum_{i,j=1}^na_{ij}x_ix_j(a_{ij}=a_{ji})$，总有可逆变换$x=Cz$，使$f(Cz)$为规范形。
+	\end{corollary}
+	
+	\begin{enumerate}
+		\item 用正交变换化二次型为标准形的方法：
+		\begin{enumerate}
+			\item 将二次型表示为矩阵形式$f=x'Ax$，求出$A$；
+			\item 求出$A$的全部互不相等的特征值$\lambda_1,\lambda_2,\cdots,\lambda_s$，它们的重数依次为$k_1,k_2,\cdots,k_s(k_1+k_2+\cdots+k_s=n)$；
+			\item 对每个$k_i$重特征值，解方程$(A-\lambda_iE)x=0$，得$k_i$个线性无关的特征向量，再把它们正交化、单位化，得$k_i$个两两正交的单位特征向量。因$k_1+k_2+\cdots+k_s=n$，故共得$n$个两两正交的单位特征向量；
+			\item 将这$n$个两两正交的单位特征向量构成正交阵$P$，则$P^{-1}AP=\Lambda$；
+			\item 作正交变换$x=Py$，则得$f$的标准形$f=\lambda_1y_1^2+\cdots+\lambda_ny_n^2$。
+		\end{enumerate}
+		
+		\item 用配方法化二次型为标准形的具体步骤：
+		\begin{enumerate}
+			\item 若二次型含有$x_i$的平方项，则先把含有$x_i$的乘积项集中，然后配方，再用同样的方法对其余的变量进行配方，直到都配成平方项为止，经过可逆线性变换，就得到二次型的标准形；
+			\item 若二次型中不含有平方项，但是$a_{ij}\neq0(i\neq j)$，则先作可逆线性变换
+			\[
+			\left\{
+			\begin{array}{l}
+				x_i=y_i-y_j\\
+				x_j=y_i+y_j\quad(k=1,2,\cdots,n \text{ 且 } k\neq i,j)\\
+				x_k=y_k
+			\end{array}
+			\right.
+			\]
+			化二次型为含有平方项的二次型，然后再按上述方法配方。
+		\end{enumerate}
+	\end{enumerate}
+	
+	\item \textbf{正定二次型}
+	\begin{enumerate}
+		\item 惯性定理
+		
+		设有实二次型$f=x'Ax$，它的秩为$r$，有两个实的可逆变换$x=Cy$及$x=Pz$，使
+		\[
+		f=k_1y_1^2+k_2y_2^2+\cdots+k_ry_r^2\quad(k_i\neq0)
+		\]
+		及
+		\[
+		f=\lambda_1z_1^2+\lambda_2z_2^2+\cdots+\lambda_rz_r^2\quad(\lambda_i\neq0)
+		\]
+		则$k_1,\cdots,k_r$中正数的个数与$\lambda_1,\cdots,\lambda_r$中正数的个数相等。
+		
+		\textit{注：}二次型的标准形中正系数的个数称为二次型的正惯性系数，负系数的个数称为二次型的负惯性系数。若二次型$f$的秩为$r$，正惯性系数为$p$，则$f$的规范形为
+		\[
+		f=y_1^2+\cdots+y_p^2-y_{p+1}^2-\cdots-y_r^2
+		\]
+		
+		\item 正(负)定二次型的概念
+		\begin{definition}
+			设有实二次型$f(x)=x'Ax$：
+			\begin{enumerate}
+				\item 如果对任何$x\neq0$，都有$f(x)>0$(显然$f(0)=0$)，则$f$为正定二次型，并称对称矩阵$A$是正定的；
+				\item 如果对任何$x\neq0$，都有$f(x)<0$，则称$f$为负定二次型，并称对称矩阵$-A$是负定的。
+			\end{enumerate}
+		\end{definition}
+		
+		\item 正(负)定二次型的判别
+		\begin{theorem}
+			实二次型$f=x'Ax$为正定的充分必要条件是：它的标准形的$n$个系数全为正。
+		\end{theorem}
+		
+		\begin{corollary}
+			对称矩阵$A$为正定的充分必要条件是$A$的特征值全为正。
+		\end{corollary}
+		
+		\begin{theorem}
+			对称矩阵$A$为正定的充分必要条件是$A$的各阶主子式为正，即
+			\[
+			a_{11}>0,\quad
+			\left|\begin{array}{ll}a_{11}&a_{12}\\a_{21}&a_{22}\end{array}\right|>0,\quad
+			\cdots,\quad
+			\left|\begin{array}{ccc}a_{11}&\cdots&a_{1n}\\\vdots&&\vdots\\a_{n1}&\cdots&a_{nn}\end{array}\right|>0
+			\]
+		\end{theorem}
+	\end{enumerate}
+	
+	\end{enumerate}
+\section*{附录~~记号与常用公式}
+\begin{enumerate}
+	\item 1.阶乘公式记 \(n !=n(n-1)(n-2) \cdots 3 \cdot 2 \cdot 1\) ,规定 \(0 !=1\) ,
+	
+	\[记 \quad(2 n+1) ! !=(2 n+1)(2 n-1) \cdots 5 \cdot 3 \cdot 1 ,\]
+	
+	\[(2 n) ! !=(2 n)(2 n-2) \cdot \cdots \cdot 6 \cdot 4 \cdot 2 .\]
+	
+	\[并有公式 (2 n) !=(2 n+1) ! ! \times(2 n) ! !, \quad(2 n) ! !=2\]
+	
+	\item 组合公式 \(C_{n}^{k}=\frac{n !}{k !(n-k) !}=\frac{n(n-1) \cdots(n-k+1)}{k !}\) ,规定 \(C_{n}^{\circ}=1\) 
+	\[并有公式 C_{n+1}^{k}=C_{n}^{k}+C_{n}^{k-1}, \quad(a+b)^{n}=\sum_{k=0}^{n} C_{n}^{k} a^{k} b^{n-k} .\]
+	
+	\item 向量记号如 \(n=(A, B, C)\) ;空间点的坐标如(1,2,3)。
+	\item 常用不等式
+	
+	(1)柯而不等式 \(|\sum_{k=1}^{n} a_{k} b_{k}| ≤\sqrt{\sum_{k=1}^{n} a_{k}^{2}} \cdot \sqrt{\sum_{k=1}^{n} b_{k}^{2}} .\)
+	
+	(2)周司夫质基不带式 \(\sqrt{\sum_{k=1}^{n}(a_{k}+b_{k})^{2}} ≤\sqrt{\sum_{k=1}^{n} a_{k}^{2}}+\sqrt{\sum_{k=1}^{n} b_{k}^{2}}\)
+	
+	(3)平均值不等式 
+	\[\frac{a_{1}+a_{2}+\cdots+a_{n}}{n} \geq \sqrt[n]{a_{1} a_{2} \cdots a_{n}}, 其中 a_{k}>0(k=1,2, \cdots, n) .\]
+	
+	(4)三角函数不等式
+	
+	①对于任何实数 x ,都有 \(|sin x| \leqslant|x|\) 
+	
+	② \(0<x<\frac{\pi}{2}\) 时,sinx<tanz
+	
+	③ \(0<x<\frac{\pi}{2}\) 时, \(\frac{2}{\pi}<\frac{sin x}{x}<1\)
+	\item 三角公式
+	
+	①两角和或差 
+	
+	\[sin (\alpha \pm \beta)=sin \alpha cos \beta \pm cos \alpha sin \beta, cos (\alpha \pm \beta)=cos \alpha cos \beta \mp sin \alpha sin \beta,\]
+	
+	\[tan (\alpha \pm \beta)=\frac{tan \alpha \pm tan \beta}{1 \mp tan \alpha tan \beta}, cot (\alpha \pm \beta)=\frac{cot \alpha cot \beta \mp 1}{cot \beta \pm cot \alpha} .\]
+	
+	②和差化积 
+	
+	\[sin \alpha+sin \beta=2 sin \frac{\alpha+\beta}{2} cos \frac{\alpha-\beta}{2}, sin \alpha-sin \beta=2 cos \frac{\alpha+\beta}{2} sin \frac{\alpha-\beta}{2},\]
+	
+	\[cos \alpha+cos \beta=2 cos \frac{\alpha+\beta}{2} cos \frac{\alpha-\beta}{2}, cos \alpha-cos \beta=-2 sin \frac{\alpha+\beta}{2} sin \frac{\alpha-\beta}{2} .\]
+	
+	③ 积化和差 
+	
+	\[sin \alpha sin \beta=-\frac{1}{2}[cos (\alpha+\beta)-cos (\alpha-\beta)],\]
+	
+	\item 
+	\[cos \alpha cos \beta=\frac{1}{2}[cos (\alpha+\beta)+cos (\alpha-\beta)],\]
+	
+	\[sin \alpha sin \beta=\frac{1}{2}[sin (\alpha+\beta)+sin (\alpha-\beta)] .\]
+	
+	\item 欧拉公式: \(e^{i y}=(cos y+isin y)\) ,其中 \(i=\sqrt{-1}\) , y 是实数.
+	
+	(1)由此可推出 \(cos y=\frac{e^{i y}+e^{-i y}}{2}\) , \(sin y=\frac{e^{i y}-e^{-i y}}{2 i}\) ,也称为欧拉公式。
+	
+	(2)如果复数 \(z ≠0\) ,它可表示为 \(z=r(cos \theta+i sin \theta)=r e^{i \theta}\) ,称为该复数的复指数形式,其中 \(r=|z|\) , θ 是 z 的辐角,
+	
+	(3)棣莫弗公式 \(z^{n}=r^{n} e^{i n \theta}=r^{n}(cos n \theta+i sin n \theta)\) .
+	
+	(4)如果 \(z=x+i y\) ,则 \(e^{x}=e^{x}(cos y+isin y)\) ,其中 x , y 都是实数.此时 \(|e^{x}|=e^{x}\) ,共轭复数 \(e^{\bar{x}}=e^{\bar{x}}=e^{x}(cos y-i sin y)\) ,
+	
+	\item 双曲函数
+	\item 
+	\[\text{双曲正弦} sh x=\frac{e^{x}-e^{-x}}{2}, \text{双曲余弦} ch x=\frac{e^{x}+e^{-x}}{2},\]
+	
+	\item 
+	\[\text{双曲正切} th x=\frac{sh x}{ch x}=\frac{e^{x}-e^{-x}}{e^{x}+e^{-x}}, \text{双曲余切} cth x=\frac{ch x}{sh x}=\frac{e^{x}+e^{-x}}{e^{x}-e^{-x}}.\]
+	
+	\item 反双曲函数
+	
+	\[\text{反双曲正弦}~~~~~~~arsh x=ln \left(x+\sqrt{x^{2}+1}\right), x \in(-\infty,+\infty),\]
+	
+	\[\text{反双曲余弦}~~~~~~~arch x=ln \left(x+\sqrt{x^{2}-1}\right), x \in[1,+\infty),\]
+	
+	\[\text{反双曲正切}~~~~~~~arth x=\frac{1}{2} ln \frac{1+x}{1-x}, x \in(-1,1),\]
+	
+	\[\text{反双曲余切}~~~~~~~arcth x=\frac{1}{2} ln \frac{x+1}{x-1}, x \in(-\infty,-1) \cup(1,+\infty).\]
+	
+	\item 函数 \(f(x)\) 在点 \(x_{0}\) 处的左、右极限分别记为 \(f(x_{0}^{-})\) , \(f(x_{0}^{+})\) ;函数 \(f(x)\) 在点 \(x_{0}\) 处的 左、右导数分别记为 \(f_{-}'(x_{0})\) , \(f_{+}'(x_{0})\) .
+\end{enumerate}
+
+\end{document}

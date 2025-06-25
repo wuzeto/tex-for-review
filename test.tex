@@ -1,0 +1,99 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, bm}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{property}{Property}
+\newtheorem{remark}{Remark}
+\newtheorem{corollary}{Corollary}
+
+\begin{document}
+	
+	\begin{itemize}
+		\item ⑤ 设 \(A\) 是正交矩阵，则 \(|A| = 1\) 或 \(|A| = -1\)。  
+		\begin{theorem}
+			\(n\) 阶方阵 \(A\) 是正交矩阵的充要条件是 \(A\) 的 \(n\) 个行向量（或列向量）构成 \(\mathbb{R}^n\) 的一个规范正交向量组。
+		\end{theorem}
+		\begin{definition}
+			若 \(P\) 为正交阵，则线性变换 \(y = Px\) 称为正交变换。
+		\end{definition}
+		\begin{property}
+			正交变换保持向量的长度不变。
+		\end{property}
+		
+		\item \textbf{特征值与特征向量}
+		\begin{definition}
+			设 \(A\) 是 \(n\) 阶矩阵，若存在数 \(\lambda\) 和非零列向量 \(x\) 使得 \(Ax = \lambda x\)，则称 \(\lambda\) 为 \(A\) 的特征值，\(x\) 为对应于 \(\lambda\) 的特征向量。
+		\end{definition}
+		\begin{remark}
+			\begin{enumerate}
+				\item \(Ax = \lambda x\) 等价于 \((A - \lambda E)x = 0\)，其有非零解当且仅当 \(|A - \lambda E| = 0\)（特征方程），\(f(\lambda) = |A - \lambda E|\) 为特征多项式。
+				\item \(n\) 阶矩阵 \(A\) 必有 \(n\) 个复特征值（重根按重数计）。
+				\item 若 \(x, y\) 是对应 \(\lambda\) 的特征向量，则 \(k_1x + k_2y\)（\(k_1, k_2\) 不全为零）也是对应 \(\lambda\) 的特征向量。
+			\end{enumerate}
+		\end{remark}
+		
+		(1) \textbf{特征根和特征向量的求法}  
+		第一步：解特征方程  
+		\[
+		|A - \lambda E| = \left|\begin{array}{cccc}
+			a_{11} - \lambda & a_{12} & \cdots & a_{1n} \\
+			a_{21} & a_{22} - \lambda & \cdots & a_{2n} \\
+			\vdots & \vdots & & \vdots \\
+			a_{n1} & a_{n2} & \cdots & a_{nn} - \lambda
+		\end{array}\right| = 0
+		\]  
+		求出特征值 \(\lambda_1, \lambda_2, \cdots, \lambda_s\)。  
+		第二步：对每个 \(\lambda_i\)，解 \((A - \lambda_i E)x = 0\)，求基础解系 \(\alpha_1, \alpha_2, \cdots, \alpha_r\)，对应 \(\lambda_i\) 的所有特征向量为 \(k_1\alpha_1 + k_2\alpha_2 + \cdots + k_r\alpha_r\)。
+		
+		(2) \textbf{特征值与特征向量的性质}  
+		\begin{theorem}
+			设 \(n\) 阶方阵 \(A = (a_{ij})\) 的特征值为 \(\lambda_1, \lambda_2, \cdots, \lambda_n\)，则：  
+			\begin{enumerate}
+				\item \(\lambda_1 + \lambda_2 + \cdots + \lambda_n = a_{11} + a_{22} + \cdots + a_{nn}\)；  
+				\item \(\lambda_1\lambda_2\cdots\lambda_n = |A|\)。
+			\end{enumerate}
+		\end{theorem}
+		\begin{theorem}
+			属于不同特征值的特征向量线性无关。
+		\end{theorem}
+		\begin{theorem}
+			矩阵 \(A\) 和 \(A'\) 有相同的特征值。
+		\end{theorem}
+		\begin{theorem}
+			若 \(\lambda\) 是 \(A\) 的特征值，则 \(\lambda^k\) 是 \(A^k\) 的特征值。
+		\end{theorem}
+		\begin{theorem}
+			若 \(\lambda\) 是可逆矩阵 \(A\) 的特征值，则 \(\lambda^{-1}\) 是 \(A^{-1}\) 的特征值。
+		\end{theorem}
+		
+		\item \textbf{相似矩阵与相似变换}  
+		\begin{definition}
+			设 \(A, B\) 是 \(n\) 阶矩阵，若存在可逆矩阵 \(P\) 使 \(P^{-1}AP = B\)，则称 \(B\) 是 \(A\) 的相似矩阵，\(P^{-1}AP\) 为相似变换，\(P\) 为相似变换矩阵。
+		\end{definition}
+		
+		(1) \textbf{相似矩阵的性质}  
+		\begin{enumerate}
+			\item 相似关系是等价关系：  
+			- 自反性：\(A \sim A\)；  
+			- 对称性：若 \(A \sim B\)，则 \(B \sim A\)；  
+			- 传递性：若 \(A \sim B\) 且 \(B \sim C\)，则 \(A \sim C\)。  
+			\item 若 \(A \sim B\)，则 \(A^m \sim B^m\)（\(m\) 为正整数）。  
+			\item 若 \(A \sim B\)，则 \(A\) 与 \(B\) 的特征多项式相同，特征值相同。  
+		\end{enumerate}
+		
+		(2) \textbf{方阵对角化}  
+		\begin{theorem}
+			\(n\) 阶矩阵 \(A\) 可对角化（即存在可逆矩阵 \(P\) 使 \(P^{-1}AP = \Lambda\) 为对角阵）的充要条件是 \(A\) 有 \(n\) 个线性无关的特征向量。
+		\end{theorem}
+		\begin{corollary}
+			若 \(A\) 的 \(n\) 个特征值互不相等，则 \(A\) 可对角化。
+		\end{corollary}
+		
+		(3) \textbf{利用对角矩阵计算矩阵的幂及矩阵多项式}  
+		\begin{theorem}
+			设 \(\varphi(A) = a_0E + a_1A + a_2A^2 + \cdots + a_mA^m\)，若存在可逆矩阵 \(P\) 使 \(P^{-1}AP = \Lambda = \text{diag}(\lambda_1, \lambda_2, \cdots, \lambda_n)\)，则 \(\varphi(A) = P\varphi(\Lambda)P^{-1}\)，其中 \(\varphi(\Lambda) = \text{diag}(\varphi(\lambda_1), \varphi(\lambda_2), \cdots, \varphi(\lambda_n))\)。
+		\end{theorem}
+	\end{itemize}
+	
+\end{document}

@@ -1,0 +1,205 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[UTF8]{ctexart}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\usepackage[a4paper, margin=0.6in]{geometry}
+\author{}
+\date{}
+
+\begin{document}
+
+\section{2025年高等数学超难综合模拟卷}\label{2025ux5e74ux9ad8ux7b49ux6570ux5b66ux8d85ux96beux7efcux5408ux6a21ux62dfux5377}
+
+\subsection{一、单项选择题（每题5分，共40分）}\label{ux4e00ux5355ux9879ux9009ux62e9ux9898ux6bcfux98985ux5206ux517140ux5206uxff09}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  设函数
+  \( f(x) = \int_0^{x^2} \sin(\sqrt{t}) e^{-\frac{1}{1+t}} dt \)，则
+  \( \lim_{x \to 0} \frac{f(x) - x^3 \arctan x}{x^6} = \)\\
+  (A) \( -\frac{1}{10} \) (B) \( \frac{1}{10} \) (C) \( -\frac{1}{12} \)
+  (D) \( \frac{1}{12} \)
+\item
+  已知5阶矩阵 \( A \) 满足 \( A^3 = O \) 且
+  \( \text{rank}(A^2) = 2 \)，则 \( A \)
+  的Jordan标准形中1阶Jordan块的数量为\\
+  (A) 1 (B) 2 (C) 3 (D) 4
+\item
+  设二维随机变量 \( (X,Y) \) 满足 \( X \sim N(0,1) \)，且在 \( X=x \)
+  条件下 \( Y \sim N(x, x^2) \)，则 \( \text{Cov}(X,Y) \) 和 \( D(Y) \)
+  分别为\\
+  (A) 1, 2 (B) 1, 3 (C) 2, 3 (D) 2, 4
+\item
+  微分方程 \( (x^2 y''')^3 + e^{y'} = x \ln x \)
+  的阶数与是否为线性方程的判断为\\
+  (A) 3阶，非线性 (B) 3阶，线性 (C) 2阶，非线性 (D) 2阶，线性
+\item
+  设 \( \Omega \) 由曲面 \( z = \sqrt{x^2 + y^2} \) 与
+  \( z = \sqrt{2 - x^2 - y^2} \) 围成，计算
+  \( \iiint_{\Omega} (x^4 + y^4 + z^4) dV \)
+  时，利用对称性化简后积分可表示为\\
+  (A) \( 4 \iiint_{\Omega} z^4 dV \) (B)
+  \( \frac{4}{3} \iiint_{\Omega} (x^4 + y^4 + z^4) dV \)\\
+  (C) \( \frac{2}{3} \iiint_{\Omega} (x^4 + y^4 + z^4) dV \) (D)
+  \( \frac{8}{3} \iiint_{\Omega} z^4 dV \)
+\item
+  级数 \( \sum_{n=1}^{\infty} \frac{(-1)^n n!}{n^n} (2+\sin n) \)
+  的敛散性为\\
+  (A) 绝对收敛 (B) 条件收敛 (C) 发散 (D) 无法判断
+\item
+  设向量组 \( \alpha_1, \alpha_2, \alpha_3 \) 线性无关，向量组
+  \( \beta_1 = \alpha_1 + k\alpha_2 \),
+  \( \beta_2 = \alpha_2 + k\alpha_3 \),
+  \( \beta_3 = \alpha_3 + k\alpha_1 \)，当 \( k = \) 何值时
+  \( \beta_1, \beta_2, \beta_3 \) 线性相关？\\
+  (A) 1 (B) -1 (C) 2 (D) -2
+\item
+  设总体 \( X \sim U(0, \theta) \)，\( X_1, X_2, X_3 \)
+  为样本，下列估计量中最有效的 \( \theta \) 估计量是\\
+  (A) \( \hat{\theta}_1 = 2\overline{X} \) (B)
+  \( \hat{\theta}_2 = \frac{4}{3} \max\{X_1,X_2,X_3\} \)\\
+  (C) \( \hat{\theta}_3 = 3\min\{X_1,X_2,X_3\} \) (D)
+  \( \hat{\theta}_4 = \overline{X} + \max\{X_1,X_2,X_3\} \)
+\end{enumerate}
+
+\subsection{二、填空题（每题5分，共30分）}\label{ux4e8cux586bux7a7aux9898ux6bcfux98985ux5206ux517130ux5206uxff09}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  求极限
+  \( \lim_{n \to \infty} n^2 \left(1 - \cos\frac{1}{n} - \int_0^{\frac{1}{n}} \arctan t dt\right) = \)
+  \textbf{\_\_}
+\item
+  设矩阵 \( A = \begin{pmatrix} 
+  1 & 1 & 1 \\
+  1 & 1 & 1 \\
+  1 & 1 & 1 
+  \end{pmatrix} \)，则二次型 \( f = x^T A^5 x \) 的规范形为
+  \textbf{\_\_}
+\item
+  已知随机变量 \( X \) 满足 \( E(X) = 1 \), \( E(X^2) = 4 \),
+  \( E(X^3) = 10 \)，则 \( X \) 的三阶中心矩为 \textbf{\_\_}
+\item
+  微分方程 \( y''' - 3y'' + 3y' - y = e^x \sqrt{x} \) 的特解形式应设为
+  \textbf{\_\_}
+\item
+  幂级数 \( \sum_{n=1}^{\infty} \frac{(n!)^2}{(2n)!} (x-1)^n \)
+  的收敛半径为 \textbf{\_\_}
+\item
+  设 \( f(x,y,z) = x^2 + y^2 + z^2 \)，则 \( f \) 在点 \( (1,1,1) \)
+  处沿曲面 \( x^2 + y^2 + z^2 = 3 \) 外法线方向的方向导数为
+  \textbf{\_\_}
+\end{enumerate}
+
+\subsection{三、解答题（共130分）}\label{ux4e09ux89e3ux7b54ux9898ux5171130ux5206uxff09}
+
+15.（12分）设函数
+\( f(x) = \int_0^x e^{-t^2} dt \cdot \int_0^x t e^{-t^2} dt \)，\\
+(i) 求 \( f(x) \) 的n阶导数 \( f^{(n)}(0) \)；\\
+(ii) 求 \( f(x) \) 的麦克劳林级数展开式（前3个非零项）。
+
+16.（12分）已知矩阵 \( A = \begin{pmatrix} 
+1 & -1 & 1 & 0 \\
+2 & 4 & -2 & 1 \\
+-3 & -3 & 5 & 0 \\
+0 & 0 & 0 & 2 
+\end{pmatrix} \)，\\
+(i) 求 \( A \) 的特征值和特征向量；\\
+(ii) 求 \( e^A \) 的矩阵表达式。
+
+17.（12分）设二维随机变量 \( (X,Y) \) 的联合概率密度为
+
+\[f(x,y) = \begin{cases} 
+k(x^2 + y^2), & x^2 + y^2 \leq 1 \\
+0, & 其他 
+\end{cases}\]
+
+(i) 求常数 \( k \)；\\
+(ii) 求 \( Z = X^2 + Y^2 \) 的概率密度；\\
+(iii) 求 \( E(\sqrt{X^2 + Y^2}) \)。
+
+18.（12分）求微分方程 \( y'' + y = \frac{1}{\cos x} \)
+的通解，并计算满足初始条件 \( y(0)=1, y'(0)=0 \) 的特解。
+
+19.（14分）计算曲面积分 \( \iint_{\Sigma} (x^3 + y^3 + z^3) dS \)，其中
+\( \Sigma \) 为曲面 \( z = \sqrt{a^2 - x^2 - y^2} \) 与 \( z = 0 \)
+所围立体的表面。
+
+20.（14分）设级数 \( \sum_{n=1}^{\infty} a_n \) 收敛，且
+\( a_n > 0 \)，证明：\\
+(i) \( \sum_{n=1}^{\infty} \frac{\sqrt{a_n}}{n} \) 收敛；\\
+(ii) \( \sum_{n=1}^{\infty} a_n^{1 - \frac{1}{n}} \) 收敛当且仅当
+\( \sum_{n=1}^{\infty} a_n \) 绝对收敛。
+
+21.（14分）设向量空间 \( V \) 是所有2×2实矩阵构成的空间，定义线性变换
+\( T: V \to V \) 为 \( T(A) = A + A^T \)，\\
+(i) 求 \( T \) 的核 \( \ker(T) \) 和像 \( \text{im}(T) \)；\\
+(ii) 求 \( T \) 在基 \( E_{11}, E_{12}, E_{21}, E_{22} \)
+下的矩阵表示；\\
+(iii) 证明 \( V = \ker(T) \oplus \text{im}(T) \)。
+
+22.（14分）设总体 \( X \) 的概率密度为
+
+\[f(x;\theta) = \begin{cases} 
+\frac{1}{\theta} e^{-\frac{x-\mu}{\theta}}, & x \geq \mu \\
+0, & x < \mu 
+\end{cases}\]
+
+其中 \( \theta > 0 \) 和 \( \mu \)
+为未知参数，\( X_1, X_2, \dots, X_n \) 为样本，\\
+(i) 求 \( \theta \) 和 \( \mu \) 的矩估计量；\\
+(ii) 求 \( \theta \) 和 \( \mu \) 的极大似然估计量；\\
+(iii) 若 \( \mu = 0 \)，构造 \( \theta \) 的一个无偏估计量。
+
+23.（16分）设函数 \( f(x,y) = \frac{1}{1 - xy} \)，\\
+(i) 求 \( f(x,y) \) 在点 \( (0,0) \) 处的n阶偏导数
+\( \frac{\partial^n f(0,0)}{\partial x^k \partial y^{n-k}} \)；\\
+(ii) 证明 \( f(x,y) \) 在 \( |x| < 1, |y| < 1 \) 内可微；\\
+(iii) 计算二重积分 \( \iint_{D} \frac{1}{(1 - xy)^2} dxdy \)，其中
+\( D = [0,1] \times [0,1] \)。
+
+\end{document}

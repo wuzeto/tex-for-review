@@ -1,0 +1,216 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[UTF8]{ctexart}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\usepackage[a4paper, margin=0.6in]{geometry}
+\author{}
+\date{}
+
+\begin{document}
+
+\section{2025年高考数学超难综合模拟卷}\label{2025ux5e74ux9ad8ux8003ux6570ux5b66ux8d85ux96beux7efcux5408ux6a21ux62dfux5377}
+
+\subsection{一、单项选择题（每题5分，共40分）}\label{ux4e00ux5355ux9879ux9009ux62e9ux9898ux6bcfux98985ux5206ux517140ux5206uxff09}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  设函数
+  \( f(x) = \int_{0}^{x^2} \frac{\arcsin\sqrt{t}}{1+t^3} dt \)，则
+  \( \lim_{x \to 0} \frac{f(x) - x^3 \int_{0}^{x} e^{-t^4} dt}{x^7 \ln(1+x^2)} = \)\\
+  (A) \( -\frac{1}{210} \) (B) \( \frac{1}{210} \) (C)
+  \( -\frac{1}{180} \) (D) \( \frac{1}{180} \)
+\item
+  已知7阶矩阵 \( A \) 满足 \( A^4 = O \) 且
+  \( \text{rank}(A^3) = 1 \)，则 \( A \)
+  的Jordan标准形中2阶Jordan块的数量为\\
+  (A) 2 (B) 3 (C) 4 (D) 5
+\item
+  设二维随机变量 \( (X,Y) \) 满足 \( X \sim \text{Exp}(1) \)，且在
+  \( X=x \) 条件下 \( Y \sim \text{Gamma}(2,x) \)，则
+  \( \text{Cov}(X,Y) \) 和 \( E(Y^3) \) 分别为\\
+  (A) 1, 12 (B) 2, 24 (C) 1, 24 (D) 2, 48
+\item
+  微分方程 \( (x^2 y''')^2 + \sin(y') = x \log_2 x \)
+  的奇解存在性判断及最高阶导数系数分析为\\
+  (A) 存在奇解，最高阶导数系数为变系数\\
+  (B) 不存在奇解，最高阶导数系数为常系数\\
+  (C) 存在奇解，最高阶导数系数为常系数\\
+  (D) 不存在奇解，最高阶导数系数为变系数
+\item
+  设 \( \Omega \) 由曲面 \( z = x^2 + y^2 - 1 \) 与
+  \( z = 1 - x^2 - y^2 \) 围成，计算
+  \( \iiint_{\Omega} (x^5 + y^5 + z^5) dV \)
+  时，利用对称性化简后非零项为\\
+  (A) \( 2 \iiint_{\Omega} z^5 dV \) (B)
+  \( 4 \iiint_{\Omega} x^5 dV \)\\
+  (C) \( 8 \iiint_{\Omega} y^5 dV \) (D) 所有项均为零
+\item
+  级数 \( \sum_{n=2}^{\infty} \frac{(-1)^n}{n(\ln n)^{\alpha}} \) 与
+  \( \sum_{n=2}^{\infty} \frac{1}{n(\ln n)(\ln\ln n)^{\beta}} \)
+  同时收敛的 \( (\alpha,\beta) \) 范围为\\
+  (A) \( \alpha > 1, \beta > 1 \) (B) \( \alpha \geq 1, \beta > 1 \) \\
+  (C) \( \alpha > 1, \beta \geq 1 \) (D)
+  \( \alpha \geq 1, \beta \geq 1 \)
+\item
+  设向量组 \( \alpha_1, \alpha_2, \alpha_3, \alpha_4 \) 线性无关，向量组
+  \( \beta_1 = \alpha_1 + k\alpha_4 \),
+  \( \beta_2 = \alpha_2 + k\alpha_1 \),
+  \( \beta_3 = \alpha_3 + k\alpha_2 \),
+  \( \beta_4 = \alpha_4 + k\alpha_3 \)，当 \( k^4 = \) 何值时
+  \( \beta_1, \beta_2, \beta_3, \beta_4 \) 线性相关？\\
+  (A) 1 (B) -1 (C) 2 (D) -2
+\item
+  设总体 \( X \sim \text{Pareto}(3,\theta) \)，其概率密度为
+  \( f(x;\theta) = \frac{3\theta^3}{x^4}, x \geq \theta \)，\( X_1,X_2,X_3 \)
+  为样本，下列估计量中满足渐近正态性的 \( \theta \) 估计量是\\
+  (A) \( \hat{\theta}_1 = \frac{3}{4} \min\{X_1,X_2,X_3\} \) (B)
+  \( \hat{\theta}_2 = \frac{1}{3} \sum_{i=1}^3 X_i \)\\
+  (C) \( \hat{\theta}_3 = \sqrt[3]{\prod_{i=1}^3 X_i} \) (D)
+  \( \hat{\theta}_4 = \frac{\max\{X_1,X_2,X_3\}}{2} \)
+\end{enumerate}
+
+\subsection{二、填空题（每题5分，共30分）}\label{ux4e8cux586bux7a7aux9898ux6bcfux98985ux5206ux517130ux5206uxff09}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  求极限
+  \( \lim_{n \to \infty} n^3 \left(1 - \cos\frac{1}{\sqrt{n}} - \int_0^{\frac{1}{\sqrt{n}}} \frac{\arctan t}{1+t^2} dt\right) = \)
+  \textbf{\_\_}
+\item
+  设矩阵 \( A = \begin{pmatrix} 
+  1 & 1 & 1 \\
+  1 & \omega & \omega^2 \\
+  1 & \omega^2 & \omega 
+  \end{pmatrix} \)（其中 \( \omega \) 为三次单位根），则二次型
+  \( f = x^T A^4 x \) 的正惯性指数为 \textbf{\_\_}
+\item
+  已知随机变量 \( X \) 满足 \( E(X) = 2 \), \( E(X^2) = 8 \),
+  \( E(X^4) = 160 \)，则 \( X \) 的峰度系数为 \textbf{\_\_}
+\item
+  微分方程 \( y''' - 2y'' + y' = x e^x \sin x \) 的特解形式应设为
+  \( x^k e^x (A\cos x + B\sin x) \)，其中 \( k = \) \textbf{\_\_}
+\item
+  幂级数
+  \( \sum_{n=1}^{\infty} \frac{(2n)!}{(n!)^2} \left(\int_0^1 x^n (1-x)^n dx\right) (x-2)^n \)
+  的收敛区间为 \textbf{\_\_}
+\item
+  设 \( f(x,y,z) = e^{x+y+z} \)，则 \( f \) 在点 \( (0,0,0) \) 处沿曲面
+  \( \frac{x^2}{1} + \frac{y^2}{2} + \frac{z^2}{3} = 1 \)
+  外法线方向的方向导数为 \textbf{\_\_}
+\end{enumerate}
+
+\subsection{三、解答题（共130分）}\label{ux4e09ux89e3ux7b54ux9898ux5171130ux5206uxff09}
+
+15.（12分）设函数
+\( f(x) = \int_0^x e^{-t^2} dt \cdot \int_0^x t^2 e^{-t^2} dt \)，\\
+(i) 证明 \( f(x) \) 满足微分方程
+\( f''(x) + 4x^2 f(x) = 2x e^{-2x^2} \);\\
+(ii) 求 \( f^{(2n)}(0) \) 的递推公式及 \( f^{(4)}(0) \) 的值。
+
+16.（12分）已知矩阵 \( A = \begin{pmatrix} 
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1 \\
+1 & 0 & 0 & 0 
+\end{pmatrix} \)，\\
+(i) 求 \( A \) 的特征值和最小多项式；\\
+(ii) 计算 \( A^{100} \) 及 \( \det(e^A - I) \)。
+
+17.（12分）设二维随机变量 \( (X,Y) \) 的联合概率密度为\\
+\(
+f(x,y) = \begin{cases} 
+k(x^4 + y^4), & x^2 + y^2 \leq 1 \\
+0, & 其他 
+\end{cases}
+\)\\
+(i) 求常数 \( k \)（利用贝塔函数
+\( B(m,n) = \int_0^1 t^{m-1}(1-t)^{n-1}dt \)）；\\
+(ii) 求 \( X \) 与 \( Y \) 的相关系数 \( \rho_{XY} \);\\
+(iii) 求 \( P(X^2 + Y^2 \leq \frac{1}{2}) \)。
+
+18.（12分）求微分方程 \( y'' + 4y = \frac{1}{\sin 2x} \)
+的通解，并讨论其在区间 \( (0,\frac{\pi}{2}) \) 内的所有有界解。
+
+19.（14分）计算曲面积分 \( \iint_{\Sigma} (x^4 + y^4 + z^4) dS \)，其中
+\( \Sigma \) 为曲面 \( z = \sqrt{x^2 + y^2} \) 被平面 \( z = 1 \) 和
+\( z = 2 \) 所截部分。
+
+20.（14分）设级数 \( \sum_{n=1}^{\infty} a_n \) 绝对收敛，且
+\( \sum_{n=1}^{\infty} n|a_n| \) 发散，证明：\\
+(i) \( \sum_{n=1}^{\infty} \frac{a_n}{\ln(n+1)} \) 收敛；\\
+(ii) \( \sum_{n=1}^{\infty} \frac{a_n}{n^p} \) 在 \( p > 0 \)
+时绝对收敛，在 \( p \leq 0 \) 时可能发散。
+
+21.（14分）设向量空间 \( V = \mathbb{R}^{3 \times 3} \)，定义线性变换
+\( T: V \to V \) 为 \( T(A) = \frac{1}{2}(A + A^T) \)，\\
+(i) 证明 \( T \) 是幂等变换（\( T^2 = T \)）；\\
+(ii) 求 \( T \) 的特征值和特征子空间；\\
+(iii) 若 \( A \in V \)，证明 \( A \) 可唯一表示为 \( A = B + C \)，其中
+\( B \in \ker(T) \), \( C \in \text{im}(T) \)。
+
+22.（14分）设总体 \( X \) 的概率密度为
+
+\[f(x;\theta) = \begin{cases} 
+\frac{1}{2\theta} e^{-\frac{|x|}{\theta}}, & x \in \mathbb{R} \\
+0, & 其他 
+\end{cases}\]
+
+其中 \( \theta > 0 \) 为未知参数，\( X_1, X_2, \dots, X_n \) 为样本，\\
+(i) 证明 \( \hat{\theta}_1 = \frac{1}{n} \sum_{i=1}^n |X_i| \) 是
+\( \theta \) 的无偏估计量；\\
+(ii) 求 \( \hat{\theta}_1 \) 的方差 \( D(\hat{\theta}_1) \);\\
+(iii) 构造 \( \theta \) 的一个置信水平为 \( 1 - \alpha \) 的置信区间。
+
+23.（16分）设函数 \( f(x,y) = \frac{1}{(1 - xy)^2} \)，\\
+(i) 求 \( f(x,y) \) 在点 \( (0,0) \) 处的n阶偏导数
+\( \frac{\partial^n f(0,0)}{\partial x^k \partial y^{n-k}} \);\\
+(ii) 证明 \( f(x,y) \) 在 \( |x| < 1, |y| < 1 \) 内满足拉普拉斯方程
+\( \frac{\partial^2 f}{\partial x^2} + \frac{\partial^2 f}{\partial y^2} = 0 \);\\
+(iii) 计算二重积分 \( \iint_{D} f(x,y) \ln(xy) dxdy \)，其中
+\( D = [0,\frac{1}{2}] \times [0,\frac{1}{2}] \)。
+
+\end{document}

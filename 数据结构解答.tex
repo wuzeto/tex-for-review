@@ -1,0 +1,2008 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{amsmath, amssymb}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{tasks}
+\usepackage{graphicx}
+\usepackage[a4paper, margin=0.6in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ulem} 
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{数据结构黑皮书练习解答}
+\lfoot{Page \thepage}
+\cfoot{\today}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\title{数据结构练习与解答}
+\author{NgChakTung}
+\date{\today}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	\section{1.2~~函数与参数}
+	\subsection{题目1：模板函数 Input}
+	试编写一个模板函数Input，它要求用户输入一个非负数，并负责验证用户所输入的数是否真的大于或等于0，如果不是，它将告诉用户该输入非法，需要重新输入一个数。在函数非成功退出之前，应给用户三次机会。如果输入成功，函数应当把所输入的数作为引用参数返回。输入成功时，函数应返回true,否则返回false。上机测试该函数。
+	
+	要求用户输入一个非负数，并验证是否大于等于 0。失败时提示重新输入，最多三次机会。成功则返回 true 并通过引用返回值。
+	
+	\begin{lstlisting}[language=C++]
+		#include <iostream>
+		using namespace std;
+		
+		template<typename T>
+		bool Input(T &value) {
+			int attempts = 3;
+			while (attempts--) {
+				cout << "请输入一个非负数: ";
+				cin >> value;
+				if (!cin.fail() && value >= 0) {
+					return true;
+				}
+				cin.clear();
+				cin.ignore(10000, '\n');
+				cout << "输入非法，请重新输入！剩余尝试次数：" << attempts << endl;
+			}
+			return false;
+		}
+	\end{lstlisting}
+	
+	\subsection{题目2：模板函数 isSorted}
+	试编写一个模板函数，用来测试数组a中的元素是否按升序排列（即$a[i]\leq a[i+1]$,其中$0 \leq i \le n-1$）。如果不是，函数应返回false，否则应返回true。上机测试该函数。
+	
+	测试数组是否按升序排列。
+	
+	\begin{lstlisting}[language=C++]
+		template<typename T>
+		bool isSorted(const T a[], int n) {
+			for (int i = 0; i < n - 1; ++i)
+			if (a[i] > a[i + 1])
+			return false;
+			return true;
+		}
+	\end{lstlisting}
+	
+	\subsection{题目3：计算阶乘的非递归函数}
+	试编写一个非递归函数来计算n！，并上机测试函数的正确性。
+	
+	计算 $ n! $
+	
+	\begin{lstlisting}[language=C++]
+		unsigned long long factorial(int n) {
+			if (n < 0) return 0;
+			unsigned long long result = 1;
+			for (int i = 2; i <= n; ++i)
+			result *= i;
+			return result;
+		}
+	\end{lstlisting}
+	
+	\subsection{题目4：斐波那契数列}
+	1)试编写一个计算斐波那契数列Fn的递归函数，并上机测试其正确性。
+	
+	2)试说明对于任何n>2的整数，调用1）中的函数计算Fn时，同一个Fi会被处理至少一次。
+	
+	3)试编写一个非递归的函数来计算斐波那契数列Fn，该函数应能直接计算出每个斐波那契数。上机测试代码的正确性。
+	
+	\subsubsection{1) 递归版本}
+	\begin{lstlisting}[language=C++]
+		int fib_recursive(int n) {
+			if (n == 0) return 0;
+			if (n == 1) return 1;
+			return fib_recursive(n - 1) + fib_recursive(n - 2);
+		}
+	\end{lstlisting}
+	
+	\subsubsection{2) 说明}
+	对于任何 $ n > 2 $，递归调用会重复计算相同的子问题，例如：
+	$$
+	F_5 = F_4 + F_3 = (F_3 + F_2) + (F_2 + F_1)
+	$$
+	可以看到 $ F_2 $ 被多次计算。
+	
+	\subsubsection{3) 非递归版本}
+	\begin{lstlisting}[language=C++]
+		int fib_iterative(int n) {
+			if (n == 0) return 0;
+			if (n == 1) return 1;
+			int a = 0, b = 1;
+			for (int i = 2; i <= n; ++i) {
+				int temp = a + b;
+				a = b;
+				b = temp;
+			}
+			return b;
+		}
+	\end{lstlisting}
+	
+	\subsection{题目5：输出所有子集}
+	试编写一个递归函数，用来输出n个元素的所有子集。例如，三个元素\{a,b,c\}的所有子集是：\{\}（空集），$\{a\},\{b\},\{c\},\{a,b\},\{a,c\},\{b,c\}\text{和}\{a,b,c\}$。
+	
+	递归生成所有子集。
+	
+	\begin{lstlisting}[language=C++]
+		#include <vector>
+		#include <iostream>
+		using namespace std;
+		
+		void printSubset(const vector<char>& subset) {
+			cout << "{ ";
+				for (char c : subset)
+				cout << c << " ";
+				cout << "}\n";
+		}
+		
+		void generateSubsets(vector<char>& elements, int index, vector<char>& current) {
+			if (index == elements.size()) {
+				printSubset(current);
+				return;
+			}
+			
+			// 不选当前元素
+			generateSubsets(elements, index + 1, current);
+			
+			// 选当前元素
+			current.push_back(elements[index]);
+			generateSubsets(elements, index + 1, current);
+			current.pop_back(); // 回溯
+		}
+		
+		void allSubsets(vector<char>& elements) {
+			vector<char> current;
+			generateSubsets(elements, 0, current);
+		}
+	\end{lstlisting}
+	
+	\subsection{题目6：判断元素 x 是否在数组中}
+	试编写一个递归函数来确定元素x是否属于数组a[0：n-1]。
+	
+	递归实现查找。
+	
+	\begin{lstlisting}[language=C++]
+		template<typename T>
+		bool contains(T a[], int n, T x) {
+			if (n <= 0) return false;
+			if (a[0] == x) return true;
+			return contains(a + 1, n - 1, x);
+		}
+	\end{lstlisting}
+	
+	\section{1.3~~~动态存储分配}
+	
+	\subsection{题目7：模板函数 ChangeSize1D}
+	假定用一维数组a[0：size-1]来存储一组元素。如果有n个元素，可以把它们存储在a[0],...,a[n-1]中。当n超过size时，数组将不足以存储所有元素，必须分配一个更大的数组。类似地，如果元素的数目比size小很多，我们又可能希望减少数组的大小，以便释放出多余的空间为其他地方所用。试编写一个模板函数ChangeSize1D把数组a的大小从size变成ToSize。函数首先应该分配一个新的、大小为ToSize的数组，然后把原数组a中的n个元素复制到新数组a中，最后释放原数组a所占用的空间。上机测试该函数。
+	
+	编写一个模板函数，将一维数组从当前大小调整为新的大小。若新大小小于原大小，截断；若大于，则复制原有内容并在后面填充默认值。
+	
+	\begin{lstlisting}[language=C++]
+		#include <iostream>
+		#include <algorithm> // for std::min
+		using namespace std;
+		
+		template<typename T>
+		void ChangeSize1D(T*& a, int oldSize, int newSize) {
+			if (newSize <= 0) {
+				delete[] a;
+				a = nullptr;
+				return;
+			}
+			
+			T* newArray = new T[newSize]; // 分配新数组
+			int elementsToCopy = min(oldSize, newSize);
+			for (int i = 0; i < elementsToCopy; ++i)
+			newArray[i] = a[i];
+			
+			// 可选：如果 newSize > oldSize，可以初始化剩余空间为默认值
+			for (int i = elementsToCopy; i < newSize; ++i)
+			newArray[i] = T(); // 默认构造值（如 0、空等）
+			
+			delete[] a; // 释放旧数组
+			a = newArray;
+		}
+	\end{lstlisting}
+	
+	\subsubsection{测试代码示例}
+	\begin{lstlisting}[language=C++]
+	int main() {
+		int* arr = new int[5]{1, 2, 3, 4, 5};
+		cout << "原始数组: ";
+		for (int i = 0; i < 5; ++i) cout << arr[i] << " ";
+		cout << endl;
+		
+		ChangeSize1D(arr, 5, 8);
+		
+		cout << "扩容后数组: ";
+		for (int i = 0; i < 8; ++i) cout << arr[i] << " ";
+		cout << endl;
+		
+		ChangeSize1D(arr, 8, 3);
+		
+		cout << "缩容后数组: ";
+		for (int i = 0; i < 3; ++i) cout << arr[i] << " ";
+		cout << endl;
+		
+		delete[] arr;
+		return 0;
+	}
+\end{lstlisting}
+	
+	\subsection{题目8：函数 ChangeSize2D}试编写一个函数ChangeSize2D来改变一个二维数组的大小（见练习7）。上机测试该函数。
+	
+	
+	改变二维数组的大小。与一维类似，但需要逐行处理。
+	
+	\begin{lstlisting}[language=C++]
+		template<typename T>
+		void ChangeSize2D(T& a, int oldRows, int oldCols, int newRows, int newCols) {
+			T newArray = new T*[newRows]; // 分配新行指针
+			
+			for (int i = 0; i < newRows; ++i)
+			newArray[i] = new T[newCols]; // 每行分配新列
+			
+			// 复制原数组数据
+			for (int i = 0; i < min(oldRows, newRows); ++i)
+			for (int j = 0; j < min(oldCols, newCols); ++j)
+			newArray[i][j] = a[i][j];
+			
+			// 初始化新增位置为默认值（可选）
+			for (int i = 0; i < newRows; ++i)
+			for (int j = (i < oldRows ? oldCols : 0); j < newCols; ++j)
+			newArray[i][j] = T();
+			
+			// 删除旧数组
+			for (int i = 0; i < oldRows; ++i)
+			delete[] a[i];
+			delete[] a;
+			
+			a = newArray;
+		}
+	\end{lstlisting}
+	
+	\subsubsection{测试代码示例}
+	\begin{lstlisting}[language=C++]
+	int main() {
+		int rows = 2, cols = 3;
+		int matrix = new int*[rows];
+		for (int i = 0; i < rows; ++i) {
+			matrix[i] = new int[cols];
+			for (int j = 0; j < cols; ++j)
+			matrix[i][j] = i * cols + j + 1;
+		}
+		
+		cout << "原始矩阵：" << endl;
+		for (int i = 0; i < rows; ++i) {
+			for (int j = 0; j < cols; ++j)
+			cout << matrix[i][j] << " ";
+			cout << endl;
+		}
+		
+		ChangeSize2D(matrix, rows, cols, 3, 4);
+		rows = 3, cols = 4;
+		
+		cout << "扩容后的矩阵：" << endl;
+		for (int i = 0; i < rows; ++i) {
+			for (int j = 0; j < cols; ++j)
+			cout << matrix[i][j] << " ";
+			cout << endl;
+		}
+		
+		// 释放内存
+		for (int i = 0; i < rows; ++i)
+		delete[] matrix[i];
+		delete[] matrix;
+		
+		return 0;
+	}
+\end{lstlisting}
+	\section{1.4~~~类}
+	\subsection{题目9：Currency 类的最大/最小表示范围分析}
+	1)采用程序1-15中的描述，所能表示的最大和最小货币值分别是多少？假定用四个字节
+	表示一个long型数据，用两个字节表示一个int型数据，则一个unsignedlong数介于0～232-1之间，一个unsignedint数介于0～65535之间。
+	
+	2)采用程序1-15中的描述，把dollars和cents变成int型，此时所能表示的最大和最小货币值分别是多少？
+	
+	3)如果用函数Add（见程序1-18）来累加两个货币值，为了确保从Currency类型转换成longint类型时不会发生错误，a1和a2最大可能的值应是多少？
+	
+	程序 1-15 中的 Currency 类描述如下：
+	\begin{lstlisting}[language=C++]
+		class Currency {
+			private:
+			long dollars;
+			int cents;
+		};
+	\end{lstlisting}
+	
+	\subsubsection{1) long + int 表示范围}
+	- 假设：
+	- 'long' 占用 4 字节（32 位），有符号：$ -2^{31} \sim 2^{31}-1 $
+	- 'int' 占用 2 字节（16 位），有符号：$ -32768 \sim 32767 $
+	
+	所以一个货币值最大为：
+	$$
+	\text{max} = 2^{31}-1 + \frac{9999}{100} = 21474836.99
+	$$
+	最小为：
+	$$
+	\text{min} = -2^{31} + \frac{-9999}{100} = -21474836.99
+	$$
+	
+	\subsubsection{2) 使用 int 表示 dollars 和 cents}
+	
+	若改为：
+	\begin{lstlisting}[language=C++]
+		int dollars;
+		int cents;
+	\end{lstlisting}
+	
+	每个字段范围是 $-32768 \sim 32767$，因此最大值为：
+	$$
+	\text{max} = 32767.99
+	$$
+	最小值为：
+	$$
+	\text{min} = -32768.99
+	$$
+	
+	\subsubsection{3) Add 函数安全性限制}
+	
+	函数原型：
+	\begin{lstlisting}[language=C++]
+		void Add(Currency a1, Currency a2);
+	\end{lstlisting}
+	
+	内部使用了类型转换为 'long int'。为防止溢出，必须保证：
+	
+	\begin{align}
+	a1.dollars + a1.cents / 100 < 2^{31}-1 \\
+	a2.dollars + a2.cents / 100 < 2^{31}-1
+		\end{align}
+	
+	即：
+	
+	\begin{align}
+	a1.dollars \leq 21474836,\quad a1.cents \leq 99 \\
+	a2.dollars \leq 21474836,\quad a2.cents \leq 99
+\end{align}
+	
+	
+	
+	\subsection{题目10：扩充 Currency 类功能}
+	试扩充程序1-15中的Currency类，为该类添加如下的public成员函数：
+	
+	1)Input()——从标准输入流中接收一个货币值，并把它返回给调用者。
+	
+	2)Subtract(x)——从当前对象中减去对象x的值，并把结果返回。
+	
+	3)Percent(x)——返回一个Currency对象，其值为当前对象的x\%，其中,x是一个浮点数。
+	
+	4)Multiply(x)——返回一个Currency对象，其值为当前对象乘以浮点数x。
+	
+	5)Devide(x)——返回一个Currency对象，其值为当前对象除以浮点数x。
+	
+	基于程序 1-15 扩展以下成员函数：
+	
+	\begin{lstlisting}[language=C++]
+		class Currency {
+			public:
+			void Input();               // 输入货币值
+			void Subtract(const Currency& x); // 减法
+			Currency Percent(float x);  // 百分比
+			Currency Multiply(float x); // 乘法
+			Currency Divide(float x);   // 除法
+			private:
+			long dollars;
+			int cents;
+		};
+	\end{lstlisting}
+	
+	\subsubsection{实现细节}
+	\begin{lstlisting}[language=C++]
+		void Currency::Input() {
+			float value;
+			std::cin >> value;
+			dollars = static_cast<long>(value);
+			cents = static_cast<int>((value - dollars) * 100 + 0.5); // 四舍五入
+		}
+		
+		void Currency::Subtract(const Currency& x) {
+			long totalCents = (dollars * 100 + cents) - (x.dollars * 100 + x.cents);
+			dollars = totalCents / 100;
+			cents = abs(totalCents % 100);
+		}
+		
+		Currency Currency::Percent(float x) {
+			long totalCents = (dollars * 100 + cents) * x / 100;
+			Currency result;
+			result.dollars = totalCents / 100;
+			result.cents = totalCents % 100;
+			return result;
+		}
+		
+		Currency Currency::Multiply(float x) {
+			long totalCents = (dollars * 100 + cents) * x;
+			Currency result;
+			result.dollars = totalCents / 100;
+			result.cents = totalCents % 100;
+			return result;
+		}
+		
+		Currency Currency::Divide(float x) {
+			long totalCents = (dollars * 100 + cents) / x;
+			Currency result;
+			result.dollars = totalCents / 100;
+			result.cents = totalCents % 100;
+			return result;
+		}
+	\end{lstlisting}
+
+	
+	\subsection{题目11：使用程序 1-21 的描述实现相同功能}
+	采用程序1-21中的描述来完成练习10。
+	
+	如果程序 1-21 是将 'dollars' 和 'cents' 合并为一个 'long totalCents;' 来存储总美分数，则类定义如下：
+	
+	\begin{lstlisting}[language=C++]
+		class Currency {
+			public:
+			void Input();
+			void Subtract(const Currency& x);
+			Currency Percent(float x);
+			Currency Multiply(float x);
+			Currency Divide(float x);
+			private:
+			long totalCents;
+		};
+	\end{lstlisting}
+	
+	\subsubsection{实现}
+	\begin{lstlisting}[language=C++]
+		void Currency::Input() {
+			float value;
+			std::cin >> value;
+			totalCents = static_cast<long>(value * 100 + 0.5);
+		}
+		
+		void Currency::Subtract(const Currency& x) {
+			totalCents -= x.totalCents;
+		}
+		
+		Currency Currency::Percent(float x) {
+			Currency result;
+			result.totalCents = totalCents * x / 100;
+			return result;
+		}
+		
+		Currency Currency::Multiply(float x) {
+			Currency result;
+			result.totalCents = totalCents * x;
+			return result;
+		}
+		
+		Currency Currency::Divide(float x) {
+			Currency result;
+			result.totalCents = totalCents / x;
+			return result;
+		}
+	\end{lstlisting}
+	
+	\subsection{题目12：重载操作符和赋值运算符}
+	1)采用程序1-24中的描述来完成练习10。重载操作符>>,-,\%,*和/。在重载操作符>>时，
+	可把它定义成一个友元函数，不必专门定义一个public输入函数。
+	
+	2)利用重载赋值操作符=来替换两个Set函数。把一个整数赋值给一个Currency对象可用
+	operator=(intx)来表示，它可用来替换第一个Set函数，其中x表示一个包含符号、美元和美分
+	的整数。同样，operator=(floatx)可用来替换第二个Set函数。
+	
+	\subsubsection{1) 重载操作符}
+	
+	\begin{lstlisting}[language=C++]
+		class Currency {
+			public:
+			friend std::istream& operator>>(std::istream&, Currency&);
+			Currency operator-(const Currency&) const;
+			Currency operator%(float) const;
+			Currency operator*(float) const;
+			Currency operator/(float) const;
+			private:
+			long totalCents;
+		};
+	\end{lstlisting}
+	
+	\begin{lstlisting}[language=C++]
+		std::istream& operator>>(std::istream& in, Currency& c) {
+			float val;
+			in >> val;
+			c.totalCents = static_cast<long>(val * 100 + 0.5);
+			return in;
+		}
+		
+		Currency Currency::operator-(const Currency& x) const {
+			Currency result;
+			result.totalCents = totalCents - x.totalCents;
+			return result;
+		}
+		
+		Currency Currency::operator%(float x) const {
+			Currency result;
+			result.totalCents = totalCents * x / 100;
+			return result;
+		}
+		
+		Currency Currency::operator*(float x) const {
+			Currency result;
+			result.totalCents = totalCents * x;
+			return result;
+		}
+		
+		Currency Currency::operator/(float x) const {
+			Currency result;
+			result.totalCents = totalCents / x;
+			return result;
+		}
+	\end{lstlisting}
+	
+	\subsubsection{2) 重载赋值操作符}
+	
+	\begin{lstlisting}[language=C++]
+		class Currency {
+			public:
+			Currency& operator=(int x);      // 整数赋值
+			Currency& operator=(float x);    // 浮点数赋值
+		};
+		
+		Currency& Currency::operator=(int x) {
+			totalCents = x * 100;
+			return *this;
+		}
+		
+		Currency& Currency::operator=(float x) {
+			totalCents = static_cast<long>(x * 100 + 0.5);
+			return *this;
+		}
+	\end{lstlisting}
+	\section{3.3~~~公式化描述}
+	\subsection{练习1：动态扩容 LinearList 类}
+	类LinearList的一个缺点是需要预测线性表最大可能的尺寸，解决的方法之一是：在创建线性表时，置MaxSize=1，之后在执行插入操作期间，如果在表中已经有了MaxSize个元素，则将MaxSize加倍，按照这个新尺寸分配一个新数组，并将老数组中的数据复制到新数组中，最后将老数组删除。类似地，在执行删除操作期间，如果线性表的尺寸降至当前MaxSize的四分之一，则分配一个更小的、尺寸为MaxSize/2的数组，并将老数组中的数据复制到新数组中，最后将老数组删除。
+	
+	1)采用上述思想，重新实现类LinearList。构造函数不应带参数，并将MaxSize置为1，并分配一个大小为1的数组，同时置length=0。
+	
+	2)考虑从一个空表开始，对其连续实施n次表操作。假定在使用以前的实现方法时用了f(n)步，试证明对于上述新的实现方法，存在常数c，使得执行步数最多为cf(n)。
+	
+	\subsubsection{1) 动态扩容类定义}
+	
+	\begin{lstlisting}[language=C++]
+		template <typename T>
+		class LinearList {
+			public:
+			LinearList() : length(0), MaxSize(1) { element = new T[MaxSize]; }
+			~LinearList() { delete[] element; }
+			void Insert(int i, const T& x);
+			void Delete(int i);
+			// 其他函数省略...
+			private:
+			int length;
+			int MaxSize;
+			T* element;
+			void ChangeSize();
+		};
+	\end{lstlisting}
+	\subsubsection{扩容/缩容逻辑}
+	
+	\begin{lstlisting}[language=C++]
+		template <typename T>
+		void LinearList<T>::ChangeSize() {
+			int newSize = MaxSize;
+			if (length == MaxSize) newSize *= 2;
+			else if (MaxSize > 1 && length <= MaxSize / 4) newSize /= 2;
+			else return;
+			T* newArray = new T[newSize];
+			for (int i = 0; i < length; ++i)
+			newArray[i] = element[i];
+			delete[] element;
+			element = newArray;
+			MaxSize = newSize;
+		}
+	\end{lstlisting}
+	\subsubsection{插入/删除调用 ChangeSize}
+	
+	\begin{lstlisting}[language=C++]
+		template <typename T>
+		void LinearList<T>::Insert(int i, const T& x) {
+			// 检查索引有效性...
+			ChangeSize();
+			// 插入元素...
+		}
+		template <typename T>
+		void LinearList<T>::Delete(int i) {
+			// 删除元素...
+			ChangeSize();
+		}
+	\end{lstlisting}
+	\subsubsection{2) 时间复杂度分析}
+	
+	假设原实现中每次插入操作需要 O(1) 时间，总操作数为 $ f(n) $。由于新实现中扩容操作总时间是 $ O(n) $，因此存在常数 $ c $，使得新方法的时间复杂度为 $ cf(n) $。
+	\subsection{练习2：反序操作 Reverse}
+	
+	假设一个线性表的描述满足公式
+	location(i)=i-1
+	
+	1)扩充LinearList类的定义，增加一个函数Reverse，该函数将表中元素的次序变反。反序操作是就地进行的（即在数组element本身的空间内）。注意，在反序操作进行之前，表中第k个元素（如果存在）位于element[k-1]，完成反序之后，该元素位于element[length-k]。
+	
+	2)证明上述函数的复杂性与线性表的长度成线性关系。
+	
+	3)采用适当的测试数据来验证代码的正确性。
+	
+	4)请编写另外一个就地处理的反序函数，它能对LinearList类型的对象进行反序操作。该函数不是LinearList类的成员函数，但它应利用成员函数来产生反序线性表。
+	
+	5)上述函数的时间复杂性是多少？
+	
+	6)分别采用大小为1000，5000和10000的线性表来比较以上两种反序函数的执行效率。
+	
+	\subsubsection{1) 成员函数 Reverse()}
+	
+	\begin{lstlisting}[language=C++]
+		template <typename T>
+		void LinearList<T>::Reverse() {
+			for (int i = 0; i < length / 2; ++i)
+			swap(element[i], element[length - 1 - i]);
+		}
+	\end{lstlisting}
+	\subsubsection{2) 复杂度分析}
+	
+	循环执行 $ \lfloor \frac{n}{2} \rfloor $ 次，每步为 O(1)，总复杂度为 $ O(n) $。
+	\subsubsection{3) 非成员函数 ReverseList()}
+	
+	\begin{lstlisting}[language=C++]
+		template <typename T>
+		void ReverseList(LinearList<T>& list) {
+			for (int i = 0; i < list.length / 2; ++i)
+			swap(list.element[i], list.element[list.length - 1 - i]);
+		}
+	\end{lstlisting}
+	\subsubsection{5) 时间复杂度}
+	
+	两者均为 $ O(n) $。
+	\subsubsection{6) 测试建议}
+	
+	分别对长度为 1000、5000、10000 的线性表进行多次运行测试，记录耗时并比较两种方式效率差异。
+	\subsection{练习3：Half() 函数}
+	
+	扩充LinearList类的定义，增加一个成员函数Half()。调用X.Half()将删除X中半数的元素。比如，如果X.length的初始值为7，且X.element[]=[2,13,4,5,17,8,29]，则执行X.Half()后，X.length的值为4，且X.element[]=[2,4,17,29]；如果X.length的初始值为4，且X.element[]=[2,13,4,5]，则执行X.Half()后，X.length的值为2，且X.element[]=[2,4]。如果X开始时是空表，则执行X.Half()后，X仍然为空表。
+	
+	1)试给出成员函数Half()的代码。不能利用任何其他的LinearList成员函数。代码的复杂性应为$\Theta$(length)。
+	
+	2)证明代码的复杂性确实为$\Theta$(length)。
+	
+	3)使用适当的测试数据来测试代码的正确性。
+	
+	\subsubsection{1) 实现 Half()}
+	
+	\begin{lstlisting}[language=C++]
+		template <typename T>
+		void LinearList<T>::Half() {
+			int newLength = length / 2 + length % 2;
+			int j = 0;
+			for (int i = 0; i < length; i += 2)
+			element[j++] = element[i];
+			length = newLength;
+		}
+	\end{lstlisting}
+	\subsubsection{2) 复杂度分析}
+	
+	遍历整个数组一次，每步执行 O(1)，总复杂度为 $ \Theta(n) $。
+	\subsubsection{3) 测试建议}
+	
+	使用示例：
+	
+	- 原始数组: [2,13,4,5,17,8,29] → [2,4,17,29]
+	
+	- 原始数组: [2,13,4,5] → [2,4]
+	\subsection{练习4：复制构造函数}
+	LinearList缺省的复制构造函数仅复制length,MaxSize和element的值。因此，当用线性表L作为函数F的实际参数（对应于值参X）来调用F时，L.length,L.MaxSize和L.element被复制到
+	X的相应成员中。当函数F退出时，LinearList的析构函数被X唤醒，数组X.element（与数组
+	L.element相同）被删除。避免L.element被删除的一种方法是定义复制构造函数如下：
+	LinearList<T>::LinearList(constLinearList<T>\&L)
+	该函数复制length和MaxSize的值，然后创建一个新数组element，并将L.element[0:MaxSize-1]复制到element中。试编写这个复制构造函数，并估计其复杂性。
+	
+	\subsubsection{实现复制构造函数}
+	
+	\begin{lstlisting}[language=C++]
+		template <typename T>
+		LinearList<T>::LinearList(const LinearList<T>& L)
+		: length(L.length), MaxSize(L.MaxSize) {
+			element = new T[MaxSize];
+			for (int i = 0; i < length; ++i)
+			element[i] = L.element[i];
+		}
+	\end{lstlisting}
+	\subsubsection{复杂度分析}
+	
+	复制所有元素，时间复杂度为 $ O(n) $。
+	\subsection{练习5：游标操作}
+	在许多应用中，需要对一个线性表中的元素进行前移和后移操作。试扩充LinearList类
+	的定义，增加一个私有成员变量current，它纪录线性表当前的位置。此外，需要增加的共享成
+	员如下：
+	
+	1)Reset—置current为1。
+	
+	2)Current(x)—返回x中的当前元素。
+	
+	3)End—当且仅当当前元素为表的最后一个元素时，返回true。
+	
+	4)Front—当且仅当当前元素为表的第一个元素时，返回true。
+	
+	5)Next—移动current至表中的下一个元素，如果操作失败则引发一个异常。
+	
+	6)Previous—移动current至表中的前一个元素，如果操作失败则引发一个异常。
+	
+	试编写上述代码，并使用适当的测试数据来测试代码的正确性。
+	\subsubsection{类定义新增}
+	
+	\begin{lstlisting}[language=C++]
+		private:
+		int current; // 当前位置（从1开始）
+			template <typename T>
+			void LinearList<T>::Reset() { current = 1; }
+			template <typename T>
+			bool LinearList<T>::End() const { return current == length; }
+			template <typename T>
+			bool LinearList<T>::Front() const { return current == 1; }
+			template <typename T>
+			void LinearList<T>::Next() {
+				if (current >= length) throw std::out_of_range("超出末尾");
+				++current;
+			}
+			template <typename T>
+			void LinearList<T>::Previous() {
+				if (current <= 1) throw std::out_of_range("超出开头");
+				--current;
+			}
+		\end{lstlisting}
+		\subsection{练习6：交替合并两个线性表 Alternate(A,B)}
+		设A和B均为LinearList对象
+		
+		1)编写一个新的成员函数Alternate(A,B)以创建一个新的线性表，该表包含了A和B中的所
+		有元素，其中A和B的元素轮流出现，表中的首元素为A中的第一个元素。在轮流排列元素时，
+		如果某个表的元素用完了，则把另一个表的其余元素依次添加在新表的后部。代码的复杂性应
+		与两个输入表的长度呈线性比例关系。
+		
+		2)证明代码具有线性复杂性。
+		
+		3)使用适当的测试数据来测试代码的正确性。
+		\subsubsection{实现 Alternate()}
+		
+		\begin{lstlisting}[language=C++]
+			template <typename T>
+			void LinearList<T>::Alternate(const LinearList<T>& A, const LinearList<T>& B) {
+				Clear(); // 清空当前列表
+				int lenA = A.length, lenB = B.length;
+				int n = max(lenA, lenB);
+				for (int i = 0; i < n; ++i) {
+					if (i < lenA) Insert(length + 1, A.element[i]);
+					if (i < lenB) Insert(length + 1, B.element[i]);
+				}
+			}
+		\end{lstlisting}
+		\subsubsection{复杂度分析}
+		
+		最多插入 $ 2n $ 次，每次插入平均 O(1)，总复杂度为 $ O(n) $。
+		\subsection{练习7：有序合并 Merge(A,B)}
+		设A和B均为LinearList对象。假定A和B中的元素都是按序排列的（如从左至右按递增次
+		序排列）。
+		
+		1)试编写一个成员函数Merge(A,B)，用以创建一个新的有序线性表，该表中包含了A和B
+		的所有元素。
+		
+		2)考察所编写的函数的时间复杂性。
+		
+		3)用适当的测试数据来测试代码的正确性。
+		
+		\subsubsection{实现 Merge()}
+		
+		\begin{lstlisting}[language=C++]
+			template <typename T>
+			void LinearList<T>::Merge(const LinearList<T>& A, const LinearList<T>& B) {
+				Clear();
+				int i = 0, j = 0;
+				while (i < A.length && j < B.length) {
+					if (A.element[i] <= B.element[j])
+					Insert(length + 1, A.element[i++]);
+					else
+					Insert(length + 1, B.element[j++]);
+				}
+				while (i < A.length) Insert(length + 1, A.element[i++]);
+				while (j < B.length) Insert(length + 1, B.element[j++]);
+			}
+		\end{lstlisting}
+		\subsubsection{复杂度分析}
+		
+		每个元素仅处理一次，总复杂度为 $ O(m+n) $。
+		\subsection{练习8：Split(A,B)}
+		1)试编写函数LinearList::Split(A,B)，该函数用来创建两个线性表A和B，A中包含*this
+		的所有奇数元素（注意一个线性表的奇数元素是指element偶数位置上的元素），B中包含其余
+		的元素。
+		
+		2)考察函数的时间复杂性。
+		
+		3)用适当的测试数据来测试代码的正确性。
+		\subsubsection{实现 Split()}
+		
+		\begin{lstlisting}[language=C++]
+			template <typename T>
+			void LinearList<T>::Split(LinearList<T>& A, LinearList<T>& B) {
+				A.Clear(); B.Clear();
+				for (int i = 0; i < length; ++i) {
+					if (i % 2 == 0) A.Insert(A.length + 1, element[i]);
+					else B.Insert(B.length + 1, element[i]);
+				}
+			}
+		\end{lstlisting}
+		\subsubsection{复杂度分析}
+		
+		遍历一次数组，插入 O(1)，总复杂度为 $ O(n) $。
+		\subsection{练习9：location(i)=i 的实现}
+		假定采用如下公式来描述一个线性表：
+		
+		$location(i)=i$（3-2）
+		
+		1)对于程序3-1中的类定义需要做相应的修改吗？如果是，请编写新的定义。
+		
+		2)能够描述的最长的表的长度是多少？
+		
+		3)修改程序3-1中的所有函数，以满足公式（3-2）
+		
+		4)用适当的测试数据来测试代码的正确性。
+		
+		5)每个函数的时间复杂性分别是多少？
+		
+		\subsubsection{1) 修改类定义}
+		
+		修改插入/删除逻辑，使 'element[i]' 对应第 'i+1' 个元素。
+		\subsubsection{2) 最大长度}
+		
+		仍为 'MaxSize'。
+		\subsubsection{3) 所有函数需相应调整索引处理。}
+		
+		以下是部分核心函数的修改示例：
+		
+		\begin{lstlisting}[language=C++]
+			template <typename T>
+			T LinearList<T>::Get(int i) const {
+				if (i < 0 || i >= length)
+				throw std::out_of_range("Index out of range");
+				return element[i];
+			}
+			
+			template <typename T>
+			void LinearList<T>::Insert(int i, const T& x) {
+				if (i < 0 || i > length)
+				throw std::out_of_range("Index out of range");
+				ChangeSize();
+				for (int j = length; j > i; --j)
+				element[j] = element[j - 1];
+				element[i] = x;
+				++length;
+			}
+			
+			template <typename T>
+			void LinearList<T>::Delete(int i) {
+				if (i < 0 || i >= length)
+				throw std::out_of_range("Index out of range");
+				for (int j = i; j < length - 1; ++j)
+				element[j] = element[j + 1];
+				--length;
+				ChangeSize();
+			}
+		\end{lstlisting}
+			
+			\subsection{练习14：循环队列式 LinearList}
+			假定采用下述公式来描述一个线性表：
+			$location(i)=(location(1)+i-1)\%MaxSize$（3-3）
+			
+			其中MaxSize是用来存储表元素的数组的大小。与专门保留一个表长的做法不同的是，用变量
+			first和last来指出表的第一个元素和最后一个元素的位置。
+			
+			1)基于该公式，设计一个与LinearList相似的类。
+			
+			2)first和last的初始值应该是多少？
+			
+			3)对于新的类，试编写出所有成员函数的代码。（通过适当的选择，将元素移动到欲插入/
+			删除元素的左边或右边，可以编写出更高效的Delete和Insert代码。）
+			
+			4)考察每个函数的时间复杂性。
+			
+			5)用适当的测试数据来测试代码的正确性。
+			
+			\subsubsection{1) 新类设计}
+			使用 'first' 和 'last' 表示首尾位置，采用模运算定位。
+			\begin{lstlisting}[language=C++]
+				template <typename T>
+				class CircularList {
+					public:
+					CircularList(int size = 10);
+					~CircularList();
+					
+					void Insert(int pos, const T& x);
+					void Delete(int pos);
+					T Get(int pos) const;
+					bool IsEmpty() const { return length == 0; }
+					int Size() const { return length; }
+					
+					private:
+					int MaxSize;
+					int first;
+					int last;
+					int length;
+					T* element;
+				};
+			\end{lstlisting}
+			\subsubsection{2) 初始值设置}
+			\begin{lstlisting}[language=C++]
+			first = last = -1;
+			length = 0;
+		\end{lstlisting}
+			\subsubsection{3) Insert/Delete 示例}
+			\begin{lstlisting}[language=C++]
+				template <typename T>
+				void CircularList<T>::Insert(int pos, const T& x) {
+					if (length == MaxSize)
+					throw std::overflow_error("List is full");
+					
+					int realPos = (first + pos) % MaxSize;
+					
+					// 移动元素
+					for (int i = last; i >= realPos; --i)
+					element[(i + 1) % MaxSize] = element[i];
+					
+					element[realPos] = x;
+					++length;
+					last = (last + 1) % MaxSize;
+					if (first == -1) first = 0;
+				}
+			\end{lstlisting}
+			
+			\begin{lstlisting}[language=C++]
+				template <typename T>
+				void CircularList<T>::Delete(int pos) {
+					if (length == 0)
+					throw std::underflow_error("List is empty");
+					
+					int realPos = (first + pos) % MaxSize;
+					
+					for (int i = realPos; i < last; ++i)
+					element[i] = element[(i + 1) % MaxSize];
+					
+					--length;
+					last = (last - 1 + MaxSize) % MaxSize;
+					if (length == 0) first = last = -1;
+				}
+			\end{lstlisting}
+			\subsubsection{4) 时间复杂度}
+			插入/删除最坏情况 O(n)，其余操作 O(1)
+			\subsection{练习20：在多个线性表之间插入元素}
+			编写一个C++函数，该函数在表i的第k个元素之后插入一个元素。假定在一个数组中
+			存放了n个线性表。如果不得不移动多个表以便容纳新元素，新的函数应该首先确定可用空间
+			的数量。移动表时应保证每个表所包含的可用空间数量应大体相同，以便适应未来增长的需要。
+			通过编译和执行，测试代码的正确性。
+			
+			\subsubsection{思路}
+			维护一个全局数组 'T* storage'，以及每个线性表的起始位置和长度。插入时计算可用空间，必要时重新分配并平衡各表空间。
+			\begin{lstlisting}[language=C++]
+				template <typename T>
+				void MultiList<T>::InsertAfter(int tableIndex, int k, const T& x) {
+					if (tableIndex < 0 || tableIndex >= numTables)
+					throw std::out_of_range("Invalid table index");
+					
+					Table& t = tables[tableIndex];
+					if (t.length >= t.capacity)
+					ExpandTable(tableIndex);
+					
+					int insertPos = t.start + k + 1;
+					
+					// 向后移动后续表的数据
+					for (int i = numTables - 1; i > tableIndex; --i) {
+						MoveData(tables[i].start + 1, tables[i].start, tables[i].length);
+						tables[i].start += 1;
+					}
+					
+					storage[insertPos] = x;
+					t.length += 1;
+				}
+			\end{lstlisting}
+			\subsection{练习21：从指定表中删除元素}
+			编写一个C++函数，该函数用来从表i中删除第k个元素。假定在一个数组中存放了n
+			个线性表。通过编译和执行，测试代码的正确性。
+			\subsubsection{实现思路}
+			根据表号和元素位置找到对应存储区域，移动元素，更新长度信息。
+			\begin{lstlisting}[language=C++]
+				template <typename T>
+				void MultiList<T>::DeleteFrom(int tableIndex, int k) {
+					if (tableIndex < 0 || tableIndex >= numTables)
+					throw std::out_of_range("Invalid table index");
+					
+					Table& t = tables[tableIndex];
+					if (k < 0 || k >= t.length)
+					throw std::out_of_range("Invalid element index");
+					
+					int deletePos = t.start + k;
+					
+					// 删除元素
+					for (int i = deletePos; i < t.start + t.length - 1; ++i)
+					storage[i] = storage[i + 1];
+					
+					t.length -= 1;
+					
+					// 向前移动后续表数据
+					for (int i = tableIndex + 1; i < numTables; ++i) {
+						MoveData(tables[i].start - 1, tables[i].start, tables[i].length);
+						tables[i].start -= 1;
+					}
+				}
+			\end{lstlisting}
+			
+	\section{3.4~~~链表描述}
+			
+	\subsection*{练习22：复制构造函数 Chain<T>::Chain(const Chain<T>\&C)}
+	编写一个复制构造函数Chain<T>::Chain(constChain<T>\&C)，把链表C中的元素复制到新的节点中。这个构造函数的复杂性是多少？
+	\subsubsection*{实现代码}
+	
+	\begin{lstlisting}[language=C++]
+		template <typename T>
+		class ChainNode {
+			public:
+			T data;
+			ChainNode<T>* link;
+		};
+		
+		template <typename T>
+		class Chain {
+			public:
+			Chain() : first(nullptr), last(nullptr) {}
+			Chain(const Chain<T>& C); // 复制构造函数
+			~Chain();
+			
+			private:
+			ChainNode<T>* first;
+			ChainNode<T>* last;
+		};
+		
+		template <typename T>
+		Chain<T>::Chain(const Chain<T>& C) {
+			if (C.first == nullptr) {
+				first = last = nullptr;
+				return;
+			}
+			
+			ChainNode<T>* src = C.first;
+			ChainNode<T>* dst = new ChainNode<T>;
+			dst->data = src->data;
+			first = dst;
+			src = src->link;
+			
+			while (src != nullptr) {
+				dst->link = new ChainNode<T>;
+				dst = dst->link;
+				dst->data = src->data;
+				src = src->link;
+			}
+			dst->link = nullptr;
+			last = dst;
+		}
+	\end{lstlisting}
+	
+	\subsubsection*{时间复杂度分析}
+	
+	遍历整个链表一次，每个节点复制一次。
+	
+	 时间复杂度：O(n)
+	
+	
+	
+	\subsection*{练习23：数组线性表转单向链表}
+	编写一个函数，把一个用数组表示的线性表转换成单向链表。要求利用LinearList的成员
+	函数Find和Chain的成员函数Insert来实现。该函数的时间复杂性是多少？试测试代码的正确性。
+	
+	使用 'LinearList' 的 'Find()' 和 'Chain' 的 'Insert()' 实现。
+	
+	\begin{lstlisting}[language=C++]
+		template <typename T>
+		void ArrayToChain(LinearList<T>& list, Chain<T>& chain) {
+			for (int i = 1; i <= list.Size(); ++i) {
+				T x;
+				if (list.Find(i, x)) {
+					chain.Insert(chain.Length() + 1, x);
+				}
+			}
+		}
+	\end{lstlisting}
+	
+	 时间复杂度：O(n²)  
+	因为每次 'Insert(k, x)' 都要从头开始查找位置。
+	
+	
+	
+	\subsection*{练习24：链表转数组线性表}
+	编写一个函数，把一个用单向链表表示的线性表转换成用数组表示的线性表。
+	
+	1)首先利用Chain的成员函数Find和LinearList的成员函数Insert来实现。该函数的时间复杂性是多少？试测试代码的正确性。
+	
+	2)利用链表遍历器来实现。函数的时间复杂性是多少？试用适当的测试数据来测试该函数
+	的正确性。
+	\subsubsection*{1) 使用 Find 和 Insert}
+	
+	\begin{lstlisting}[language=C++]
+		template <typename T>
+		void ChainToArray(Chain<T>& chain, LinearList<T>& list) {
+			int pos = 1;
+			ChainNode<T>* p = chain.First();
+			while (p) {
+				list.Insert(pos++, p->data);
+				p = p->link;
+			}
+		}
+	\end{lstlisting}
+	
+	 时间复杂度：O(n²)  
+	同上，每次插入都需从头查找。
+	
+	\subsubsection*{2) 使用链表遍历器}
+	
+	\begin{lstlisting}[language=C++]
+		template <typename T>
+		void ChainToArrayFast(Chain<T>& chain, LinearList<T>& list) {
+			ChainIterator<T> iter(chain);
+			int pos = 1;
+			while (T* x = iter.Next()) {
+				list.Insert(pos++, *x);
+			}
+		}
+	\end{lstlisting}
+	
+	 时间复杂度：O(n)  
+	只需遍历一次链表即可。
+	
+	
+	
+	\subsection*{练习25：FromList / ToList 成员函数}
+	扩充Chain的类定义，把LinearList转换成Chain以及Chain转换成LinearList的函数作为成员函数添加到Chain的类定义之中。具体任务是编写函数FromList(L)和ToList(L)。
+	FromList(L)把一个线性表L转换成单向链表，而ToList(L)把一个单向链表转换成线性表L。每个函数的时间复杂性分别是多少？试测试代码的正确性。
+	\begin{lstlisting}[language=C++]
+		template <typename T>
+		class Chain {
+			public:
+			void FromList(const LinearList<T>& L);
+			void ToList(LinearList<T>& L) const;
+		};
+	\end{lstlisting}
+	
+	\begin{lstlisting}[language=C++]
+		template <typename T>
+		void Chain<T>::FromList(const LinearList<T>& L) {
+			Clear();
+			for (int i = 1; i <= L.Size(); ++i) {
+				T x;
+				if (L.Find(i, x))
+				Insert(Size() + 1, x);
+			}
+		}
+		
+		template <typename T>
+		void Chain<T>::ToList(LinearList<T>& L) const {
+			L.Clear();
+			int pos = 1;
+			ChainNode<T>* p = first;
+			while (p) {
+				L.Insert(pos++, p->data);
+				p = p->link;
+			}
+		}
+	\end{lstlisting}
+	
+	 时间复杂度：O(n²) （FromList），O(n)（ToList）
+	
+	
+	
+	\subsection*{练习27：Reverse 反序链表}
+	1)扩充Chain的类定义，增加函数Reverse，用于对x中的元素反序。要求反序操作就地进行，不需要分配任何新的节点。
+	
+	2)函数的时间复杂性是多少？
+	
+	3)通过编译和执行，测试函数的正确性。要求使用自己的测试数据。
+	就地反序，不创建新节点。
+	
+	\begin{lstlisting}[language=C++]
+		template <typename T>
+		void Chain<T>::Reverse() {
+			ChainNode<T>* prev = nullptr;
+			ChainNode<T>* curr = first;
+			while (curr) {
+				ChainNode<T>* next = curr->link;
+				curr->link = prev;
+				prev = curr;
+				curr = next;
+			}
+			std::swap(first, last);
+		}
+	\end{lstlisting}
+	
+	 时间复杂度：O(n)
+	
+	
+	
+	\subsection*{练习28：非成员函数 Reverse(A,B)}
+	完成练习27，区别是Reverse不作为Chain的成员函数。要求利用Chain的成员函数来
+	完成反序操作。新的函数将拥有两个参数A和B，A作为输入的链表，B是把A反序后得到的链表。在反序完成时，A变成一个空的链表。
+	
+	A 被清空，B 是 A 的反序。
+	
+	\begin{lstlisting}[language=C++]
+		template <typename T>
+		void Reverse(const Chain<T>& A, Chain<T>& B) {
+			B.Clear();
+			ChainNode<T>* p = A.first;
+			while (p) {
+				B.Insert(1, p->data); // 插入头部
+				p = p->link;
+			}
+		}
+	\end{lstlisting}
+	
+	 时间复杂度：O(n)
+	
+	
+	
+	\subsection*{练习29：Alternate 合并两个链表}
+	令A和B都是Chain类型
+	
+	1)编写一个新的成员函数Alternate，用以创建一个新的线性表C，该表包含了A和B中的所有元素，其中A和B的元素轮流出现，表中的首元素为A中的第一个元素。在轮流排列元素时，如果某个表的元素用完了，则把另一个表的其余元素依次添加在新表的后部。代码的复杂性应与两个输入表的长度呈线性比例关系。
+	
+	2)证明代码具有线性复杂性。
+	
+	3)通过编译和执行，测试函数的正确性。要求使用自己的测试数据。
+	
+	轮流插入元素。
+	
+	\begin{lstlisting}[language=C++]
+		template <typename T>
+		void Chain<T>::Alternate(const Chain<T>& A, const Chain<T>& B) {
+			Clear();
+			ChainNode<T>* pa = A.first;
+			ChainNode<T>* pb = B.first;
+			
+			while (pa || pb) {
+				if (pa) { Insert(Size()+1, pa->data); pa = pa->link; }
+				if (pb) { Insert(Size()+1, pb->data); pb = pb->link; }
+			}
+		}
+	\end{lstlisting}
+	
+	 时间复杂度：O(m+n)
+	
+	
+	
+	\subsection*{练习30：破坏式 Alternate(A,B)}
+	扩充Chain的类定义，增加一个与练习29中的Alternate函数相类似的函数Alternate。该
+	函数应利用A和B中的物理节点来建立C。在执行完Alternate之后，A和B均变成空表。
+	
+	1)编写出Alternate的实现代码。代码的复杂性应与初始链表的长度呈线性关系。
+	
+	2)证明代码具有线性复杂性。
+	
+	3)通过编译和执行，测试函数的正确性。要求使用自己的测试数据。
+	
+	利用物理节点合并，A、B 清空。
+	
+	\begin{lstlisting}[language=C++]
+		template <typename T>
+		void Chain<T>::Alternate(Chain<T>& A, Chain<T>& B) {
+			Clear();
+			ChainNode<T>* pa = A.first;
+			ChainNode<T>* pb = B.first;
+			
+			ChainNode<T>* tail = nullptr;
+			while (pa || pb) {
+				if (pa) {
+					if (!first) first = tail = pa;
+					else tail = tail->link = pa;
+					pa = pa->link;
+					tail->link = nullptr;
+				}
+				if (pb) {
+					if (!first) first = tail = pb;
+					else tail = tail->link = pb;
+					pb = pb->link;
+					tail->link = nullptr;
+				}
+			}
+			A.first = A.last = nullptr;
+			B.first = B.last = nullptr;
+		}
+	\end{lstlisting}
+	
+	 时间复杂度：O(m+n)
+	
+	
+	
+	\subsection*{练习31：Merge 合并两个有序链表}
+	令A和B都是Chain类型，假定A和B的元素都是按序排列的（即从左至右按递增次
+	序排列）
+	
+	1)编写一个函数Merge，用以创建一个新的有序线性表C，该表中包含了A和B的所有元素。
+	
+	2)函数的时间复杂性如何？
+	
+	3)通过编译和执行，测试函数的正确性。要求使用自己的测试数据。
+	
+	\begin{lstlisting}[language=C++]
+		template <typename T>
+		void Merge(const Chain<T>& A, const Chain<T>& B, Chain<T>& C) {
+			ChainNode<T>* pa = A.first;
+			ChainNode<T>* pb = B.first;
+			
+			while (pa && pb) {
+				if (pa->data <= pb->data)
+				C.Insert(C.Size()+1, pa->data), pa = pa->link;
+				else
+				C.Insert(C.Size()+1, pb->data), pb = pb->link;
+			}
+			while (pa) C.Insert(C.Size()+1, pa->data), pa = pa->link;
+			while (pb) C.Insert(C.Size()+1, pb->data), pb = pb->link;
+		}
+	\end{lstlisting}
+	
+	 时间复杂度：O(m+n)
+	
+	
+	
+	\subsection*{练习33：Split 拆分奇偶位置元素}
+	重做练习31，要求函数是Chain的一个成员函数，并使用两个输入链表中的物理节点来
+	建立新链表C，在Merge执行完之后，两个输入链表均变成空表。
+	
+	\begin{lstlisting}[language=C++]
+		template <typename T>
+		void Split(const Chain<T>& C, Chain<T>& A, Chain<T>& B) {
+			A.Clear(); B.Clear();
+			ChainNode<T>* p = C.first;
+			int index = 1;
+			while (p) {
+				if (index % 2 == 1)
+				A.Insert(A.Size()+1, p->data);
+				else
+				B.Insert(B.Size()+1, p->data);
+				p = p->link;
+				index++;
+			}
+		}
+	\end{lstlisting}
+	
+	 时间复杂度：O(n)
+	
+	
+	
+	\subsection*{练习41：循环链表删除节点x}
+	令x指向一个循环链表z中的任意节点
+	
+	1)编写一个函数用来删除节点x中的元素。提示：由于不知道哪个节点是x的左边相邻节
+	点，因此难以从链表中删除节点x；不过，为了删除x中的元素，可以把x的数据域用x的下一个节点y的数据域来替换，然后删除y节点即可。
+	
+	2)所编写的函数的时间复杂性如何？
+	
+	3)通过编译和执行，测试函数的正确性。要求使用自己的测试数据。
+	
+	思路：用下一个节点替换当前节点值，再删除下一个节点。
+	
+	\begin{lstlisting}[language=C++]
+		template <typename T>
+		void DeleteNode(ChainNode<T>* x) {
+			if (x == x->link) {
+				delete x;
+				return;
+			}
+			ChainNode<T>* y = x->link;
+			x->data = y->data;
+			x->link = y->link;
+			delete y;
+		}
+	\end{lstlisting}
+	
+	 时间复杂度：O(1)
+	
+	
+	
+	\subsection*{练习57：双向链表游标控制}
+	为了有效地支持在一个双向链表中进行前移和后移，需要扩充Double的类定义（见程序3-21），即增加一个私有成员current，用它来纪录链表的当前位置，为此，需要增加以下共享函数：
+	
+	1)ResetLeft—将current置为LeftEnd。
+	
+	2)ResetRight—将current置为RightEnd。
+	
+	3)current(x)—取当前元素至x。如果current>length，函数返回false，否则返回true。
+	
+	4)End—如果当前的位置恰好指向链表的最后一个元素（即最右边的元素），则返回true，
+	否则返回false。
+	
+	5)Front—如果当前的位置恰好指向链表的第一个元素（即最左边的元素），则返回true，
+	否则返回false。
+	
+	6)Next—移动current指向链表的下一个元素。如果没有下一个元素，函数返回false，否
+	则返回true。
+	
+	7)Previous—移动current指向链表的前一个元素。如果没有前一个元素，函数返回false，
+	否则返回true。
+	
+	编写以上扩充函数，使用适当的测试数据测试代码的正确性。
+	
+	新增成员变量 'current'，以及相关函数。
+	
+	\begin{lstlisting}[language=C++]
+		template <typename T>
+		class DoubleChain {
+			public:
+			void ResetLeft();
+			void ResetRight();
+			bool Current(T& x);
+			bool End();
+			bool Front();
+			bool Next();
+			bool Previous();
+			
+			private:
+			DblNode<T>* current;
+			DblNode<T>* head;
+			int length;
+		};
+	\end{lstlisting}
+	
+	 时间复杂度：O(1)
+	
+	
+	
+	\subsection*{练习58：InsertionSort 插入排序链表}
+	为Chain增加成员函数InsertionSort，该函数可利用程序2-15给出的插入排序算法对链表
+	中的元素按递增次序进行重新排列。不得创建新的节点或删除老的节点。
+	
+	1)程序在最坏情况下的时间复杂性是多少？如果链表中的元素已经按递增次序排列，程序
+	需要消耗多长时间？
+	
+	2)通过编译和执行，测试程序的正确性。要求使用自己的测试数据。
+	
+	\begin{lstlisting}[language=C++]
+		template <typename T>
+		void Chain<T>::InsertionSort() {
+			if (!first || !first->link) return;
+			
+			ChainNode<T>* sorted = first;
+			ChainNode<T>* curr = first->link;
+			sorted->link = nullptr;
+			
+			while (curr) {
+				ChainNode<T>* next = curr->link;
+				if (curr->data <= sorted->data) {
+					curr->link = sorted;
+					sorted = curr;
+				} else {
+					ChainNode<T>* p = sorted;
+					while (p->link && p->link->data < curr->data)
+					p = p->link;
+					curr->link = p->link;
+					p->link = curr;
+				}
+				curr = next;
+			}
+			first = sorted;
+		}
+	\end{lstlisting}
+	
+	 时间复杂度：
+	- 最坏情况 O(n²)
+	- 已排序链表 O(n)
+	
+\section{3.5~~~寻址}
+
+\subsection*{练习60：Output 成员函数和操作符 << 重载}
+编写IndirectList的成员函数Output，并利用该函数重载操作符<<。测试代码的正确性。
+\subsubsection*{实现代码}
+
+\begin{lstlisting}[language=C++]
+	template <typename T>
+	class IndirectList {
+		public:
+		void Output(std::ostream& out) const;
+		int length;
+		
+		private:
+		T table; // 间接寻址表
+	};
+	
+	template <typename T>
+	void IndirectList<T>::Output(std::ostream& out) const {
+		for (int i = 0; i < length; ++i)
+		out << *table[i] << " ";
+		out << std::endl;
+	}
+	
+	// 重载 <<
+	template <typename T>
+	std::ostream& operator<<(std::ostream& out, const IndirectList<T>& list) {
+		list.Output(out);
+		return out;
+	}
+\end{lstlisting}
+
+测试建议
+
+\begin{lstlisting}[language=C++]
+int main() {
+	int a = 10, b = 20, c = 30;
+	IndirectList<int> list;
+	// 初始化 list.table[0] = &a 等
+	std::cout << list;
+	return 0;
+}
+\end{lstlisting}
+
+
+\subsection*{练习61：Search 成员函数}
+编写IndirectList的成员函数Search，测试其正确性，并指出函数的时间复杂性。
+
+\begin{lstlisting}[language=C++]
+	template <typename T>
+	int IndirectList<T>::Search(const T& x) const {
+		for (int i = 0; i < length; ++i)
+		if (*table[i] == x)
+		return i + 1; // 返回逻辑位置
+		return -1;
+	}
+\end{lstlisting}
+
+时间复杂度：O(n)
+
+
+\subsection*{练习62：遍历器类 ChainIterator}
+设计一个间接寻址的类遍历器，参照ChainIterator类（见程序3-18）的定义。通过用它
+从左至右输出一个线性表来测试其正确性。
+
+参照 `ChainIterator` 设计 `IndirectListIterator`。
+
+
+\begin{lstlisting}[language=C++]
+	template <typename T>
+	class IndirectListIterator {
+		public:
+		IndirectListIterator(IndirectList<T>& list) : list(list), index(0) {}
+		bool HasNext() { return index < list.length; }
+		T& Next() { return *list.table[index++]; }
+		
+		private:
+		IndirectList<T>& list;
+		int index;
+	};
+\end{lstlisting}
+
+测试建议
+
+\begin{lstlisting}[language=C++]
+IndirectList<int> list;
+// 初始化
+IndirectListIterator<int> iter(list);
+while (iter.HasNext())
+std::cout << iter.Next() << " ";
+\end{lstlisting}
+
+
+\subsection*{练习63：折半搜索函数 BinarySearch}
+1)编写一个折半搜索（见程序2-30）函数，用来对一个间接寻址表进行搜索。假定对
+于所有的$i\leq length-2$有$^*table[i]\leq ^*table[i+1]$。函数的时间复杂性应该是O(log(length))，试证
+明之。
+
+2)通过编译和执行，测试该程序的正确性。要求使用自己的测试数据。
+
+3)搜索一个有序的单向链表速度会有多快？试编写一个具有这种时间复杂性的，对单向链
+表进行搜索的函数。
+
+适用于有序间接寻址表。
+
+
+\begin{lstlisting}[language=C++]
+	template <typename T>
+	int BinarySearch(IndirectList<T>& list, const T& x) {
+		int low = 0, high = list.length - 1;
+		while (low <= high) {
+			int mid = (low + high) / 2;
+			if (*list.table[mid] == x) return mid + 1;
+			else if (*list.table[mid] < x) low = mid + 1;
+			else high = mid - 1;
+		}
+		return -1;
+	}
+\end{lstlisting}
+
+时间复杂度：O(log n)
+
+证明：
+每次将搜索区间缩小一半，最多执行 $ \log_2 n $ 次循环。
+
+
+\subsection*{练习64：插入排序函数 InsertionSort}
+令x为IndirectList类型的对象
+
+1)编写一个排序函数，使x按递增次序排列，即对于所有的$i\leq length-2$，有$^*table[i]\leq
+table[i+l]$。基于插入排序方法（见程序2-15）实现该函数。函数的时间复杂性应该是
+$O(length^2)$，并且与每个元素的大小无关。试证明之。
+
+2)通过编译和执行，测试该程序的正确性。要求使用自己的测试数据。
+
+对 IndirectList 进行插入排序。
+
+
+\begin{lstlisting}[language=C++]
+	template <typename T>
+	void InsertionSort(IndirectList<T>& list) {
+		for (int i = 1; i < list.length; ++i) {
+			T* key = list.table[i];
+			int j = i - 1;
+			while (j >= 0 && *list.table[j] > *key) {
+				list.table[j + 1] = list.table[j];
+				--j;
+			}
+			list.table[j + 1] = key;
+		}
+	}
+\end{lstlisting}
+
+时间复杂度：O(n²)  
+最坏情况下，每轮都要比较并移动前面所有元素。
+
+
+\subsection*{练习65：冒泡/选择/计数排序实现}
+分别采用以下排序算法（详见第2章）完成练习64：
+
+1)冒泡排序。
+
+2)选择排序。
+
+3)计数排序。
+
+\subsubsection*{1) 冒泡排序}
+
+\begin{lstlisting}[language=C++]
+	template <typename T>
+	void BubbleSort(IndirectList<T>& list) {
+		for (int i = 0; i < list.length - 1; ++i)
+		for (int j = 0; j < list.length - i - 1; ++j)
+		if (*list.table[j] > *list.table[j + 1])
+		std::swap(list.table[j], list.table[j + 1]);
+	}
+\end{lstlisting}
+
+时间复杂度：O(n²)
+
+\subsubsection*{2) 选择排序}
+
+\begin{lstlisting}[language=C++]
+	template <typename T>
+	void SelectionSort(IndirectList<T>& list) {
+		for (int i = 0; i < list.length - 1; ++i) {
+			int minIndex = i;
+			for (int j = i + 1; j < list.length; ++j)
+			if (*list.table[j] < *list.table[minIndex])
+			minIndex = j;
+			std::swap(list.table[i], list.table[minIndex]);
+		}
+	}
+\end{lstlisting}
+
+时间复杂度：O(n²)
+
+\subsubsection*{3) 计数排序}
+
+\begin{lstlisting}[language=C++]
+	template <typename T>
+	void CountingSort(IndirectList<T>& list, T maxVal) {
+		int countSize = maxVal + 1;
+		int* count = new int[countSize]{0};
+		
+		for (int i = 0; i < list.length; ++i)
+		count[*list.table[i]]++;
+		
+		int index = 0;
+		for (T val = 0; val <= maxVal; ++val)
+		while (count[val]--)
+		*list.table[index++] = val;
+		
+		delete[] count;
+	}
+\end{lstlisting}
+
+时间复杂度：O(n + k)，其中 k 是最大值
+
+\subsection*{练习66：根据 table 数组排序 element 数组}
+给定一个类型为T的数组element[0:length-l]和一个整数数组table[0:length-l]。table[]是
+[0,1,...,length-1]的一种排列，使得对于$0\leq i\leq length-2$有$element[table[i]]\leq element[table
+[i+l]]$。
+
+1)编写一个函数对element[]进行排序，使得对于所有的i,有$element[i]\leq element[i+l]$。函
+数的时间复杂性应该是O(s*length)，其中s为每个元素的大小，函数的空间复杂性应该是O(s)。
+试证明之。
+
+2)测试函数的正确性。
+
+\begin{lstlisting}[language=C++]
+	template <typename T>
+	void SortByTable(T element[], int table[], int length) {
+		T* temp = new T[length];
+		for (int i = 0; i < length; ++i)
+		temp[i] = element[table[i]];
+		for (int i = 0; i < length; ++i)
+		element[i] = temp[i];
+		delete[] temp;
+	}
+\end{lstlisting}
+
+时间复杂度：O(n)  
+
+空间复杂度：O(s)，s 为每个元素大小
+
+证明：
+只需一次复制和一次赋值即可完成排序。
+\section{3.6~~~}
+\subsection*{练习67：为 SimChain 类设计遍历器 SimIterator}
+为SimChain类设计一个类遍历器SimIterator。请参考程序3-18中关于Chains类遍历器的定义。SimIterator中应包含与ChainIterator相同的成员函数。编写并测试代码。
+
+参考程序 3-18 中 ChainIterator 的定义。
+
+\subsubsection*{SimIterator 实现}
+\begin{lstlisting}[language=C++]
+	template <typename T>
+	class SimChain;
+	
+	template <typename T>
+	class SimIterator {
+		public:
+		SimIterator(SimChain<T>& list) : list(list), current(0) {}
+		
+		bool HasNext() const;
+		T& Next();
+		
+		private:
+		SimChain<T>& list;
+		int current;
+	};
+	
+	template <typename T>
+	bool SimIterator<T>::HasNext() const {
+		return current < list.Length();
+	}
+	
+	template <typename T>
+	T& SimIterator<T>::Next() {
+		if (!HasNext())
+		throw std::out_of_range("No more elements");
+		return *list[current++];
+	}
+\end{lstlisting}
+
+\subsubsection*{测试建议}
+
+\begin{lstlisting}[language=C++]
+	SimChain<int> chain;
+	chain.Insert(1, 10);
+	chain.Insert(2, 20);
+	SimIterator<int> iter(chain);
+	while (iter.HasNext())
+	std::cout << iter.Next() << " ";
+\end{lstlisting}
+
+
+\subsection*{练习68：修改 SimSpace 类以返回节点指针而非索引}
+1)修改SimSpace类，使得Allocate返回一个指向node[i]的指针，而不是返回索引值i。类似地，修改Deallocate函数，使它的输入参数为欲释放节点的指针。
+
+2)采用1)中的SimSpace代码重新编写SimChain的实现代码。请留意新代码与Chain的代码之间的相似性。
+
+\subsubsection*{1) 修改 Allocate / Deallocate 函数}
+
+\begin{lstlisting}[language=C++]
+	template <typename T>
+	class SimSpace {
+		public:
+		T* Allocate();
+		void Deallocate(T* ptr);
+		
+		private:
+		int freeList; // 空闲节点索引
+		T* nodes;
+		int capacity;
+	};
+\end{lstlisting}
+
+\begin{lstlisting}[language=C++]
+	template <typename T>
+	T* SimSpace<T>::Allocate() {
+		if (freeList == -1)
+		throw std::bad_alloc();
+		int index = freeList;
+		freeList = *(int*)&nodes[index]; // 获取下一个空闲节点
+		return &nodes[index];
+	}
+	
+	template <typename T>
+	void SimSpace<T>::Deallocate(T* ptr) {
+		*(int*)ptr = freeList;
+		freeList = ptr - nodes;
+	}
+\end{lstlisting}
+
+\subsubsection*{2) 修改 SimChain 使用新接口}
+
+\begin{lstlisting}[language=C++]
+	SimSpace<Node<T>> space;
+	Node<T>* node = space.Allocate();
+	space.Deallocate(node);
+\end{lstlisting}
+
+时间复杂度：O(1)
+
+
+\subsection*{练习69：使用静态 SimSpace 成员优化内存分配}
+1)修改SimNode类的定义，为它添加一个类型为SimSpace<T>的静态成员S。这样，所有类型为SimSpace<T>的节点都可以共享同样的模拟空间。重载函数new和delete，以便从模拟空间S中取得节点SimNodes或将SimNodes节点送回模拟空间S中。
+
+2)假定SimSpace是按照练习68的要求实现的，SimNode是按照1)中要求实现的。修改Chain类的代码（见程序3-8），使得它能够用SimNodes代替ChainNodes进行工作。测试代码，并测量运行时间，以确定哪个版本的Chain更快。
+\subsubsection*{1) 修改 SimNode 类，添加静态 SimSpace 成员}
+
+\begin{lstlisting}[language=C++]
+	template <typename T>
+	class SimNode {
+		public:
+		static SimSpace<SimNode<T>> space;
+		
+		void* operator new(size_t size) {
+			return space.Allocate();
+		}
+		
+		void operator delete(void* ptr) {
+			space.Deallocate(static_cast<SimNode<T>*>(ptr));
+		}
+		
+		T data;
+		SimNode<T>* link;
+	};
+\end{lstlisting}
+
+\begin{lstlisting}[language=C++]
+	// 静态成员初始化
+	template <typename T>
+	SimSpace<SimNode<T>> SimNode<T>::space;
+\end{lstlisting}
+
+\subsubsection*{2) 修改 Chain 类使用 SimNode 替代 ChainNode}
+
+\begin{lstlisting}[language=C++]
+	typedef SimNode<T> Node;
+	Node* first;
+\end{lstlisting}
+
+性能对比建议
+
+分别运行以下操作各 10000 次：
+- 插入 1000 个节点
+- 删除 1000 个节点
+记录平均耗时，比较原 Chain 和 SimChain 性能差异。
+
+
+\subsection*{练习70：插入排序链表}
+假定一个链表是采用模拟指针进行描述的，节点的类型为SimNode
+
+1)编写一个程序，该程序使用插入排序算法对链表中的节点进行重新排序，要求按照data域的递增次序进行排列。
+
+2)代码的时间复杂性是多少？如果不是O(n2)，请重写代码以使其具有这样的复杂性，其中n为链表长度。
+
+3)测试代码的正确性。
+\subsubsection*{1) 插入排序函数}
+\begin{lstlisting}[language=C++]
+	template <typename T>
+	void InsertionSort(SimChain<T>& chain) {
+		if (chain.IsEmpty()) return;
+		
+		SimNode<T>* sorted = chain.First();
+		SimNode<T>* curr = chain.First()->link;
+		
+		while (curr) {
+			SimNode<T>* next = curr->link;
+			if (curr->data <= sorted->data) {
+				curr->link = sorted;
+				sorted = curr;
+			} else {
+				SimNode<T>* p = sorted;
+				while (p->link && p->link->data < curr->data)
+				p = p->link;
+				curr->link = p->link;
+				p->link = curr;
+			}
+			curr = next;
+		}
+		chain.SetFirst(sorted);
+	}
+\end{lstlisting}
+
+\subsubsection*{2) 时间复杂度分析}
+
+最坏情况每次都要扫描整个有序部分：
+
+时间复杂度：O(n²)
+
+
+\subsection*{练习74：自定义 new/delete 提升性能}
+对new和delete的调用通常都要耗费很多时间，为此，可以使用自行编写的释放函数（该函数能将被删除的节点放入自由节点表中）来替换delete函数，以便提高代码的运行效率。为了替换new，可以自行编写一个分配函数，每当自由节点链表为空时该函数才会去调用new。修改Chain类（见程序3-8）以实现上述思想。要求编写如上所述的分配节点和释放节点函数，并对自由节点链表进行初始化。试比较两种Chain版本的执行时间，并评价新方法的优缺点。
+\subsubsection*{1) 自定义分配/释放函数}
+
+\begin{lstlisting}[language=C++]
+	template <typename T>
+	class FreeList {
+		public:
+		static void* operator new(size_t size);
+		static void operator delete(void* ptr);
+		
+		private:
+		static std::stack<T*> freeNodes;
+	};
+	
+	template <typename T>
+	std::stack<T*> FreeList<T>::freeNodes;
+	
+	template <typename T>
+	void* FreeList<T>::operator new(size_t size) {
+		if (!freeNodes.empty()) {
+			T* node = freeNodes.top();
+			freeNodes.pop();
+			return node;
+		}
+		return ::operator new(size);
+	}
+	
+	template <typename T>
+	void FreeList<T>::operator delete(void* ptr) {
+		freeNodes.push(static_cast<T*>(ptr));
+	}
+\end{lstlisting}
+
+\subsubsection*{2) 修改 Chain 类使用自定义分配器}
+
+\begin{lstlisting}[language=C++]
+	typedef FreeList<Node<T>> FastNode;
+	FastNode<T>* node = new FastNode<T>;
+	delete node;
+\end{lstlisting}
+\end{document}

@@ -1,0 +1,285 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{amsmath, amssymb}
+\usepackage{enumitem}
+\usepackage{geometry}
+\usepackage{algorithm2e} % 用于伪代码
+\geometry{a4paper, margin=1in}
+\titleformat{\section}{\large\bfseries}{术语 \thesection}{1em}{}
+
+\begin{document}
+	
+	\section*{数据结构与算法核心术语整理}
+	
+	\section{数据结构相关术语}
+	
+	\begin{description}[leftmargin=3cm, style=nextline]
+		\item[数组 (Array)] 一种线性结构，支持随机访问，大小固定。
+		\item[链表 (Linked List)] 由结点组成的线性结构，支持动态扩展。
+		\item[栈 (Stack)] 后进先出（LIFO）的数据结构。
+		\item[队列 (Queue)] 先进先出（FIFO）的数据结构。
+		\item[树 (Tree)] 层次结构，有根节点和子节点，无环。
+		\item[二叉树 (Binary Tree)] 每个节点最多有两个子节点的树。
+		\item[堆 (Heap)] 完全二叉树，满足堆性质，常用于优先队列。
+		\item[图 (Graph)] 由顶点和边组成的数据结构，分为有向图和无向图。
+		\item[哈希表 (Hash Table)] 利用哈希函数实现快速查找的结构。
+		\item[散列表 (Hash Table)] 见哈希表。
+		\item[跳表 (Skip List)] 基于多层链表的概率型有序结构，支持快速插入/删除/查找。
+		\item[斐波那契堆 (Fibonacci Heap)] 支持合并操作的高效堆结构。
+		\item[B 树] 多路平衡搜索树，适用于外存存储。
+		\item[红黑树 (Red-Black Tree)] 自平衡二叉搜索树，保证对数时间复杂度。
+		\item[AVL 树] 高度平衡的二叉搜索树。
+		\item[区间树 (Interval Tree)] 存储区间并支持范围查询的树结构。
+		\item[顺序统计树 (Order-Statistic Tree)] 支持按秩查询的红黑树变体。
+		\item[van Emde Boas 树] 用于整数键值的高效字典结构。
+		\item[不相交集合 (Disjoint Set)] 又称并查集，支持合并与查找操作。
+		\item[持久数据结构 (Persistent Data Structure)] 支持历史版本访问的数据结构。
+	\end{description}
+	
+	\section{算法设计方法相关术语}
+	
+	\begin{description}[leftmargin=3.5cm, style=nextline]
+		\item[分治法 (Divide and Conquer)] 将问题划分为子问题分别求解。
+		\item[动态规划 (Dynamic Programming)] 解决具有重叠子问题和最优子结构的问题。
+		\item[贪心算法 (Greedy Algorithm)] 每一步选择局部最优解以期得到全局最优解。
+		\item[回溯法 (Backtracking)] 递归地尝试所有可能解的暴力搜索策略。
+		\item[分支限界法 (Branch and Bound)] 结合剪枝的广度优先搜索方法。
+		\item[近似算法 (Approximation Algorithm)] 在 NP-Hard 问题中找到近似最优解。
+		\item[在线算法 (On-line Algorithm)] 实时响应输入的算法。
+		\item[离线算法 (Off-line Algorithm)] 已知全部输入后处理的算法。
+		\item[多线程算法 (Multithreaded Algorithm)] 支持并发执行的算法。
+		\item[并行算法 (Parallel Algorithm)] 同时执行多个计算任务的算法。
+		\item[概率分析 (Probabilistic Analysis)] 分析算法在平均情况下的性能。
+		\item[摊还分析 (Amortized Analysis)] 分析一系列操作的平均代价。
+		\item[核算法 (Kernel Method)] 用于算法正确性证明的数学方法。
+		\item[渐近记号 (Asymptotic Notation)] 描述算法运行时间的增长趋势（如 $O$、$\Omega$、$\Theta$）。
+	\end{description}
+	
+	\section{排序与查找相关术语}
+	
+	\begin{description}[leftmargin=3.5cm, style=nextline]
+		\item[冒泡排序 (Bubble Sort)] 通过相邻元素交换实现排序。
+		\item[插入排序 (Insertion Sort)] 将每个元素插入已排序部分。
+		\item[选择排序 (Selection Sort)] 每次选择最小元素放入当前位置。
+		\item[快速排序 (Quicksort)] 基于划分思想的分治排序算法。
+		\item[归并排序 (Merge Sort)] 基于归并思想的稳定排序算法。
+		\item[堆排序 (Heapsort)] 利用堆结构进行排序。
+		\item[计数排序 (Counting Sort)] 线性时间排序算法，适用于小范围整数。
+		\item[基数排序 (Radix Sort)] 按位从低位到高位进行排序。
+		\item[桶排序 (Bucket Sort)] 将元素分布到多个桶中分别排序。
+		\item[二分查找 (Binary Search)] 在有序数组中查找目标值的高效算法。
+		\item[跳跃表查找 (Skip List Search)] 利用索引加速查找的过程。
+		\item[字符串匹配 (String Matching)] 查找模式串在主串中的位置。
+		\item[KMP 算法] 利用前缀函数优化字符串匹配过程。
+		\item[Rabin-Karp 算法] 利用哈希函数加速字符串匹配。
+		\item[Boyer-Moore 算法] 利用坏字符启发式提高匹配效率。
+	\end{description}
+	
+	\section{图论相关术语}
+	
+	\begin{description}[leftmargin=3.5cm, style=nextline]
+		\item[深度优先搜索 (DFS)] 对图进行遍历时尽可能深入。
+		\item[广度优先搜索 (BFS)] 逐层扩展访问图的节点。
+		\item[Dijkstra 算法] 单源最短路径算法，适用于非负权图。
+		\item[Bellman-Ford 算法] 支持负权重边的单源最短路径算法。
+		\item[Floyd-Warshall 算法] 所有节点对之间的最短路径。
+		\item[Prim 算法] 构造最小生成树的贪心算法。
+		\item[Kruskal 算法] 利用并查集构造最小生成树。
+		\item[最大流 (Max Flow)] 寻找从源到汇的最大流量。
+		\item[最小割 (Min Cut)] 图中将源汇分离的最小容量切割。
+		\item[匈牙利算法 (Hungarian Algorithm)] 解决二分图最大匹配问题。
+		\item[霍普克罗夫特-卡普算法 (Hopcroft-Karp)] 快速求解二分图最大匹配。
+		\item[强连通分量 (Strongly Connected Component)] 有向图中互相可达的极大子图。
+		\item[拓扑排序 (Topological Sort)] 有向无环图的线性排序。
+		\item[欧拉路径 (Euler Path)] 经过每条边一次且仅一次的路径。
+		\item[哈密顿路径 (Hamiltonian Path)] 经过每个顶点一次且仅一次的路径。
+	\end{description}
+	
+	\section{数学与算法基础术语}
+	
+	\begin{description}[leftmargin=3.5cm, style=nextline]
+		\item[大 O 记号 (Big-O Notation)] 表示算法的上界。
+		\item[Ω 记号 (Omega Notation)] 表示算法的下界。
+		\item[Θ 记号 (Theta Notation)] 表示算法的紧确界。
+		\item[多项式时间 (Polynomial Time)] 运行时间为输入规模的多项式函数。
+		\item[NP 类问题 (NP Problems)] 可在多项式时间内验证的决策问题。
+		\item[NP 完全问题 (NP-Complete Problems)] 最难的 NP 问题。
+		\item[NP 难问题 (NP-Hard Problems)] 不一定是 NP 的最难问题。
+		\item[递归式 (Recurrence)] 描述分治算法运行时间的方程。
+		\item[主定理 (Master Theorem)] 用于解决特定形式递归式的定理。
+		\item[矩阵乘法 (Matrix Multiplication)] 多种算法可改进其复杂度。
+		\item[傅里叶变换 (Fourier Transform)] 用于信号处理和卷积计算。
+		\item[线性规划 (Linear Programming)] 优化线性目标函数，在约束条件下求解。
+		\item[单纯形法 (Simplex Method)] 求解线性规划的经典算法。
+		\item[内点法 (Interior Point Method)] 线性规划的新一代求解器。
+		\item[网络流 (Network Flow)] 图论中表示资源流动的模型。
+		\item[最大流 (Max Flow)] 网络中从源到汇的最大流量。
+		\item[最小割 (Min Cut)] 网络中使源汇分离的最小容量切口。
+		\item[拟阵 (Matroid)] 一种抽象代数结构，广泛用于贪心算法。
+	\end{description}
+	
+	\section{高级算法与应用术语}
+	
+	\begin{description}[leftmargin=3.5cm, style=nextline]
+		\item[模拟退火 (Simulated Annealing)] 一种基于概率的元启发式优化算法。
+		\item[遗传算法 (Genetic Algorithm)] 模拟自然进化过程的元启发式算法。
+		\item[蚁群算法 (Ant Colony Optimization)] 模拟蚂蚁寻找最短路径行为的算法。
+		\item[粒子群算法 (Particle Swarm Optimization)] 基于群体智能的优化方法。
+		\item[布隆过滤器 (Bloom Filter)] 用于判断元素是否存在的空间高效结构。
+		\item[布谷鸟搜索 (Cuckoo Search)] 基于寄生鸟类行为的优化算法。
+		\item[人工神经网络 (Artificial Neural Network)] 模拟人脑结构的机器学习模型。
+		\item[支持向量机 (Support Vector Machine)] 一种分类与回归的监督学习方法。
+		\item[聚类算法 (Clustering Algorithm)] 将相似对象分组的无监督学习方法。
+		\item[隐马尔可夫模型 (Hidden Markov Model)] 用于序列建模的统计模型。
+		\item[Viterbi 算法] 用于 HMM 中寻找最可能状态路径的动态规划算法。
+		\item[奇异值分解 (Singular Value Decomposition)] 用于矩阵降维的数值方法。
+		\item[线性代数 (Linear Algebra)] 研究向量空间与线性变换的数学分支。
+		\item[稀疏矩阵 (Sparse Matrix)] 大部分元素为零的矩阵，节省存储。
+		\item[稠密矩阵 (Dense Matrix)] 大部分元素非零的矩阵。
+		\item[图着色 (Graph Coloring)] 给图的顶点分配颜色，避免相邻同色。
+		\item[旅行商问题 (Traveling Salesman Problem)] 经典 NP 难组合优化问题。
+		\item[集合覆盖问题 (Set Cover Problem)] 覆盖所有元素的最小集合选择。
+		\item[背包问题 (Knapsack Problem)] 经典组合优化问题，有0-1和分数两种形式。
+		\item[最长公共子序列 (LCS)] 动态规划经典问题。
+		\item[钢条切割 (Rod Cutting)] 动态规划入门问题。
+		\item[矩阵链乘法 (Matrix Chain Multiplication)] 动态规划经典问题。
+	\end{description}
+	
+	\section{密码学与安全术语}
+	
+	\begin{description}[leftmargin=3.5cm, style=nextline]
+		\item[公钥加密 (Public-Key Cryptography)] 使用不同密钥进行加密与解密。
+		\item[数字签名 (Digital Signature)] 用于身份认证与防篡改。
+		\item[素数测试 (Primality Testing)] 判断一个数是否为质数。
+		\item[Miler-Rabin 测试] 一种概率性素数判定算法。
+		\item[椭圆曲线加密 (Elliptic Curve Cryptography)] 基于椭圆曲线的加密系统。
+		\item[哈希函数 (Hash Function)] 将任意长度输入映射为定长输出。
+		\item[SHA-256] 一种常用的哈希算法。
+		\item[AES 加密] 高级加密标准，对称加密算法。
+		\item[DES 加密] 数据加密标准，已被 AES 替代。
+		\item[RSA 加密] 基于大整数分解的公钥加密算法。
+	\end{description}
+	
+	\section{其他重要术语}
+	
+	\begin{description}[leftmargin=3.5cm, style=nextline]
+		\item[伪代码 (Pseudocode)] 用于描述算法逻辑的通用语言。
+		\item[算法复杂度 (Algorithm Complexity)] 描述算法运行时间和空间需求。
+		\item[时间复杂度 (Time Complexity)] 算法运行时间随输入增长的趋势。
+		\item[空间复杂度 (Space Complexity)] 算法所需内存空间的增长趋势。
+		\item[最坏情况 (Worst Case)] 输入导致算法运行最慢的情况。
+		\item[平均情况 (Average Case)] 所有输入的期望运行时间。
+		\item[最好情况 (Best Case)] 输入导致算法运行最快的情况。
+		\item[指示器随机变量 (Indicator Random Variable)] 用于概率分析的工具。
+		\item[势能法 (Potential Method)] 摊还分析的一种方法。
+		\item[递归树 (Recursion Tree)] 用于直观分析递归算法的工具。
+		\item[线性规划松弛 (LP Relaxation)] 将整数规划放松为线性规划求解。
+		\item[约简 (Reduction)] 将一个问题转换为另一个问题求解。
+		\item[归约 (Reduction)] 用于证明问题复杂性的技术。
+		\item[决策问题 (Decision Problem)] 输出为“是”或“否”的问题。
+		\item[优化问题 (Optimization Problem)] 寻找最优解的问题。
+		\item[近似比 (Approximation Ratio)] 近似算法与最优解的比值。
+		\item[指数时间 (Exponential Time)] 时间复杂度为 $2^{n}$ 或更高。
+		\item[多项式时间 (Polynomial Time)] 时间复杂度为 $n^k$，其中 $k$ 为常数。
+	\end{description}
+	
+		
+		\section*{5-2 (查找一个无序数组)}
+		
+		本题将分析三个算法，它们在一个包含 $n$ 个元素的无序数组 $A$ 中查找一个值 $x$。
+		
+		考虑如下的随机策略：随机挑选 $A$ 中的一个下标 $i$。如果 $A[i] = x$，则终止；否则，继续挑选 $A$ 中一个新的随机下标。重复随机挑选下标，直到找到一个下标 $j$，使 $A[j] = x$，或者直到我们已检查过 $A$ 中的每一个元素。注意，我们每次都是从全部下标的集合中挑选，于是可能会不止一次地检查某个元素。
+		
+		\begin{enumerate}[label=\alph*.]
+			\item 请写出过程 $\textsc{Random-Search}$ 的伪代码来实现上述策略。确保当 $A$ 中所有下标都被挑选过时，你的算法应停止。
+			
+			\begin{algorithm}[H]
+				\SetAlgoLined
+				\KwIn{数组 $A[1..n]$, 目标值 $x$}
+				\KwOut{下标 $j$ 使得 $A[j]=x$，或"未找到"}
+				checked $\leftarrow$ 空集合\;
+				\While{true}{
+					$i \leftarrow$ 从 $\{1,2,\ldots,n\}$ 中随机选择一个下标\;
+					\If{$A[i] = x$}{
+						\Return $i$\;
+					}
+					将 $i$ 加入 checked\;
+					\If{checked 的大小等于 $n$}{
+						\Return "未找到"\;
+					}
+				}
+				\caption{$\textsc{Random-Search}(A, x)$}
+			\end{algorithm}
+			
+			\item 假定恰好有一个下标 $i$ 使得 $A[i] = x$。在我们找到 $x$ 和 $\textsc{Random-Search}$ 结束之前，必须挑选 $A$ 的下标的数目期望是多少？你的答案应该是 $n$ 的函数。
+			
+			设期望查找次数为 $E$。每次尝试选中目标的概率为 $\frac{1}{n}$，未选中的概率为 $\frac{n-1}{n}$。根据期望的线性性：
+			\[
+			E = 1 + \frac{n-1}{n}E
+			\]
+			解得 $E = n$。
+			
+			\item 假设有 $k \geq 1$ 个下标 $i$ 使得 $A[i] = x$。推广你对 (b) 部分的解答。在找到 $x$ 或 $\textsc{Random-Search}$ 结束之前，必须挑选 $A$ 的下标的数目期望是多少？你的答案应该是 $n$ 和 $k$ 的函数。
+			
+			此时每次尝试选中目标的概率为 $\frac{k}{n}$，未选中的概率为 $\frac{n-k}{n}$。期望满足：
+			\[
+			E = 1 + \frac{n-k}{n}E
+			\]
+			解得 $E = \frac{n}{k}$。
+			
+			\item 假设没有下标 $i$ 使得 $A[i] = x$。在检查完 $A$ 的所有元素或 $\textsc{Random-Search}$ 结束之前，我们必须挑选 $A$ 的下标的数目期望是多少？
+			
+			每次尝试选中新下标的概率为 $\frac{n-m}{n}$（$m$ 为已检查的下标数）。期望次数为：
+			\[
+			E = \sum_{m=0}^{n-1} \frac{n}{n-m} = n \sum_{i=1}^n \frac{1}{i} = n H_n
+			\]
+			其中 $H_n$ 是第 $n$ 个调和数，约为 $\ln n + \gamma$（$\gamma$ 是欧拉常数）。
+			
+			现在考虑一个确定性的线性查找算法，我们称之为 $\textsc{Deterministic-Search}$。具体地说，这个算法在 $A$ 中顺序查找 $x$，考虑 $A[1], A[2], A[3], \dots, A[n]$，直到找到 $A[i] = x$，或者到达数组的末尾。假设输入数组的所有排列都是等可能的。
+			
+			\item 假设恰好有一个下标 $i$ 使得 $A[i] = x$。$\textsc{Deterministic-Search}$ 平均情形的运行时间是多少？$\textsc{Deterministic-Search}$ 最坏情形的运行时间又是多少？
+			
+			- 平均情形：目标元素等概率出现在任何位置，平均比较次数为 $\frac{1}{n} \sum_{i=1}^n i = \frac{n+1}{2}$。
+			- 最坏情形：目标元素在最后位置或不存在，比较次数为 $n$。
+			
+			\item 假设有 $k \geq 1$ 个下标 $i$ 使得 $A[i] = x$。推广你对 (e) 部分的解答。$\textsc{Deterministic-Search}$ 平均情形的运行时间是多少？$\textsc{Deterministic-Search}$ 最坏情形的运行时间又是多少？你的答案应是 $n$ 和 $k$ 的函数。
+			
+			- 平均情形：最早出现的目标位置的期望值为 $\frac{n+1}{k+1}$。
+			- 最坏情形：所有目标元素都在数组末尾，比较次数为 $n$。
+			
+			\item 假设没有下标 $i$ 使得 $A[i] = x$。$\textsc{Deterministic-Search}$ 平均情形的运行时间是多少？
+			
+			$\textsc{Deterministic-Search}$ 最坏情形的运行时间又是多少？
+			
+			- 平均情形：必须检查所有元素，比较次数为 $n$。
+			- 最坏情形：同上，比较次数为 $n$。
+			
+			最后，考虑一个随机算法 $\textsc{Scramble-Search}$，它先将输入数组随机变换排列，然后在排列变换后的数组上，运行上面的确定性线性查找算法。
+			
+			\item 设 $k$ 是满足 $A[i] = x$ 的下标的数目，请给出在 $k = 0$ 和 $k = 1$ 情况下，算法 $\textsc{Scramble-Search}$ 最坏情形的运行时间和运行时间期望。推广你的解答以处理 $k \geq 1$ 的情况。
+			
+			- $k = 0$ 时：
+			- 最坏情形：比较 $n$ 次。
+			- 期望：比较 $n$ 次。
+			
+			- $k = 1$ 时：
+			- 最坏情形：比较 $n$ 次。
+			- 期望：比较 $\frac{n+1}{2}$ 次。
+			
+			- $k \geq 1$ 时：
+			- 最坏情形：比较 $n$ 次。
+			- 期望：比较 $\frac{n+1}{k+1}$ 次。
+			
+			\item 你将会使用 3 种查找算法中的哪一个？解释你的答案。
+			
+			选择取决于具体场景：
+			\begin{itemize}
+				\item 若 $k$ 较大（接近 $n$），随机搜索更优，因其期望次数为 $\frac{n}{k} \approx 1$。
+				\item 若需保证最坏情况性能，确定性搜索或洗牌搜索更优。
+				\item 洗牌搜索在平均情况下表现良好，且无需预先知道 $k$ 的值。
+			\end{itemize}
+		\end{enumerate}
+	
+\end{document}

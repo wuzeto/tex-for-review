@@ -1,0 +1,482 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{amsmath, amssymb}
+\usepackage{enumitem}
+\usepackage{tasks}
+\usepackage{graphicx}
+\usepackage[a4paper, margin=0.6in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ulem}  % 用于可能的下划线等，这里用于“最深层循环中的语句”等强调（若需要）
+\title{操作系统-概念}
+\author{NgChakTung}
+\date{\today}
+\begin{document}
+\maketitle
+\centering
+\includegraphics[totalheight=0.5\textwidth]{2010.png}
+% 使用 enumerate 环境列出题目（可根据需要调整缩进和编号格式）
+\section{}
+
+\begin{enumerate}
+	
+	% 题目3
+	\item 在单处理机环境下的多道程序设计具有A、B 和 C 的特点。
+	
+	% 题目4
+	\item 现代操作系统的两个最基本特征是 A 和 B，除此之外，它还具有 C 和 D 的特征。
+	
+	% 题目5
+	\item 从资源管理的角度看，操作系统具有四大功能：A、B、C 和 D；而为了方便用户，操作系统还必须提供 E。
+	
+	% 题目6
+	\item 除了传统操作系统中的进程管理、存储器管理、设备管理、文件管理等基本功能外，现代操作系统中还增加了 A、B 和 C 等功能。
+	
+	% 题目7
+	\item 操作系统的基本类型主要有 A、B 和 C。
+	
+	% 题目8
+	\item 批处理系统的主要优点是 A 和 B；主要缺点是 C 和 D。
+	
+	% 题目10
+	\item 分时系统的基本特征是：A、B、C 和 D。
+	
+	% 题目12
+	\item 实时系统可分为 A、B、C和D等类型。
+	
+	\begin{enumerate}
+		\item 列出下列类型操作系统的基本特点。
+		\begin{enumerate}
+			\item 批处理（Batch Processing）
+			\item 交互式（Interactive）
+			\item 分时（Time-Sharing）
+			\item 实时（Real-Time）
+			\item 网络（Network）
+			\item 并行（Parallel）
+			\item 分布（Distributed）
+			\item 集群（Cluster）
+			\item 手持（Handheld）
+		\end{enumerate}
+	\end{enumerate}
+\end{enumerate}
+
+
+\section{}
+\begin{enumerate}
+	% 题目3
+	\item 程序并发执行与顺序执行时相比产生了一些新特征，分别是 A、B 和 C。
+	
+	% 题目6
+	\item 进程最基本的特征是 A 和 B，除此之外，它还有 C 和 D 的特征。
+	
+	% 题目14
+	\item 同步机制应遵循的准则有 A、B、C 和 D。
+	
+	% 题目19
+	\item 利用共享的文件进行进程通信的方式被称作 A，除此之外，进程通信的类型还有 B、C 和 D 三种类型。
+	
+	% 题目20
+	\item 客户机—服务器系统通信机制主要的实现方法有是 A、B 和 C 三种。
+	
+	% 题目21
+	\item 为实现消息缓冲队列通信，应在 PCB 中增加 A、B 和 C 三个数据项。
+\end{enumerate}
+
+\section{}
+\begin{enumerate}
+	% 题目2
+	\item 作业调度必须做 A 和 B 两个决定。
+	
+	% 题目3
+	\item 进程调度的主要任务是 A、B 和 C，进程调度的方式主要有 D 和 E 两种方式。
+	
+	% 题目4
+	\item 在抢占调度方式中，抢占的原则主要有：A、B 和 C。
+	
+	% 题目5
+	\item 在设计进程调度程序时，应考虑 A、B 和 C 三个问题。
+	
+	% 题目10
+	\item 死锁产生的主要原因是 A 和 B。
+	
+	% 题目11
+	\item 死锁产生的必要条件是 A、B、C 和 D。
+	
+	% 题目16
+	\item A 和 B 是解除死锁的两种常用方法。
+	
+	\item \begin{enumerate}
+		\item[3.4] 下面设计的优点和缺点分别是什么？系统层次和用户层次都要考虑。
+		\begin{enumerate}
+			\item 同步和异步通信
+			\item 自动和显式缓冲
+			\item 复制传送和引用传送
+			\item 固定大小和可变大小消息
+		\end{enumerate}
+
+		\item[7.4] 根据如下两点，比较循环等待方法与各种死锁避免方法（如银行家算法）：
+		\begin{enumerate}
+			\item 运行时开销。
+			\item 系统吞吐量。
+		\end{enumerate}
+		
+		\item[7.5] 在一个真实的计算机系统中，可用的资源和进程对资源的要求都不会持续很久（几个月）。资源会损坏和被替换，新的进程会进入和离开系统，新的资源会被购买和加入系统。如果用银行家算法控制死锁，下面哪些变化在什么情况下是安全的（不会导致死锁）？
+		\begin{enumerate}
+			\item 增加可用资源（新的资源被加入系统）
+			\item 减少可用资源（资源被从系统中永久性地移出）
+			\item 增加一个进程的 Max（进程需要更多的资源，超过所允许的资源）
+			\item 减少一个进程的 Max（进程不再需要那么多资源）
+			\item 增加进程的数量
+			\item 减少进程的数量
+		\end{enumerate}
+		
+		\item[7.7] 假设一个系统有 $m$ 个相同类型的资源被 $n$ 个进程共享，进程每次只请求或释放一个资源。试证明只要符合下面两个条件，系统就不会发生死锁：
+		\begin{enumerate}
+			\item 每个进程需要资源的最大值在 $1 \sim m$ 之间。
+			\item 所有进程需要资源的最大值的和小于 $m + n$。
+		\end{enumerate}
+	\end{enumerate}
+\end{enumerate}
+
+\section{}
+\begin{enumerate}
+	% 题目2
+	\item 程序装入的方式有 A、B 和 C 三种方式。
+	
+	% 题目3
+	\item 程序的链接方式有 A、B 和 C 三种方式。
+	
+	% 题目10
+	\item 实现进程对换应具备 A、B 和 C 三方面的功能。
+	
+	% 题目14
+	\item 引入分段主要是满足用户的需要，具体包括 A、B、C 和 D 方面。
+	
+	% 题目17
+	\item 在段页式系统中（无快表），为获得一条指令或数据，都需三次访问内存。第一次从内存中取得 A；第二次从内存中取得 B；第三次从内存中取得 C。
+	
+	\item[4.4] 在多线程进程中，下列哪些程序状态被共享？
+	\begin{enumerate}
+		\item 寄存器值
+		\item 堆内存
+		\item 全局变量
+		\item 栈内存
+	\end{enumerate}
+	
+	\item[4.8] 考虑多处理器系统和采用多对多线程模式编写的多线程程序，使程序中用户级线程数比系统中处理器数多。讨论下列情形的性能影响：
+	\begin{enumerate}
+		\item 分配给程序的内核线程数比处理器数少。
+		\item 分配给程序的内核线程数与处理器数相等。
+		\item 分配给程序的内核线程数比处理器数多，但少于用户线程数。
+	\end{enumerate}
+\end{enumerate}
+
+\section{}
+\begin{enumerate}
+	% 题目3
+	\item 实现虚拟存储器，除了需要有一定容量的内存和相当容量的外存外，还需要有 A、B 和 C 的硬件支持。
+	
+	% 题目4
+	\item 为实现请求分页管理，应在纯分页的页表基础上增加 A、B、C 和 D 等数据项。
+	
+	% 题目5
+	\item 在请求页系统中要采用多种置换算法，其中 OPT 是 A 置换算法，LRU 是 B 置换算法，NUR 是 C 置换算法，而 LFU 则是 D 置换算法，PBA 是 E 算法。
+	
+	% 题目7
+	\item 在请求页系统中，调页的策略有 A 和 B 两种方式。
+	
+	% 题目9
+	\item 分页系统的内存保护通常有 A 和 B 两种措施。
+	
+	% 题目11
+	\item 为实现段的共享，系统中应设置一张 A，每个被共享的段占其中的一个表项，其中应包含了被共享段的段名、B、C 和 D 等数据项；另外，还在该表项中记录了共享该段的 E 的情况。
+	
+	% 题目12
+	\item 在分段系统中常用的存储保护措施有 A、B 和 C 三种方式。
+	
+	% 题目14
+	\item Intel x86/Pentium 系列 CPU 可采用 A 和 B 两种工作模式。
+	
+	\begin{enumerate}
+		\item[5.2] 讨论下列几对调度标准如何在一定设置中冲突：
+		\begin{enumerate}
+			\item CPU 利用率和响应时间
+			\item 平均周转时间（turnaround time）和最大等待时间
+			\item I/O 设备利用率和 CPU 利用率
+		\end{enumerate}
+		
+		\item[5.5] 下面哪种调度算法能导致饥饿？
+		\begin{enumerate}
+			\item 先到先服务
+			\item 最短作业优先
+			\item 轮转法
+			\item 优先级
+		\end{enumerate}
+		
+		\item[5.6] 考虑 RR 调度算法的一个变种，在这个算法里，就绪队列里的项是指向 PCB 的指针。
+		\begin{enumerate}
+			\item 在就绪队列中如果把两个指针指向同一个进程，会有什么效果？
+			\item 这个方案的两个主要优点和两个主要缺点是什么？
+			\item 如何修改基本的 RR 调度算法不用两个指针达到同样的效果？
+		\end{enumerate}
+		
+		\item[5.9] 考虑下面的动态改变优先级的抢占式优先级调度算法。大的优先级数代表高优先级。当一个进程在等待 CPU 时（在就绪队列中，但没执行），优先级以 $\alpha$ 速率改变；当它运行时，优先级以 $\beta$ 速率改变。所有的进程在进入等待队列时指定优先级为 0。参数 $\alpha$ 和 $\beta$ 可以进行设定得到许多不同的调度算法。
+		\begin{enumerate}
+			\item $\beta > \alpha > 0$ 是什么算法？
+			\item $\alpha < \beta < 0$ 是什么算法？
+		\end{enumerate}
+		
+		\item[5.10] 解释下面调度算法对短进程偏好程度上的区别。
+		\begin{enumerate}
+			\item FCFS
+			\item RR
+			\item 多级反馈队列
+		\end{enumerate}
+		
+		\item[5.11] 采用 Windows XP 调度算法，下列情况的线程的数字优先级如何？
+		\begin{enumerate}
+			\item 在 REALTIME\_PRIORITY\_CLASS 中的线程具有相对优先级 HIGHEST。
+			\item 在 NORMAL\_PRIORITY\_CLASS 中的线程具有相对优先级 NORMAL。
+			\item 在 HIGH\_PRIORITY\_CLASS 中的线程具有相对优先级 ABOVE\_NORMAL。
+		\end{enumerate}
+	\end{enumerate}
+	
+	\begin{enumerate}
+		\item[8.4] 绝大多数系统允许程序在执行时分配更多的内存给它自己的地址空间。程序的堆段中的数据分配就是这样一个内存分配实例。在下面的方法中，支持动态内存分配需要什么？
+		\begin{enumerate}
+			\item 连续内存分配
+			\item 纯分段
+			\item 纯分页
+		\end{enumerate}
+		
+		\item[8.5] 对下列问题，试比较连续内存分配方案、纯分段方案和纯分页方案中的内存组织方法：
+		\begin{enumerate}
+			\item 外部碎片
+			\item 内部碎片
+			\item 共享跨进程代码的能力
+		\end{enumerate}
+		
+		\item[8.8] 许多系统中，程序二进制常见的结构如下：代码从一个小的固定虚拟地址（如 0）开始保存。代码段后是用来保存程序变量的数据段，当程序开始执行时，栈在虚拟地址空间的另一端被分配，并被允许向更低的虚拟地址方向递增。在下列方案中，采用上述结构有何意义？
+		\begin{enumerate}
+			\item 连续内存分配
+			\item 纯分段
+			\item 纯分页
+		\end{enumerate}
+	\end{enumerate}
+	
+	\begin{enumerate}
+		\item[9.6] 假定要监视时钟算法的指针移动速度（可用来表示页替换的速度）。根据下面的现象，可得到什么结论？
+		\begin{enumerate}
+			\item 指针移动快
+			\item 指针移动慢
+		\end{enumerate}
+		
+		\item[9.9] VAX/VMS 系统采用 FIFO 置换算法来处理常驻页和经常使用页的空闲帧池。假定空闲帧池采用最近最少使用置换算法。试回答下列问题：
+		\begin{enumerate}
+			\item 如果出现页错误而所需页不在空闲帧池中，那么新请求页如何从空闲中分配？
+			\item 如果出现页错误且所需页在空闲帧池中，那么新请求页如何由常驻页和经常使用页的空闲池来满足？
+			\item 如果常驻页的数量为 1，那么这样方法会退化成什么？
+			\item 如果空闲帧池的页数量为 0，那么这样方法会退化成什么？
+		\end{enumerate}
+		
+		\item[9.10] 假设一个具有下面时间利用率的按需调页系统：
+		
+		
+		- CPU 利用率：20\%
+		
+		- 分页磁盘：97.7\%
+		
+		- 其他 I/O 设备：5\%
+		
+		试说明下面哪一项可能提高 CPU 的利用率，为什么？
+		\begin{enumerate}
+			\item 安装一个更快的 CPU
+			\item 安装一个更大的分页磁盘
+			\item 提高多道程序的程度
+			\item 降低多道程序的程度
+			\item 安装更多内存
+			\item 安装个更快的硬盘，或对多个硬盘用多个控制器
+			\item 加入预约式页面调度算法预取页
+			\item 增加页面大小
+		\end{enumerate}
+	\end{enumerate}
+\end{enumerate}
+
+\section{}
+\begin{enumerate}
+	% 题目4
+	\item 缓冲池中的每个缓冲区由 A 和 B 两部分组成。
+	
+	% 题目5
+	\item I/O 软件通常被组织成 A、B、C 和 D 四个层次。
+	
+	% 题目8
+	\item 除了设备的独立性外，在设备分配时还要考虑 A、B 和 C 三种因素。
+	
+	% 题目9
+	\item 为实现设备独立性，在系统中必须设置 A 表，通常它包括 B、C 和 D 三项。
+	
+	% 题目10
+	\item SPOOLing 系统是由磁盘中的 A 和 B，内存中的 C 和 D，E 和 F 以及并行管理程序构成的。
+	
+	% 题目12
+	\item 磁盘的访问时间由 A、B 和 C 三部分组成，其中所占比重比较大的是 D，故磁盘调度的目标为 E。
+	
+	\begin{enumerate}
+		\item[12.1] 除了 FCFS，就没有其他的磁盘调度算法是真正公平的（可能会出现饥饿）。
+		\begin{enumerate}
+			\item 说明为什么这个断言是真的。
+			\item 描述一个方法，修改像 SCAN 这样的算法以确保它公平。
+			\item 说明为什么在分时系统中公平是一个重要的目标。
+			\item 给出三个以上例子，在这些情况下操作系统在服务 I/O 请求时“不公平”很重要。
+		\end{enumerate}
+		
+		\item[12.2] 假设一个磁盘驱动器有 5 000 个柱面，从 0～4 999。驱动器正在为柱面 143 的一个请求提供服务，且前面的一个服务请求是在柱面 125。按 FIFO 顺序，即将到来的服务队列是：
+		\[
+		86, \, 1470, \, 913, \, 1774, \, 948, \, 1509, \, 1022, \, 1750, \, 130
+		\]
+		从现在的位置开始，按照下面的磁盘调度算法，要满足队列中的服务要求磁头总的移动距离是多少？
+		\begin{enumerate}
+			\item FCFS
+			\item SSTF
+			\item SCAN
+			\item LOOK
+			\item C-SCAN
+			\item C-LOOK
+		\end{enumerate}
+		
+		\item[12.3] 基础物理学中说：当一个物体在不变加速度 $a$ 的情况下，距离 $d$ 与时间 $t$ 的关系可以用 $d = \frac{1}{2} a t^2$ 来表示。假设在一次磁盘寻道中，像习题 12.2 中一样，在开始一半，磁头以一不变加速度加速，而在后一半，磁头以同一加速度减速。假设磁盘完成一个临近柱面的寻道要 1 ms，一次寻道 5 000 柱面要 18 ms。
+		\begin{enumerate}
+			\item 寻道的距离是磁头移动经过的柱面数，说明为什么寻道时间和寻道距离的平方根成正比。
+			\item 写一个寻道时间是寻道距离的函数的等式。这个等式应该这样的形式 $t = x + y \sqrt{L}$，$t$ 是以 ms 为单位的时间，$L$ 是以柱面数表示的寻道距离。
+			\item 计算习题 12.2 中各种调度算法的总的寻道时间。比较哪一种最快（有最小的总寻道时间）。
+			\item “加速百分比”是节省下的时间除以原先要的时间。最快的调度算法与 FCFS 比较的“加速百分比”是多少。
+		\end{enumerate}
+		
+		\item[12.7] 请求常常不是均衡分发的，例如，包含文件系统 FAT 或索引节点的柱面比包含文件内容的柱面访问的频率要高。假设知道 50\% 的请求都是对一小部分固定的柱面的。
+		\begin{enumerate}
+			\item 对这种情况，本章讨论的算法中有没有哪些性能特别好？为什么？
+			\item 设计一个磁盘调度算法，利用此磁盘上的“热点”，提供更好的性能。
+			\item 文件系统一般是通过一个间接表找到数据块的，像 DOS 中的 FAT 或 UNIX 中的索引。描述一个或更多的利用此类间接表来提高磁盘性能的方法。
+		\end{enumerate}
+		
+		\item[12.9] 考虑 RAID 级别 5 包含 5 个磁盘，4 个磁盘的奇偶校验存储在第 5 个磁盘中。按下面的执行需要访问多少个块？
+		\begin{enumerate}
+			\item 写 1 个块数据
+			\item 写 7 个连续块数据
+		\end{enumerate}
+		
+		\item[12.10] 比较 RAID 级别 5 和 RAID 级别 1 在以下操作中的吞吐量。
+		\begin{enumerate}
+			\item 单个块读操作
+			\item 多个连续块读操作
+		\end{enumerate}
+		
+		\item[12.14] 硬盘的可靠程度通常用一个叫做故障间平均时间（MTBF）的术语来描述。虽然这个量叫做“时间”，MTBF 实际上用每次故障的驱动器小时数来测量。
+		\begin{enumerate}
+			\item 如果一个系统包含 1 000 个磁盘驱动器，每个磁盘驱动器的 MTBF 为 750 000 小时。下面关于这个特大容量磁盘多长时间会出现一次错误的描述，哪一个最好：千年一次，百年一次，十年一次，一年一次，一个月一次，一个星期一次，一天一次，一小时一次，一分钟一次？
+			\item 死亡率统计显示，平均每个美国居民在 20～21 岁之间的死亡几率是 1:1 000。推断一个 20 岁的人的 MTBF 小时数。将这个小时数转化成年，这个 MTBF 告诉你这个 20 岁的人预期的寿命是多少？
+			\item 制造商保证某种磁盘驱动器的 MTBF 是一百万个小时。你能从此推断出这些驱动器保修的年数是多少？
+		\end{enumerate}
+	\end{enumerate}
+	
+	\begin{enumerate}
+		\item[13.3] 考虑以下单用户 PC 的 I/O 情况：
+		\begin{enumerate}
+			\item 用于图形用户界面的鼠标
+			\item 多任务操作系统的磁带驱动器（假定并没有设备预分配）
+			\item 包含用户文件的磁盘驱动器
+			\item 能直接与总线相连且可以通过内存映射 I/O 访问的图形卡
+		\end{enumerate}
+		针对这些 I/O，你会在设计操作系统的时候使用缓冲、假脱机、高速缓存还是多种技术的组合？你会使用轮询检测 I/O 还是中断驱动 I/O？请给出选择的理由。
+	\end{enumerate}
+\end{enumerate}
+
+\section{}
+\begin{enumerate}
+	% 题目1
+	\item 文件管理应具有 A、B、C 和 D 等功能。
+	
+	% 题目2
+	\item 文件按逻辑结构可分成 A 和 B 两种类型，现代操作系统普遍采用的是其中的 C 结构。
+	
+	% 题目3
+	\item 记录式文件，把数据的组织分成 A、B 和 C 三级。
+	
+	% 题目5
+	\item 一个文件系统模型由最低层 A、中间层 B 和最高层 C 三个层次组成。
+	
+	% 题目6
+	\item 对文件的访问有 A 和 B 两种方式。
+	
+	% 题目13
+	\item 引入索引结点后，一个文件在磁盘中占有的资源包括 A、B 和 C 三部分。
+	
+		
+		\begin{enumerate}
+			\item[11.1] 假设一个文件系统采用修改过的、支持扩展的连续分配算法。一个文件是一组扩展，每个扩展对应一个连续的块集合。这种系统中的关键问题是扩展大小的可变级别。下述机制的优点和缺点分别是什么？
+			\begin{enumerate}
+				\item 所有扩展都一样大小，这个大小是预定义的。
+				\item 扩展可以是任意大小，并且动态分配。
+				\item 扩展可以从预定义的一些大小中选取。
+			\end{enumerate}
+			
+			\item[11.3] 假设一个空闲空间都保存在空闲空间列表的系统。
+			\begin{enumerate}
+				\item 假设指向空闲空间列表的指针丢失了，系统能够重新构建空闲空间列表吗？为什么？
+				\item 假设一个类似于 UNIX 的使用索引分配的文件系统。要读一个很小的本地文件 `/a/b/c` 需要多少磁盘 I/O 操作？假定任何磁盘块都没有被缓冲。
+				\item 提出一种机制保证指针永远不会因为内存失败而丢失。
+			\end{enumerate}
+		\end{enumerate}
+
+\end{enumerate}
+
+\section{}
+\begin{enumerate}
+	% 题目1
+	\item 文件的物理结构主要有 A、B 和 C 三种类型，其中顺序访问效率最高的是 D，随机访问效率最高的是 E。
+	
+	% 题目6
+	\item 在利用空闲链表来管理外存空间时，可有两种方式：一种以 A 为单位拉成一条链；另一种以 B 为单位拉成一条链。
+	
+	% 题目8
+	\item 磁盘的第一级容错技术 SFT-I 包含 A、B、C 和 D 等措施。
+	
+	% 题目10
+	\item 集群系统的主要工作模式有 A、B 和 C 三种方式。
+\end{enumerate}
+
+\section{}
+\begin{enumerate}
+	% 题目3
+	\item 在联机命令接口中，实际上包含了 A、B 和 C 三部分。
+	
+	% 题目4
+	\item 在键盘终端处理程序中，有 A 和 B 两种方式实现字符接收的功能。
+	
+	% 题目8
+	\item 图形用户接口使用了 WIMP 技术，将 A、B、C 和 D 面向对象技术集成在一起，形成了一个视窗操作环境。
+\end{enumerate}
+
+\section{}
+\begin{enumerate}
+	% 题目1
+	\item 按系统中各个处理器的功能和结构是否相同，可将多处理机系统分为 A 和 B 两种类型。
+	
+	% 题目4
+	\item 与单机操作系统不同，多处理机操作系统具有 A、B、C 和 D 等新特征。
+	
+	% 题目8
+	\item 网络操作系统最基本的功能是 A，此外还应具有 B、C 和系统容错等功能。
+	
+	% 题目9
+	\item 为了实现数据通信，网络操作系统应具有连接的建立与拆除、A、B、C 和 D 等功能。
+	
+	% 题目11
+	\item 网络管理的功能包括 A、B、C、D 和计费管理等功能。
+\end{enumerate}
+
+
+\end{document}

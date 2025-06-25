@@ -1,0 +1,130 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{amsmath}
+\usepackage{geometry}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{extarrows}
+\usepackage{makecell}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{pgfplots}
+\usepackage{amsthm}
+
+\theoremstyle{remark}
+\newtheorem{remark}{注}
+
+\pgfplotsset{compat=1.18}  % 设置兼容版本（推荐）
+\usepackage{tikz}
+\usepackage{tikz}
+\usetikzlibrary{shapes, arrows.meta, positioning, chains, decorations.pathreplacing, calligraphy}
+\usepackage[dvipsnames, svgnames, x11names]{xcolor}
+\usepackage{tcolorbox}
+\usepackage[normalem]{ulem}
+% 设置页面边距
+\geometry{a4paper, margin=2cm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usetikzlibrary{shapes, arrows.meta, positioning, chains, decorations.pathreplacing, calligraphy}
+\usepackage[dvipsnames, svgnames, x11names]{xcolor}
+\usepackage{tcolorbox}
+\usepackage[normalem]{ulem}
+
+\title{第5讲、第15讲 微分方程思维导图}
+\author{}
+\date{}
+
+\begin{document}
+	\maketitle
+	
+	\section{微分方程的概念}
+	\subsection{微分方程及其阶}
+	基本未知函数及其导数(或微分)与自变量之间关系的方程，方程中未知函数的最高阶导数的阶数称为微分方程的阶，“自变量与函数及其导数之间的关系”
+	
+	\subsection{常微分方程}
+	未知函数是一元函数的微分方程
+	
+	\subsection{线性常微分方程}
+	形如 \(a_n(x)y^{(n)} + a_{n - 1}(x)y^{(n - 1)} + \cdots + a_1(x)y' + a_0(x)y = f(x)\) 的微分方程称为线性常微分方程；当 \(f(x) \equiv 0\) 时，叫做齐次线性微分方程，否则叫做非齐次线性微分方程
+	
+	\subsection{微分方程的解}
+	满足微分方程的函数，使方程成为恒等式，叫做微分方程的解；含有任意常数且任意常数的个数等于微分方程阶数的解，叫做微分方程的通解
+	
+	\subsection{微分方程的通解}
+	若微分方程的解中含有相互独立的任意常数，且任意常数的个数等于微分方程的阶数，这样的解叫做微分方程的通解
+	
+	\subsection{初始条件与特解}
+	确定通解中任意常数的条件称为初始条件，如 \(y(x_0) = y_0\)，\(y'(x_0) = y_1\)，\(\cdots\) ；确定了通解中的任意常数，就得到了特解
+	
+	\section{一阶微分方程的求解}
+	\subsection{可分离变量微分方程}
+	(1) 可分离变量：形如 \(y' = f(x)g(y)\) 的方程，通解为 \(\int \frac{1}{g(y)} dy = \int f(x) dx\) 
+	
+	(2) 齐次微分方程：形如 \(\frac{dy}{dx} = f\left(\frac{y}{x}\right)\) 的方程（可令 \(u = \frac{y}{x}\)，则 \(y = xu\)，\(\frac{dy}{dx} = u + x\frac{du}{dx}\) ）
+	
+	\subsection{齐次型微分方程}
+	一切如 \(\frac{dy}{dx} = \varphi\left(\frac{y}{x}\right)\) 的方程，求解时令 \(u = \frac{y}{x}\)，则 \(y = xu\)，\(\frac{dy}{dx} = u + x\frac{du}{dx}\) ，方程化为 \(u + x\frac{du}{dx} = \varphi(u)\) ，分离变量得 \(\int \frac{1}{\varphi(u) - u} du = \int \frac{1}{x} dx\) 
+	
+	\subsection{一阶线性微分方程}
+	一切如 \(y' + P(x)y = Q(x)\) 的方程，通解公式为 \(y = e^{-\int P(x) dx} \left( \int Q(x) e^{\int P(x) dx} dx + C \right)\) 
+	
+	\subsubsection{伯努利方程}
+	形如 \(\frac{dy}{dx} + P(x)y = Q(x)y^n\)（\(n \neq 0,1\)），通过令 \(z = y^{1 - n}\) 转化为一阶线性微分方程
+	
+	\subsection{二阶可降阶微分方程（仅列常见形式）}
+	(1) \(y'' = f(x,y')\)（缺 \(y\) 型）：令 \(p = y'\)，则 \(y'' = p'\)，方程化为 \(p' = f(x,p)\) 
+	
+	(2) \(y'' = f(y,y')\)（缺 \(x\) 型）：令 \(p = y'\)，则 \(y'' = p\frac{dp}{dy}\)，方程化为 \(p\frac{dp}{dy} = f(y,p)\) 
+	
+	(3) \(y'' = f(x)\)（最简单的二阶方程，逐次积分）：第一次积分得 \(y' = \int f(x) dx + C_1\)，第二次积分得 \(y = \int \left( \int f(x) dx + C_1 \right) dx + C_2\) 
+	
+	\section{全微分方程}
+	若 \(P(x,y)dx + Q(x,y)dy = 0\) 在区域 \(D\) 上是一阶全微分方程，且在 \(D\) 内某一单连通区域内 \(P,Q\) 具有连续的一阶偏导数，且 \(\frac{\partial P}{\partial y} = \frac{\partial Q}{\partial x}\) ，则方程为全微分方程，其通解为 \(u(x,y) = \int_{(x_0,y_0)}^{(x,y)} P(x,y)dx + Q(x,y)dy = C\) ，也可通过凑微分法求解
+	
+	\section{高阶线性微分方程的求解}
+	（此处按思维导图中提及的框架，可结合具体内容补充，因原图未详细展开高阶线性方程具体解法步骤，先保留结构）
+	
+	\section{微分方程的几何应用}
+	“强大的工具”——曲线（结合具体应用场景，因原图未详细展开，保留结构，可后续补充如根据曲线的切线、曲率等条件建立微分方程求解曲线方程等内容 ）
+	
+	\section{微分方程的物理应用}
+	（同理，按思维导图框架保留，可补充如根据运动学、动力学、热传导等物理规律建立微分方程求解物理量变化等内容 ）
+	
+	% 以下为尝试用TikZ绘制思维导图结构示例（因手动精确还原全部手绘思维导图较复杂，先给出大致框架示意，可根据实际需求细化）
+	\begin{tikzpicture}[
+		node distance = 1.5cm,
+		every node/.style = {draw, rectangle, rounded corners, align=center, minimum width=2cm, minimum height=1cm},
+		arrow/.style = {->, >=Latex}
+		]
+		% 根节点
+		\node (root) {微分方程};
+		
+		% 一级子节点
+		\node (concept) [below of=root, xshift=-4cm] {微分方程的概念};
+		\node (solve1) [below of=root, xshift=0cm] {一阶微分方程求解};
+		\node (solve2) [below of=root, xshift=4cm] {高阶方程等};
+		\node (appGeo) [below of=root, xshift=-2cm, yshift=-3cm] {几何应用};
+		\node (appPhy) [below of=root, xshift=2cm, yshift=-3cm] {物理应用};
+		
+		% 连接根节点与一级子节点
+		\draw[arrow] (root) -- (concept);
+		\draw[arrow] (root) -- (solve1);
+		\draw[arrow] (root) -- (solve2);
+		\draw[arrow] (root) -- (appGeo);
+		\draw[arrow] (root) -- (appPhy);
+		
+		% 二级子节点（以微分方程的概念下子项为例，继续细化）
+		\node (order) [below of=concept, xshift=-3cm] {微分方程及其阶};
+		\node (ode) [below of=concept, xshift=0cm] {常微分方程};
+		\node (lode) [below of=concept, xshift=3cm] {线性常微分方程};
+		\draw[arrow] (concept) -- (order);
+		\draw[arrow] (concept) -- (ode);
+		\draw[arrow] (concept) -- (lode);
+		
+		% 可继续类似方式细化更多子节点...
+		
+	\end{tikzpicture}
+	
+\end{document}

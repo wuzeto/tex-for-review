@@ -1,0 +1,195 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{amsmath, amssymb}
+\usepackage{enumitem}
+\usepackage{geometry}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+% 自定义样式
+\lstset{
+	basicstyle=\ttfamily,
+	keywordstyle=\color{blue},
+	stringstyle=\color{magenta},
+	commentstyle=\color{gray},
+	showstringspaces=false,
+	frame=single,
+	breaklines=true,
+	numbers=none,
+	numberstyle=\tiny\color{gray},
+	stepnumber=1,
+	tabsize=4,
+	captionpos=b,
+	escapeinside={(*@}{@*)},
+}
+
+% 设置页眉
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\textbf{ADT 描述}}
+\lhead{\textbf{线性表、数组、栈、队列}}
+
+
+\begin{document}
+	
+	\begin{algorithm}
+		\caption{Huffman Algorithm (HUFFMAN(C))}
+		\label{alg:huffman}
+		\begin{algorithmic}[1]
+			\STATE $ n = |C| $
+			\STATE $ Q = C $
+			\FOR{$ i = 1 $ \TO $ n - 1 $}
+			\STATE allocate a new node $ z $
+			\STATE $ z.\text{left} = x = \text{EXTRACT-MIN}(Q) $
+			\STATE $ z.\text{right} = y = \text{EXTRACT-MIN}(Q) $
+			\STATE $ z.\text{freq} = x.\text{freq} + y.\text{freq} $
+			\STATE $\text{INSERT}(Q, z)$
+			\ENDFOR
+			\RETURN $\text{EXTRACT-MIN}(Q)$
+		\end{algorithmic}
+	\end{algorithm}
+	
+	\begin{algorithm}
+		\caption{B-TREE-SEARCH(x, k)}
+		\label{alg:btree_search}
+		\begin{algorithmic}[1]
+			\STATE $ i \gets 1 $
+			\WHILE{$ i \leq x.n $ and $ k > x.key_i $}
+			\STATE $ i \gets i + 1 $
+			\ENDWHILE
+			\IF{$ i \leq x.n $ and $ k == x.key_i $}
+			\RETURN $ (x, i) $
+			\ELSIF{ $ x.leaf $ }
+			\RETURN NIL
+			\ELSE
+			\STATE DISK-READ($ x.c_i $)
+			\RETURN B-TREE-SEARCH($ x.c_i, k $)
+			\ENDIF
+		\end{algorithmic}
+	\end{algorithm}
+	
+	\section{B-TREE-CREATE}
+	\begin{algorithm}
+		\caption{B-TREE-CREATE(x, k)}
+		\label{alg:btree_search}
+		\begin{algorithmic}[1]
+
+			\STATE $ x.\text{c}_{i + 1} \gets z $
+			\FOR{$ j = x.n $ downto $ i $}
+			\STATE $ x.\text{key}_{j + 1} \gets x.\text{key}_j $
+			\ENDFOR
+			\STATE $ x.\text{key}_i \gets y.\text{key}_t $
+			\STATE $ x.n \gets x.n + 1 $
+			\STATE $\text{DISK-WRITE}(y)$
+			\STATE $\text{DISK-WRITE}(z)$
+			\STATE $\text{DISK-WRITE}(x)$
+	\end{algorithmic}
+\end{algorithm}
+
+\section{B-TREE-INSERT-NONFULL}
+
+\begin{algorithm}
+\caption{B-TREE-INSERT-NONFULL(x, k)}
+\label{alg:btree_insert_nonfull}
+\begin{algorithmic}[1]
+\STATE $ i \gets x.n $
+\IF{$ x.\text{leaf} $}
+\WHILE{$ i \geq 1 $ and $ k < x.\text{key}_i $}
+\STATE $ x.\text{key}_{i + 1} \gets x.\text{key}_i $
+\STATE $ i \gets i - 1 $
+\ENDWHILE
+\STATE $ x.\text{key}_{i + 1} \gets k $
+\STATE $ x.n \gets x.n + 1 $
+\STATE $\text{DISK-WRITE}(x)$
+\ELSIF{$ i \geq 1 $ and $ k < x.\text{key}_i $}
+\STATE $ i \gets i - 1 $
+\STATE $ i \gets i + 1 $
+\STATE $\text{DISK-READ}(x.\text{c}_i)$
+\IF{$ x.\text{c}_i.n == 2t - 1 $}
+\STATE $\text{B-TREE-SPLIT-CHILD}(x, i)$
+\IF{$ k > x.\text{key}_i $}
+\STATE $ i \gets i + 1 $
+\ENDIF
+\ENDIF
+\STATE $\text{B-TREE-INSERT-NONFULL}(x.\text{c}_i, k)$
+\ENDIF
+\end{algorithmic}
+\end{algorithm}
+	
+		
+	\section*{ADT 3-1 线性表的抽象数据类型描述}
+	
+	\subsection*{抽象数据类型 LinearList \{}
+	
+	\subsubsection*{实例}
+	0 或多个元素的有序集合
+	
+	\subsubsection*{操作}
+	\begin{lstlisting}[language=Python, caption={LinearList ADT}]
+		Create (): 创建一个空线性表
+		Destroy (): 删除表
+		IsEmpty(): 如果表为空则返回 true，否则返回 false
+		Length (): 返回表的大小 (即表中元素个数)
+		Find (k,x): 寻找表中第 k 个元素，并把它保存到 x 中；如果不存在，则返回 false
+		Search (x): 返回元素 x 在表中的位置；如果 x 不在表中，则返回 0
+		Delete (k,x): 删除表中第 k 个元素，并把它保存到 x 中；函数返回修改后的线性表
+		Insert (k,x): 在第 k 个元素之后插入 x；函数返回修改后的线性表
+		Output (out): 把线性表放入输出流 out 之中
+	\end{lstlisting}
+	
+	\section*{ADT 4-1 数组的抽象数据类型描述}
+	
+	\subsection*{抽象数据类型 Array \{}
+	
+	\subsubsection*{实例}
+	形如 (index, value) 的数据对集合，其中任意两对数据的 index 值都各不相同
+	
+	\subsubsection*{操作}
+	\begin{lstlisting}[language=Python, caption={Array ADT}]
+		Create(): 创建一个空的数组
+		Store(index, value): 添加数据 (index, value)，同时删除具有相同 index 值的数据对（如果存在）
+		Retrieve(index): 返回索引值为 index 的数据对
+	\end{lstlisting}
+	
+	\section*{ADT 5-1 堆的抽象数据类型描述}
+	
+	\subsection*{抽象数据类型 Stack \{}
+	
+	\subsubsection*{实例}
+	元素线性表，栈底，栈顶
+	
+	\subsubsection*{操作}
+	\begin{lstlisting}[language=Python, caption={Stack ADT}]
+		Create(): 创建一个空的堆栈
+		IsEmpty(): 如果堆栈为空，则返回 true，否则返回 false
+		IsFull(): 如果堆栈满，则返回 true，否则返回 false
+		Top(): 返回栈顶元素
+		Add(x): 向堆栈中添加元素 x
+		Delete(x): 删除栈顶元素，并将它传递给 x
+	\end{lstlisting}
+	
+	\section*{ADT 6-1 队列的抽象数据类型描述}
+	
+	\subsection*{抽象数据类型 Queue \{}
+	
+	\subsubsection*{实例}
+	有序线性表，一端称为 front，另一端称为 rear
+	
+	\subsubsection*{操作}
+	\begin{lstlisting}[language=Python, caption={Queue ADT}]
+		Create (): 创建一个空的队列；
+		IsEmpty (): 如果队列为空，则返回 true，否则返回 false；
+		IsFull (): 如果队列满，则返回 true；否则返回 false；
+		First (): 返回队列的第一个元素；
+		Last (): 返回队列的最后一个元素；
+		Add (x): 向队列中添加元素 x；
+		Delete (x): 删除队首元素，并送入 x；
+	\end{lstlisting}
+	
+\end{document}

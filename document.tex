@@ -1,0 +1,333 @@
+% !TEX TS-program = xelatex
+% !TEX encoding = UTF-8 Unicode
+
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{ctex}
+\usepackage{enumitem}
+% 主题设置
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% 标题页信息
+\title{世界杯赛事数据分析}
+\subtitle{实验报告与调研分析}
+\author{Your Name}
+\institute{Your Institution}
+\date{\today}
+
+\begin{document}
+	
+	% 标题页
+	\begin{frame}
+		\titlepage
+	\end{frame}
+	
+	% 目录页
+	\begin{frame}{目录}
+		\tableofcontents
+	\end{frame}
+	
+	\section{实验目的}
+	\begin{frame}
+		\begin{enumerate}[label=\arabic*.]
+			\item 深入理解并熟练运用数据处理和分析工具（如\texttt{pandas}、\texttt{matplotlib}、\texttt{seaborn}等）。
+			\item 探索世界杯比赛表现指标与比赛结果之间的关系，为球队训练和比赛策略制定提供数据支持。
+			\item 掌握机器学习算法在世界杯赛事预测中的应用，构建预测模型并评估性能。
+		\end{enumerate}
+	\end{frame}
+	
+	\section{实验原理}
+	\begin{frame}
+		\begin{enumerate}[label=\arabic*.]
+			\item 数据处理：使用\texttt{pandas}进行数据清洗与预处理。
+			\item 数据可视化：通过\texttt{matplotlib}和\texttt{seaborn}绘制图表。
+			\item 统计分析：采用多元Logistic回归等方法分析世界杯比赛表现指标。
+			\item 机器学习：运用逻辑回归、随机森林等算法构建世界杯赛事预测模型。
+		\end{enumerate}
+	\end{frame}
+	
+	\section{实验环境}
+	\begin{frame}
+		\begin{enumerate}[label=\arabic*.]
+			\item 硬件：普通个人计算机。
+			\item 软件：Windows 10，Python 3.7，依赖库包括\texttt{pandas}、\texttt{numpy}、\texttt{matplotlib}、\texttt{seaborn}、\texttt{scikit-learn}等。
+			\item 开发环境：Jupyter Notebook。
+		\end{enumerate}
+	\end{frame}
+	
+	\section{实验步骤}
+	\begin{frame}
+		\begin{enumerate}[label=\arabic*.]
+			\item 数据收集与读取：从国际足联官网等数据源收集世界杯赛事数据。
+			\item 数据清洗与预处理：处理缺失值、转换数据类型。
+			\item 数据分析与可视化：计算关键指标，绘制折线图、柱状图、雷达图等，以展示世界杯数据特征。
+			\item 模型构建与预测：选择特征，划分训练集和测试集，训练并评估用于世界杯赛事预测的模型。
+		\end{enumerate}
+	\end{frame}
+	
+	\section{实验结果}
+	\begin{frame}
+		\begin{enumerate}[label=\arabic*.]
+			\item 足球赛事：
+			\begin{enumerate}[label=\arabic{*}.]
+				\item 世界杯总进球数和参赛队伍数随年份呈现明显的波动变化。这一波动反映了不同时期世界杯的赛制调整、参赛队伍实力变化以及足球运动整体发展趋势对比赛规模和进球数量的影响 。
+				\item 不同比赛阶段的平均进球数和主场胜率差异显著。例如，小组赛阶段和淘汰赛阶段的平均进球数有所不同，主场球队在某些阶段的胜率也存在明显波动，这对于分析各阶段比赛的特点和主场优势的作用具有重要意义。
+				\item 通过KLOSE的雷达图，清晰展示了该球员在世界杯比赛中的综合表现。涵盖了进球、助攻、出场时的不同表现（如被侵犯造点、红黄牌情况）等多个维度，为全面评估球员在世界杯赛事中的表现提供了直观依据。
+			\end{enumerate}
+			\item 篮球赛事：文档提及篮球相关内容，但研究聚焦世界杯数据，此处篮球部分与主题不符，可忽略或在后续研究明确篮球数据与世界杯关联后再做分析。
+			\item 模型预测：在对世界杯赛事结果的预测中，随机森林模型表现优于逻辑回归模型。从准确率、召回率等评估指标来看，随机森林模型能更准确地预测比赛结果，为赛事预测提供了更可靠的方法。
+		\end{enumerate}
+	\end{frame}
+	
+	\section{问题及解决方法}
+	\begin{frame}
+		\begin{enumerate}[label=\arabic*.]
+			\item 数据处理问题：仔细检查从国际足联官网等获取的世界杯数据文件格式，确保数据能正确读取。针对数据中的缺失值，根据数据特点和分析目的，选择合适的处理方式，如删除少量缺失值的样本、使用均值或中位数填充等 。
+			\item 模型训练问题：针对世界杯赛事预测模型，调整模型参数以避免过拟合或欠拟合。例如，对于随机森林模型，可以调整树的数量、最大深度等参数，提高模型对世界杯赛事数据的泛化能力和预测准确性。
+			\item 可视化问题：对绘制的世界杯数据图表进行美化，调整颜色搭配、字体样式和线条粗细等元素，增强图表的美观度。同时，清晰标注数据标签，使图表所表达的信息准确无误，便于观众理解。
+		\end{enumerate}
+	\end{frame}
+	
+	\section{数据可视化与图表分析}
+	\begin{frame}
+		\begin{columns}
+			\column{0.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{output_5_0.png} \\
+			\small 图1：历年世界杯总进球数变化趋势图。该图展示了从1930年到2020年期间每届世界杯比赛的总进球数变化情况，呈现出随时间的波动趋势，反映了不同时期世界杯足球比赛进攻端的整体表现变化。
+			\column{0.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{output_5_1.png} \\
+			\small 图2：不同年份世界杯参赛队伍数量变化趋势图。此图呈现了各届世界杯参赛队伍数量的变化，体现了世界杯赛事规模随时间的发展，反映出足球运动在全球范围内的推广和参与度的变化。
+		\end{columns}
+	\end{frame}
+	
+	\begin{frame}
+		\begin{columns}
+			\column{0.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{output_6_1.png} \\
+			\small 图3：不同比赛阶段平均进球数对比图。该图对比了世界杯比赛中小组赛、淘汰赛等不同阶段的平均进球数，有助于分析各阶段比赛的进攻节奏和激烈程度差异。
+			\column{0.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{output_7_0.png} \\
+			\small 图4：不同比赛阶段主场胜率对比图。展示了世界杯各比赛阶段主场球队的获胜概率，反映了主场优势在不同阶段比赛中的作用差异，为分析比赛胜负因素提供参考。
+		\end{columns}
+	\end{frame}
+	
+	\begin{frame}
+		\begin{columns}
+			\column{0.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{output_8_0.png} \\
+			\small 图5：世界杯历史上最活跃裁判执法场次统计图。该图列出了执法世界杯比赛场次较多的裁判及其执法场次，反映了这些裁判在世界杯赛事中的参与频率和活跃度。
+			\column{0.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{output_9_1.png} \\
+			\small 图6：世界杯比赛各半场平均进球数对比图。对比了世界杯比赛上半场和下半场的平均进球数，有助于发现比赛不同时段的进球规律和特点。
+		\end{columns}
+	\end{frame}
+	
+	\begin{frame}
+		\begin{columns}
+			\column{0.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{output_14_1.png} \\
+			\small 图7：世界杯相关变量相关性热力图。展示了年份、总进球数、参赛队伍数、比赛场数和观众人数等变量之间的相关性，通过颜色深浅直观呈现各变量之间的关联程度，帮助分析这些因素在世界杯赛事中的相互影响。
+			\column{0.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{output_14_4.png} \\
+			\small 图8：模型训练和验证损失变化图。描绘了在构建世界杯赛事预测模型过程中，训练损失和验证损失随训练轮次的变化曲线，用于评估模型的训练效果和收敛情况，判断模型是否过拟合或欠拟合。
+		\end{columns}
+	\end{frame}
+	
+	\begin{frame}
+		\begin{columns}
+			\column{0.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{output_14_6.png} \\
+			\small 图9：世界杯比赛总进球数时序预测图。该图基于历史数据对未来世界杯比赛总进球数进行预测，展示了实际总进球数、预测总进球数以及置信区间，为预测世界杯未来赛事的进球趋势提供了数据支持。
+			\column{0.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{output_18_0.png} \\
+			\small 图10：历年世界杯现场观众人数变化趋势图。呈现了各届世界杯现场观众人数的变化情况，反映了世界杯赛事在不同时期的吸引力和受关注程度的变化。
+		\end{columns}
+	\end{frame}
+	
+	\begin{frame}
+		\begin{columns}
+			\column{0.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{output_18_1.png} \\
+			\small 图11：世界杯参赛队伍数变化趋势图（与图2侧重点或数据范围不同）。从另一个角度或更细致的数据展示了世界杯参赛队伍数量随时间的变化，进一步分析参赛队伍规模的发展趋势。
+			\column{0.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{output_18_2.png} \\
+			\small 图12：历年世界杯进球数变化趋势图（再次强调进球数变化，可能分析角度有差异）。重新展示进球数变化趋势，可能在分析维度或数据处理上与图1有所不同，以更全面地呈现世界杯进球数的变化规律。
+		\end{columns}
+	\end{frame}
+	
+	\begin{frame}
+		\begin{columns}
+			\column{0.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{output_18_3.png} \\
+			\small 图13：世界杯各球队夺冠次数分析图。展示了各球队在世界杯历史上的夺冠次数，突出了不同球队在世界杯赛事中的统治力和成就。
+			\column{0.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{output_18_4.png} \\
+			\small 图14：世界杯决赛队伍次数统计图。呈现了各球队进入世界杯决赛的次数，反映了不同球队在世界杯顶级赛事中的参与程度和竞争力。
+		\end{columns}
+	\end{frame}
+	
+	\begin{frame}
+		\begin{columns}
+			\column{0.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{output_19_1.png} \\
+			\small 图15：逻辑回归与随机森林模型预测世界杯比赛结果准确率对比图。对比了两种模型在预测世界杯比赛结果时的准确率，直观展示了随机森林模型在预测世界杯赛事方面的优势。
+			\column{0.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{output_19_3.png} \\
+			\small 图16：随机森林模型在世界杯赛事预测中的特征重要性图。展示了随机森林模型中各特征对于预测世界杯比赛结果的重要程度，帮助理解模型的决策依据和影响比赛结果的关键因素。
+		\end{columns}
+	\end{frame}
+	
+	\begin{frame}
+		\begin{columns}
+			\column{0.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{output_19_5.png} \\
+			\small 图17：世界杯比赛某指标（假设为各球队不同区域进球数）分布热力图。假设该图展示了各球队在世界杯比赛中不同区域的进球分布情况，通过热力图直观呈现进球在不同区域的密集程度，分析球队的进攻特点和战术偏好。
+			\column{0.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{output_20_0.png} \\
+			\small 图18：世界杯比赛相关指标（假设为不同比赛阶段进球数与观众人数关系）散点图。假设该图展示了世界杯不同比赛阶段进球数与观众人数之间的关系，通过散点图分析两者之间的相关性，探索比赛精彩程度与观众参与度的联系。
+		\end{columns}
+	\end{frame}
+	
+	\begin{frame}
+		\begin{columns}
+			\column{0.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{output_21_0.png} \\
+			\small 图19：世界杯四强队伍（排除占比＜5%队伍）分布饼图。展示了世界杯四强中，排除占比小于5%的队伍后，各主要队伍在四强中的分布比例，反映了世界杯四强的格局和主要竞争力量。
+			\column{0.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{output_22_0.png} \\
+			\small 图20：世界杯进球数最多的五个国家柱状图。列出了在世界杯历史上进球数最多的五个国家及其进球数量，突出这些国家在世界杯进攻端的卓越表现和强大实力。
+		\end{columns}
+	\end{frame}
+	
+	\begin{frame}
+		\begin{columns}
+			\column{0.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{output_23_0.png} \\
+			\small 图21：世界杯各比赛阶段主客场球队总进球数柱状图。对比了世界杯不同比赛阶段主客场球队的总进球数，分析主客场球队在各阶段的进球表现差异，探究主场和客场因素对球队进球的影响。
+			\column{0.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{output_24_0.png} \\
+			\small 图22：世界杯各比赛阶段主客场球队平均进球数柱状图。展示了世界杯不同比赛阶段主客场球队的平均进球数，进一步分析主客场球队在各阶段的进球效率差异，为研究比赛胜负与进球效率的关系提供依据。
+		\end{columns}
+	\end{frame}
+	
+	\begin{frame}
+		\begin{columns}
+			\column{0.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{output_25_0.png} \\
+			\small 图23：世界杯主场进球数排名前十球队柱状图。列出了在世界杯比赛中主场进球数排名前十的球队及其进球数量，体现这些球队在主场比赛时的进攻优势和强大的主场战斗力。
+			\column{0.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{output_26_0.png} \\
+			\small 图24：世界杯比赛结果预测混淆矩阵图。展示了模型对世界杯比赛结果预测的混淆矩阵，用于评估模型预测的准确性，分析模型在预测不同比赛结果时的误判情况。
+		\end{columns}
+	\end{frame}
+	
+	\begin{frame}
+				\begin{columns}
+					\column{0.5\textwidth}
+					\centering
+					\includegraphics[width=\textwidth]{output_27_0.png} \\
+					\small 图25：世界杯各比赛阶段主客场球队总进球数对比图（实际阶段对比）。此图详细对比了世界杯实际比赛中如小组赛各轮次、淘汰赛不同阶段等主客场球队的总进球数情况。通过对比，可以清晰地看到在不同比赛阶段，主客场球队的进球能力差异。例如，在小组赛初期，主场球队可能凭借主场优势在总进球数上占据一定优势，但随着比赛的推进，到了淘汰赛阶段，这种差异可能会发生变化，这有助于分析各阶段比赛的特点以及主客场因素对球队进球表现的影响 。
+					\column{0.5\textwidth}
+					\centering
+					\includegraphics[width=\textwidth]{output_27_1.png} \\
+					\small 图26：世界杯各比赛阶段主客场球队平均进球数对比图（实际指标对比）。该图聚焦于世界杯各比赛阶段主客场球队平均进球数这一指标进行对比。平均进球数能够更准确地反映球队在不同阶段的进球效率。从图中可以观察到，某些阶段主场球队平均进球数较高，而在其他阶段客场球队的平均进球数可能更具优势，这对于研究比赛进程中主客场球队的进攻效率变化规律具有重要意义，也能为分析比赛胜负与进球效率之间的关系提供有力的数据支持。
+				\end{columns}
+	\end{frame}
+			
+			\begin{frame}
+				\begin{columns}
+					\column{0.5\textwidth}
+					\centering
+					\includegraphics[width=\textwidth]{output_28_0.png} \\
+					\small 图27：世界杯冠军所在大洲数量对比柱状图及占比饼图。柱状图展示了不同大洲获得世界杯冠军的次数对比，清晰呈现出哪些大洲在世界杯冠军争夺中占据主导地位；饼图则以占比的形式直观地显示出各洲冠军数量在总体中的比例。通过这两个图表的结合，可以直观地看出欧洲和南美洲在世界杯冠军数量上的优势，以及其他大洲的竞争力情况，有助于分析世界足球的地域实力格局。
+					\column{0.5\textwidth}
+					\centering
+					\includegraphics[width=\textwidth]{output_29_1.png} \\
+					\small 图28：世界杯不同名次（冠、亚、季、殿）各国家获得次数柱状图。此图分别列出了各国家在世界杯比赛中获得冠军、亚军、季军和殿军的次数。从图中可以清晰地看到哪些国家在世界杯的历史上取得了较多的高名次成绩，如巴西、德国等传统足球强国在各名次上的分布情况，以及一些新兴足球国家在世界杯中的崛起和发展，为研究各国足球在世界杯赛事中的长期表现提供了直观的数据依据。
+				\end{columns}
+			\end{frame}
+			
+			\begin{frame}
+				\centering
+				\includegraphics[width=0.7\textwidth]{output_30_0.png} \\
+				\small 图29：KLOSE比赛表现雷达图。该雷达图从进球、助攻、被侵犯造点（Indemnified goals）、出场次数（以“OUT”体现，假设与出场相关）、黄牌和红牌等多个维度，全面展示了球员KLOSE在世界杯比赛中的综合表现。通过雷达图的形式，可以直观地看出球员在各个方面的优势和劣势，例如KLOSE在进球方面表现突出，但在红黄牌纪律方面可能存在一定的问题，这为评估球员在世界杯赛事中的表现和特点提供了多维度的视角，也为球队针对球员制定战术和训练计划提供参考。
+	\end{frame}
+			
+			
+			\begin{frame}
+				\begin{enumerate}[label=\arabic*.]
+					\item 通过本次实验，成功探索并分析了世界杯比赛表现指标与比赛结果之间的关系。例如，发现了不同比赛阶段平均进球数、主场胜率等指标与比赛结果的关联，以及关键球员的综合表现对比赛的影响。
+					\item 构建并评估了用于世界杯赛事预测的模型，结果表明随机森林模型在预测世界杯比赛结果方面表现更优，为后续的赛事预测提供了有价值的参考方法。
+					\item 实验过程中也发现了一些不足之处，数据的完整性和准确性有待进一步提高，例如部分历史数据可能存在缺失或误差；模型的预测能力也需要进一步优化，以适应更复杂的比赛情况和数据变化。
+					\item 未来的研究方向可以拓展数据来源，收集更多维度和更全面的世界杯赛事数据，如球员的详细技术动作数据、球队的战术布置数据等；同时，探索更复杂的机器学习模型，如深度学习模型，以提高对世界杯赛事的分析和预测水平。
+				\end{enumerate}
+			\end{frame}
+			
+			
+			\begin{frame}
+				\begin{enumerate}[label=\arabic*.]
+					\item 研究现状：
+					\begin{enumerate}[label=\arabic{*}.]
+						\item 在足球领域，研究表明射门次数、跑动距离等指标对世界杯比赛的胜负具有显著影响。例如，更多的射门次数和在关键区域的跑动距离往往与更高的获胜概率相关 。
+						\item 在篮球方面（若关联世界杯篮球赛事，可进一步阐述，此处暂按聚焦足球世界杯理解，篮球部分略作说明），虽本研究主要聚焦足球世界杯，但在篮球赛事研究中，防守篮板是关键制胜指标之一，这与足球世界杯的研究重点有所不同，但也体现了数据指标在不同球类赛事分析中的重要性。
+					\end{enumerate}
+					\item 应用场景：
+					\begin{enumerate}[label=\arabic{*}.]
+						\item 球队训练：通过对世界杯数据的分析，球队可以了解自身与对手的优势和劣势，制定更具针对性的训练计划，提高球队的比赛表现。
+						\item 赛事预测：利用数据分析构建的模型可以对世界杯比赛结果进行预测，为赛事组织者、媒体和球迷提供参考，增加赛事的关注度和趣味性。
+						\item 球迷互动：基于世界杯数据的分析结果，可以开发各种形式的球迷互动活动，如数据竞猜、话题讨论等，增强球迷对赛事的参与感和兴趣。
+					\end{enumerate}
+					\item 常用方法：
+					\begin{enumerate}[label=\arabic{*}.]
+						\item 统计分析：运用多元Logistic回归等统计方法，分析比赛表现指标与比赛结果之间的关系，确定关键的影响因素。
+						\item 数据可视化：借助\texttt{matplotlib}和\texttt{seaborn}等工具绘制图表，将复杂的数据以直观的形式呈现出来，便于理解和分析数据特征及规律。
+						\item 机器学习：运用逻辑回归、随机森林等机器学习算法构建预测模型，对世界杯赛事结果进行预测，并通过评估指标不断优化模型性能。
+					\end{enumerate}
+					\item 未来趋势：
+					\begin{enumerate}[label=\arabic{*}.]
+						\item 多源数据融合：未来的研究将融合更多来源的数据，如球员的生理数据、比赛的视频数据等，以更全面地分析比赛过程和球队表现。
+						\item 深度学习应用：深度学习模型在图像识别、语音识别等领域取得了巨大成功，未来有望在世界杯赛事数据分析中得到更广泛的应用，提高预测的准确性和分析的深度。
+						\item 实时数据分析：随着技术的发展，实现对世界杯赛事的实时数据分析将成为可能，这将为教练在比赛中及时调整战术、观众实时了解比赛动态提供支持。
+					\end{enumerate}
+				\end{enumerate}
+			\end{frame}
+			
+	
+			\begin{frame}
+				\begin{enumerate}[label=\arabic*.]
+					\item 赛事数据分析领域在世界杯研究方面已经取得了显著进展，通过对各种数据的分析和模型构建，为理解世界杯比赛提供了更深入的视角。
+					\item 数据处理、分析和机器学习方法在世界杯赛事数据分析中发挥了关键作用，帮助研究者发现数据背后的规律和趋势，为球队和相关方提供决策支持。
+					\item 未来，多源数据融合、深度学习和实时分析将成为世界杯赛事数据分析的重要发展方向，有望进一步提升对世界杯赛事的理解和预测能力。
+					\item 在发展过程中，需要注意数据隐私保护和算法公平性问题，确保数据分析的合法性、公正性和可靠性，促进世界杯赛事数据分析领域的健康发展。
+				\end{enumerate}
+			\end{frame}
+			
+			\end{document}
